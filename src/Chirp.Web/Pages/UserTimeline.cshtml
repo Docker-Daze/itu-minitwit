@@ -1,0 +1,45 @@
+﻿@page "/{author}"
+@model Chirp.Web.Pages.UserTimelineModel
+@{
+    ViewData["Title"] = "Chirp!";
+    Layout = "Shared/_Layout";
+    var routeName = HttpContext.GetRouteValue("author");
+    ViewData["CurrentPage"] = Model._currentPage;
+    ViewData["NextPageHasCheeps"] = Model._nextPageHasCheeps;
+}
+
+<div>
+    <div class="userInfoContainer">
+        <div>
+            @if (@Model.CheepTimelineModel.AvatarMap.ContainsKey(routeName!.ToString()!) && !string.IsNullOrEmpty(@Model.CheepTimelineModel.AvatarMap[routeName!.ToString()!]))
+            {
+                <img src="@Model.CheepTimelineModel.AvatarMap[@routeName!.ToString()!]" class="claim-img-large" alt="Avatar">
+            }
+            else
+            {
+                // https://fontawesome.com/icons/user?f=classic&s=solid&pc=%23e29494&sc=%23e29494
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="claim-img-large">
+                    <path fill="#e29494" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+                </svg>
+            }
+        </div>
+        <div>
+            <h2> @routeName's Timeline </h2>
+            <div class="follower-count">
+                @Model.followerCount Followers
+            </div>
+        </div>
+    </div>
+
+    <partial name="Shared/_CheepBoxPartial" model="Model.CheepInput" />
+
+    @if (Model.CheepTimelineModel.Cheeps.Any())
+    {
+        <partial name="Shared/_CheepsTimelinePartial" model="Model.CheepTimelineModel" />
+    }
+    else
+    {
+        <em>There are no cheeps so far.</em>
+    }
+</div>
+<partial name="Shared/_PaginationPartial"/>

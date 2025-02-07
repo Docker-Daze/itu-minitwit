@@ -1,0 +1,97 @@
+﻿@page "/About"
+@using Chirp.Core
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<Author> SignInManager
+@model Chirp.Web.Pages.About
+
+@{
+    ViewData["Title"] = "About me";
+    Layout = "Shared/_Layout";
+    var followingCount = @Model.UserInfo["followingCount"];
+    var followerCount = @Model.UserInfo["followerCount"];
+}
+
+<div class="aboutContainer">
+    <h2>Personal information</h2>
+
+    @if (!string.IsNullOrEmpty(@Model.Avatar))
+    {
+    <img src="@Model.Avatar" class="claim-img-large" alt="Avatar">
+    }
+    else
+    {
+    // https://fontawesome.com/icons/user?f=classic&s=solid&pc=%23e29494&sc=%23e29494
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="claim-img-large">
+        <path fill="#e29494" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+    </svg>
+    }
+    
+    <ul>
+        @{
+            <li><strong>Username:</strong> @Model.UserInfo["username"]</li>
+            <li><strong>Email:</strong> @Model.UserInfo["email"]</li>
+            <li><strong>Login method:</strong> @Model.UserInfo["login"]</li>
+        }
+    </ul>
+    <a class="manageButton" href="/Identity/Account/Manage">Manage information →</a>
+</div>
+
+<div class="followContainer">
+    <div class="followersBox">
+        <h2>Following (@followingCount)</h2>
+
+        <ul>
+            @foreach (var following in Model.Following)
+            {
+                <li>
+                    <strong>
+                        <a href="/@following">@following</a>
+                    </strong>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="followersBox">
+        <h2>Followers (@followerCount)</h2>
+
+        <ul>
+            @foreach (var follower in Model.Followers)
+            {
+                <li>
+                    <strong>
+                        <a href="/@follower">@follower</a>
+                    </strong>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="cheepContainer">
+    <h2>Your cheeps (@Model.Cheeps.Count)</h2>
+    <ul>
+        @foreach (var cheep in Model.Cheeps)
+        {
+            <li>
+                <p>
+                    <strong>
+                        <a href="/@cheep.Author">@cheep.Author</a>
+                    </strong>
+                    @cheep.Text
+                    <small>&mdash; @cheep.TimeStamp</small>
+                </p>
+                <div class="deleteBox">
+                    @if (User.Identity!.IsAuthenticated && User.Identity.Name == cheep.Author)
+                    {
+                    <form method="post" asp-page-handler="Delete">
+                        <input type="hidden" name="cheepId" value="@cheep.Id"/>
+                        <button class="deleteBtn" type="submit">DELETE</button>
+                    </form>
+                    }
+                </div>
+            </li>
+        }
+    </ul>
+    <a class="manageButton" href="/Identity/Account/Manage/PersonalData">Download cheeps →</a>
+</div>

@@ -1,0 +1,23 @@
+﻿@page "/"
+@model Chirp.Web.Pages.PublicModel
+@{
+    ViewData["Title"] = "Chirp!";
+    Layout = "Shared/_Layout";
+    ViewData["CurrentPage"] = Model._currentPage;
+    ViewData["NextPageHasCheeps"] = Model._nextPageHasCheeps;
+}
+
+<div>
+    <h2> Public Timeline </h2>
+    <partial name="Shared/_CheepBoxPartial" model="Model.CheepInput" />
+
+    @if (Model.CheepTimelineModel.Cheeps.Any())
+    {
+        <partial name="Shared/_CheepsTimelinePartial" model="Model.CheepTimelineModel" />
+    } 
+    else
+    {
+        <em>There are no cheeps so far.</em>
+    }
+</div>
+<partial name="Shared/_PaginationPartial"/>

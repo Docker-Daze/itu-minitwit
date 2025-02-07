@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram name="Page-1" id="BTxtzBNqBTlB-L7zn74N">
+    <mxGraphModel dx="984" dy="633" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-13" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="290" y="230" width="350" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="_sK3rRI7_w_xgOXl84pB-1" target="_sK3rRI7_w_xgOXl84pB-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-1" value="«client»&lt;br&gt;&lt;b&gt;Browser&lt;/b&gt;" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="70" y="290" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-2" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="_sK3rRI7_w_xgOXl84pB-1" vertex="1">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-5" value="«webserver»&lt;br&gt;&lt;b&gt;Server&lt;/b&gt;" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="320" y="280" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-6" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="_sK3rRI7_w_xgOXl84pB-5" vertex="1">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-8" value="SQLite&lt;div&gt;Database&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="550" y="285" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="_sK3rRI7_w_xgOXl84pB-5" target="_sK3rRI7_w_xgOXl84pB-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-12" value="HTTPS" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="215" y="320" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_sK3rRI7_w_xgOXl84pB-14" value="&lt;b&gt;Azure App Service&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="400" y="240" width="130" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

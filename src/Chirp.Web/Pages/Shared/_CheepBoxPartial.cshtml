@@ -1,0 +1,27 @@
+@model Chirp.Web.Pages.CheepInputModel
+
+@{
+    <script src="/js/autosizeCheepBox.js"></script>
+
+}
+
+@if (User.Identity!.IsAuthenticated)
+{
+    <div class="cheepbox">
+        <h3>What's on your mind @(User.Identity.Name)?</h3>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <textarea
+                id="Message"
+                rows="1 "
+                asp-for="Message"
+                class="form-control">
+            </textarea>
+            <div style="display: flex; justify-content: space-between">
+                <div><span asp-validation-for="Message"></span></div>
+                <div><input type="submit" value="Share"></div>
+            </div>
+        </form>
+        <p id="charCount">Characters left: 160</p>
+    </div>
+}

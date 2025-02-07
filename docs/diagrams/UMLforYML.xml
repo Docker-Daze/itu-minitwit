@@ -1,0 +1,94 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram name="Page-1" id="4EIN_MqzIUPf0WEsbBpX">
+    <mxGraphModel dx="1036" dy="606" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-1" target="fhDHdWaKuchnHJ0OoBSc-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-1" value="run &quot;dotnet build&amp;nbsp;&lt;div&gt;--no --restore&quot;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-2" value="ON PUSH/PULL REQUEST" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="181" width="192" height="29" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-4" target="fhDHdWaKuchnHJ0OoBSc-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-4" value="installs playwright" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-5" target="fhDHdWaKuchnHJ0OoBSc-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-5" value="run &quot;dotnet restore&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-8" value="run &quot;dotnet test&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-10" value="ON RELEASE" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="526" y="181" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-13" target="fhDHdWaKuchnHJ0OoBSc-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-13" value="run &quot;dotnet build&amp;nbsp;&lt;div&gt;--no --restore&quot;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-15" target="fhDHdWaKuchnHJ0OoBSc-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-15" value="installs playwright" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-17" target="fhDHdWaKuchnHJ0OoBSc-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-17" value="run &quot;dotnet restore&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-18" target="fhDHdWaKuchnHJ0OoBSc-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-18" value="run &quot;dotnet test&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-19" target="fhDHdWaKuchnHJ0OoBSc-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-19" value="Publish and zip to Linux, Windows, MacOS" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-22" value="Make release to Github" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-24" value="ON PUSH TO MAIN" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="101" y="500" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-26" target="fhDHdWaKuchnHJ0OoBSc-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-26" value="run &quot;dotnet publish&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="36" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-28" target="fhDHdWaKuchnHJ0OoBSc-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-28" value="Logins to Azure" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="196" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="fhDHdWaKuchnHJ0OoBSc-30" target="fhDHdWaKuchnHJ0OoBSc-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-30" value="run &quot;dotnet buid&quot;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="36" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhDHdWaKuchnHJ0OoBSc-31" value="Deploy to Azure" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="196" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

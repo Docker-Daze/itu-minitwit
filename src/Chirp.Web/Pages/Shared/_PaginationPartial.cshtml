@@ -1,0 +1,24 @@
+@{
+    var currentPage = ViewData["CurrentPage"] as int? ?? 1;
+    var nextPageHasCheeps = ViewData["NextPageHasCheeps"] as bool? ?? false;
+}
+
+<div class="pagination">
+    @if (currentPage > 1)
+    {
+        <form method="get" class="paginationButton">
+            <input type="hidden" name="page" value="@(currentPage - 1)"/>
+            <button type="submit">Previous Page</button>
+        </form>
+    }
+    <div class="paginationButton">
+        <button type="submit">Current page @currentPage</button>
+    </div>
+    @if (nextPageHasCheeps)
+    {
+        <form method="get" class="paginationButton">
+            <input type="hidden" name="page" value="@(currentPage + 1)"/>
+            <button type="submit">Next Page</button>
+        </form>
+    }
+</div>
