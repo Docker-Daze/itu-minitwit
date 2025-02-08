@@ -12,13 +12,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
-string tempDirectory = Path.GetTempPath();
-string dbFilePath = Path.Combine(tempDirectory, "minitwit.db");
-
-string connectionString = $"Data Source={dbFilePath}";
-
-builder.Services.AddDbContext<MinitwitDbContext>(options =>
-    options.UseSqlite(connectionString));
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
 
@@ -39,5 +34,12 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
+using (var scope = app.Services.CreateScope())
+{
+    var minitwitDbContext = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+    minitwitDbContext.Database.EnsureCreated();
+    DbInitializer.SeedDatabase(minitwitDbContext);
+}
 
 app.Run();
