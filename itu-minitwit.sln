@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{10CDE30B-25A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitwit.web", "src\minitwit.web\minitwit.web.csproj", "{A6463781-DBAE-489C-9CE7-BEDFB07B384D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitwit.repository", "src\minitwit.repository\minitwit.repository.csproj", "{0DDFEC70-EDE0-4103-B74A-4822632221D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitwit.infrastructure", "src\minitwit.infrastructure\minitwit.infrastructure.csproj", "{0DDFEC70-EDE0-4103-B74A-4822632221D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitwit.core", "src\minitwit.core\minitwit.core.csproj", "{C8237C32-0A51-4862-8BA6-D8E8932DE894}"
 EndProject

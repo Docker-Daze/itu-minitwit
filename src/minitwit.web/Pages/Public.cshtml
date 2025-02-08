@@ -1,19 +1,16 @@
-@page
+@page "/public"
 @model itu_minitwit.Pages.Public
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Welcome";
+    Layout = "Shared/_Layout";
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] | MiniTwit</title>
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
 </head>
-<body>
-<div>
-    
-</div>
-</body>
-</html>

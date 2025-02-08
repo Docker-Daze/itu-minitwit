@@ -1,19 +1,8 @@
-@page
+@page "${user}"
 @model itu_minitwit.Pages.UserTimeline
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Minitwit";
+    Layout = "Shared/_Layout";
+    var routeName = HttpContext.GetRouteValue("user");
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
-</div>
-</body>
-</html>

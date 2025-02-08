@@ -1,7 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using minitwit.core;
+using minitwit.infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
+string tempDirectory = Path.GetTempPath();
+string dbFilePath = Path.Combine(tempDirectory, "minitwit.db");
+
+string connectionString = $"Data Source={dbFilePath}";
+
+builder.Services.AddDbContext<MinitwitDbContext>(options =>
+    options.UseSqlite(connectionString));
 
 var app = builder.Build();
 
