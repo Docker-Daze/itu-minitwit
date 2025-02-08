@@ -22,3 +22,7 @@
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/refint/minitwit.core.dll
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/Microsoft.Extensions.Identity.Stores.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/Microsoft.Extensions.Identity.Stores.xml
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.csproj.AssemblyReference.cache
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.BC8F7569.Up2Date

@@ -15,6 +15,13 @@ builder.Services.AddSession();
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseSqlite(connectionString));
 
+builder.Services.AddDefaultIdentity<User>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.User.RequireUniqueEmail = false;
+    })
+    .AddEntityFrameworkStores<MinitwitDbContext>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
