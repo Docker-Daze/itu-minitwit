@@ -21,5 +21,7 @@ public class MinitwitDbContext : DbContext
         modelBuilder.Entity<Message>()
             .HasIndex(m => m.MessageId)
             .IsUnique();
+        modelBuilder.Entity<Follower>()
+            .HasNoKey();
     }
 }

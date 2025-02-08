@@ -14,3 +14,19 @@
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/refint/minitwit.infrastructure.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.pdb
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.deps.json
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.pdb
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.pdb
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.csproj.AssemblyReference.cache
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfoInputs.cache
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfo.cs
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.csproj.CoreCompileInputs.cache
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.sourcelink.json
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.064E3D6C.Up2Date
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/refint/minitwit.infrastructure.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.pdb
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll
