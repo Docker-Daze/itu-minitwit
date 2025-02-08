@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DWum7mf3CRdyRwjDxu6PJXCqKnrLD6Tux2sbq5fUd6Q=",
+  "Hash": "yW4s8sIxgk9VxY/qd5in7w4yBnXOFAmG4IfaqyfeUvo=",
   "Source": "minitwit.web",
   "BasePath": "_content/minitwit.web",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "minitwit.web/wwwroot",
       "Source": "minitwit.web",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/",
       "BasePath": "_content/minitwit.web",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
       "SourceId": "minitwit.web",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "minitwit.web#[.{fingerprint=7nn3axbmky}]?.styles.css.gz",
       "AssetKind": "All",
@@ -28,20 +28,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css",
+      "RelatedAsset": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "15fs1nbmrv",
       "Integrity": "pcjYvtCv6Blv6V28VQyCiB0OQ+WYEDQ/J/hMM/A1zK4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css"
+      "OriginalItemSpec": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
       "SourceId": "minitwit.web",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "css/style#[.{fingerprint=us3jx0kf4m}]?.css.gz",
       "AssetKind": "All",
@@ -49,20 +49,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
+      "RelatedAsset": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "t0278cabk0",
       "Integrity": "/R2511PztFovb3/BUp1xJhM4WFQvu+Z0xW9sZriSGe8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css"
+      "OriginalItemSpec": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
       "SourceId": "minitwit.web",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "js/site#[.{fingerprint=xtxxf3hu2r}]?.js.gz",
       "AssetKind": "All",
@@ -70,20 +70,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
+      "RelatedAsset": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "pmnrhqz0gl",
       "Integrity": "YTkfXSHFEnZ6310TKacrOsSM7+9iBIEpAwW6DhmB2Rg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js"
+      "OriginalItemSpec": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
       "SourceId": "minitwit.web",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "favicon#[.{fingerprint=61n19gt1b8}]?.ico.gz",
       "AssetKind": "All",
@@ -91,20 +91,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
+      "RelatedAsset": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "jefwejb9ld",
       "Integrity": "+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico"
+      "OriginalItemSpec": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
       "SourceId": "minitwit.web",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "minitwit.web#[.{fingerprint=7nn3axbmky}]!.bundle.scp.css.gz",
       "AssetKind": "All",
@@ -112,20 +112,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
+      "RelatedAsset": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "15fs1nbmrv",
       "Integrity": "pcjYvtCv6Blv6V28VQyCiB0OQ+WYEDQ/J/hMM/A1zK4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css"
+      "OriginalItemSpec": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css",
       "SourceId": "minitwit.web",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "minitwit.web#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -140,13 +140,13 @@
       "Integrity": "jccCdWzsWT6NFaYt1JHK45VFujSeM9+dtkn3qPal1bU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css"
+      "OriginalItemSpec": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
       "SourceId": "minitwit.web",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "minitwit.web#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -161,13 +161,13 @@
       "Integrity": "jccCdWzsWT6NFaYt1JHK45VFujSeM9+dtkn3qPal1bU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css"
+      "OriginalItemSpec": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
       "SourceId": "minitwit.web",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "css/style#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -185,10 +185,10 @@
       "OriginalItemSpec": "wwwroot/css/style.css"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
       "SourceId": "minitwit.web",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "favicon#[.{fingerprint}]?.ico",
       "AssetKind": "All",
@@ -206,10 +206,10 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-      "Identity": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
+      "Identity": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
       "SourceId": "minitwit.web",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/",
+      "ContentRoot": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/",
       "BasePath": "_content/minitwit.web",
       "RelativePath": "js/site#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -230,7 +230,7 @@
   "Endpoints": [
     {
       "Route": "css/style.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -253,7 +253,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 16:51:17 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -285,7 +285,7 @@
     },
     {
       "Route": "css/style.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -306,7 +306,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 16:51:17 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -322,7 +322,7 @@
     },
     {
       "Route": "css/style.css.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -343,7 +343,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 16:51:17 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -367,7 +367,7 @@
     },
     {
       "Route": "css/style.us3jx0kf4m.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -390,7 +390,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 16:51:17 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -430,7 +430,7 @@
     },
     {
       "Route": "css/style.us3jx0kf4m.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -451,7 +451,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 16:51:17 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -475,7 +475,7 @@
     },
     {
       "Route": "css/style.us3jx0kf4m.css.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/6nmlgab2it-us3jx0kf4m.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -496,7 +496,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 16:51:17 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -528,7 +528,7 @@
     },
     {
       "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -551,7 +551,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -591,7 +591,7 @@
     },
     {
       "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -612,7 +612,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -636,7 +636,7 @@
     },
     {
       "Route": "favicon.61n19gt1b8.ico.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -657,7 +657,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -689,7 +689,7 @@
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -712,7 +712,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -744,7 +744,7 @@
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -765,7 +765,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -781,7 +781,7 @@
     },
     {
       "Route": "favicon.ico.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xjszrloegb-61n19gt1b8.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -802,7 +802,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -826,7 +826,7 @@
     },
     {
       "Route": "js/site.js",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -849,7 +849,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -881,7 +881,7 @@
     },
     {
       "Route": "js/site.js",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -902,7 +902,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -918,7 +918,7 @@
     },
     {
       "Route": "js/site.js.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -939,7 +939,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -963,7 +963,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -986,7 +986,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1026,7 +1026,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1047,7 +1047,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1071,7 +1071,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/vob35dkct0-xtxxf3hu2r.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1092,7 +1092,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Feb 2025 13:15:52 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1124,7 +1124,7 @@
     },
     {
       "Route": "minitwit.web.7nn3axbmky.bundle.scp.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1147,7 +1147,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1187,7 +1187,7 @@
     },
     {
       "Route": "minitwit.web.7nn3axbmky.bundle.scp.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1208,7 +1208,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1232,7 +1232,7 @@
     },
     {
       "Route": "minitwit.web.7nn3axbmky.bundle.scp.css.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1253,7 +1253,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1285,7 +1285,7 @@
     },
     {
       "Route": "minitwit.web.7nn3axbmky.styles.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1308,7 +1308,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1348,7 +1348,7 @@
     },
     {
       "Route": "minitwit.web.7nn3axbmky.styles.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1369,7 +1369,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1393,7 +1393,7 @@
     },
     {
       "Route": "minitwit.web.7nn3axbmky.styles.css.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1414,7 +1414,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1446,7 +1446,7 @@
     },
     {
       "Route": "minitwit.web.bundle.scp.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1469,7 +1469,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1501,7 +1501,7 @@
     },
     {
       "Route": "minitwit.web.bundle.scp.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1522,7 +1522,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1538,7 +1538,7 @@
     },
     {
       "Route": "minitwit.web.bundle.scp.css.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/xul4lyc2sy-7nn3axbmky.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1559,7 +1559,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1583,7 +1583,7 @@
     },
     {
       "Route": "minitwit.web.styles.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1606,7 +1606,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1638,7 +1638,7 @@
     },
     {
       "Route": "minitwit.web.styles.css",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/bundle/minitwit.web.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1659,7 +1659,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1675,7 +1675,7 @@
     },
     {
       "Route": "minitwit.web.styles.css.gz",
-      "AssetFile": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
+      "AssetFile": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/compressed/3yecpopamr-7nn3axbmky.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1696,7 +1696,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 14:45:38 GMT"
+          "Value": "Sat, 08 Feb 2025 19:02:16 GMT"
         },
         {
           "Name": "Cache-Control",
