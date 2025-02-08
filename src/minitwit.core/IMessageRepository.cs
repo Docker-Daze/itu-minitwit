@@ -3,6 +3,6 @@ namespace minitwit.core;
 public interface IMessageRepository
 {
     public Task AddMessage(Message message);
-    public Task<ICollection<Message>> GetMessages();
-    public Task<ICollection<Message>> GetMessagesUserTimeline(string userId);
+    public Task<List<MessageDTO>> GetMessages();
+    public Task<List<MessageDTO>> GetMessagesUserTimeline(string userId);
 }

@@ -1,16 +1,30 @@
 @page "/public"
-@model itu_minitwit.Pages.Public
+@model itu_minitwit.Pages.PublicModel
 
 @{
     ViewData["Title"] = "Welcome";
     Layout = "Shared/_Layout";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] | MiniTwit</title>
-    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
-</head>
+<ul class="messages">
+    @if (Model.Messages.Any())
+    {
+    @foreach (var message in Model.Messages)
+    {
+    <li>
+        // Load image here
+        <p>
+            <strong>
+                <a href="/@message.Username">@message.Username</a>
+            </strong>
+            @message.Text
+            <small>&mdash; @message.Timestamp</small>
+        </p>
+    </li>
+    }
+    }
+    else
+    {
+    <li><em>There's no message so far.</em></li>
+    }
+</ul>

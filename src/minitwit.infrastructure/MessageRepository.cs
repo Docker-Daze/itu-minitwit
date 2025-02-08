@@ -1,21 +1,37 @@
+using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 
 namespace minitwit.infrastructure;
 
 public class MessageRepository : IMessageRepository
 {
-    public Task AddMessage(Message message)
+    private readonly MinitwitDbContext _dbContext;
+    
+    public MessageRepository(MinitwitDbContext dbContext)
     {
-        // def add_message(): """Registers a new message for the user."""
+        _dbContext = dbContext;
+    }
+    
+    public async Task AddMessage(Message message)
+    {
         throw new NotImplementedException();
     }
 
-    public Task<ICollection<Message>> GetMessages()
+    public async Task<List<MessageDTO>> GetMessages()
     {
-        throw new NotImplementedException();
+        var query = (from message in _dbContext.Messages
+            orderby message.Timestamp descending
+            select new MessageDTO
+            {
+                Text = message.Text,
+                Username = message.User.Username,
+                Timestamp = message.Timestamp.ToString("MM'/'dd'/'yy H':'mm':'ss")
+            });
+        var result = await query.ToListAsync();
+        return result;
     }
 
-    public Task<ICollection<Message>> GetMessagesUserTimeline(string userId)
+    public async Task<List<MessageDTO>> GetMessagesUserTimeline(string userId)
     {
         throw new NotImplementedException();
     }
