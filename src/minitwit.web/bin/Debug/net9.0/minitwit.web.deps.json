@@ -779,6 +779,9 @@
       },
       "System.Threading.Channels/7.0.0": {},
       "minitwit.core/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Sqlite": "9.0.1"
+        },
         "runtime": {
           "minitwit.core.dll": {
             "assemblyVersion": "1.0.0",

@@ -10,3 +10,18 @@
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/refint/minitwit.core.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.deps.json
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.runtimeconfig.json
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.pdb
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.csproj.AssemblyReference.cache
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.GeneratedMSBuildEditorConfig.editorconfig
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.AssemblyInfoInputs.cache
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.AssemblyInfo.cs
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.csproj.CoreCompileInputs.cache
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.sourcelink.json
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/refint/minitwit.core.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.genruntimeconfig.cache
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll
