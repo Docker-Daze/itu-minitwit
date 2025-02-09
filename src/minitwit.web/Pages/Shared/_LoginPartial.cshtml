@@ -4,8 +4,8 @@
     {
         <div>
             <a href="/@(User.Identity.Name)">my timeline</a> |
-            <a href="/">public timeline</a> |
-            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" style="display:inline;">
+            <a href="/public">public timeline</a> |
+            <form asp-area="Identity" asp-page="/Logout" asp-route-returnUrl="@Url.Page("/public", new { area = "" })" method="post" style="display:inline;">
                 <button type="submit" class="btn btn-link p-0">logout [@(User.Identity?.Name)]</button>
             </form>
         </div>
@@ -14,8 +14,8 @@
     {
         <div>
             <a href="/">public timeline</a> |
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">sign up</a> |
-            <a asp-area="Identity" asp-page="/Account/Login">sign in</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Register">sign up</a> |
+            <a asp-area="Identity" asp-page="/Login">sign in</a>
         </div>
     }
 </div>
