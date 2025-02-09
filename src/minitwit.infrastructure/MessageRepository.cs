@@ -6,7 +6,7 @@ namespace minitwit.infrastructure;
 public class MessageRepository : IMessageRepository
 {
     private readonly MinitwitDbContext _dbContext;
-    private const int pageSize = 10;
+    private const int PerPage = 10;
     
     public MessageRepository(MinitwitDbContext dbContext)
     {
@@ -20,7 +20,7 @@ public class MessageRepository : IMessageRepository
 
     public async Task<List<MessageDTO>> GetMessages(int page)
     {
-        int offset = (page - 1) * pageSize;
+        int offset = (page - 1) * PerPage;
         
         var query = (from message in _dbContext.Messages
             orderby message.PubDate descending
@@ -30,7 +30,7 @@ public class MessageRepository : IMessageRepository
                 Text = message.Text,
                 Username = message.Author.Username,
                 PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss")
-            }).Skip(offset).Take(pageSize);
+            }).Skip(offset).Take(PerPage);
         
         var result = await query.ToListAsync();
         return result;
@@ -38,7 +38,7 @@ public class MessageRepository : IMessageRepository
 
     public async Task<List<MessageDTO>> GetMessagesUserTimeline(string username, int page)
     {
-        int offset = (page - 1) * pageSize;
+        int offset = (page - 1) * PerPage;
         
         var query = (from message in _dbContext.Messages
             orderby message.PubDate descending
@@ -48,7 +48,7 @@ public class MessageRepository : IMessageRepository
                 Text = message.Text,
                 Username = message.Author.Username,
                 PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss")
-            }).Skip(offset).Take(pageSize);
+            }).Skip(offset).Take(PerPage);
         
         var result = await query.ToListAsync();
         return result;
