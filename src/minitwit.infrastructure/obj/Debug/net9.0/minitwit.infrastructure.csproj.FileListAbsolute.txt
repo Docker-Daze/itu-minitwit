@@ -30,5 +30,5 @@
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/refint/minitwit.infrastructure.dll
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.pdb
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll
-/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/Microsoft.Extensions.Identity.Stores.dll
-/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/Microsoft.Extensions.Identity.Stores.xml
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.runtimeconfig.json
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.genruntimeconfig.cache
