@@ -45,8 +45,8 @@ app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
-    //var minitwitDbContext = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
-    //minitwitDbContext.Database.EnsureCreated();
+    var minitwitDbContext = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+    minitwitDbContext.Database.EnsureCreated();
     //DbInitializer.SeedDatabase(minitwitDbContext);
 }
 

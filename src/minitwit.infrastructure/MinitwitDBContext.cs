@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 
 namespace minitwit.infrastructure;
 
-public class MinitwitDbContext : DbContext
+public class MinitwitDbContext : IdentityDbContext<User>
 {
     public DbSet<Message> Messages { get; set; }
     public DbSet<User> Users { get; set; }
@@ -15,16 +16,10 @@ public class MinitwitDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         
-        // Add indexes here
-        modelBuilder.Entity<User>()
-            .HasIndex(u => u.UserId).IsUnique();
-        
         modelBuilder.Entity<User>()
             .HasMany(u => u.Tweets)
             .WithOne(m => m.User)
             .HasForeignKey(m => m.UserId);
-            
-            
         
         modelBuilder.Entity<Message>()
             .HasIndex(m => m.MessageId)
