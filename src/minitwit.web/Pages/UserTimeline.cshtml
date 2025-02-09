@@ -1,8 +1,33 @@
-@page "${user}"
-@model itu_minitwit.Pages.UserTimeline
+@page "/{user}"
+@model itu_minitwit.Pages.UserTimelineModel
 
 @{
     ViewData["Title"] = "Minitwit";
     Layout = "Shared/_Layout";
     var routeName = HttpContext.GetRouteValue("user");
 }
+
+<h2> @routeName's Timeline </h2>
+
+<ul class="messages">
+    @if (Model.Messages.Any())
+    {
+        @foreach (var message in Model.Messages)
+        {
+            <li>
+                // Load image here
+                <p>
+                    <strong>
+                        <a href="/@message.Username">@message.Username</a>
+                    </strong>
+                    @message.Text
+                    <small>&mdash; @message.PubDate</small>
+                </p>
+            </li>
+        }
+    }
+    else
+    {
+        <li><em>There's no message so far.</em></li>
+    }
+</ul>

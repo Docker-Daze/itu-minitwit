@@ -1,13 +1,26 @@
+using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 
 namespace minitwit.infrastructure;
 
 public class UserRepository : IUserRepository
 {
-    public Task<string> GetUserId(string username)
+    
+    private readonly MinitwitDbContext _dbContext;
+    
+    public UserRepository(MinitwitDbContext dbContext)
     {
-        // get_user_id(username): """Convenience method to look up the id for a username."""
-        throw new NotImplementedException();
+        _dbContext = dbContext;
+    }
+    public async Task<string> GetUserId(string username)
+    {
+        var query = from Users in _dbContext.Users
+            where Users.Username == username
+            select Users;
+        
+        var user = await query.FirstOrDefaultAsync();
+        
+        return user.UserId;
     }
 
     public Task<string> GetGravatarURL(string email)

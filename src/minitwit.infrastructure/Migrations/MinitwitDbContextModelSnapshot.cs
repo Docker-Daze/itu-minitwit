@@ -35,21 +35,24 @@ namespace minitwit.infrastructure.Migrations
                     b.Property<string>("MessageId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("AuthorUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Flagged")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("PubDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Text")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("MessageId");
 
+                    b.HasIndex("AuthorUserId");
+
                     b.HasIndex("MessageId")
                         .IsUnique();
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Messages");
                 });
@@ -78,11 +81,11 @@ namespace minitwit.infrastructure.Migrations
 
             modelBuilder.Entity("minitwit.core.Message", b =>
                 {
-                    b.HasOne("minitwit.core.User", "User")
+                    b.HasOne("minitwit.core.User", "Author")
                         .WithMany("Messages")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("AuthorUserId");
 
-                    b.Navigation("User");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("minitwit.core.User", b =>

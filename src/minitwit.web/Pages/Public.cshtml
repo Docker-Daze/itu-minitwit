@@ -5,23 +5,24 @@
     ViewData["Title"] = "Welcome";
     Layout = "Shared/_Layout";
 }
+<h2>Public Timeline</h2>
 
 <ul class="messages">
     @if (Model.Messages.Any())
     {
-    @foreach (var message in Model.Messages)
-    {
-    <li>
-        // Load image here
-        <p>
-            <strong>
-                <a href="/@message.Username">@message.Username</a>
-            </strong>
-            @message.Text
-            <small>&mdash; @message.Timestamp</small>
-        </p>
-    </li>
-    }
+        @foreach (var message in Model.Messages)
+        {
+            <li>
+                // Load image here
+                <p>
+                    <strong>
+                        <a href="/@message.Username">@message.Username</a>
+                    </strong>
+                    @message.Text
+                    <small>&mdash; @message.PubDate</small>
+                </p>
+            </li>
+        }
     }
     else
     {

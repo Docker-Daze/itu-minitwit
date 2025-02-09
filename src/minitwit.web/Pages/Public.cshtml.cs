@@ -6,19 +6,19 @@ namespace itu_minitwit.Pages;
 
 public class PublicModel : PageModel
 {
-    private readonly IUserRepository _userRepository;
     private readonly IMessageRepository _messageRepository;
-    public List<MessageDTO> Messages { get; set; } = new List<MessageDTO>();
+    public List<MessageDTO> Messages { get; set; }
+    public int _currentPage;
 
-    public PublicModel(IUserRepository userRepository, IMessageRepository messageRepository)
+    public PublicModel(IMessageRepository messageRepository)
     {
-        _userRepository = userRepository;
         _messageRepository = messageRepository;
     }
     
-    public async Task<ActionResult> OnGet()
+    public async Task<ActionResult> OnGet([FromQuery] int? page)
     {
-        Messages = await _messageRepository.GetMessages();
+        _currentPage = page ?? 1;
+        Messages = await _messageRepository.GetMessages(_currentPage);
         return Page();
     }
 }
