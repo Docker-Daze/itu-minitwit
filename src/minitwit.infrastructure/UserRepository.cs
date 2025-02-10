@@ -55,31 +55,50 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task FollowUser(string whoId, string whomUsername)
-    {
-        string whomId = GetUserID(whomUsername).Result;
-        // def follow_user(username): """Adds the current user as follower of the given user."""
-        Follower newfollowing = new Follower{
-            WhoId = whoId,
-            WhomId = whomId
-        };
+    public async Task<bool> FollowUser(string whoId, string whomUsername)
+{
+    string whomId = await GetUserID(whomUsername);
 
-        await _dbContext.Followers.AddAsync(newfollowing);
-        await _dbContext.SaveChangesAsync();
+    if (string.IsNullOrEmpty(whomId))
+    {
+        return false; // User not found, follow operation failed
     }
 
-    public async Task UnfollowUser(string whoId, string whomUsername)
+    var newFollowing = new Follower
     {
-        string whomId = GetUserID(whomUsername).Result;
+        WhoId = whoId,
+        WhomId = whomId
+    };
 
-        var followerEntry = _dbContext.Followers
-            .FirstOrDefault(f => f.WhoId == whoId && f.WhomId == whomId);
+    await _dbContext.Followers.AddAsync(newFollowing);
+    await _dbContext.SaveChangesAsync();
 
-        if (followerEntry != null)
+    return true; // Follow operation successful
+}
+
+
+    public async Task<bool> UnfollowUser(string whoId, string whomUsername)
+    {
+        string whomId = await GetUserID(whomUsername);
+
+        if (string.IsNullOrEmpty(whomId))
         {
-            _dbContext.Followers.Remove(followerEntry);
-            await _dbContext.SaveChangesAsync();
+            return false; // User not found, unfollow operation failed
         }
+
+        var followerEntry = await _dbContext.Followers
+            .FirstOrDefaultAsync(f => f.WhoId == whoId && f.WhomId == whomId);
+
+        if (followerEntry == null)
+        {
+            return false; // No follow entry found
+        }
+
+        _dbContext.Followers.Remove(followerEntry);
+        await _dbContext.SaveChangesAsync();
+
+        return true; // Successfully unfollowed
     }
+
 
 }

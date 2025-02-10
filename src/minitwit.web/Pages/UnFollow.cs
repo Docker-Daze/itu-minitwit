@@ -18,11 +18,18 @@ public class UnFollow : PageModel
     
     public async Task<ActionResult> OnGet(string user ,[FromQuery] int? page)
     {
-        if(username != null){
-            await _userRepository.UnfollowUser(username, user);
-            // TODO: Add flash Substitiute
+        if(username != null || user != null){
+            var response = await _userRepository.UnfollowUser(username, user);
+
+        if (response == null || response == false)
+            return new StatusCodeResult(500);
         }
-        
-        return Redirect("/public");
+
+        return new ContentResult
+        {
+            Content = $"You are now following {user}",
+            ContentType = "text/plain",
+            StatusCode = 200
+        };
     }
 }

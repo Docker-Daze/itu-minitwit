@@ -18,11 +18,18 @@ public class Follow : PageModel
     
     public async Task<ActionResult> OnGet(string user ,[FromQuery] int? page)
     {
-        if(username != null){
-            await _userRepository.FollowUser(username, user);
-            // TODO: Add flash Substitiute
+        if(username != null || user != null){
+            var response = await _userRepository.FollowUser(username, user);
+
+        if (response == null || response == false)
+            return new StatusCodeResult(500);
         }
 
-        return Redirect("/");
+        return new ContentResult
+        {
+            Content = $"You are no longer following {user}",
+            ContentType = "text/plain",
+            StatusCode = 200
+        };
     }
 }

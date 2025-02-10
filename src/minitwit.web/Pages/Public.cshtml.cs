@@ -52,3 +52,5 @@ public class PublicModel : PageModel
         return Redirect("/public");
     }
 }
+
+
