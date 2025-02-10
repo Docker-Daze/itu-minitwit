@@ -51,12 +51,12 @@ public class MessageRepository : IMessageRepository
             {
                 Text = message.Text,
                 Username = message.User.UserName,
-                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss")
+                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
+                GravatarUrl = message.User.GravatarURL
             }).Skip(offset).Take(PerPage);
         
         var result = await query.ToListAsync();
         return result;
-        throw new NotImplementedException();
     }
 
     public async Task<List<MessageDTO>> GetMessagesUserTimeline(string username, int page)
@@ -70,7 +70,8 @@ public class MessageRepository : IMessageRepository
             {
                 Text = message.Text,
                 Username = message.User.UserName,
-                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss")
+                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
+                GravatarUrl = message.User.GravatarURL
             }).Skip(offset).Take(PerPage);
         
         var result = await query.ToListAsync();

@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 
@@ -22,10 +24,29 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    public Task<User> GetUser(string username, int size)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<string> GetGravatarURL(string email)
     {
-        // def gravatar_url(email, size=80): """Return the gravatar image for the given email address."""
         throw new NotImplementedException();
+    }
+
+    public async Task<string> GetGravatarURL(string email, int size = 80)
+    {
+        string normalizedEmail = email.Trim().ToLower();
+
+        // Compute the MD5 hash of the email
+        using (MD5 md5 = MD5.Create())
+        {
+            byte[] hashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(normalizedEmail));
+            string hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+
+            // Return the gravatar URL asynchronously
+            return await Task.FromResult($"http://www.gravatar.com/avatar/{hash}?d=identicon&s={size}");
+        }
     }
 
     public Task FollowUser(string username)

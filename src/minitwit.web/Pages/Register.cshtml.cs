@@ -21,13 +21,15 @@ public class RegisterModel : PageModel
     private readonly IUserEmailStore<User> _emailStore;
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSender _emailSender;
+    private readonly IUserRepository _userRepository;
 
     public RegisterModel(
         UserManager<User> userManager,
         IUserStore<User> userStore,
         SignInManager<User> signInManager,
         ILogger<RegisterModel> logger,
-        IEmailSender emailSender)
+        IEmailSender emailSender,
+        IUserRepository userRepository)
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -35,6 +37,7 @@ public class RegisterModel : PageModel
         _signInManager = signInManager;
         _logger = logger;
         _emailSender = emailSender;
+        _userRepository = userRepository;
     }
 
     /// <summary>
@@ -129,6 +132,8 @@ public class RegisterModel : PageModel
             if (result.Succeeded)
             {
                 _logger.LogInformation("User created a new account with password.");
+
+                user.GravatarURL = await _userRepository.GetGravatarURL(Input.Email, 80);
                     
                 var claim = new Claim("User Name", Input.UserName);
                 await _userManager.AddClaimAsync(user, claim);

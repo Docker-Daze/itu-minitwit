@@ -15,7 +15,7 @@
         @foreach (var message in Model.Messages)
         {
             <li>
-                // Load image here
+                <img src="@message.GravatarUrl" alt="Gravatar" width="48" height="48">
                 <p>
                     <strong>
                         <a href="/@message.Username">@message.Username</a>
