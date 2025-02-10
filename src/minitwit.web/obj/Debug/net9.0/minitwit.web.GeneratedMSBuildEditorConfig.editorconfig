@@ -46,6 +46,10 @@ build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Follow.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9sbG93LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Public.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHVibGljLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,6 +64,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/UnFollow.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVW5Gb2xsb3cuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/UserTimeline.cshtml]

@@ -24,11 +24,17 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public Task<User> GetUser(string username, int size)
+    public async Task<string> GetUserID(string username)
     {
-        throw new NotImplementedException();
-    }
+        var query = from Users in _dbContext.Users
+            where Users.UserName == username
+            select Users.Id;
 
+        var id = await query.FirstOrDefaultAsync();
+        return id;
+    }
+    
+    
     public Task<string> GetGravatarURL(string email)
     {
         throw new NotImplementedException();
@@ -49,15 +55,31 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public Task FollowUser(string username)
+    public async Task FollowUser(string whoId, string whomUsername)
     {
+        string whomId = GetUserID(whomUsername).Result;
         // def follow_user(username): """Adds the current user as follower of the given user."""
-        throw new NotImplementedException();
+        Follower newfollowing = new Follower{
+            WhoId = whoId,
+            WhomId = whomId
+        };
+
+        await _dbContext.Followers.AddAsync(newfollowing);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task UnfollowUser(string username)
+    public async Task UnfollowUser(string whoId, string whomUsername)
     {
-        // def unfollow_user(username): """Removes the current user as follower of the given user."""
-        throw new NotImplementedException();
+        string whomId = GetUserID(whomUsername).Result;
+
+        var followerEntry = _dbContext.Followers
+            .FirstOrDefault(f => f.WhoId == whoId && f.WhomId == whomId);
+
+        if (followerEntry != null)
+        {
+            _dbContext.Followers.Remove(followerEntry);
+            await _dbContext.SaveChangesAsync();
+        }
     }
+
 }

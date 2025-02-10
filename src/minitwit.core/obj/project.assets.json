@@ -3253,24 +3253,25 @@
     ]
   },
   "packageFolders": {
-    "/Users/nikolai/.nuget/packages/": {}
+    "/home/aras/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
+      "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
       "projectName": "minitwit.core",
-      "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
-      "packagesPath": "/Users/nikolai/.nuget/packages/",
-      "outputPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/obj/",
+      "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
+      "packagesPath": "/home/aras/.nuget/packages/",
+      "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/nikolai/.nuget/NuGet/NuGet.Config"
+        "/home/aras/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3326,7 +3327,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
