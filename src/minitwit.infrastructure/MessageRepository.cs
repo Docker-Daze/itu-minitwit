@@ -6,16 +6,38 @@ namespace minitwit.infrastructure;
 public class MessageRepository : IMessageRepository
 {
     private readonly MinitwitDbContext _dbContext;
+    private IUserRepository _userRepository;
     private const int PerPage = 10;
     
-    public MessageRepository(MinitwitDbContext dbContext)
+    public MessageRepository(MinitwitDbContext dbContext, IUserRepository userRepository)
     {
         _dbContext = dbContext;
+        _userRepository = userRepository;
+        
     }
     
-    public async Task AddMessage(string message)
+    public async Task AddMessage(string username, string message)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            throw new ArgumentException("Message text cannot be empty.");
+        }
+        if (message.Length > 160)
+        {
+            throw new ArgumentException("Message text cannot exceed 160 characters.");
+        }
+        
+        var user = await _userRepository.GetUser(username);
+
+        Message newMessage = new()
+        {
+            Text = message,
+            PubDate = DateTime.Now,
+            User = user
+        };
+        
+        await _dbContext.Messages.AddAsync(newMessage); // does not write to the database!
+        await _dbContext.SaveChangesAsync(); // persist the changes in the database
     }
 
     public async Task<List<MessageDTO>> GetMessages(int page)
