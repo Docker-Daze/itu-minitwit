@@ -24,16 +24,16 @@ def register(username, password, password2=None, email=None):
     if email is None:
         email = username + '@example.com'
     return requests.post(f'{BASE_URL}/Identity/Account/Register', data={
-        'username':     username,
-        'password':     password,
-        'password2':    password2,
-        'email':        email,
+        'Input.UserName': username, 
+        'Input.Email': email,
+        'Input.Password': password,
+        'Input.ConfirmPassword': password2,
     }, allow_redirects=True)
 
 def login(username, password):
     """Helper function to login"""
     http_session = requests.Session()
-    r = http_session.post(f'{BASE_URL}/Identity/Account/Login', data={
+    r = http_session.post(f'{BASE_URL}/Identity/Account/Login', json={
         'username': username,
         'password': password
     }, allow_redirects=True)
@@ -60,12 +60,14 @@ def add_message(http_session, text):
 
 def test_register():
     """Make sure registering works"""
-    r = register('user1', 'default12@')
+    r = register('user1', 'Default12@')
+    print(f"Response Status: {r.status_code}")
+    print(f"Response Text: {r.text}")
     assert 'You were successfully registered ' \
            'and can login now' in r.text
-    r = register('user1', 'default12@')
+    r = register('user1', 'Default12@')
     assert 'The username is already taken' in r.text
-    r = register('', 'default12@')
+    r = register('', 'Default12@')
     assert 'You have to enter a username' in r.text
     r = register('meh', '')
     assert 'You have to enter a password' in r.text
@@ -76,7 +78,7 @@ def test_register():
 
 def test_login_logout():
     """Make sure logging in and logging out works"""
-    r, http_session = register_and_login('user1', 'default12@')
+    r, http_session = register_and_login('user1', 'Default12@')
     assert 'You were logged in' in r.text
     r = logout(http_session)
     assert 'You were logged out' in r.text
@@ -87,7 +89,7 @@ def test_login_logout():
 
 def test_message_recording():
     """Check if adding messages works"""
-    _, http_session = register_and_login('foo', 'default12@')
+    _, http_session = register_and_login('foo', 'Default12@')
     add_message(http_session, 'test message 1')
     add_message(http_session, '<test message 2>')
     r = requests.get(f'{BASE_URL}/')
@@ -96,10 +98,10 @@ def test_message_recording():
 
 def test_timelines():
     """Make sure that timelines work"""
-    _, http_session = register_and_login('foo', 'default12@')
+    _, http_session = register_and_login('foo', 'Default12@')
     add_message(http_session, 'the message by foo')
     logout(http_session)
-    _, http_session = register_and_login('bar', 'default12@')
+    _, http_session = register_and_login('bar', 'Default12@')
     add_message(http_session, 'the message by bar')
     r = http_session.get(f'{BASE_URL}/public')
     assert 'the message by foo' in r.text

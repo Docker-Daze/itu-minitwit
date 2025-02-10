@@ -157,7 +157,8 @@ namespace minitwit.web.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+            return BadRequest(new { errors });  // This will return detailed errors
             // If we got this far, something failed, redisplay form
             return Page();
         }
