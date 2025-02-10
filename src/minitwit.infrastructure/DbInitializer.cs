@@ -6,7 +6,7 @@ public static class DbInitializer
 {
     public static void SeedDatabase(MinitwitDbContext minitwitDbContext)
     {
-        if (!(minitwitDbContext.Users.Any() && minitwitDbContext.Messages.Any()))
+        /*if (!(minitwitDbContext.Users.Any() && minitwitDbContext.Messages.Any()))
         {
             var a1 = new User() { UserId = "1", Username = "Roger Histand", Email = "Roger+Histand@hotmail.com", Messages = new List<Message>()};
             var a2 = new User() { UserId = "2", Username = "Luanna Muro", Email = "Luanna-Muro@ku.dk", Messages = new List<Message>() };
@@ -694,6 +694,6 @@ public static class DbInitializer
             minitwitDbContext.Users.AddRange(Users);
             minitwitDbContext.Messages.AddRange(Messages);
             minitwitDbContext.SaveChanges();
-        }
+        }*/
     }
 }

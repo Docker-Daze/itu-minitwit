@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 using minitwit.infrastructure;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,13 @@ builder.Services.AddSession();
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseSqlite(connectionString));
+
+builder.Services.AddDefaultIdentity<User>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.User.RequireUniqueEmail = false;
+    })
+    .AddEntityFrameworkStores<MinitwitDbContext>();
 
 var app = builder.Build();
 
@@ -34,12 +42,13 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
     var minitwitDbContext = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
     minitwitDbContext.Database.EnsureCreated();
-    DbInitializer.SeedDatabase(minitwitDbContext);
+    //DbInitializer.SeedDatabase(minitwitDbContext);
 }
 
 app.Run();

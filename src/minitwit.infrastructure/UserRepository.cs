@@ -14,13 +14,14 @@ public class UserRepository : IUserRepository
     }
     public async Task<string> GetUserId(string username)
     {
-        var query = from Users in _dbContext.Users
+        /*var query = from Users in _dbContext.Users
             where Users.Username == username
             select Users;
         
         var user = await query.FirstOrDefaultAsync();
         
-        return user.UserId;
+        return user.UserId;*/
+        throw new NotImplementedException();
     }
 
     public Task<string> GetGravatarURL(string email)
