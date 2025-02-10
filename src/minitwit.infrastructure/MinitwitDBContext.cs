@@ -18,12 +18,9 @@ public class MinitwitDbContext : IdentityDbContext<User>
         
         modelBuilder.Entity<Follower>()
             .HasKey(f => new { f.WhoId, f.WhomId });
-        // Add indexes here
         modelBuilder.Entity<User>()
-            .HasMany(u => u.Messages)
-            .WithOne(m => m.User)
-            .HasForeignKey(m => m.UserId);
-        
+            .HasIndex(u => u.UserName)
+            .IsUnique();
         modelBuilder.Entity<Message>()
             .HasIndex(m => m.MessageId)
             .IsUnique();
