@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 using minitwit.infrastructure;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
