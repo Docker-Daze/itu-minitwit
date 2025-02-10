@@ -14,10 +14,10 @@ public class UserRepository : IUserRepository
     {
         _dbContext = dbContext;
     }
-    public async Task<User> GetUser(string username)
+    public async Task<User> GetUser(string userId)
     {
         var query = from Users in _dbContext.Users
-            where Users.UserName == username
+            where Users.Id == userId
             select Users;
         
         var user = await query.FirstOrDefaultAsync();

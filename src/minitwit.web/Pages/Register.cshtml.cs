@@ -139,9 +139,8 @@ public class RegisterModel : PageModel
                 await _userManager.AddClaimAsync(user, claim);
 
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                    
-                    
-                    
+                HttpContext.Session.SetString("UserId", user.Id);
+                
                 return LocalRedirect(returnUrl);
             }
             foreach (var error in result.Errors)

@@ -116,6 +116,7 @@ public class LoginModel : PageModel
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in.");
+                HttpContext.Session.SetString("UserId", user.Id);
                 return LocalRedirect(returnUrl);
             }
             if (result.RequiresTwoFactor)

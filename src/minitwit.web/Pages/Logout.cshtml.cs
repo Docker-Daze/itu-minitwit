@@ -22,6 +22,7 @@ public class LogoutModel : PageModel
     {
         await _signInManager.SignOutAsync();
         _logger.LogInformation("User logged out.");
+        HttpContext.Session.Remove("UserId");
         if (returnUrl != null)
         {
             return LocalRedirect(returnUrl);

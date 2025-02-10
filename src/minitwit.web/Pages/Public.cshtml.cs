@@ -26,7 +26,9 @@ public class PublicModel : PageModel
     
     public async Task<ActionResult> OnPost()
     {
-        if (!User.Identity.IsAuthenticated)
+        var userId = HttpContext.Session.GetString("UserId");
+
+        if (string.IsNullOrEmpty(userId))
         {
             return Unauthorized();
         }
@@ -46,7 +48,7 @@ public class PublicModel : PageModel
             return Page();
         }
 
-        await _messageRepository.AddMessage(User.Identity.Name, message);
+        await _messageRepository.AddMessage(userId, message);
         return Redirect("/public");
     }
 }
