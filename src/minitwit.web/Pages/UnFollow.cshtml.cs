@@ -9,9 +9,11 @@ namespace itu_minitwit.Pages;
 public class UnFollow : PageModel
 {
     IUserRepository _userRepository;
+    IMessageRepository _messageRepository;
     string username;
-        public UnFollow(IUserRepository userRepository)
+        public UnFollow(IMessageRepository messageRepository, IUserRepository userRepository)
     {
+        _messageRepository = messageRepository;
         _userRepository = userRepository;
         var username = HttpContext.Session.GetString("UserId");
     }
