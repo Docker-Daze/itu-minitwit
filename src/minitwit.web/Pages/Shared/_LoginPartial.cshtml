@@ -6,7 +6,7 @@
             <a href="/@(User.Identity.Name)">my timeline</a> |
             <a href="/public">public timeline</a> |
             <form asp-page="Logout" asp-route-returnUrl="@Url.Page("/public", new { area = "" })" method="post" style="display:inline;">
-                <button type="submit" class="btn btn-link p-0">logout [@(User.Identity?.Name)]</button>
+                <button type="submit" class="btn-primary">logout [@(User.Identity?.Name)]</button>
             </form>
         </div>
     }

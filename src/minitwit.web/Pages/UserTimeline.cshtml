@@ -4,13 +4,45 @@
 @{
     ViewData["Title"] = "Minitwit";
     Layout = "Shared/_Layout";
-    var routeName = HttpContext.GetRouteValue("user");
+    var routeName = Model.HttpContext.GetRouteValue("user")?.ToString();
+    if (string.IsNullOrEmpty(routeName))
+    {
+        throw new Exception("Route value 'user' is null or empty.");
+    }
+    var isFollowing = await Model.IsFollowing(routeName);
+    var action = isFollowing ? "unfollow" : "follow";
 }
 
 <h2> @routeName's Timeline </h2>
+    @if (User.Identity.IsAuthenticated && User.Identity.Name != routeName)
+    {
+        if (isFollowing)
+        {
+            <!-- Show Unfollow button if following -->
+            <form method="post" asp-page-handler="UnFollow" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="user" value="@routeName"/>
+                <button type="submit" class="btn btn-danger btn-sm">
+                    Unfollow
+                </button>
+            </form>
+        }
+        else
+        {
+            <!-- Show Follow button if not following -->
+            <form method="post" asp-page-handler="Follow" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="user" value="@routeName"/>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    Follow
+                </button>
+            </form>
+        }
+    }
+
 
 <ul class="messages">
-    @if (Model.Messages.Any())
+    @if (Model.Messages != null && Model.Messages.Any())
     {
         @foreach (var message in Model.Messages)
         {

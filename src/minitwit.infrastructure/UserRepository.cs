@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -55,9 +56,10 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<bool> FollowUser(string whoId, string whomUsername)
+    public async Task<bool> FollowUser(string whoUsername, string whomUsername)
 {
     string whomId = await GetUserID(whomUsername);
+    string whoId = await GetUserID(whoUsername);
 
     if (string.IsNullOrEmpty(whomId))
     {
@@ -77,11 +79,12 @@ public class UserRepository : IUserRepository
 }
 
 
-    public async Task<bool> UnfollowUser(string whoId, string whomUsername)
+    public async Task<bool> UnfollowUser(string whoUsername, string whomUsername)
     {
         string whomId = await GetUserID(whomUsername);
+        string whoId = await GetUserID(whoUsername);
 
-        if (string.IsNullOrEmpty(whomId))
+        if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
             return false; // User not found, unfollow operation failed
         }
@@ -99,6 +102,23 @@ public class UserRepository : IUserRepository
 
         return true; // Successfully unfollowed
     }
+
+    public async Task<bool> IsFollowing(string whoUsername, string whomUsername)
+    {
+        string whomId = await GetUserID(whomUsername);
+        string whoId = await GetUserID(whoUsername);
+
+        if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
+        {
+            return false; // User not found, cannot be following
+        }
+
+        return await _dbContext.Followers
+            .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
+    }
+
+
+    
 
 
 }

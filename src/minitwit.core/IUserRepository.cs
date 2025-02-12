@@ -7,4 +7,5 @@ public interface IUserRepository
     public Task<string> GetGravatarURL(string email, int size);
     public Task<bool> FollowUser(string who, string whom);
     public Task<bool> UnfollowUser(string who, string whom);
+    public Task<bool> IsFollowing(string who, string whom);
 }
