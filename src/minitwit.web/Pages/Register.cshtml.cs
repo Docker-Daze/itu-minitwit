@@ -39,109 +39,70 @@ public class RegisterModel : PageModel
         _emailSender = emailSender;
         _userRepository = userRepository;
     }
-
-    /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-    ///     directly from your code. This API may change or be removed in future releases.
-    /// </summary>
+    
     [BindProperty]
-    public InputModel Input { get; set; }
-
-    /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-    ///     directly from your code. This API may change or be removed in future releases.
-    /// </summary>
+    public string Username { get; set; }
+    [BindProperty]
+    public string Email { get; set; }
+    [BindProperty]
+    public string Password { get; set; }
+    [BindProperty]
+    public string Password2 { get; set; }
     public string ReturnUrl { get; set; }
-
-    /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-    ///     directly from your code. This API may change or be removed in future releases.
-    /// </summary>
-    public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-    /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-    ///     directly from your code. This API may change or be removed in future releases.
-    /// </summary>
-    public class InputModel
-    {
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        [Required]
-        [DataType(DataType.Text)]
-        [StringLength(32, ErrorMessage = "The user name can be no longer than 32 characters.")]
-        [RegularExpression(@"^[a-zA-Z0-9æøåÆØÅ_\-\s]*$", ErrorMessage = "The username can only contain letters, numbers, hyphens, underscores, and spaces.")]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-            
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-    }
-
+    
 
     public async Task OnGetAsync(string returnUrl = null)
     {
         ReturnUrl = returnUrl;
-        ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
     }
 
     public async Task<IActionResult> OnPostAsync(string returnUrl = null)
     {
         returnUrl ??= Url.Content("~/");
-        ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        
+        if (string.IsNullOrEmpty(Username))
+        {
+            ModelState.AddModelError(string.Empty, "You have to enter a username");
+            return Page();
+        }
+        else if (string.IsNullOrEmpty(Email) || !Email.Contains("@"))
+        {
+            ModelState.AddModelError(string.Empty, "You have to enter a valid email address");
+            return Page();
+        }
+        else if (string.IsNullOrEmpty(Password))
+        {
+            ModelState.AddModelError(string.Empty,"You have to enter a password");
+            return Page();
+        }
+        else if (Password != Password2)
+        {
+            ModelState.AddModelError(string.Empty,"The two passwords do not match");
+            return Page();
+        }
+        else if (await _userManager.FindByNameAsync(Username) is not null)
+        {
+            TempData["FlashMessage"] ="The username is already taken";
+            return Page();
+        }
+        
         if (ModelState.IsValid)
         {
             var user = CreateUser();
 
-            user.UserName = Input.UserName;
+            user.UserName = Username;
                 
-            var existingUser = await _userManager.FindByEmailAsync(Input.Email);
-            if (existingUser != null)
-            {
-                ModelState.AddModelError(string.Empty, "Email address already exists.");
-                return Page();
-            }
-                
-            await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
-            await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-            var result = await _userManager.CreateAsync(user, Input.Password);
+            await _userStore.SetUserNameAsync(user, Username, CancellationToken.None);
+            await _emailStore.SetEmailAsync(user, Email, CancellationToken.None);
+            var result = await _userManager.CreateAsync(user, Password);
                 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User created a new account with password.");
+                TempData["FlashMessage"] ="You were successfully registered and can login now";
 
-                user.GravatarURL = await _userRepository.GetGravatarURL(Input.Email, 80);
-                    
-                var claim = new Claim("User Name", Input.UserName);
-                await _userManager.AddClaimAsync(user, claim);
-
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                HttpContext.Session.SetString("UserId", user.Id);
+                user.GravatarURL = await _userRepository.GetGravatarURL(Email, 80);
                 
-                return LocalRedirect(returnUrl);
+                return LocalRedirect("/login");
             }
             foreach (var error in result.Errors)
             {

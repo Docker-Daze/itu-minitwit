@@ -3,10 +3,11 @@ using Xunit;
 
 namespace minitwit.tests;
 
-public class TestAPI
+public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _fixture;
     private readonly HttpClient _client;
+    private const string BaseUrl = "http://localhost:5114";
 
     public TestAPI(WebApplicationFactory<Program> fixture)
     {
@@ -14,10 +15,56 @@ public class TestAPI
         _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = true, HandleCookies = true });
     }
 
-    public void Register(string username, string username)
+    public async Task<HttpResponseMessage> Register(string username, string password, string password2 = null, string email = null)
     {
+        if (password2 == null) 
+        {
+            password2 = password;
+        }
+
+        if (email == null)
+        {
+            email = username + "@example.com";
+        }
         
+        var formData = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair<string, string>("Username", username),
+            new KeyValuePair<string, string>("Password", password),
+            new KeyValuePair<string, string>("Password2", password2),
+            new KeyValuePair<string, string>("Email", email),
+        });
+    
+        return await _client.PostAsync("/register", formData);
     }
+
+    [Fact]
+    public async void TestRegister()
+    {
+        var r = await Register("user1", "Default123!");
+        var content = await r.Content.ReadAsStringAsync();
+        Assert.Contains("You were successfully registered and can login now", content);
+        
+        r = await Register("user1", "Default123!");
+        content = await r.Content.ReadAsStringAsync();
+        Assert.Contains("The username is already taken", content);
+        
+        r = await Register("", "Default123!");
+        content = await r.Content.ReadAsStringAsync();
+        Assert.Contains("You have to enter a username", content);
+        
+        r = await Register("meh", "");
+        content = await r.Content.ReadAsStringAsync();
+        Assert.Contains("You have to enter a password", content);
+        
+        r = await Register("meh", "x123!", "y123!");
+        content = await r.Content.ReadAsStringAsync();
+        Assert.Contains("The two passwords do not match", content);
+        
+        r = await Register("meh", "foo", null, "broken");
+        content = await r.Content.ReadAsStringAsync();
+        Assert.Contains("You have to enter a valid email address", content);
+    } 
     
     
     

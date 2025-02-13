@@ -1206,3 +1206,9 @@ C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit
 /home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/minitwit.web.pdb
 /home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/minitwit.web.genruntimeconfig.cache
 /home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/ref/minitwit.web.dll
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/out/web.config
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/out/appsettings.Development.json
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/out/appsettings.json
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/out/minitwit.web.deps.json
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/out/minitwit.web.runtimeconfig.json
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/out/minitwit.web.staticwebassets.endpoints.json
