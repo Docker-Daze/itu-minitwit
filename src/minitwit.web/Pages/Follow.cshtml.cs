@@ -20,12 +20,14 @@ public class Follow : PageModel
     
     public async Task<ActionResult> OnGet(string user ,[FromQuery] int? page)
     {
-        if(username != null || user != null){
+        if (username != null || user != null){
             var response = await _userRepository.FollowUser(username, user);
 
         if (response == null || response == false)
             return new StatusCodeResult(500);
         }
+        
+        
 
         return new ContentResult
         {
