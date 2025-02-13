@@ -141,6 +141,7 @@ public class RegisterModel : PageModel
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 HttpContext.Session.SetString("UserId", user.Id);
                 
+                TempData["StatusMessage"] = "You were successfully registered and can login now";
                 return LocalRedirect(returnUrl);
             }
             foreach (var error in result.Errors)

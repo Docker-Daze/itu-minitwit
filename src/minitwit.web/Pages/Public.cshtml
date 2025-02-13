@@ -7,7 +7,12 @@
 }
 <h2>Public Timeline</h2>
 <partial name="Shared/_MessageBoxPartial" model="Model.MessageInput" />
-
+@if (TempData["StatusMessage"] != null)
+{
+<div class="alert alert-success">
+    @TempData["StatusMessage"]
+</div>
+}
 <ul class="messages">
     @if (Model.Messages.Any())
     {
