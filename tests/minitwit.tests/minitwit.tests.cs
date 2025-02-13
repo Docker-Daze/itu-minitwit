@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
+using System.Text;
+using System.Text.Json;  // or Newtonsoft.Json if you prefer
+
+
 namespace minitwit.tests;
 
-public class TestAPI
+public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _fixture;
     private readonly HttpClient _client;
+    private string BaseUrl = "http://localhost:5114";
 
     public TestAPI(WebApplicationFactory<Program> fixture)
     {
@@ -14,14 +19,76 @@ public class TestAPI
         _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = true, HandleCookies = true });
     }
 
-    public void Register(string username, string username)
+    private async Task<HttpResponseMessage> Register(string username, string password, string password2 = null, string email = null)
     {
+        // If no confirmation password is provided, use the same password.
+        if (password2 == null)
+        {
+            password2 = password;
+        }
+
+        // If no email is provided, use a default email based on the username.
+        if (email == null)
+        {
+            email = $"{username}@example.com";
+        }
+
+        // Build the form data (using keys that match your form fields).
+        var formData = new Dictionary<string, string>
+        {
+            { "Input.UserName", username },
+            { "Input.Email", email },
+            { "Input.Password", password },
+            { "Input.ConfirmPassword", password2 }
+        };
+
+        var content = new FormUrlEncodedContent(formData);
+
+        // Post the form data to the registration endpoint.
+        return await _client.PostAsync("/register", content);
+    }
+
+    public async Task<(HttpResponseMessage response, HttpClient httpClient)> Login(string username, string password)
+    {
+        var handler = new HttpClientHandler { AllowAutoRedirect = true };
+        var httpClient = new HttpClient(handler);
+        var url = $"{BaseUrl}/login";
+
+        // Build the form data using keys expected by your login form.
+        var formData = new Dictionary<string, string>
+        {
+            { "Input.UserName", username },
+            { "Input.Password", password }
+        };
+
+        var content = new FormUrlEncodedContent(formData);
+
+        HttpResponseMessage response = await httpClient.PostAsync(url, content);
+
+        return (response, httpClient);
+    }
+
+
+    [Fact]
+    public async Task test_login_logout()
+    {
+        await Register("user1", "Default123!");
+        var response = await _client.GetAsync($"{BaseUrl}");
+        var htmlContent = await response.Content.ReadAsStringAsync();
+
+        // Assert that the logout button text is present in the HTML.
+        Assert.Contains("logout [user1]", htmlContent, StringComparison.OrdinalIgnoreCase);
         
+        await Login("user1", "Default123!");
+        
+        response = await _client.GetAsync($"{BaseUrl}/user1");
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+
+        // Verify that the "my timeline" option is present in the HTML.
+        Assert.Contains("my timeline", content, StringComparison.OrdinalIgnoreCase);
     }
     
-    
-    
-
     [Fact]
     public async void CanSeePublicTimeline()
     {
