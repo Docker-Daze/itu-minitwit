@@ -76,6 +76,32 @@ public class MessageRepository : IMessageRepository
         
         var result = await query.ToListAsync();
         return result;
-        throw new NotImplementedException();
+    }
+    
+    public async Task<List<MessageDTO>> GetMessagesOwnTimeline(string username, int page)
+    {
+        int offset = (page - 1) * PerPage;
+        
+        var userId = await _userRepository.GetUserID(username);
+
+        var following = await _dbContext.Followers
+            .Where(f => f.WhoId == userId)
+            .Select(f => f.WhomId)
+            .ToListAsync();
+        
+        var query = (from message in _dbContext.Messages
+            orderby message.PubDate descending
+            where message.Flagged == 0 
+                  && (message.User.UserName == username || following.Contains(message.User.Id)) 
+            select new MessageDTO
+            {
+                Text = message.Text,
+                Username = message.User.UserName,
+                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
+                GravatarUrl = message.User.GravatarURL
+            }).Skip(offset).Take(PerPage);
+        
+        var result = await query.ToListAsync();
+        return result;
     }
 }

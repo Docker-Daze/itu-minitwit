@@ -1,19 +1,19 @@
 {
   "Files": [
     {
-      "Id": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
+      "Id": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
       "PackagePath": "staticwebassets/minitwit.web.7nn3axbmky.bundle.scp.css"
     },
     {
-      "Id": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
+      "Id": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
       "PackagePath": "staticwebassets/css/style.css"
     },
     {
-      "Id": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
+      "Id": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
+      "Id": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
     {
