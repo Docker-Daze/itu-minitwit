@@ -20,8 +20,7 @@ BASE_URL = "http://localhost:5114"
 def get_csrf_token(session, url):
     """Perform a GET request to the URL and extract the __RequestVerificationToken."""
     response = session.get(url)
-
-
+    
     match = re.search(r'name="__RequestVerificationToken"[^>]*value="([^"]+)"', response.text)
     if match:
         return match.group(1)
