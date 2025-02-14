@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("minitwit.web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30f7c09e6b6d9b3b4052d2ebd360029277c93cae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a52179ff5d6e0cc21f77297838389e3f9d95044b")]
 [assembly: System.Reflection.AssemblyProductAttribute("minitwit.web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("minitwit.web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
