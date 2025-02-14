@@ -1,0 +1,15 @@
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/bin/Release/net9.0/minitwit.core.deps.json
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/bin/Release/net9.0/minitwit.core.runtimeconfig.json
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/bin/Release/net9.0/minitwit.core.dll
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/bin/Release/net9.0/minitwit.core.pdb
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.csproj.AssemblyReference.cache
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.AssemblyInfoInputs.cache
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.AssemblyInfo.cs
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.csproj.CoreCompileInputs.cache
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.sourcelink.json
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.dll
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/refint/minitwit.core.dll
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.pdb
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/minitwit.core.genruntimeconfig.cache
+/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Release/net9.0/ref/minitwit.core.dll
