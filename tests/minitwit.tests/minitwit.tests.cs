@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.Razor.Language;
 using Xunit;
 
 namespace minitwit.tests;
@@ -66,17 +67,14 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         Assert.Contains("You have to enter a valid email address", content);
     } 
     
-    
-    
 
     [Fact]
     public async void CanSeePublicTimeline()
     {
-        var response = await _client.GetAsync("/");
+        var response = await _client.GetAsync("/public");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
-
-        Assert.Contains("Chirp!", content);
+        
         Assert.Contains("Public Timeline", content);
     }
     

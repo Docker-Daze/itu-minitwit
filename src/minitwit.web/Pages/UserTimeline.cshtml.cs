@@ -6,6 +6,7 @@ using minitwit.core;
 
 namespace itu_minitwit.Pages;
 
+[IgnoreAntiforgeryToken]
 public class UserTimelineModel : PageModel
 {
     private readonly IMessageRepository _messageRepository;

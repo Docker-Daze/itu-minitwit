@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using minitwit.core;
 
+[IgnoreAntiforgeryToken]
 public class LogoutModel : PageModel
 {
     private readonly SignInManager<User> _signInManager;

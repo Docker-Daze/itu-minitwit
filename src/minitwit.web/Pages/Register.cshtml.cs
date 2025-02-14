@@ -13,6 +13,7 @@ using minitwit.core;
 
 namespace minitwit.web.Pages;
 
+[IgnoreAntiforgeryToken]
 public class RegisterModel : PageModel
 {
     private readonly SignInManager<User> _signInManager;
@@ -55,7 +56,7 @@ public class RegisterModel : PageModel
     {
         ReturnUrl = returnUrl;
     }
-
+    
     public async Task<IActionResult> OnPostAsync(string returnUrl = null)
     {
         returnUrl ??= Url.Content("~/");

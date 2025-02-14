@@ -5,6 +5,7 @@ using minitwit.web.Pages;
 
 namespace itu_minitwit.Pages;
 
+[IgnoreAntiforgeryToken]
 public class PublicModel : PageModel
 {
     private readonly IMessageRepository _messageRepository;

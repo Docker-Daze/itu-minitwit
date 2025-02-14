@@ -6,6 +6,7 @@ using minitwit.web.Pages;
 
 namespace itu_minitwit.Pages;
 
+[IgnoreAntiforgeryToken]
 public class UnFollow : PageModel
 {
     IUserRepository _userRepository;
