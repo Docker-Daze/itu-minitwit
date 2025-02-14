@@ -9,13 +9,15 @@ namespace itu_minitwit.Pages;
 public class PublicModel : PageModel
 {
     private readonly IMessageRepository _messageRepository;
+    private readonly IUserRepository _userRepository;
     public List<MessageDTO> Messages { get; set; }
     public int _currentPage;
     [BindProperty]
     public MessageInputModel MessageInput { get; set; }
-    public PublicModel(IMessageRepository messageRepository)
+    public PublicModel(IMessageRepository messageRepository, IUserRepository userRepository)
     {
         _messageRepository = messageRepository;
+        _userRepository = userRepository;
     }
     
     public async Task<ActionResult> OnGet([FromQuery] int? page)
@@ -51,6 +53,34 @@ public class PublicModel : PageModel
 
         await _messageRepository.AddMessage(userId, message);
         return Redirect("/public");
+    }
+
+
+
+    public async Task<ActionResult> OnPostAddMessageAsync(string message){
+
+        await Task.CompletedTask;
+
+        if(message.Length < 1){
+
+            return BadRequest("Message cannot be empty");
+        }
+
+        if(User.Identity.IsAuthenticated){
+
+            string userID = await _userRepository.GetUserID(User.Identity.Name);
+
+            if(userID != null){
+                await _messageRepository.AddMessage(userID, message);
+                return RedirectToPage("/public");
+            }
+            else{
+                return BadRequest("User with no ID");
+            }
+            
+        }
+
+        return Unauthorized();
     }
 }
 

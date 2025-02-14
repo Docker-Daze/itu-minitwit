@@ -17,75 +17,75 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = minitwit.web
 build_property.RootNamespace = minitwit.web
-build_property.ProjectDir = /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/
+build_property.ProjectDir = /home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web
+build_property.MSBuildProjectDirectory = /home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Login.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = 
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Logout.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = 
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9nb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Register.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = 
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/AddMessage.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/AddMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRkTWVzc2FnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Follow.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Follow.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9sbG93LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Public.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Public.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHVibGljLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_LoginPartial.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_MessageBoxPartial.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_MessageBoxPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19NZXNzYWdlQm94UGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/UnFollow.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/UnFollow.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVW5Gb2xsb3cuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/UserTimeline.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/UserTimeline.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlclRpbWVsaW5lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/_ViewImports.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/_ViewStart.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_Layout.cshtml]
+[/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-84zx9gvqeo
