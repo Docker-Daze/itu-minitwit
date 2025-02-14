@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using minitwit.infrastructure;
 using Xunit;
 
 namespace minitwit.tests;
@@ -9,11 +12,21 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
     private readonly WebApplicationFactory<Program> _fixture;
     private readonly HttpClient _client;
     private const string BaseUrl = "http://localhost:5114";
+    private readonly MinitwitDbContext _dbContext;
 
     public TestAPI(WebApplicationFactory<Program> fixture)
     {
         _fixture = fixture;
         _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = true, HandleCookies = true });
+        
+        SqliteConnection connection;
+        connection = new SqliteConnection("DataSource=:memory:");
+        connection.Open();
+
+        var builder = new DbContextOptionsBuilder<MinitwitDbContext>().UseSqlite(connection);
+        _dbContext = new MinitwitDbContext(builder.Options);
+
+        _dbContext.Database.EnsureCreated();
     }
 
     public async Task<HttpResponseMessage> Register(string username, string password, string password2 = null, string email = null)

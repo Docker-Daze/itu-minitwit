@@ -9,4 +9,5 @@ public class RerouteController : Controller
     {
         return LocalRedirect("/public");
     }
+    
 }
