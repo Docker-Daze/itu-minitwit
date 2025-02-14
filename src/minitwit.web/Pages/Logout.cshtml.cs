@@ -13,16 +13,12 @@ public class LogoutModel : PageModel
         _signInManager = signInManager;
     }
 
-    public async Task<IActionResult> OnPost(string returnUrl = null)
+    public async Task<IActionResult> OnGet()
     {
         await _signInManager.SignOutAsync();
         TempData["FlashMessage"] = "You were logged out";
         HttpContext.Session.Remove("UserId");
-        if (returnUrl != null)
-        {
-            return LocalRedirect(returnUrl);
-        }
-        return RedirectToPage();
+        return RedirectToPage("public");
     }
 }
 
