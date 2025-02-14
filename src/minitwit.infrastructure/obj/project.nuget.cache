@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qZ+TAP7AZXo=",
+  "dgSpecHash": "R6xSolULHKI=",
   "success": true,
   "projectFilePath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
   "expectedPackageFiles": [
@@ -85,5 +85,16 @@
     "/Users/nikolai/.nuget/packages/system.text.json/9.0.1/system.text.json.9.0.1.nupkg.sha512",
     "/Users/nikolai/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Microsoft.AspNetCore.Identity 2.3.0 depends on Microsoft.Extensions.Identity.Core (>= 2.3.0) but Microsoft.Extensions.Identity.Core 2.3.0 was not found. An approximate best match of Microsoft.Extensions.Identity.Core 3.0.0 was resolved.",
+      "libraryId": "Microsoft.Extensions.Identity.Core",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
