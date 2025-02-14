@@ -3,7 +3,7 @@ using Xunit;
 
 namespace minitwit.tests;
 
-public class TestAPI
+public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _fixture;
     private readonly HttpClient _client;
@@ -14,13 +14,50 @@ public class TestAPI
         _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = true, HandleCookies = true });
     }
 
-    public void Register(string username, string username)
+    [Fact]
+    public async Task logout()
     {
-        
+        //Act
+        var response = await _client.GetAsync("/logout");
+        //Assert
+        response.EnsureSuccessStatusCode();
     }
-    
-    
-    
+
+    private async Task AuthenticateAsync()
+    {
+        var loginData = new Dictionary<string, string>
+        {
+            { "username", "testuser" },
+            { "password", "testpassword" }
+        };
+
+        var loginContent = new FormUrlEncodedContent(loginData);
+        var loginResponse = await _client.PostAsync("/login", loginContent);
+        loginResponse.EnsureSuccessStatusCode();
+    }
+
+    [Fact]
+    public async Task CanAddMessage()
+    {
+        await AuthenticateAsync();
+        // Arrange
+        var formData = new Dictionary<string, string>
+        {
+            { "text", "Test message" }
+        };
+        var content = new FormUrlEncodedContent(formData);
+        // Act
+        var response = await _client.PostAsync("/add_message", content);
+        var responseString = await response.Content.ReadAsStringAsync();
+        // Debugging: Print error response if request fails
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($"API Error: {response.StatusCode}, Response: {responseString}");
+        }
+        // Assert
+        response.EnsureSuccessStatusCode();
+        Assert.Contains("Your message was recorded", responseString);
+    }
 
     [Fact]
     public async void CanSeePublicTimeline()

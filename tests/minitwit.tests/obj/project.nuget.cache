@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ETtaakKlWi0=",
+  "dgSpecHash": "LwiNTFLaxHY=",
   "success": true,
   "projectFilePath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
   "expectedPackageFiles": [
@@ -89,6 +89,7 @@
     "/Users/mathiashansen/.nuget/packages/microsoft.codeanalysis.razor/6.0.24/microsoft.codeanalysis.razor.6.0.24.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.codeanalysis.scripting.common/4.8.0/microsoft.codeanalysis.scripting.common.4.8.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.codeanalysis.workspaces.common/4.8.0/microsoft.codeanalysis.workspaces.common.4.8.0.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/microsoft.codecoverage/17.13.0/microsoft.codecoverage.17.13.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.data.sqlite/9.0.1/microsoft.data.sqlite.9.0.1.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.data.sqlite.core/9.0.1/microsoft.data.sqlite.core.9.0.1.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.diasymreader/2.0.0/microsoft.diasymreader.2.0.0.nupkg.sha512",
@@ -136,7 +137,10 @@
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.webencoders/8.0.11/microsoft.extensions.webencoders.8.0.11.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.net.http.headers/2.3.0/microsoft.net.http.headers.2.3.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.net.stringtools/17.10.4/microsoft.net.stringtools.17.10.4.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/microsoft.net.test.sdk/17.13.0/microsoft.net.test.sdk.17.13.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.netcore.platforms/2.0.0/microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/microsoft.testplatform.objectmodel/17.13.0/microsoft.testplatform.objectmodel.17.13.0.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/microsoft.testplatform.testhost/17.13.0/microsoft.testplatform.testhost.17.13.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.visualstudio.web.codegeneration/9.0.0/microsoft.visualstudio.web.codegeneration.9.0.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.visualstudio.web.codegeneration.core/9.0.0/microsoft.visualstudio.web.codegeneration.core.9.0.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.visualstudio.web.codegeneration.design/9.0.0/microsoft.visualstudio.web.codegeneration.design.9.0.0.nupkg.sha512",
