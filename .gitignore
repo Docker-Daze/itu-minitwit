@@ -1,5 +1,39 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,macos,linux,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,macos,linux,windows
+# Ignore build and dependency files
+bin/
+obj/
+*.db
+*.suo
+*.user
+*.csproj.user
+
+# Ignore Docker files that shouldn't be copied
+.dockerignore
+.docker-compose*
+
+# Ignore editor/IDE files
+.vscode/
+.idea/
+*.swp
+
+# Ignore Git-related files
+.git/
+.gitignore
+
+# Ignore logs and temporary files
+logs/
+*.log
+temp/
+tmp/
+
+# Ignore SQLite database if not mounted as a volume
+minitwit.db
+
+# Ignore environment and secrets files
+.env
+secrets.json
+appsettings.Development.json
 
 ### Linux ###
 *~
