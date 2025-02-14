@@ -59,8 +59,6 @@ public class RegisterModel : PageModel
     
     public async Task<IActionResult> OnPostAsync(string returnUrl = null)
     {
-        returnUrl ??= Url.Content("~/");
-        
         if (string.IsNullOrEmpty(Username))
         {
             ModelState.AddModelError(string.Empty, "You have to enter a username");
