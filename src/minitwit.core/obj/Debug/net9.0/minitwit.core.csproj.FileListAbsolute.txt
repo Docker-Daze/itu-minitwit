@@ -22,10 +22,7 @@
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/refint/minitwit.core.dll
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll
-/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/Microsoft.Extensions.Identity.Stores.dll
-/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/Microsoft.Extensions.Identity.Stores.xml
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.csproj.AssemblyReference.cache
-/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.BC8F7569.Up2Date
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.deps.json
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.runtimeconfig.json
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.dll
@@ -74,3 +71,5 @@ C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit
 /Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb
 /Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.genruntimeconfig.cache
 /Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.runtimeconfig.json
+/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.genruntimeconfig.cache

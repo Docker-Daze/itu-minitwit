@@ -9431,19 +9431,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/mathiashansen/.nuget/packages/": {}
+    "/home/rasmus/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+      "projectUniqueName": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
       "projectName": "minitwit.tests",
-      "projectPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
-      "packagesPath": "/Users/mathiashansen/.nuget/packages/",
-      "outputPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/obj/",
+      "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+      "packagesPath": "/home/rasmus/.nuget/packages/",
+      "outputPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/tests/minitwit.tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/mathiashansen/.nuget/NuGet/NuGet.Config"
+        "/home/rasmus/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -9455,8 +9455,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
-              "projectPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
+            "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
+              "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
             }
           }
         }
@@ -9469,7 +9469,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
+        "auditMode": "all"
       },
       "SdkAnalysisLevel": "9.0.100"
     },
@@ -9506,7 +9506,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/rasmus/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

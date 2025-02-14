@@ -1,19 +1,17 @@
 services:
-  dbserver:
-    image: minitwit/dbserver
-    ports:
-      - "27018:27017"
-    networks:
-      - outside
-
   webserver:
-    image: minitwit/webserver
+    image: minitwit-web
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5114:5000"
-    networks:
-        - outside
+      - "5114:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    volumes:
+      - ./src/minitwit.web/minitwit.db:/app/data/minitwit.db
 
-networks:
-  outside:
-    name: minitwit-network
-    external: true
+
+volumes:
+  sqlite_data:
+
