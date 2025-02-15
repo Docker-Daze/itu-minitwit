@@ -39,10 +39,8 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 
     private async Task DisposeDbContext()
     {
-        // Ensure to dispose DbContext properly
         await _dbContext.DisposeAsync();
         
-        // Close and dispose the SQLite connection
         _connection.Close();
         _connection.Dispose();
     }
