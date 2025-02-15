@@ -21,6 +21,8 @@ builder.Services.AddSession(options =>
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseSqlite(connectionString));
 
+builder.Services.AddControllers();
+
 builder.Services.AddDefaultIdentity<User>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
@@ -50,6 +52,7 @@ app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
 app.MapControllers();
+
 
 using (var scope = app.Services.CreateScope())
 {

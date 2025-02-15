@@ -9431,32 +9431,34 @@
     ]
   },
   "packageFolders": {
-    "/home/rasmus/.nuget/packages/": {}
+    "C:\\Users\\ralle\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+      "projectUniqueName": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\tests\\minitwit.tests\\minitwit.tests.csproj",
       "projectName": "minitwit.tests",
-      "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
-      "packagesPath": "/home/rasmus/.nuget/packages/",
-      "outputPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/tests/minitwit.tests/obj/",
+      "projectPath": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\tests\\minitwit.tests\\minitwit.tests.csproj",
+      "packagesPath": "C:\\Users\\ralle\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\tests\\minitwit.tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/rasmus/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ralle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
-              "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
+            "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj": {
+              "projectPath": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj"
             }
           }
         }
@@ -9469,9 +9471,8 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+        "auditMode": "direct"
+      }
     },
     "frameworks": {
       "net9.0": {
@@ -9506,8 +9507,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/rasmus/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Microsoft.AspNetCore.Identity 2.3.0 depends on Microsoft.Extensions.Identity.Core (>= 2.3.0) but Microsoft.Extensions.Identity.Core 2.3.0 was not found. An approximate best match of Microsoft.Extensions.Identity.Core 3.0.0 was resolved.",
+      "libraryId": "Microsoft.Extensions.Identity.Core",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
