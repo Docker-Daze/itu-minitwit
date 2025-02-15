@@ -60,6 +60,7 @@ public class UserTimelineModel : PageModel
         }
 
         await _userRepository.FollowUser(User.Identity.Name, user);
+        TempData["FlashMessage"] = $"You are now following \"{user}\"";
         return RedirectToPage("/UserTimeline", new { user = user });
     } 
 
@@ -77,6 +78,7 @@ public class UserTimelineModel : PageModel
         }
 
         await _userRepository.UnfollowUser(User.Identity.Name, user);
+        TempData["FlashMessage"] = $"You are no longer following \"{user}\"";
         return RedirectToPage("/UserTimeline", new { user = user });
     } 
 

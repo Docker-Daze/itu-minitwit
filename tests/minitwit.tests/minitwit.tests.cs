@@ -10,7 +10,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _fixture;
     private readonly HttpClient _client;
-    private readonly MinitwitDbContext _dbContext;
+    private MinitwitDbContext _dbContext;
 
     public TestAPI(WebApplicationFactory<Program> fixture)
     {
@@ -91,6 +91,12 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
     [Fact]
     public async Task TestRegister()
     {
+        SqliteConnection connection = new SqliteConnection("DataSource=:memory:");
+        connection.Open();
+        var builder = new DbContextOptionsBuilder<MinitwitDbContext>().UseSqlite(connection);
+        _dbContext = new MinitwitDbContext(builder.Options);
+        _dbContext.Database.EnsureCreated();
+        
         var response = await Register("user1", "default");
         var content = await response.Content.ReadAsStringAsync();
         Assert.Contains("You were successfully registered and can login now", content);
@@ -119,6 +125,12 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
     [Fact]
     public async Task TestLoginLogout()
     {
+        SqliteConnection connection = new SqliteConnection("DataSource=:memory:");
+        connection.Open();
+        var builder = new DbContextOptionsBuilder<MinitwitDbContext>().UseSqlite(connection);
+        _dbContext = new MinitwitDbContext(builder.Options);
+        _dbContext.Database.EnsureCreated();
+        
         await _dbContext.DisposeAsync();
         var response = await RegisterAndLogin("user1", "default");
         var content = await response.Content.ReadAsStringAsync();
@@ -140,6 +152,12 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         
     [Fact]
     public async Task TestMessageRecording() {
+        SqliteConnection connection = new SqliteConnection("DataSource=:memory:");
+        connection.Open();
+        var builder = new DbContextOptionsBuilder<MinitwitDbContext>().UseSqlite(connection);
+        _dbContext = new MinitwitDbContext(builder.Options);
+        _dbContext.Database.EnsureCreated();
+        
         await RegisterAndLogin("foo", "default");
         await AddMessage("the message by foo");
         await AddMessage("<test message 2>");
@@ -152,6 +170,12 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 
     [Fact]
     public async Task TestTimelines() {
+        SqliteConnection connection = new SqliteConnection("DataSource=:memory:");
+        connection.Open();
+        var builder = new DbContextOptionsBuilder<MinitwitDbContext>().UseSqlite(connection);
+        _dbContext = new MinitwitDbContext(builder.Options);
+        _dbContext.Database.EnsureCreated();
+        
         await RegisterAndLogin("foo", "default");
         await AddMessage("the message by foo");
         await Logout();
@@ -172,7 +196,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         // now let's follow foo
         response = await _client.GetAsync("/foo/follow");
         content = await response.Content.ReadAsStringAsync();
-        Assert.Contains("You are now following &#34;foo&#34;", content);
+        Assert.Contains("You are now following \"foo\"", content);
         
         // we should now see foo's message
         response = await _client.GetAsync("/");
@@ -189,7 +213,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         // now unfollow and check if that worked
         response = await _client.GetAsync("/foo/unfollow");
         content = await response.Content.ReadAsStringAsync();
-        Assert.Contains("You are no longer following &#34;foo&#34;", content);
+        Assert.Contains("You are no longer following \"foo\"", content);
         response = await _client.GetAsync("/");
         content = await response.Content.ReadAsStringAsync();
         Assert.DoesNotContain("the message by foo", content);

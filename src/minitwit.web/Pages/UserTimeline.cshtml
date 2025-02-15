@@ -13,13 +13,13 @@
 }
 
 <h2> @routeName's Timeline </h2>
-@if (User.Identity.Name == routeName)
+@if (User.Identity.IsAuthenticated && User.Identity.Name == routeName)
 {
     <div class="followstatus">
         This is you!
     </div>
 }
-else
+else if (User.Identity.IsAuthenticated)
 {
     <div class="followstatus">
         @if (isFollowing)

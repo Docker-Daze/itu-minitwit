@@ -8,9 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9244077d-96d5-4d06-8de7-248cf87952ef" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/minitwit.tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/minitwit.tests.cs" afterDir="false" />
-    </list>
+    <list default="true" id="9244077d-96d5-4d06-8de7-248cf87952ef" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +30,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6d2342c247c64eb7a9b3702e481e4443f83e00/50/ae522d60/IIdentity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6d2342c247c64eb7a9b3702e481e4443f83e00/7f/8d820dc7/IDisposable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f2fba02199a046a1bd41c1d44cc1cd7e79800/f3/0b62c072/PageModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7d382df578ec93391918cfaa4ce7f4b8f35c9aed1241d6556dc9be26df13c/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ab90db2d8cc5f168d71432ad53a29a4a1a54cdac4b8e573db4ed63469b178/HttpResponse.cs" root0="SKIP_HIGHLIGHTING" />
@@ -154,6 +154,7 @@
       <workItem from="1739137224945" duration="4026000" />
       <workItem from="1739159990693" duration="7220000" />
       <workItem from="1739523828302" duration="8337000" />
+      <workItem from="1739537625861" duration="14246000" />
     </task>
     <servers />
   </component>
@@ -161,6 +162,17 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

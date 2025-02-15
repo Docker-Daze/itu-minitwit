@@ -7,27 +7,24 @@ namespace itu_minitwit.Pages;
 [IgnoreAntiforgeryToken]
 public class Follow : PageModel
 {
-    IUserRepository _userRepository;
-    string username;
+    private readonly IUserRepository _userRepository;
+    
+    [BindProperty(SupportsGet = true)]
+    public string user {get; set;}
         public Follow(IMessageRepository messageRepository, IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
     
-    public async Task<ActionResult> OnGet(string user ,[FromQuery] int? page)
+    public async Task<ActionResult> OnGet()
     {
-        if(username != null || user != null){
-            var response = await _userRepository.FollowUser(username, user);
-
-        if (response == null || response == false)
-            return new StatusCodeResult(500);
-        }
-
-        return new ContentResult
+        if (User.Identity.IsAuthenticated)
         {
-            Content = $"You are no longer following {user}",
-            ContentType = "text/plain",
-            StatusCode = 200
-        };
+            await _userRepository.FollowUser(User.Identity.Name, user);
+            TempData["FlashMessage"] = $"You are now following \"{user}\"";
+            return Redirect($"/{user}");
+        }
+        
+        return Unauthorized();
     }
 }

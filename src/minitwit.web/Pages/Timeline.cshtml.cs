@@ -4,6 +4,7 @@ using minitwit.core;
 
 namespace minitwit.web.Pages;
 
+[IgnoreAntiforgeryToken]
 public class TimelineModel : PageModel
 {
     private readonly IMessageRepository _messageRepository;
