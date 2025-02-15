@@ -8,7 +8,84 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9244077d-96d5-4d06-8de7-248cf87952ef" name="Changes" comment="" />
+    <list default="true" id="9244077d-96d5-4d06-8de7-248cf87952ef" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.itu-minitwit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.itu-minitwit/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/bin/Debug/net9.0/minitwit.core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/bin/Debug/net9.0/minitwit.core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/bin/Debug/net9.0/minitwit.core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/bin/Debug/net9.0/minitwit.core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/minitwit.core.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/refint/minitwit.core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/Debug/net9.0/refint/minitwit.core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/minitwit.core.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/minitwit.core.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/minitwit.core.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/minitwit.core.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.core/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.core/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/refint/minitwit.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/Debug/net9.0/refint/minitwit.infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/minitwit.infrastructure.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/minitwit.infrastructure.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/minitwit.infrastructure.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/minitwit.infrastructure.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.infrastructure/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/Pages/Register.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/Pages/Register.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/bin/Debug/net9.0/minitwit.web.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/minitwit.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/minitwit.web.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/ref/minitwit.web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/ref/minitwit.web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/refint/minitwit.web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/Debug/net9.0/refint/minitwit.web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/minitwit.web.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/minitwit.web.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/minitwit.web.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/minitwit.web.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minitwit.web/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/minitwit.web/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.tests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.tests.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/bin/Debug/net9.0/minitwit.web.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/minitwit.tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/minitwit.tests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/ref/minitwit.tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/ref/minitwit.tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/refint/minitwit.tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/Debug/net9.0/refint/minitwit.tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/minitwit.tests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/tests/minitwit.tests/obj/rider.project.restore.info" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,6 +127,7 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
   </component>
@@ -155,12 +233,15 @@
       <workItem from="1739159990693" duration="7220000" />
       <workItem from="1739523828302" duration="8337000" />
       <workItem from="1739537625861" duration="14246000" />
+      <workItem from="1739630136655" duration="8301000" />
+      <workItem from="1739639487439" duration="180000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -175,5 +256,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet Exception Breakpoints">
+          <properties exception="System.InvalidOperationException" isInternal="false" displayValue="InvalidOperationException" namespaceName="System">
+            <option name="internal" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

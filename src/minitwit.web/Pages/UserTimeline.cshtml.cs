@@ -24,14 +24,7 @@ public class UserTimelineModel : PageModel
     {
         _currentPage = page ?? 1;
 
-        if (User.Identity.Name == user)
-        {
-            Messages = await _messageRepository.GetMessagesOwnTimeline(user, _currentPage);
-        }
-        else
-        {
-            Messages = await _messageRepository.GetMessagesUserTimeline(user, _currentPage);
-        }
+        Messages = await _messageRepository.GetMessagesUserTimeline(user, _currentPage);
         return Page();
     }
 
