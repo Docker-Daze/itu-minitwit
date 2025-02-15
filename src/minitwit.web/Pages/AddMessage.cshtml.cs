@@ -1,52 +1,48 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using minitwit.core;
-using minitwit.infrastructure;
 
-namespace itu_minitwit.Pages;
+namespace minitwit.web.Pages;
 
-public class AddMessage : PageModel
+[IgnoreAntiforgeryToken]
+public class AddMessageModel : PageModel
 {
-    [Required (ErrorMessage = "Message cannot be empty")]
-    [StringLength(160, ErrorMessage = "Maximum length is 160 characters")]
-    [Display(Name = "Message Text")]
-    public string Message { get; set; }
-    public IMessageRepository _messageRepository;
-    public IUserRepository _userRepository;
-    
-    public AddMessage(IMessageRepository messageRepository, IUserRepository userRepository){
+    private readonly IMessageRepository _messageRepository;
+    private readonly IUserRepository _userRepository;
+    [BindProperty]
+    public MessageInputModel MessageInput { get; set; } = new();
+
+    public AddMessageModel(IMessageRepository messageRepository, IUserRepository userRepository)
+    {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
     }
-    public string Text { get; set; }
-
-    public async Task<IActionResult> OnPostAsync()
+    
+    public async Task<IActionResult> OnPost()
     {
-
-        if (string.IsNullOrEmpty(Text))
+        
+        var userId = await _userRepository.GetUserID(User.Identity.Name);
+        if (userId == null)
         {
-            ModelState.AddModelError(string.Empty, "Message text cannot be empty.");
-            return Page();
-        }
-
-        if(!User.Identity.IsAuthenticated){
             return Unauthorized();
         }
-
-        string UserId = await _userRepository.GetUserID(User.Identity.Name);
-
-        if(UserId != null){
-            
-            await _messageRepository.AddMessage(UserId, Text);
-
-            return new ContentResult{
         
-            Content = $"Your message was recorded",
-            ContentType = "text/plain",
-            StatusCode = 200};
+        var message = MessageInput.Text;
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            ModelState.AddModelError(String.Empty, "Message cannot be empty.");
+        }
+        else if (message.Length > 160)
+        {
+            ModelState.AddModelError(String.Empty, "Message cannot be more 160 characters.");
+        }
+        if (!ModelState.IsValid)
+        {
+            return Redirect("/");
         }
 
-        return BadRequest();
+        await _messageRepository.AddMessage(userId, message);
+        TempData["FlashMessage"] = "Your message was recorded";
+        return Redirect("/");
     }
 }

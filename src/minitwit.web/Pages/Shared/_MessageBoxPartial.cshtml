@@ -3,8 +3,8 @@
 {
     <div class="twitbox">
         <h3>What's on your mind, @(User.Identity.Name)?</h3>
-        <form asp-page-handler="AddMessage" method="post">
-            <input type="text" name="message" placeholder="message, here?" size="60">
+        <form action="/add_message" method="post">
+            <input type="text" name="text" placeholder="message, here?" size="60">
             <input type="submit" value="Share">
         </form>
     </div>

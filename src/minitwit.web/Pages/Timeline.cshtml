@@ -1,0 +1,35 @@
+@page "/"
+@model minitwit.web.Pages.TimelineModel
+
+@{
+    ViewData["Title"] = "Minitwit";
+    Layout = "Shared/_Layout";
+}
+<h2> @User.Identity.Name's Timeline </h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <partial name="Shared/_MessageBoxPartial" model="Model.MessageInput" />
+}
+
+<ul class="messages">
+    @if (Model.Messages != null && Model.Messages.Any())
+    {
+    @foreach (var message in Model.Messages)
+    {
+    <li>
+        <img src="@message.GravatarUrl" alt="Gravatar" width="48" height="48">
+        <p>
+            <strong>
+                <a href="/@message.Username">@message.Username</a>
+            </strong>
+            @message.Text
+            <small>&mdash; @message.PubDate</small>
+        </p>
+    </li>
+    }
+    }
+    else
+    {
+    <li><em>There's no message so far.</em></li>
+    }
+</ul>
