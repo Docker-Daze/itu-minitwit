@@ -9,7 +9,12 @@
 <div class=page>
     <h1>MiniTwit</h1>
     <partial name="_LoginPartial" />
-    
+    @if (TempData["FlashMessage"] != null)
+    {
+    <ul class="flashes">
+        <li>@TempData["FlashMessage"]</li>
+    </ul>
+    }
     <div class=body>
         @RenderBody()
     </div>

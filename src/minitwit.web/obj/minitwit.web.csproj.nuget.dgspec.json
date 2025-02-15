@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {}
+    "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {}
   },
   "projects": {
-    "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
+    "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
+        "projectUniqueName": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
         "projectName": "minitwit.core",
-        "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
-        "packagesPath": "/home/rasmus/.nuget/packages/",
-        "outputPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/",
+        "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
+        "packagesPath": "/Users/nikolai/.nuget/packages/",
+        "outputPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/rasmus/.nuget/NuGet/NuGet.Config"
+          "/Users/nikolai/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -36,7 +36,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -79,21 +79,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/rasmus/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
+    "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
+        "projectUniqueName": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
         "projectName": "minitwit.infrastructure",
-        "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
-        "packagesPath": "/home/rasmus/.nuget/packages/",
-        "outputPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/",
+        "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
+        "packagesPath": "/Users/nikolai/.nuget/packages/",
+        "outputPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/rasmus/.nuget/NuGet/NuGet.Config"
+          "/Users/nikolai/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -105,8 +105,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
-                "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
+              "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
+                "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
               }
             }
           }
@@ -119,7 +119,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -154,21 +154,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/rasmus/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
+    "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj",
+        "projectUniqueName": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj",
         "projectName": "minitwit.web",
-        "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj",
-        "packagesPath": "/home/rasmus/.nuget/packages/",
-        "outputPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.web/obj/",
+        "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj",
+        "packagesPath": "/Users/nikolai/.nuget/packages/",
+        "outputPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/rasmus/.nuget/NuGet/NuGet.Config"
+          "/Users/nikolai/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -180,11 +180,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
-                "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
+              "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
+                "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
               },
-              "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
-                "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj"
+              "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
+                "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj"
               }
             }
           }
@@ -197,7 +197,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -205,13 +205,17 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.1, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.1, )"
             },
             "Microsoft.Data.Sqlite": {
               "target": "Package",
@@ -257,7 +261,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/rasmus/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

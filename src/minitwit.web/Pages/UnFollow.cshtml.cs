@@ -1,37 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using minitwit.core;
-using minitwit.infrastructure;
-using minitwit.web.Pages;
 
 namespace itu_minitwit.Pages;
 
+[IgnoreAntiforgeryToken]
 public class UnFollow : PageModel
 {
-    IUserRepository _userRepository;
-    IMessageRepository _messageRepository;
-    string username;
+    private readonly IUserRepository _userRepository;
+    [BindProperty(SupportsGet = true)]
+    public string user {get; set;}
         public UnFollow(IMessageRepository messageRepository, IUserRepository userRepository)
     {
-        _messageRepository = messageRepository;
         _userRepository = userRepository;
-        var username = HttpContext.Session.GetString("UserId");
     }
     
-    public async Task<ActionResult> OnGet(string user ,[FromQuery] int? page)
+    public async Task<ActionResult> OnGet()
     {
-        if(username != null || user != null){
-            var response = await _userRepository.UnfollowUser(username, user);
-
-        if (response == null || response == false)
-            return new StatusCodeResult(500);
+        if (User.Identity.IsAuthenticated)
+        {
+            await _userRepository.UnfollowUser(User.Identity.Name, user);
+            TempData["FlashMessage"] = $"You are no longer following \"{user}\""; 
+            return Redirect($"/{user}");
         }
 
-        return new ContentResult
-        {
-            Content = $"You are now following {user}",
-            ContentType = "text/plain",
-            StatusCode = 200
-        };
+        return Unauthorized();
     }
 }

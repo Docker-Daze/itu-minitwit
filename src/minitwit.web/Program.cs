@@ -28,6 +28,15 @@ builder.Services.AddDefaultIdentity<User>(options =>
     })
     .AddEntityFrameworkStores<MinitwitDbContext>();
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 1;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

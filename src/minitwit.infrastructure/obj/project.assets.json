@@ -4383,19 +4383,19 @@
     ]
   },
   "packageFolders": {
-    "/home/rasmus/.nuget/packages/": {}
+    "/Users/nikolai/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
+      "projectUniqueName": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
       "projectName": "minitwit.infrastructure",
-      "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
-      "packagesPath": "/home/rasmus/.nuget/packages/",
-      "outputPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/",
+      "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
+      "packagesPath": "/Users/nikolai/.nuget/packages/",
+      "outputPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/rasmus/.nuget/NuGet/NuGet.Config"
+        "/Users/nikolai/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -4407,8 +4407,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
-              "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
+            "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
+              "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
             }
           }
         }
@@ -4421,7 +4421,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
       "SdkAnalysisLevel": "9.0.100"
     },
@@ -4456,7 +4456,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/rasmus/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

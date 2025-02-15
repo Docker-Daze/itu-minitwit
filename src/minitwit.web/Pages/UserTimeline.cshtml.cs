@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using minitwit.core;
+using minitwit.web.Pages;
 
 namespace itu_minitwit.Pages;
 
+[IgnoreAntiforgeryToken]
 public class UserTimelineModel : PageModel
 {
     private readonly IMessageRepository _messageRepository;
@@ -23,14 +24,7 @@ public class UserTimelineModel : PageModel
     {
         _currentPage = page ?? 1;
 
-        if (User.Identity.Name == user)
-        {
-            Messages = await _messageRepository.GetMessagesOwnTimeline(user, _currentPage);
-        }
-        else
-        {
-            Messages = await _messageRepository.GetMessagesUserTimeline(user, _currentPage);
-        }
+        Messages = await _messageRepository.GetMessagesUserTimeline(user, _currentPage);
         return Page();
     }
 
@@ -59,6 +53,7 @@ public class UserTimelineModel : PageModel
         }
 
         await _userRepository.FollowUser(User.Identity.Name, user);
+        TempData["FlashMessage"] = $"You are now following \"{user}\"";
         return RedirectToPage("/UserTimeline", new { user = user });
     } 
 
@@ -76,6 +71,7 @@ public class UserTimelineModel : PageModel
         }
 
         await _userRepository.UnfollowUser(User.Identity.Name, user);
+        TempData["FlashMessage"] = $"You are no longer following \"{user}\"";
         return RedirectToPage("/UserTimeline", new { user = user });
     } 
 

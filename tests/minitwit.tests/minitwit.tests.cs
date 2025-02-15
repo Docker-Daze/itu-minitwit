@@ -1,199 +1,237 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using minitwit.infrastructure;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace minitwit.tests;
 
 public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _fixture;
+    private readonly ITestOutputHelper _testOutputHelper;
     private readonly HttpClient _client;
+    private MinitwitDbContext _dbContext;
+    private SqliteConnection _connection;
 
-    public TestAPI(WebApplicationFactory<Program> fixture)
+    public TestAPI(WebApplicationFactory<Program> fixture, ITestOutputHelper testOutputHelper)
     {
         _fixture = fixture;
-        _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = true, HandleCookies = true });
+        _testOutputHelper = testOutputHelper;
+        _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions
+            { AllowAutoRedirect = true, HandleCookies = true });
     }
 
-    [Fact]
-    public async Task logout()
+    private async Task InitializeDbContext()
     {
-        //Act
-        var response = await _client.GetAsync("/logout");
-        //Assert
-        response.EnsureSuccessStatusCode();
+        _connection = new SqliteConnection("DataSource=:memory:");
+        _connection.Open();
+
+        var options = new DbContextOptionsBuilder<MinitwitDbContext>()
+            .UseSqlite(_connection)
+            .Options;
+
+        _dbContext = new MinitwitDbContext(options);
+        await _dbContext.Database.EnsureCreatedAsync();
     }
 
-    private async Task AuthenticateAsync()
+    private async Task DisposeDbContext()
     {
-        var loginData = new Dictionary<string, string>
-        {
-            { "username", "testuser" },
-            { "password", "testpassword" }
-        };
-
-        var loginContent = new FormUrlEncodedContent(loginData);
-        var loginResponse = await _client.PostAsync("/login", loginContent);
-        loginResponse.EnsureSuccessStatusCode();
+        await _dbContext.DisposeAsync();
+        
+        _connection.Close();
+        _connection.Dispose();
     }
 
-    [Fact]
-    public async Task CanAddMessage()
+
+    private async Task<HttpResponseMessage> Register(string username, string? password, string? password2 = null,
+        string? email = null)
     {
-        await AuthenticateAsync();
-        // Arrange
-        var formData = new Dictionary<string, string>
+        if (password2 == null)
         {
-            { "text", "Test message" }
-        };
-        var content = new FormUrlEncodedContent(formData);
-        // Act
-        var response = await _client.PostAsync("/add_message", content);
-        var responseString = await response.Content.ReadAsStringAsync();
-        // Debugging: Print error response if request fails
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new Exception($"API Error: {response.StatusCode}, Response: {responseString}");
+            password2 = password;
         }
-        // Assert
-        response.EnsureSuccessStatusCode();
-        Assert.Contains("Your message was recorded", responseString);
-    }
 
-    [Fact]
-    public async void CanSeePublicTimeline()
-    {
-        var response = await _client.GetAsync("/");
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-
-        Assert.Contains("Chirp!", content);
-        Assert.Contains("Public Timeline", content);
-    }
-    
-    [Fact]
-    public async void CanSeeRegisterPage()
-    {
-        var response = await _client.GetAsync("/Identity/Account/Register");
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-
-        Assert.Contains("Chirp!", content);
-        Assert.Contains("Register", content);
-    }
-    
-    [Fact]
-    public async void CanSeeLogoutPage()
-    {
-        var response = await _client.GetAsync("/Identity/Account/Logout");
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-
-        Assert.Contains("Chirp!", content);
-        Assert.Contains("Log out", content);
-    }
-
-    [Fact]
-    public async void CanSeeLoginPage()
-    {
-        var response = await _client.GetAsync("/Identity/Account/Login");
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
-
-        Assert.Contains("Chirp!", content);
-        Assert.Contains("Log in", content);
-    }
-    
-    [Theory]
-    [InlineData("Jacqualine Gilcoine")]
-    [InlineData("Johnnie Calixto")]
-    public async void CanSeePrivateTimeline(string author)
-    {
-        var response = await _client.GetAsync($"/{author}");
-        
-        if (!response.IsSuccessStatusCode)
+        if (email == null)
         {
-            var errorContent = await response.Content.ReadAsStringAsync();
-            throw new Exception($"API Error: {response.StatusCode}, {errorContent}");
+            email = username + "@example.com";
         }
-        response.EnsureSuccessStatusCode();
+
+        var formData = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair<string, string?>("Username", username),
+            new KeyValuePair<string, string?>("Password", password),
+            new KeyValuePair<string, string?>("Password2", password2),
+            new KeyValuePair<string, string?>("Email", email),
+        });
+
+        return await _client.PostAsync("/register", formData);
+    }
+
+    private async Task<HttpResponseMessage> Login(string username, string? password)
+    {
+        var formData = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair<string, string?>("Username", username),
+            new KeyValuePair<string, string?>("Password", password),
+        });
+        return await _client.PostAsync("/login", formData);
+    }
+
+    private async Task<HttpResponseMessage> RegisterAndLogin(string username, string? password)
+    {
+        await Register(username, password);
+        return await Login(username, password);
+    }
+
+    private async Task<HttpResponseMessage> Logout()
+    {
+        return await _client.GetAsync("/logout");
+    }
+
+    private async Task AddMessage(string text)
+    {
+        var formData = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair<string, string>("text", text)
+        });
+        
+        var response = await _client.PostAsync("/add_message", formData);
+        
+        if (!string.IsNullOrEmpty(text) && response.IsSuccessStatusCode)
+        {
+            Assert.Contains("Your message was recorded", response.Content.ReadAsStringAsync().Result);
+        }
+    }
+
+    [Fact]
+    public async Task TestRegister()
+    {
+        await InitializeDbContext();
+        
+        var response = await Register("user1", "default");
         var content = await response.Content.ReadAsStringAsync();
+        _testOutputHelper.WriteLine(content);
+        Assert.Contains("You were successfully registered and can login now", content);
 
-        Assert.Contains("Chirp!", content);
-        Assert.Contains($"{author}'s Timeline", content);
+        response = await Register("user1", "default");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("The username is already taken", content);
+
+        response = await Register("", "default");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("You have to enter a username", content);
+
+        response = await Register("meh", "");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("You have to enter a password", content);
+
+        response = await Register("meh", "x", "y");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("The two passwords do not match", content);
+
+        response = await Register("meh", "foo", null, "broken");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("You have to enter a valid email address", content);
+        
+        await DisposeDbContext();
     }
-    
+
     [Fact]
-    public async void IsPage1SameAsDefaultTimeline()
+    public async Task TestLoginLogout()
     {
-        var responseHomePage = await _client.GetAsync("/");
-        var content1 = await responseHomePage.Content.ReadAsStringAsync();
-        responseHomePage.EnsureSuccessStatusCode();
-        var responseFirstPage = await _client.GetAsync("/?page=1");
-        var content2 = await responseFirstPage.Content.ReadAsStringAsync();
-        responseFirstPage.EnsureSuccessStatusCode();
+        await InitializeDbContext();
         
-        Assert.Contains("Chirp!", content1);
-        Assert.Contains("Public Timeline", content1);
-        Assert.Contains("Chirp!", content2);
-        Assert.Contains("Public Timeline", content2);
-        Assert.Equal(content1, content2);
+        var response = await RegisterAndLogin("user1", "default");
+        var content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("You were logged in", content);
+
+        response = await Logout();
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("You were logged out", content);
+
+        response = await Login("user1", "wrongpassword");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("Invalid password", content);
+
+        response = await Login("user2", "wrongpassword");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("Invalid username", content);
+        
+        await DisposeDbContext();
     }
     
+        
     [Fact]
-    public async void SiteHasMorePagesAndNotSameAsSameAsDefaultTimeline()
-    {
-        var responseHomePage = await _client.GetAsync("/");
-        var content1 = await responseHomePage.Content.ReadAsStringAsync();
-        responseHomePage.EnsureSuccessStatusCode();
+    public async Task TestMessageRecording() {
+        await InitializeDbContext();
         
-        var responsePage4 = await _client.GetAsync("/?page=4");
-        responsePage4.EnsureSuccessStatusCode();
-        var content2 = await responsePage4.Content.ReadAsStringAsync();
-
-        Assert.Contains("Chirp!", content1);
-        Assert.Contains("Public Timeline", content1);
-        Assert.Contains("Chirp!", content2);
-        Assert.Contains("Public Timeline", content2);
-        Assert.NotEqual(content1, content2);
+        await RegisterAndLogin("foo", "default");
+        await AddMessage("test message 1");
+        await AddMessage("<test message 2>");
+        
+        var response = await _client.GetAsync("/public");
+        var content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("test message 1", content);
+        Assert.Contains("&lt;test message 2&gt;", content);
+        
+        await DisposeDbContext();
     }
-    
-    [Theory]
-    [InlineData("Jacqualine Gilcoine")]
-    [InlineData("Johnnie Calixto")]
-    public async void PrivateTimelinePage1SameAsPrivateDefault(string author)
-    {
-        var responseHomePage = await _client.GetAsync($"/{author}");
-        var content1 = await responseHomePage.Content.ReadAsStringAsync();
-        responseHomePage.EnsureSuccessStatusCode();
-        
-        var responsePage4 = await _client.GetAsync($"/{author}?page=1");
-        responsePage4.EnsureSuccessStatusCode();
-        var content2 = await responsePage4.Content.ReadAsStringAsync();
 
-        Assert.Contains("Chirp!", content1);
-        Assert.Contains($"{author}'s Timeline", content1);
-        Assert.Contains("Chirp!", content2);
-        Assert.Contains($"{author}'s Timeline", content2);
-        Assert.Equal(content1, content2);
-    }
-    
-    [Theory]
-    [InlineData("Jacqualine Gilcoine")]
-    [InlineData("Johnnie Calixto")]
-    public async void PrivateTimelinePage4NotSameAsPrivateDefault(string author)
+    [Fact]
+    public async Task TestTimelines() 
     {
-        var responseHomePage = await _client.GetAsync($"/{author}");
-        var content1 = await responseHomePage.Content.ReadAsStringAsync();
-        responseHomePage.EnsureSuccessStatusCode();
+        await InitializeDbContext();
         
-        var responsePage4 = await _client.GetAsync($"/{author}?page=4");
-        responsePage4.EnsureSuccessStatusCode();
-        var content2 = await responsePage4.Content.ReadAsStringAsync();
-
-        Assert.Contains("Chirp!", content1);
-        Assert.Contains($"{author}'s Timeline", content1);
-        Assert.Contains("Chirp!", content2);
-        Assert.Contains($"{author}'s Timeline", content2);
-        Assert.NotEqual(content1, content2);
+        await RegisterAndLogin("foo", "default");
+        await AddMessage("the message by foo");
+        await Logout();
+        
+        await RegisterAndLogin("bar", "default");
+        await AddMessage("the message by bar");
+        var response = await _client.GetAsync("/public");
+        var content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("the message by foo", content);
+        Assert.Contains("the message by bar", content);
+        
+        // bar's timeline should just show bar's message
+        response = await _client.GetAsync("/");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.DoesNotContain("the message by foo", content);
+        Assert.Contains("the message by bar", content);
+        
+        // now let's follow foo
+        response = await _client.GetAsync("/foo/follow");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("You are now following &quot;foo&quot;", content);
+        
+        // we should now see foo's message
+        response = await _client.GetAsync("/");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("the message by foo", content);
+        Assert.Contains("the message by bar", content);
+        
+        // but on the user's page we only want the user's message
+        response = await _client.GetAsync("/bar");
+        content = await response.Content.ReadAsStringAsync();
+        _testOutputHelper.WriteLine(content);
+        Assert.DoesNotContain("the message by foo", content);
+        Assert.Contains("the message by bar", content);
+        response = await _client.GetAsync("/foo");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("the message by foo", content);
+        Assert.DoesNotContain("the message by bar", content);
+        
+        // now unfollow and check if that worked
+        response = await _client.GetAsync("/foo/unfollow");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.Contains("You are no longer following &quot;foo&quot;", content);
+        response = await _client.GetAsync("/");
+        content = await response.Content.ReadAsStringAsync();
+        Assert.DoesNotContain("the message by foo", content);
+        Assert.Contains("the message by bar", content);
+        
+        await DisposeDbContext();
     }
 }

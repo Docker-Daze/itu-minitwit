@@ -10,36 +10,42 @@
         throw new Exception("Route value 'user' is null or empty.");
     }
     var isFollowing = await Model.IsFollowing(routeName);
-    var action = isFollowing ? "unfollow" : "follow";
 }
 
 <h2> @routeName's Timeline </h2>
-    @if (User.Identity.IsAuthenticated && User.Identity.Name != routeName)
-    {
-        if (isFollowing)
+@if (User.Identity.IsAuthenticated && User.Identity.Name == routeName)
+{
+    <div class="followstatus">
+        This is you!
+    </div>
+}
+else if (User.Identity.IsAuthenticated)
+{
+    <div class="followstatus">
+        @if (isFollowing)
         {
-            <!-- Show Unfollow button if following -->
+            <span>You are currently following this user.</span>
             <form method="post" asp-page-handler="UnFollow" style="display:inline;">
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="user" value="@routeName"/>
                 <button type="submit" class="btn btn-danger btn-sm">
-                    Unfollow
+                    Unfollow user
                 </button>
             </form>
         }
         else
         {
-            <!-- Show Follow button if not following -->
+            <span>You are not yet following this user.</span>
             <form method="post" asp-page-handler="Follow" style="display:inline;">
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="user" value="@routeName"/>
                 <button type="submit" class="btn btn-primary btn-sm">
-                    Follow
+                    Follow user
                 </button>
             </form>
         }
-    }
-
+    </div>
+}
 
 <ul class="messages">
     @if (Model.Messages != null && Model.Messages.Any())
