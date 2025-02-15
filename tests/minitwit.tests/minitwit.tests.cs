@@ -2,7 +2,6 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using minitwit.infrastructure;
-using NuGet.Protocol;
 using Xunit;
 using Xunit.Abstractions;
 
