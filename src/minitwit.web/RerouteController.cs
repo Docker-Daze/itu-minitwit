@@ -111,4 +111,12 @@ public class RerouteController : Controller
 
         return LocalRedirect("/api/register");
     }
+    
+    // POST for follow
+    [HttpPost("/api/fllws/{username}")]
+    public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request)
+    {
+        await _userRepository.FollowUser(username, request.follow);
+        return Ok(new { message = "Followed successfully" });
+    }
 }
