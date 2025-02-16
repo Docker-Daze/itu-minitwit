@@ -21,7 +21,7 @@ public class RerouteController : Controller
         return LocalRedirect("/public");
     }
     
-
+    // GET and POST messages
     [HttpGet("/api/msgs/{username}")]
     public async Task<IActionResult> GetMsgs(string username, [FromQuery] int no)
     {
@@ -57,4 +57,39 @@ public class RerouteController : Controller
         
         return Ok(new { message = "Message posted successfully" });
     }
+
+    // POST for register
+    /*[HttpPost("/api/register")]
+    public async Task<IActionResult> PostRegister([FromBody] MessageRequest request)
+    {
+        var user = Activator.CreateInstance<User>();
+
+        user.UserName = Input.UserName;
+                
+        var existingUser = await _userManager.FindByEmailAsync(Input.Email);
+        if (existingUser != null)
+        {
+            ModelState.AddModelError(string.Empty, "Email address already exists.");
+            return Page();
+        }
+                
+        await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
+        await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+        var result = await _userManager.CreateAsync(user, Input.Password);
+                
+        if (result.Succeeded)
+        {
+            user.GravatarURL = await _userRepository.GetGravatarURL(Input.Email, 80);
+                    
+            var claim = new Claim("User Name", Input.UserName);
+            await _userManager.AddClaimAsync(user, claim);
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            HttpContext.Session.SetString("UserId", user.Id);
+                
+            return LocalRedirect(returnUrl);
+        }
+        
+        return Ok(new { message = "Registration posted successfully" });
+    }*/
 }
