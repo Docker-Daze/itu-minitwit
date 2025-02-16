@@ -94,15 +94,15 @@ public class RerouteController : Controller
     }
     
     [HttpPost("/api/msgs/{username}")]
-    public async Task<IActionResult> PostMsgs([FromBody] MessageRequest request, [FromQuery] int latest)
+    public async Task<IActionResult> PostMsgs(string username, [FromBody] string content, [FromQuery] int latest)
     {
         _latest = latest;
-        if (string.IsNullOrEmpty(request.Username))
+        if (string.IsNullOrEmpty(username))
         {
             return Unauthorized();
         }
         
-        var message = request.Content;
+        var message = content;
         if (string.IsNullOrWhiteSpace(message))
         {
             ModelState.AddModelError("Message", "Message cannot be empty.");
@@ -116,7 +116,7 @@ public class RerouteController : Controller
             return BadRequest(ModelState);
         }
         
-        var userId = await _userRepository.GetUserID(request.Username);
+        var userId = await _userRepository.GetUserID(username);
         await _messageRepository.AddMessage(userId, message);
         
         return Ok(new { message = "Message posted successfully" });
