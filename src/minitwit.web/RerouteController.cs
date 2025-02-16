@@ -141,9 +141,19 @@ public class RerouteController : Controller
     
     // POST for follow. {Username} is the person who will follow someone.
     [HttpPost("/api/fllws/{username}")]
-    public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request)
+    public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request, [FromQuery] int latest)
     {
+        _latest = latest;
         await _userRepository.FollowUser(username, request.follow);
         return Ok(new { message = "Followed successfully" });
+    }
+    
+    // POST for unfollow. {Username} is the person who will unfollow someone.
+    [HttpPost("/api/fllws/{username}")]
+    public async Task<IActionResult> PostFollow(string username, [FromBody] UnfollowRequest request, [FromQuery] int latest)
+    {
+        _latest = latest;
+        await _userRepository.UnfollowUser(username, request.unfollow);
+        return Ok(new { message = "Unfollowed successfully" });
     }
 }
