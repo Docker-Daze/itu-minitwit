@@ -1,17 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using minitwit.core;
 using minitwit.infrastructure;
+using minitwit.web.Pages;
 
 namespace minitwit.web;
 
 public class RerouteController : Controller
 {
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
+    private readonly IUserStore<User> _userStore;
+    private readonly IUserEmailStore<User> _emailStore;
+
+    
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
     private int currentPage;
-    public RerouteController(IMessageRepository messageRepository, IUserRepository userRepository)
+    public RerouteController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
+        IUserStore<User> userStore,
+        SignInManager<User> signInManager)
     {
         _messageRepository = messageRepository;
+        _userRepository = userRepository;
+        
+        _userManager = userManager;
+        _userStore = userStore;
+        _emailStore = (IUserEmailStore<User>)_userStore;
+        _signInManager = signInManager;
+
         _userRepository = userRepository;
     }
     
@@ -59,37 +78,37 @@ public class RerouteController : Controller
     }
 
     // POST for register
-    /*[HttpPost("/api/register")]
-    public async Task<IActionResult> PostRegister([FromBody] MessageRequest request)
+    [HttpPost("/api/register")]
+    public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request)
     {
         var user = Activator.CreateInstance<User>();
 
-        user.UserName = Input.UserName;
+        user.UserName = request.username;
                 
-        var existingUser = await _userManager.FindByEmailAsync(Input.Email);
+        var existingUser = await _userManager.FindByEmailAsync(request.email);
         if (existingUser != null)
         {
             ModelState.AddModelError(string.Empty, "Email address already exists.");
-            return Page();
+            return BadRequest(ModelState);
         }
                 
-        await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
-        await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-        var result = await _userManager.CreateAsync(user, Input.Password);
+        await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
+        await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
+        var result = await _userManager.CreateAsync(user, request.pwd);
                 
         if (result.Succeeded)
         {
-            user.GravatarURL = await _userRepository.GetGravatarURL(Input.Email, 80);
+            user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
                     
-            var claim = new Claim("User Name", Input.UserName);
+            var claim = new Claim("User Name", request.username);
             await _userManager.AddClaimAsync(user, claim);
 
             await _signInManager.SignInAsync(user, isPersistent: false);
             HttpContext.Session.SetString("UserId", user.Id);
                 
-            return LocalRedirect(returnUrl);
+            return Ok(new { message = "Registration posted successfully" });
         }
-        
-        return Ok(new { message = "Registration posted successfully" });
-    }*/
+
+        return LocalRedirect("/api/register");
+    }
 }
