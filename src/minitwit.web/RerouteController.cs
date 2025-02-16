@@ -122,10 +122,6 @@ public class RerouteController : Controller
         {
             ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
         }
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
         
         var userId = await _userRepository.GetUserID(username);
         await _messageRepository.AddMessage(userId, message);
