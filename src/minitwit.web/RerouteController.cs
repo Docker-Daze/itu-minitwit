@@ -85,14 +85,25 @@ public class RerouteController : Controller
     }
     
     // GET and POST messages
+    // GET specified users latest messages.
     [HttpGet("/api/msgs/{username}")]
-    public async Task<IActionResult> GetMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
+    public async Task<IActionResult> GetUserMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
         var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no);
         return Ok(messages);
     }
     
+    // GET latest messages. Don't matter who posted.
+    [HttpGet("/api/msgs")]
+    public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
+    {
+        _latest = latest;
+        var messages = await _messageRepository.GetMessagesSpecifiedAmount(no);
+        return Ok(messages);
+    }
+    
+    // POST a message. Author is the {username}.
     [HttpPost("/api/msgs/{username}")]
     public async Task<IActionResult> PostMsgs(string username, [FromBody] string content, [FromQuery] int latest)
     {
@@ -122,7 +133,7 @@ public class RerouteController : Controller
         return Ok(new { message = "Message posted successfully" });
     }
     
-    // POST for follow
+    // POST for follow. {Username} is the person who will follow someone.
     [HttpPost("/api/fllws/{username}")]
     public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request)
     {
