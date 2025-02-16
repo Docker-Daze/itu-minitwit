@@ -19,6 +19,7 @@ public class RerouteController : Controller
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
     private int currentPage;
+    private static int _latest = 0;
     public RerouteController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
         IUserStore<User> userStore,
         SignInManager<User> signInManager)
@@ -40,47 +41,18 @@ public class RerouteController : Controller
         return LocalRedirect("/public");
     }
     
-    // GET and POST messages
-    [HttpGet("/api/msgs/{username}")]
-    public async Task<IActionResult> GetMsgs(string username, [FromQuery] int no)
+    // GET for latest
+    [HttpGet("/api/latest")]
+    public async Task<IActionResult> Latest()
     {
-        var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no);
-        return Ok(messages);
+        return Ok(new { latest = _latest });
     }
     
-    [HttpPost("/api/msgs/{username}")]
-    public async Task<IActionResult> PostMsgs([FromBody] MessageRequest request)
-    {
-
-        if (string.IsNullOrEmpty(request.Username))
-        {
-            return Unauthorized();
-        }
-        
-        var message = request.Content;
-        if (string.IsNullOrWhiteSpace(message))
-        {
-            ModelState.AddModelError("Message", "Message cannot be empty.");
-        }
-        else if (message.Length > 160)
-        {
-            ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
-        }
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-        
-        var userId = await _userRepository.GetUserID(request.Username);
-        await _messageRepository.AddMessage(userId, message);
-        
-        return Ok(new { message = "Message posted successfully" });
-    }
-
     // POST for register
     [HttpPost("/api/register")]
-    public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request)
+    public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
     {
+        _latest = latest;
         var user = Activator.CreateInstance<User>();
 
         user.UserName = request.username;
@@ -110,6 +82,44 @@ public class RerouteController : Controller
         }
 
         return LocalRedirect("/api/register");
+    }
+    
+    // GET and POST messages
+    [HttpGet("/api/msgs/{username}")]
+    public async Task<IActionResult> GetMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
+    {
+        _latest = latest;
+        var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no);
+        return Ok(messages);
+    }
+    
+    [HttpPost("/api/msgs/{username}")]
+    public async Task<IActionResult> PostMsgs([FromBody] MessageRequest request, [FromQuery] int latest)
+    {
+        _latest = latest;
+        if (string.IsNullOrEmpty(request.Username))
+        {
+            return Unauthorized();
+        }
+        
+        var message = request.Content;
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            ModelState.AddModelError("Message", "Message cannot be empty.");
+        }
+        else if (message.Length > 160)
+        {
+            ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
+        }
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        
+        var userId = await _userRepository.GetUserID(request.Username);
+        await _messageRepository.AddMessage(userId, message);
+        
+        return Ok(new { message = "Message posted successfully" });
     }
     
     // POST for follow
