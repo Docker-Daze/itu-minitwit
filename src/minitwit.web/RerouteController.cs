@@ -7,10 +7,12 @@ namespace minitwit.web;
 public class RerouteController : Controller
 {
     private readonly IMessageRepository _messageRepository;
+    private readonly IUserRepository _userRepository;
     private int currentPage;
-    public RerouteController(IMessageRepository messageRepository)
+    public RerouteController(IMessageRepository messageRepository, IUserRepository userRepository)
     {
         _messageRepository = messageRepository;
+        _userRepository = userRepository;
     }
     
     [HttpGet("")]
@@ -21,15 +23,14 @@ public class RerouteController : Controller
     
 
     [HttpGet("/api/msgs/{username}")]
-    public async Task<IActionResult> PostMsgs([FromQuery] int? page)
+    public async Task<IActionResult> GetMsgs(string username, [FromQuery] int no)
     {
-        currentPage = page ?? 1;
-        await _messageRepository.GetMessages(currentPage);
-        return Ok();
+        var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no);
+        return Ok(messages);
     }
     
     [HttpPost("/api/msgs/{username}")]
-    public async Task<IActionResult> GetMsgs([FromBody] MessageRequest request)
+    public async Task<IActionResult> PostMsgs([FromBody] MessageRequest request)
     {
 
         if (string.IsNullOrEmpty(request.Username))
@@ -48,11 +49,12 @@ public class RerouteController : Controller
         }
         if (!ModelState.IsValid)
         {
-            return LocalRedirect("/api/msgs");
+            return BadRequest(ModelState);
         }
-
-        await _messageRepository.AddMessage(request.Username, message);
         
-        return LocalRedirect("/api/msgs/{username}");
+        var userId = await _userRepository.GetUserID(request.Username);
+        await _messageRepository.AddMessage(userId, message);
+        
+        return Ok(new { message = "Message posted successfully" });
     }
 }
