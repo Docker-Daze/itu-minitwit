@@ -130,7 +130,19 @@ public class UserRepository : IUserRepository
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
 
-
+    public async Task<List<string>> GetFollowers(string username)
+    {
+        var userId = await GetUserID(username);
+    
+        // Join the Followers table with the Users table to get the follower usernames
+        var query = from follower in _dbContext.Followers
+            join user in _dbContext.Users on follower.WhoId equals user.Id
+            where follower.WhomId == userId
+            select user.UserName;
+    
+        var result = await query.ToListAsync();
+        return result;
+    }
     
 
 

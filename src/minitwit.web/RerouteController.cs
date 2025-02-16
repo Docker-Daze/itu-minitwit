@@ -85,7 +85,7 @@ public class RerouteController : Controller
     }
     
     // GET and POST messages
-    // GET specified users latest messages.
+    // GET specified user latest messages.
     [HttpGet("/api/msgs/{username}")]
     public async Task<IActionResult> GetUserMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
     {
@@ -94,7 +94,7 @@ public class RerouteController : Controller
         return Ok(messages);
     }
     
-    // GET latest messages. Don't matter who posted.
+    // GET latest messages. Doesn't matter who posted.
     [HttpGet("/api/msgs")]
     public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
     {
@@ -105,7 +105,7 @@ public class RerouteController : Controller
     
     // POST a message. Author is the {username}.
     [HttpPost("/api/msgs/{username}")]
-    public async Task<IActionResult> PostMsgs(string username, [FromBody] string content, [FromQuery] int latest)
+    public async Task<IActionResult> PostMsgs(string username, [FromBody] MessageRequest request, [FromQuery] int latest)
     {
         _latest = latest;
         if (string.IsNullOrEmpty(username))
@@ -113,7 +113,7 @@ public class RerouteController : Controller
             return Unauthorized();
         }
         
-        var message = content;
+        var message = request.Content;
         if (string.IsNullOrWhiteSpace(message))
         {
             ModelState.AddModelError("Message", "Message cannot be empty.");
@@ -127,6 +127,16 @@ public class RerouteController : Controller
         await _messageRepository.AddMessage(userId, message);
         
         return Ok(new { message = "Message posted successfully" });
+    }
+    
+    // POST and GET for follow.
+    // GET for follow. Gets json on who it follows
+    [HttpGet("/api/fllws/{username}")]
+    public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
+    {
+        _latest = latest;
+        var followers = await _userRepository.GetFollowers(username);
+        return Ok(followers);
     }
     
     // POST for follow. {Username} is the person who will follow someone.
