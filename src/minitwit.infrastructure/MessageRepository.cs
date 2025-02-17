@@ -59,6 +59,21 @@ public class MessageRepository : IMessageRepository
         return result;
     }
 
+    public async Task<List<APIMessageDTO>> GetMessagesSpecifiedAmount(int amount)
+    {
+        var query = (from message in _dbContext.Messages
+            orderby message.PubDate descending
+            where message.Flagged == 0
+            select new APIMessageDTO
+            {
+                content = message.Text,
+                user = message.User.UserName,
+            }).Take(amount);
+        
+        var result = await query.ToListAsync();
+        return result;
+    }
+
     public async Task<List<MessageDTO>> GetMessagesUserTimeline(string username, int page)
     {
         int offset = (page - 1) * PerPage;
@@ -78,18 +93,16 @@ public class MessageRepository : IMessageRepository
         return result;
     }
     
-    public async Task<List<MessageDTO>> GetMessagesFromUsernameSpecifiedAmount(string username, int amount)
+    public async Task<List<APIMessageDTO>> GetMessagesFromUsernameSpecifiedAmount(string username, int amount)
     {
 
         var query = (from message in _dbContext.Messages
             orderby message.PubDate descending
             where message.Flagged == 0 && message.User.UserName == username
-            select new MessageDTO
+            select new APIMessageDTO
             {
-                Text = message.Text,
-                Username = message.User.UserName,
-                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
-                GravatarUrl = message.User.GravatarURL
+                content = message.Text,
+                user = message.User.UserName,
             }).Take(amount);
         
         var result = await query.ToListAsync();

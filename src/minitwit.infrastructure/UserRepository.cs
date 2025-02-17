@@ -130,7 +130,29 @@ public class UserRepository : IUserRepository
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
 
+    public async Task<List<APIFollowingDTO>> GetFollowers(string username)
+    {
+        var userId = await GetUserID(username);
 
+        // Get the IDs of the users that 'username' is following
+        var followedUserIds = await _dbContext.Followers
+            .Where(f => f.WhoId == userId)
+            .Select(f => f.WhomId)
+            .ToListAsync();
+
+        var dtos = new List<APIFollowingDTO>();
+
+        foreach (var followedUserId in followedUserIds)
+        {
+            var user = await GetUser(followedUserId);
+            dtos.Add(new APIFollowingDTO
+            {
+                follows = user.UserName! 
+            });
+        }
+
+        return dtos;
+    }
     
 
 

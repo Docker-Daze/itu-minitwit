@@ -1,17 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using minitwit.core;
 using minitwit.infrastructure;
+using minitwit.web.Pages;
 
 namespace minitwit.web;
 
 public class RerouteController : Controller
 {
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
+    private readonly IUserStore<User> _userStore;
+    private readonly IUserEmailStore<User> _emailStore;
+
+    
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
     private int currentPage;
-    public RerouteController(IMessageRepository messageRepository, IUserRepository userRepository)
+    private static int _latest = 0;
+    public RerouteController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
+        IUserStore<User> userStore,
+        SignInManager<User> signInManager)
     {
         _messageRepository = messageRepository;
+        _userRepository = userRepository;
+        
+        _userManager = userManager;
+        _userStore = userStore;
+        _emailStore = (IUserEmailStore<User>)_userStore;
+        _signInManager = signInManager;
+
         _userRepository = userRepository;
     }
     
@@ -21,19 +41,74 @@ public class RerouteController : Controller
         return LocalRedirect("/public");
     }
     
-    // GET and POST messages
-    [HttpGet("/api/msgs/{username}")]
-    public async Task<IActionResult> GetMsgs(string username, [FromQuery] int no)
+    // GET for latest
+    [HttpGet("/api/latest")]
+    public async Task<IActionResult> Latest()
     {
+        return Ok(new { latest = _latest });
+    }
+    
+    // POST for register
+    [HttpPost("/api/register")]
+    public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
+    {
+        _latest = latest;
+        var user = Activator.CreateInstance<User>();
+
+        user.UserName = request.username;
+                
+        var existingUser = await _userManager.FindByEmailAsync(request.email);
+        if (existingUser != null)
+        {
+            ModelState.AddModelError(string.Empty, "Email address already exists.");
+            return BadRequest(ModelState);
+        }
+                
+        await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
+        await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
+        var result = await _userManager.CreateAsync(user, request.pwd);
+                
+        if (result.Succeeded)
+        {
+            user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
+                    
+            var claim = new Claim("User Name", request.username);
+            await _userManager.AddClaimAsync(user, claim);
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            HttpContext.Session.SetString("UserId", user.Id);
+                
+            return Ok(new { message = "Registration posted successfully" });
+        }
+
+        return LocalRedirect("/api/register");
+    }
+    
+    // GET and POST messages
+    // GET specified user latest messages.
+    [HttpGet("/api/msgs/{username}")]
+    public async Task<IActionResult> GetUserMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
+    {
+        _latest = latest;
         var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no);
         return Ok(messages);
     }
     
-    [HttpPost("/api/msgs/{username}")]
-    public async Task<IActionResult> PostMsgs([FromBody] MessageRequest request)
+    // GET latest messages. Doesn't matter who posted.
+    [HttpGet("/api/msgs")]
+    public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
     {
-
-        if (string.IsNullOrEmpty(request.Username))
+        _latest = latest;
+        var messages = await _messageRepository.GetMessagesSpecifiedAmount(no);
+        return Ok(messages);
+    }
+    
+    // POST a message. Author is the {username}.
+    [HttpPost("/api/msgs/{username}")]
+    public async Task<IActionResult> PostMsgs(string username, [FromBody] MessageRequest request, [FromQuery] int latest)
+    {
+        _latest = latest;
+        if (string.IsNullOrEmpty(username))
         {
             return Unauthorized();
         }
@@ -47,49 +122,36 @@ public class RerouteController : Controller
         {
             ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
         }
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
         
-        var userId = await _userRepository.GetUserID(request.Username);
+        var userId = await _userRepository.GetUserID(username);
         await _messageRepository.AddMessage(userId, message);
         
         return Ok(new { message = "Message posted successfully" });
     }
-
-    // POST for register
-    /*[HttpPost("/api/register")]
-    public async Task<IActionResult> PostRegister([FromBody] MessageRequest request)
+    
+    // POST and GET for follow.
+    // GET for follow. Gets json on who it follows
+    [HttpGet("/api/fllws/{username}")]
+    public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
     {
-        var user = Activator.CreateInstance<User>();
+        _latest = latest;
+        var followers = await _userRepository.GetFollowers(username);
+        return Ok(new { follows = followers.Select(f => f.follows).ToList() });
+    }
 
-        user.UserName = Input.UserName;
-                
-        var existingUser = await _userManager.FindByEmailAsync(Input.Email);
-        if (existingUser != null)
+    
+    // POST for follow and unfolow. {Username} is the person who will follow/unfollow someone.
+    [HttpPost("/api/fllws/{username}")]
+    public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request, [FromQuery] int latest)
+    {
+        _latest = latest;
+        if (request.follow != null)
         {
-            ModelState.AddModelError(string.Empty, "Email address already exists.");
-            return Page();
+            await _userRepository.FollowUser(username, request.follow);
+            return Ok(new { message = "Followed successfully" });
         }
-                
-        await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
-        await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-        var result = await _userManager.CreateAsync(user, Input.Password);
-                
-        if (result.Succeeded)
-        {
-            user.GravatarURL = await _userRepository.GetGravatarURL(Input.Email, 80);
-                    
-            var claim = new Claim("User Name", Input.UserName);
-            await _userManager.AddClaimAsync(user, claim);
-
-            await _signInManager.SignInAsync(user, isPersistent: false);
-            HttpContext.Session.SetString("UserId", user.Id);
-                
-            return LocalRedirect(returnUrl);
-        }
-        
-        return Ok(new { message = "Registration posted successfully" });
-    }*/
+        await _userRepository.UnfollowUser(username, request.unfollow!);
+        return Ok(new { message = "Unfollowed successfully" });
+    }
+    
 }
