@@ -144,11 +144,10 @@ public class UserRepository : IUserRepository
 
         foreach (var followedUserId in followedUserIds)
         {
-            // Use your asynchronous method to get the user details
             var user = await GetUser(followedUserId);
             dtos.Add(new APIFollowingDTO
             {
-                follows = user.UserName! // assuming 'follows' is of the same type returned by GetUser
+                follows = user.UserName! 
             });
         }
 
