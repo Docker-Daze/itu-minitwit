@@ -130,18 +130,29 @@ public class UserRepository : IUserRepository
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
 
-    public async Task<List<string>> GetFollowers(string username)
+    public async Task<List<APIFollowingDTO>> GetFollowers(string username)
     {
         var userId = await GetUserID(username);
-    
-        // Join the Followers table with the Users table to get the follower usernames
-        var query = from follower in _dbContext.Followers
-            join user in _dbContext.Users on follower.WhoId equals user.Id
-            where follower.WhomId == userId
-            select user.UserName;
-    
-        var result = await query.ToListAsync();
-        return result;
+
+        // Get the IDs of the users that 'username' is following
+        var followedUserIds = await _dbContext.Followers
+            .Where(f => f.WhoId == userId)
+            .Select(f => f.WhomId)
+            .ToListAsync();
+
+        var dtos = new List<APIFollowingDTO>();
+
+        foreach (var followedUserId in followedUserIds)
+        {
+            // Use your asynchronous method to get the user details
+            var user = await GetUser(followedUserId);
+            dtos.Add(new APIFollowingDTO
+            {
+                follows = user.UserName! // assuming 'follows' is of the same type returned by GetUser
+            });
+        }
+
+        return dtos;
     }
     
 

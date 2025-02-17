@@ -8,6 +8,6 @@ public interface IUserRepository
     public Task FollowUser(string who, string whom);
     public Task UnfollowUser(string who, string whom);
     public Task<bool> IsFollowing(string who, string whom);
-    public Task<List<string>> GetFollowers(string username);
+    public Task<List<APIFollowingDTO>> GetFollowers(string username);
 
 }
