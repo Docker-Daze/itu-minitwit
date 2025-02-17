@@ -7972,19 +7972,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ralle\\.nuget\\packages\\": {}
+    "C:\\Users\\rasmu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj",
+      "projectUniqueName": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj",
       "projectName": "minitwit.web",
-      "projectPath": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj",
-      "packagesPath": "C:\\Users\\ralle\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\obj\\",
+      "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj",
+      "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ralle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7998,11 +7998,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj": {
-              "projectPath": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj"
+            "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj": {
+              "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj"
             },
-            "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj": {
-              "projectPath": "C:\\Users\\ralle\\Desktop\\code\\itu\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj"
+            "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj": {
+              "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj"
             }
           }
         }
@@ -8017,7 +8017,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -8079,7 +8079,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

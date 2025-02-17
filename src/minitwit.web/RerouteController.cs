@@ -136,8 +136,9 @@ public class RerouteController : Controller
     {
         _latest = latest;
         var followers = await _userRepository.GetFollowers(username);
-        return Ok(followers);
+        return Ok(new { follows = followers.Select(f => f.follows).ToList() });
     }
+
     
     // POST for follow and unfolow. {Username} is the person who will follow/unfollow someone.
     [HttpPost("/api/fllws/{username}")]
