@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Net;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,7 @@ public class RerouteController : Controller
     [HttpPost("/api/register")]
     public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
     {
+        Console.WriteLine("HERERERERERE");
         _latest = latest;
         var user = Activator.CreateInstance<User>();
 
@@ -78,9 +80,14 @@ public class RerouteController : Controller
             await _signInManager.SignInAsync(user, isPersistent: false);
             HttpContext.Session.SetString("UserId", user.Id);
                 
-            return Ok(new { message = "Registration posted successfully" });
+            return StatusCode(204);        
         }
 
+        foreach (var error in result.Errors)
+        {
+            Console.WriteLine(error.Description);
+        }
+        
         return LocalRedirect("/api/register");
     }
     
