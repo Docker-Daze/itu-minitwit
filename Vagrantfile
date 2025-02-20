@@ -59,6 +59,7 @@ Vagrant.configure("2") do |config|
       cd /home/vagrant/published
       nohup dotnet minitwit.web.dll --urls "http://0.0.0.0:5000" > /home/vagrant/minitwit.log 2>&1 &
       
+      # Print host link
       echo "Provisioning complete."
       THIS_IP=`hostname -I | cut -d" " -f1`
       echo "http://${THIS_IP}:5000"
