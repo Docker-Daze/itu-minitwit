@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "minitwit.web/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.3.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.1",
           "Microsoft.AspNetCore.Identity.UI": "9.0.1",
           "Microsoft.Data.Sqlite": "9.0.1",
