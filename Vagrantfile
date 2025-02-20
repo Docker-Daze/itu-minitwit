@@ -31,19 +31,19 @@ Vagrant.configure("2") do |config|
       echo "Updating package list again after adding GPG key..."
       sudo apt-get update
       
-      # Install .NET SDK (optional step, just in case it's not installed)
+      # Install .NET SDK
       echo "Installing .NET SDK..."
       sudo apt-get install -y dotnet-sdk-9.0
       
       # Check if the .NET SDK is installed
       dotnet --version
       
-      # Assuming you have already placed your code inside /vagrant
+      # Copy files
       echo "Copying project files to the server..."
       cp -r /vagrant/* $HOME
       
-      # Navigate to the project directory HERE
-      cd /root/src/minitwit.web
+      # Navigate to the project directory
+      cd /src/minitwit.web
       
       # Restore and build the project (if needed)
       echo "Restoring and building the .NET project..."
@@ -54,12 +54,14 @@ Vagrant.configure("2") do |config|
       echo "Publishing the .NET application..."
       dotnet publish -c Release -o /home/vagrant/published
       
-      # Start the application using a suitable command (assuming it's a web app)
+      # Start the application using a suitable command
       echo "Starting the application..."
-      cd /home/vagrant/published/
-      dotnet minitwit.web.dll &
+      cd /home/vagrant/published
+      nohup dotnet minitwit.web.dll --urls "http://0.0.0.0:5000" > /home/vagrant/minitwit.log 2>&1 &
       
-      echo "Provisioning complete. Navigate to http://<your_vagrant_ip>:5000 in your browser."
+      echo "Provisioning complete."
+      THIS_IP=`hostname -I | cut -d" " -f1`
+      echo "http://${THIS_IP}:5000"
     SHELL
   end
 end
