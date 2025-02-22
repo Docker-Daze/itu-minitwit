@@ -1,6 +1,6 @@
 services:
   minitwitimage:
-    image: nikolatilgreen/minitwitimage
+    image: ${DOCKER_USERNAME}/minitwitimage
     container_name: minitwit
     build:
       context: .

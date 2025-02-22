@@ -2,22 +2,34 @@ Vagrant.configure("2") do |config|
   config.vm.box = 'digital_ocean'
   config.vm.box_url = "https://github.com/devopsgroup-io/vagrant-digitalocean/raw/master/box/digital_ocean.box"
   config.ssh.private_key_path = '~/.ssh/do_ssh_key'
-  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+  config.vm.synced_folder "remote_files", "/minitwit", type: "rsync"
+  config.vm.synced_folder './src', '/minitwit/src', type: "rsync"
+  config.vm.synced_folder '.', '/vagrant', disabled: true
   
-  config.vm.define "webserver", primary: true do |server|
+  config.vm.define "minitwit", primary: true do |server|
       server.vm.provider :digital_ocean do |provider|
-        provider.ssh_key_name = ENV["do_ssh_key"]
         provider.token = ENV["DIGITAL_OCEAN_TOKEN"]
         provider.image = 'ubuntu-22-04-x64'
         provider.region = 'fra1'
         provider.size = 's-1vcpu-1gb'
     end
   
-    server.vm.hostname = "webserver"
+    server.vm.hostname = "minitwit-server"
+    
+    server.vm.provision "shell", inline: 'echo "export DOCKER_USERNAME=' + "'" + ENV["DOCKER_USERNAME"] + "'" + '" >> ~/.bash_profile'
+    server.vm.provision "shell", inline: 'echo "export DOCKER_PASSWORD=' + "'" + ENV["DOCKER_PASSWORD"] + "'" + '" >> ~/.bash_profile'
+    
     server.vm.provision "shell", privileged: false, inline: <<-SHELL
       echo "Updating package list and installing dependencies..."
       sudo apt-get update
       sudo apt-get install -y wget apt-transport-https software-properties-common
+      
+      # Install docker and docker compose
+      sudo apt-get install -y docker.io docker-compose-v2
+      
+      echo -e "\nVerifying that docker works ...\n"
+      docker run --rm hello-world
+      docker rmi hello-world
       
       # Add Microsoft's package repository for .NET SDK if it's missing
       echo "Adding Microsoft's package repository for .NET SDK..."
@@ -38,27 +50,18 @@ Vagrant.configure("2") do |config|
       # Check if the .NET SDK is installed
       dotnet --version
       
-      # Copy files
-      echo "Copying project files to the server..."
-      cp -r /vagrant/* $HOME
+      echo ". $HOME/.bashrc" >> $HOME/.bash_profile
       
-      # Navigate to the project directory
-      cd /src/minitwit.web
+      echo -e "\nConfiguring credentials as environment variables...\n"
       
-      # Restore and build the project (if needed)
-      echo "Restoring and building the .NET project..."
-      dotnet restore
-      dotnet build
+      source $HOME/.bash_profile
       
-      # Publish the .NET application
-      echo "Publishing the .NET application..."
-      dotnet publish -c Release -o /home/vagrant/published
+      echo -e "\nSelecting Minitwit Folder as default folder when you ssh into the server...\n"
+      echo "cd /minitwit" >> ~/.bash_profile
       
-      # Start the application using a suitable command
-      echo "Starting the application..."
-      cd /home/vagrant/published
-      nohup dotnet minitwit.web.dll --urls "http://0.0.0.0:5000" > /home/vagrant/minitwit.log 2>&1 &
-      
+      echo "Executing deploy script"
+      chmod +x /minitwit/deploy.sh
+   
       # Print host link
       echo "Provisioning complete."
       THIS_IP=`hostname -I | cut -d" " -f1`
