@@ -1,6 +1,7 @@
 services:
-  webserver:
-    image: minitwit-web
+  minitwitimage:
+    image: nikolatilgreen/minitwitimage
+    container_name: minitwit
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,7 +10,7 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:5000
     volumes:
-      - ./src/minitwit.web/minitwit.db:/app/data/minitwit.db
+      - sqlite_data:/minitwit/data
 
 
 volumes:
