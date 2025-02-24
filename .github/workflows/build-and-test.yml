@@ -1,0 +1,31 @@
+name: Build Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "9.x"
+
+      - name: Install dependencies
+        run: |
+          dotnet restore ./src/minitwit.web/minitwit.web.csproj
+          dotnet restore ./tests/minitwit.tests/minitwit.tests.csproj
+          dotnet add ./tests/minitwit.tests/minitwit.tests.csproj package xunit --version 2.9.2
+
+      - name: dotnet test
+        run: dotnet test tests/minitwit.tests/minitwit.tests.csproj

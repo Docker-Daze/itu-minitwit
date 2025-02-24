@@ -26,9 +26,9 @@ public class LoginModel : PageModel
     public string Password { get; set; }
     public string ReturnUrl { get; set; }
 
-    public async Task OnGetAsync(string returnUrl = null)
+    public async Task OnGetAsync(string? returnUrl = null)
     {
-        if (User.Identity.IsAuthenticated)
+        if (User.Identity?.Name == null)
         {
             ReturnUrl = "/public";;
         }
@@ -39,7 +39,7 @@ public class LoginModel : PageModel
         ReturnUrl = returnUrl;
     }
 
-    public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+    public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {
         var user = await _userManager.FindByNameAsync(Username);
         

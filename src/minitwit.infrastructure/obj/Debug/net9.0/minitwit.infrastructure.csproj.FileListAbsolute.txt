@@ -34,24 +34,6 @@ C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.064E3D6C.Up2Date
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.genruntimeconfig.cache
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.deps.json
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.runtimeconfig.json
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.dll
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.pdb
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.dll
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.pdb
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.csproj.AssemblyReference.cache
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfoInputs.cache
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfo.cs
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.csproj.CoreCompileInputs.cache
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.sourcelink.json
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.064E3D6C.Up2Date
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.dll
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/refint/minitwit.infrastructure.dll
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.pdb
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.genruntimeconfig.cache
-/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll
 /Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.deps.json
 /Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.runtimeconfig.json
 /Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.dll
@@ -106,3 +88,21 @@ C:/Users/ralle/Desktop/code/itu/4.Semester/DevOps/itu-minitwit/src/minitwit.infr
 C:/Users/ralle/Desktop/code/itu/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.pdb
 C:/Users/ralle/Desktop/code/itu/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.genruntimeconfig.cache
 C:/Users/ralle/Desktop/code/itu/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.deps.json
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.runtimeconfig.json
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.dll
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.infrastructure.pdb
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.dll
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/bin/Debug/net9.0/minitwit.core.pdb
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.csproj.AssemblyReference.cache
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfoInputs.cache
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.AssemblyInfo.cs
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.csproj.CoreCompileInputs.cache
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.sourcelink.json
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.064E3D6C.Up2Date
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.dll
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/refint/minitwit.infrastructure.dll
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.pdb
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/minitwit.infrastructure.genruntimeconfig.cache
+/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/Debug/net9.0/ref/minitwit.infrastructure.dll

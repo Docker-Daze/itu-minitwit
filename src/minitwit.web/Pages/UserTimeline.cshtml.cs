@@ -66,7 +66,8 @@ public class UserTimelineModel : PageModel
             return BadRequest("User or acions cannot be null");
         }
 
-        if(User.Identity?.IsAuthenticated != true){
+
+        if(User.Identity?.IsAuthenticated == false || User.Identity?.Name == null){
             return Unauthorized();
         }
 

@@ -7,7 +7,7 @@ namespace minitwit.infrastructure;
 public class MinitwitDbContext : IdentityDbContext<User>
 {
     public DbSet<Message> Messages { get; set; }
-    public DbSet<User> Users { get; set; }
+    public override DbSet<User> Users { get; set; }
     public DbSet<Follower> Followers { get; set; }
     
     public MinitwitDbContext(DbContextOptions<MinitwitDbContext> options) : base(options) { }

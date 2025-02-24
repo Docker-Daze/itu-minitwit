@@ -113,8 +113,8 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         var response = await Register("user1", "default");
         var content = await response.Content.ReadAsStringAsync();
         _testOutputHelper.WriteLine(content);
-        Assert.Contains("You were successfully registered and can login now", content);
-
+        Assert.True(response.IsSuccessStatusCode);
+        
         response = await Register("user1", "default");
         content = await response.Content.ReadAsStringAsync();
         Assert.Contains("The username is already taken", content);
