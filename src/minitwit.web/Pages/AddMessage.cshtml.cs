@@ -9,8 +9,10 @@ public class AddMessageModel : PageModel
 {
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
+
     [BindProperty]
     public MessageInputModel MessageInput { get; set; } = new();
+
 
     public AddMessageModel(IMessageRepository messageRepository, IUserRepository userRepository)
     {
@@ -28,9 +30,9 @@ public class AddMessageModel : PageModel
         }
         
         var message = MessageInput.Text;
-        if (string.IsNullOrWhiteSpace(message))
+        if (MessageInput?.Text == null || string.IsNullOrWhiteSpace(MessageInput.Text))
         {
-            ModelState.AddModelError(String.Empty, "Message cannot be empty.");
+            ModelState.AddModelError(string.Empty, "Message cannot be empty.");
         }
         else if (message.Length > 160)
         {

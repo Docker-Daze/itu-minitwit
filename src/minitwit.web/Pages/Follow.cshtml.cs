@@ -19,13 +19,13 @@ public class Follow : PageModel
     
     public async Task<ActionResult> OnGet()
     {
-        if (User.Identity!.IsAuthenticated)
-        {
-            await _userRepository.FollowUser(User.Identity.Name!, user);
-            TempData["FlashMessage"] = $"You are now following \"{user}\"";
-            return Redirect($"/{user}");
+        if (User.Identity?.Name == null)
+        { 
+            return Unauthorized();
         }
-        
-        return Unauthorized();
+
+        await _userRepository.FollowUser(User.Identity.Name, user);
+        TempData["FlashMessage"] = $"You are now following \"{user}\"";
+        return Redirect($"/{user}");
     }
 }

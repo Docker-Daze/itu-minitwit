@@ -1,15 +1,16 @@
 services:
-  webserver:
-    image: minitwit-web
+  minitwitimage:
+    image: ${DOCKER_USERNAME}/minitwitimage
+    container_name: minitwit
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5114:8080"
+      - "5000:5000"
     environment:
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:5000
     volumes:
-      - ./src/minitwit.web/minitwit.db:/app/data/minitwit.db
+      - sqlite_data:/minitwit/data
 
 
 volumes:
