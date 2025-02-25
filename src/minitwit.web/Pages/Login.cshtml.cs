@@ -26,20 +26,21 @@ public class LoginModel : PageModel
     public string Password { get; set; }
     public string ReturnUrl { get; set; }
 
-    public async Task OnGetAsync(string returnUrl = null)
+    public async Task OnGetAsync(string? returnUrl = null)
     {
-        if (User.Identity.IsAuthenticated)
+        if (User.Identity!.IsAuthenticated)
         {
-            ReturnUrl = "/public";;
+            ReturnUrl = "/public";
         }
 
         // Clear the existing external cookie to ensure a clean login process
         await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+        if (returnUrl != null) ReturnUrl = returnUrl;
         
-        ReturnUrl = returnUrl;
     }
 
-    public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+    public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {
         var user = await _userManager.FindByNameAsync(Username);
         

@@ -45,12 +45,12 @@ public class RegisterModel : PageModel
     public string ReturnUrl { get; set; }
     
 
-    public async Task OnGetAsync(string returnUrl = null)
+    public async Task OnGetAsync(string? returnUrl = null)
     {
-        ReturnUrl = returnUrl;
+        if(returnUrl != null) ReturnUrl = returnUrl;
     }
     
-    public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+    public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {
         if (string.IsNullOrEmpty(Username))
         {

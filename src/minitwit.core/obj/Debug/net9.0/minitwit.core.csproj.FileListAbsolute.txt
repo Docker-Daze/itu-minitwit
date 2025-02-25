@@ -24,19 +24,15 @@
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll
 /home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.csproj.AssemblyReference.cache
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.deps.json
-C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.runtimeconfig.json
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.dll
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.pdb
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.csproj.AssemblyReference.cache
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.GeneratedMSBuildEditorConfig.editorconfig
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.AssemblyInfoInputs.cache
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.AssemblyInfo.cs
-C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.csproj.CoreCompileInputs.cache
-C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.sourcelink.json
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.dll
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/refint/minitwit.core.dll
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb
-C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.genruntimeconfig.cache
 C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/bin/Debug/net9.0/minitwit.core.runtimeconfig.json
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.csproj.AssemblyReference.cache
@@ -88,3 +84,18 @@ C:/Users/ralle/Desktop/code/itu/4.Semester/DevOps/itu-minitwit/src/minitwit.core
 C:/Users/ralle/Desktop/code/itu/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.pdb
 C:/Users/ralle/Desktop/code/itu/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/minitwit.core.genruntimeconfig.cache
 C:/Users/ralle/Desktop/code/itu/4.Semester/DevOps/itu-minitwit/src/minitwit.core/obj/Debug/net9.0/ref/minitwit.core.dll
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\bin\Debug\net9.0\minitwit.core.deps.json
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\bin\Debug\net9.0\minitwit.core.dll
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\bin\Debug\net9.0\minitwit.core.pdb
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.csproj.AssemblyReference.cache
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.AssemblyInfoInputs.cache
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.AssemblyInfo.cs
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.dll
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\refint\minitwit.core.dll
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.pdb
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\ref\minitwit.core.dll
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\bin\Debug\net9.0\minitwit.core.runtimeconfig.json
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.csproj.CoreCompileInputs.cache
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.sourcelink.json
+C:\Users\rasmu\OneDrive\Desktop\Code\4.Semester\DevOps\itu-minitwit\src\minitwit.core\obj\Debug\net9.0\minitwit.core.genruntimeconfig.cache

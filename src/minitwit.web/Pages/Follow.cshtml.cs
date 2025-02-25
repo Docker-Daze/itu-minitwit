@@ -10,17 +10,18 @@ public class Follow : PageModel
     private readonly IUserRepository _userRepository;
     
     [BindProperty(SupportsGet = true)]
-    public string user {get; set;}
-        public Follow(IMessageRepository messageRepository, IUserRepository userRepository)
+    public string? user {get; set;}
+    
+    public Follow(IMessageRepository messageRepository, IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
     
     public async Task<ActionResult> OnGet()
     {
-        if (User.Identity.IsAuthenticated)
+        if (User.Identity!.IsAuthenticated)
         {
-            await _userRepository.FollowUser(User.Identity.Name, user);
+            await _userRepository.FollowUser(User.Identity.Name!, user);
             TempData["FlashMessage"] = $"You are now following \"{user}\"";
             return Redirect($"/{user}");
         }

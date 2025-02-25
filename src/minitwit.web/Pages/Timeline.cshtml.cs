@@ -9,9 +9,9 @@ public class TimelineModel : PageModel
 {
     private readonly IMessageRepository _messageRepository;
     public int _currentPage;
-    public List<MessageDTO> Messages { get; set; }
+    public List<MessageDTO>? Messages { get; set; }
     [BindProperty] 
-    public MessageInputModel MessageInput { get; set; }
+    public MessageInputModel? MessageInput { get; set; }
     
     public TimelineModel(IMessageRepository messageRepository)
     {
@@ -20,14 +20,14 @@ public class TimelineModel : PageModel
     
     public async Task<ActionResult> OnGet([FromQuery] int? page)
     {
-        if (!User.Identity.IsAuthenticated)
+        if (!User.Identity!.IsAuthenticated)
         {
             return LocalRedirect("/public");
         }
         
         _currentPage = page ?? 1;
 
-        Messages = await _messageRepository.GetMessagesOwnTimeline(User.Identity.Name, _currentPage);
+        Messages = await _messageRepository.GetMessagesOwnTimeline(User.Identity.Name!, _currentPage);
         return Page();
     }
 }

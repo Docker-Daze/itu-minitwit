@@ -19,8 +19,8 @@ public class ApiController : Controller
     
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
-    private int currentPage;
     private static int _latest = 0;
+    
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
         IUserStore<User> userStore,
         SignInManager<User> signInManager)

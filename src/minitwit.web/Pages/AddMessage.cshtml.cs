@@ -21,7 +21,7 @@ public class AddMessageModel : PageModel
     public async Task<IActionResult> OnPost()
     {
         
-        var userId = await _userRepository.GetUserID(User.Identity.Name);
+        var userId = await _userRepository.GetUserID(User.Identity!.Name!);
         if (userId == null)
         {
             return Unauthorized();

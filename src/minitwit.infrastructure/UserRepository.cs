@@ -22,17 +22,19 @@ public class UserRepository : IUserRepository
             select Users;
         
         var user = await query.FirstOrDefaultAsync();
-        return user;
+      
+        return user!;
     }
 
-    public async Task<string> GetUserID(string username)
+    public async Task<string?> GetUserID(string username)
     {
         var query = from Users in _dbContext.Users
             where Users.UserName == username
             select Users.Id;
 
         var id = await query.FirstOrDefaultAsync();
-        return id;
+        if (id != null) return id;
+        return null;
     }
     
     
