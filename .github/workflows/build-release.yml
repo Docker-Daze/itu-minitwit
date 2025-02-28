@@ -1,0 +1,60 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "v*" 
+  pull_request:
+    branches: [$default-branch]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "9.x"
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build ./src/minitwit.web/minitwit.web.csproj --configuration Release --no-restore
+
+      - name: Publish for Ubuntu
+        run: dotnet publish ./src/minitwit.web/minitwit.web.csproj --configuration Release --runtime linux-x64 --self-contained -o ./publish/ubuntu
+
+      - name: Zip Ubuntu build
+        run: zip -r ubuntu-build.zip ./publish/ubuntu
+
+      - name: Upload zipped artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ubuntu-build
+          path: ubuntu-build.zip
+
+  create-release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download Ubuntu build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ubuntu-build
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag: ${{ github.ref }}
+          files: |
+            ubuntu-build.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
