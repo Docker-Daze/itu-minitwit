@@ -41,7 +41,7 @@ public class ApiController : Controller
         var fromSimulator = request.Headers["Authorization"];
         if (fromSimulator != "Basic c2ltdWxhdG9yOnN1cGVyX3NhZmUh")
         {
-            return Unauthorized(new { status = 403, error_msg = "You are not authorized to use this resource!" });
+            return Forbid();
         }
 
         return null;
@@ -102,10 +102,9 @@ public class ApiController : Controller
     {
         _latest = latest;
         
-        var notFromSimResponse = NotReqFromSimulator(HttpContext.Request);
-        if (notFromSimResponse != null)
+        if (_userRepository.GetUserID(username).Result == null)
         {
-            return notFromSimResponse;
+            return NotFound();
         }
         
         var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no);
@@ -117,13 +116,6 @@ public class ApiController : Controller
     public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
-        
-        var notFromSimResponse = NotReqFromSimulator(HttpContext.Request);
-        if (notFromSimResponse != null)
-        {
-            return notFromSimResponse;
-        }
-        
         var messages = await _messageRepository.GetMessagesSpecifiedAmount(no);
         return Ok(messages);
     }
@@ -136,6 +128,11 @@ public class ApiController : Controller
         if (string.IsNullOrEmpty(username))
         {
             return Unauthorized();
+        }
+        
+        if (_userRepository.GetUserID(username).Result == null)
+        {
+            return NotFound();
         }
         
         var message = request.Content;
@@ -160,13 +157,10 @@ public class ApiController : Controller
     public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
-        
-        var notFromSimResponse = NotReqFromSimulator(HttpContext.Request);
-        if (notFromSimResponse != null)
+        if (_userRepository.GetUserID(username).Result == null)
         {
-            return notFromSimResponse;
+            return NotFound();
         }
-
         var followers = await _userRepository.GetFollowers(username);
         return Ok(new { follows = followers.Select(f => f.follows).ToList() });
     }
@@ -177,6 +171,12 @@ public class ApiController : Controller
     public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request, [FromQuery] int latest)
     {
         _latest = latest;
+        
+        if (_userRepository.GetUserID(username).Result == null)
+        {
+            return NotFound();
+        }
+        
         if (request.follow != null)
         {
             await _userRepository.FollowUser(username, request.follow);
