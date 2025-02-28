@@ -66,14 +66,14 @@ app.MapRazorPages()
    .WithStaticAssets();
 app.MapControllers();
 
-/*
+
+
 using (var scope = app.Services.CreateScope())
 {
     var minitwitDbContext = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
     minitwitDbContext.Database.EnsureCreated();
-    DbInitializer.SeedDatabase(minitwitDbContext);
+    //DbInitializer.SeedDatabase(minitwitDbContext);
 }
-*/
 
 app.Run();
 
