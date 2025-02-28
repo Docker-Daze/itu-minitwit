@@ -4383,19 +4383,19 @@
     ]
   },
   "packageFolders": {
-    "/home/rasmus/.nuget/packages/": {}
+    "/Users/mathiashansen/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
+      "projectUniqueName": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
       "projectName": "minitwit.infrastructure",
-      "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
-      "packagesPath": "/home/rasmus/.nuget/packages/",
-      "outputPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/",
+      "projectPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
+      "packagesPath": "/Users/mathiashansen/.nuget/packages/",
+      "outputPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/rasmus/.nuget/NuGet/NuGet.Config"
+        "/Users/mathiashansen/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -4407,8 +4407,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
-              "projectPath": "/home/rasmus/Desktop/School/4.Semester/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
+            "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
+              "projectPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
             }
           }
         }
@@ -4421,9 +4421,8 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+        "auditMode": "direct"
+      }
     },
     "frameworks": {
       "net9.0": {
@@ -4456,7 +4455,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/rasmus/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
