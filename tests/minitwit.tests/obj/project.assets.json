@@ -9466,33 +9466,32 @@
     ]
   },
   "packageFolders": {
-    "/home/aras/.nuget/packages/": {}
+    "/Users/nikolai/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+      "projectUniqueName": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
       "projectName": "minitwit.tests",
-      "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
-      "packagesPath": "/home/aras/.nuget/packages/",
-      "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/obj/",
+      "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+      "packagesPath": "/Users/nikolai/.nuget/packages/",
+      "outputPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/tests/minitwit.tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/aras/.nuget/NuGet/NuGet.Config"
+        "/Users/nikolai/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
-              "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
+            "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
+              "projectPath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
             }
           }
         }
@@ -9506,8 +9505,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+      }
     },
     "frameworks": {
       "net9.0": {
@@ -9546,7 +9544,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -9555,7 +9553,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "minitwit.tests depends on xunit.runner.visualstudio (>= 2.9.2) but xunit.runner.visualstudio 2.9.2 was not found. xunit.runner.visualstudio 3.0.0 was resolved instead.",
+      "message": "minitwit.tests depends on xunit.runner.visualstudio (>= 2.9.2) but xunit.runner.visualstudio 2.9.2 was not found. An approximate best match of xunit.runner.visualstudio 3.0.0 was resolved.",
       "libraryId": "xunit.runner.visualstudio",
       "targetGraphs": [
         "net9.0"
