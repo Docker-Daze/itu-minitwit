@@ -40,7 +40,8 @@
           "Microsoft.AspNetCore.Mvc.Testing": "9.0.2",
           "Microsoft.NET.Test.Sdk": "17.13.0",
           "minitwit.web": "1.0.0",
-          "xunit": "2.9.3",
+          "xunit": "2.9.2",
+          "xunit.runner.visualstudio": "3.0.0",
           "Microsoft.AspNetCore.Antiforgery": "9.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "9.0.0.0",
           "Microsoft.AspNetCore.Authentication.BearerToken": "9.0.0.0",
@@ -131,22 +132,49 @@
           "Microsoft.CSharp": "9.0.0.0",
           "Microsoft.Extensions.Caching.Abstractions.Reference": "9.0.0.0",
           "Microsoft.Extensions.Caching.Memory.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Configuration.Binder.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Configuration.CommandLine.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Configuration.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Configuration.EnvironmentVariables.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Configuration.FileExtensions.Reference": "9.0.0.0",
           "Microsoft.Extensions.Configuration.Ini": "9.0.0.0",
+          "Microsoft.Extensions.Configuration.Json.Reference": "9.0.0.0",
           "Microsoft.Extensions.Configuration.KeyPerFile": "9.0.0.0",
+          "Microsoft.Extensions.Configuration.UserSecrets.Reference": "9.0.0.0",
           "Microsoft.Extensions.Configuration.Xml": "9.0.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions.Reference": "9.0.0.0",
+          "Microsoft.Extensions.DependencyInjection.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Diagnostics.Abstractions.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Diagnostics.Reference": "9.0.0.0",
           "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions": "9.0.0.0",
           "Microsoft.Extensions.Diagnostics.HealthChecks": "9.0.0.0",
           "Microsoft.Extensions.Features": "9.0.0.0",
+          "Microsoft.Extensions.FileProviders.Abstractions.Reference": "9.0.0.0",
           "Microsoft.Extensions.FileProviders.Composite": "9.0.0.0",
           "Microsoft.Extensions.FileProviders.Embedded.Reference": "9.0.0.0",
+          "Microsoft.Extensions.FileProviders.Physical.Reference": "9.0.0.0",
+          "Microsoft.Extensions.FileSystemGlobbing.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Hosting.Abstractions.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Hosting.Reference": "9.0.0.0",
           "Microsoft.Extensions.Http": "9.0.0.0",
           "Microsoft.Extensions.Identity.Core.Reference": "9.0.0.0",
           "Microsoft.Extensions.Identity.Stores.Reference": "9.0.0.0",
           "Microsoft.Extensions.Localization.Abstractions": "9.0.0.0",
           "Microsoft.Extensions.Localization": "9.0.0.0",
+          "Microsoft.Extensions.Logging.Abstractions.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Logging.Configuration.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Logging.Console.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Logging.Debug.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Logging.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Logging.EventLog.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Logging.EventSource.Reference": "9.0.0.0",
           "Microsoft.Extensions.Logging.TraceSource": "9.0.0.0",
           "Microsoft.Extensions.ObjectPool.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Options.ConfigurationExtensions.Reference": "9.0.0.0",
           "Microsoft.Extensions.Options.DataAnnotations": "9.0.0.0",
+          "Microsoft.Extensions.Options.Reference": "9.0.0.0",
+          "Microsoft.Extensions.Primitives.Reference": "9.0.0.0",
           "Microsoft.Extensions.WebEncoders.Reference": "9.0.0.0",
           "Microsoft.JSInterop": "9.0.0.0",
           "Microsoft.Net.Http.Headers.Reference": "9.0.0.0",
@@ -178,6 +206,7 @@
           "System.Diagnostics.Contracts": "9.0.0.0",
           "System.Diagnostics.Debug": "9.0.0.0",
           "System.Diagnostics.DiagnosticSource": "9.0.0.0",
+          "System.Diagnostics.EventLog.Reference": "9.0.0.0",
           "System.Diagnostics.FileVersionInfo": "9.0.0.0",
           "System.Diagnostics.Process": "9.0.0.0",
           "System.Diagnostics.StackTrace": "9.0.0.0",
@@ -1699,73 +1728,28 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.2",
           "Microsoft.Extensions.Primitives": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Binder/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.Binder.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.Binder.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.CommandLine/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "9.0.2",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.CommandLine.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.CommandLine.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.EnvironmentVariables/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "9.0.2",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.FileExtensions/9.0.2": {
@@ -1775,15 +1759,6 @@
           "Microsoft.Extensions.FileProviders.Abstractions": "9.0.2",
           "Microsoft.Extensions.FileProviders.Physical": "9.0.2",
           "Microsoft.Extensions.Primitives": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Json/9.0.2": {
@@ -1792,15 +1767,6 @@
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.2",
           "Microsoft.Extensions.Configuration.FileExtensions": "9.0.2",
           "Microsoft.Extensions.FileProviders.Abstractions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.Json.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.Json.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.UserSecrets/9.0.2": {
@@ -1809,42 +1775,14 @@
           "Microsoft.Extensions.Configuration.Json": "9.0.2",
           "Microsoft.Extensions.FileProviders.Abstractions": "9.0.2",
           "Microsoft.Extensions.FileProviders.Physical": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.UserSecrets.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
         }
       },
       "Microsoft.Extensions.DependencyInjection/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.DependencyInjection.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.DependencyInjection.dll": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.2": {
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
-        }
-      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.2": {},
       "Microsoft.Extensions.DependencyModel/9.0.2": {
         "runtime": {
           "lib/net9.0/Microsoft.Extensions.DependencyModel.dll": {
@@ -1861,44 +1799,17 @@
           "Microsoft.Extensions.Configuration": "9.0.2",
           "Microsoft.Extensions.Diagnostics.Abstractions": "9.0.2",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Diagnostics.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Diagnostics.dll": {}
         }
       },
       "Microsoft.Extensions.Diagnostics.Abstractions/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
           "Microsoft.Extensions.Options": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Diagnostics.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Diagnostics.Abstractions.dll": {}
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
         }
       },
       "Microsoft.Extensions.FileProviders.Embedded/9.0.1": {
@@ -1911,28 +1822,9 @@
           "Microsoft.Extensions.FileProviders.Abstractions": "9.0.2",
           "Microsoft.Extensions.FileSystemGlobbing": "9.0.2",
           "Microsoft.Extensions.Primitives": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.FileProviders.Physical.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.FileProviders.Physical.dll": {}
         }
       },
-      "Microsoft.Extensions.FileSystemGlobbing/9.0.2": {
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.FileSystemGlobbing.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
-        }
-      },
+      "Microsoft.Extensions.FileSystemGlobbing/9.0.2": {},
       "Microsoft.Extensions.Hosting/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "9.0.2",
@@ -1957,15 +1849,6 @@
           "Microsoft.Extensions.Logging.EventLog": "9.0.2",
           "Microsoft.Extensions.Logging.EventSource": "9.0.2",
           "Microsoft.Extensions.Options": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Hosting.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Hosting.dll": {}
         }
       },
       "Microsoft.Extensions.Hosting.Abstractions/9.0.2": {
@@ -1975,15 +1858,6 @@
           "Microsoft.Extensions.Diagnostics.Abstractions": "9.0.2",
           "Microsoft.Extensions.FileProviders.Abstractions": "9.0.2",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Hosting.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Hosting.Abstractions.dll": {}
         }
       },
       "Microsoft.Extensions.Identity.Core/9.0.1": {
@@ -2005,29 +1879,11 @@
           "Microsoft.Extensions.DependencyInjection": "9.0.2",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.2",
           "Microsoft.Extensions.Options": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Logging.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Logging.dll": {}
         }
       },
       "Microsoft.Extensions.Logging.Abstractions/9.0.2": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
         }
       },
       "Microsoft.Extensions.Logging.Configuration/9.0.2": {
@@ -2040,15 +1896,6 @@
           "Microsoft.Extensions.Logging.Abstractions": "9.0.2",
           "Microsoft.Extensions.Options": "9.0.2",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Logging.Configuration.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Logging.Configuration.dll": {}
         }
       },
       "Microsoft.Extensions.Logging.Console/9.0.2": {
@@ -2058,15 +1905,6 @@
           "Microsoft.Extensions.Logging.Abstractions": "9.0.2",
           "Microsoft.Extensions.Logging.Configuration": "9.0.2",
           "Microsoft.Extensions.Options": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Logging.Console.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Logging.Console.dll": {}
         }
       },
       "Microsoft.Extensions.Logging.Debug/9.0.2": {
@@ -2074,15 +1912,6 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
           "Microsoft.Extensions.Logging": "9.0.2",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Logging.Debug.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Logging.Debug.dll": {}
         }
       },
       "Microsoft.Extensions.Logging.EventLog/9.0.2": {
@@ -2092,15 +1921,6 @@
           "Microsoft.Extensions.Logging.Abstractions": "9.0.2",
           "Microsoft.Extensions.Options": "9.0.2",
           "System.Diagnostics.EventLog": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Logging.EventLog.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Logging.EventLog.dll": {}
         }
       },
       "Microsoft.Extensions.Logging.EventSource/9.0.2": {
@@ -2110,15 +1930,6 @@
           "Microsoft.Extensions.Logging.Abstractions": "9.0.2",
           "Microsoft.Extensions.Options": "9.0.2",
           "Microsoft.Extensions.Primitives": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Logging.EventSource.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Logging.EventSource.dll": {}
         }
       },
       "Microsoft.Extensions.ObjectPool/8.0.11": {},
@@ -2126,15 +1937,6 @@
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
           "Microsoft.Extensions.Primitives": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Options.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Options.dll": {}
         }
       },
       "Microsoft.Extensions.Options.ConfigurationExtensions/9.0.2": {
@@ -2144,28 +1946,9 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
           "Microsoft.Extensions.Options": "9.0.2",
           "Microsoft.Extensions.Primitives": "9.0.2"
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
         }
       },
-      "Microsoft.Extensions.Primitives/9.0.2": {
-        "runtime": {
-          "lib/net9.0/Microsoft.Extensions.Primitives.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
-        "compile": {
-          "lib/net9.0/Microsoft.Extensions.Primitives.dll": {}
-        }
-      },
+      "Microsoft.Extensions.Primitives/9.0.2": {},
       "Microsoft.Extensions.WebEncoders/8.0.11": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
@@ -3095,28 +2878,13 @@
       },
       "System.Data.DataSetExtensions/4.5.0": {},
       "System.Diagnostics.EventLog/9.0.2": {
-        "runtime": {
-          "lib/net9.0/System.Diagnostics.EventLog.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
-          }
-        },
         "runtimeTargets": {
           "runtimes/win/lib/net9.0/System.Diagnostics.EventLog.Messages.dll": {
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
             "fileVersion": "9.0.225.6610"
-          },
-          "runtimes/win/lib/net9.0/System.Diagnostics.EventLog.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.225.6610"
           }
-        },
-        "compile": {
-          "lib/net9.0/System.Diagnostics.EventLog.dll": {}
         }
       },
       "System.Formats.Asn1/9.0.0-rc.2.24473.5": {},
@@ -3175,11 +2943,11 @@
       "System.Text.Json/9.0.1": {},
       "System.Threading.Channels/7.0.0": {},
       "System.Threading.Tasks.Dataflow/8.0.0": {},
-      "xunit/2.9.3": {
+      "xunit/2.9.2": {
         "dependencies": {
-          "xunit.analyzers": "1.18.0",
-          "xunit.assert": "2.9.3",
-          "xunit.core": "2.9.3"
+          "xunit.analyzers": "1.16.0",
+          "xunit.assert": "2.9.2",
+          "xunit.core": "2.9.2"
         }
       },
       "xunit.abstractions/2.0.3": {
@@ -3193,52 +2961,53 @@
           "lib/netstandard2.0/xunit.abstractions.dll": {}
         }
       },
-      "xunit.analyzers/1.18.0": {},
-      "xunit.assert/2.9.3": {
+      "xunit.analyzers/1.16.0": {},
+      "xunit.assert/2.9.2": {
         "runtime": {
           "lib/net6.0/xunit.assert.dll": {
-            "assemblyVersion": "2.9.3.0",
-            "fileVersion": "2.9.3.0"
+            "assemblyVersion": "2.9.2.0",
+            "fileVersion": "2.9.2.0"
           }
         },
         "compile": {
           "lib/net6.0/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.9.3": {
+      "xunit.core/2.9.2": {
         "dependencies": {
-          "xunit.extensibility.core": "2.9.3",
-          "xunit.extensibility.execution": "2.9.3"
+          "xunit.extensibility.core": "2.9.2",
+          "xunit.extensibility.execution": "2.9.2"
         }
       },
-      "xunit.extensibility.core/2.9.3": {
+      "xunit.extensibility.core/2.9.2": {
         "dependencies": {
           "xunit.abstractions": "2.0.3"
         },
         "runtime": {
           "lib/netstandard1.1/xunit.core.dll": {
-            "assemblyVersion": "2.9.3.0",
-            "fileVersion": "2.9.3.0"
+            "assemblyVersion": "2.9.2.0",
+            "fileVersion": "2.9.2.0"
           }
         },
         "compile": {
           "lib/netstandard1.1/xunit.core.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.9.3": {
+      "xunit.extensibility.execution/2.9.2": {
         "dependencies": {
-          "xunit.extensibility.core": "2.9.3"
+          "xunit.extensibility.core": "2.9.2"
         },
         "runtime": {
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {
-            "assemblyVersion": "2.9.3.0",
-            "fileVersion": "2.9.3.0"
+            "assemblyVersion": "2.9.2.0",
+            "fileVersion": "2.9.2.0"
           }
         },
         "compile": {
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         }
       },
+      "xunit.runner.visualstudio/3.0.0": {},
       "minitwit.core/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "2.3.0",
@@ -3272,6 +3041,7 @@
       },
       "minitwit.web/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.3.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.1",
           "Microsoft.AspNetCore.Identity.UI": "9.0.1",
           "Microsoft.Data.Sqlite": "9.0.1",
@@ -3830,9 +3600,51 @@
         },
         "compileOnly": true
       },
+      "Microsoft.Extensions.Configuration.Abstractions.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Configuration.Binder.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.Binder.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Configuration.CommandLine.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.CommandLine.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Configuration.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Configuration.EnvironmentVariables.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Configuration.FileExtensions.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.FileExtensions.dll": {}
+        },
+        "compileOnly": true
+      },
       "Microsoft.Extensions.Configuration.Ini/9.0.0.0": {
         "compile": {
           "Microsoft.Extensions.Configuration.Ini.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Configuration.Json.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.Json.dll": {}
         },
         "compileOnly": true
       },
@@ -3842,9 +3654,39 @@
         },
         "compileOnly": true
       },
+      "Microsoft.Extensions.Configuration.UserSecrets.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Configuration.UserSecrets.dll": {}
+        },
+        "compileOnly": true
+      },
       "Microsoft.Extensions.Configuration.Xml/9.0.0.0": {
         "compile": {
           "Microsoft.Extensions.Configuration.Xml.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.DependencyInjection.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.DependencyInjection.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Diagnostics.Abstractions.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Diagnostics.Abstractions.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Diagnostics.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Diagnostics.dll": {}
         },
         "compileOnly": true
       },
@@ -3866,6 +3708,12 @@
         },
         "compileOnly": true
       },
+      "Microsoft.Extensions.FileProviders.Abstractions.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.FileProviders.Abstractions.dll": {}
+        },
+        "compileOnly": true
+      },
       "Microsoft.Extensions.FileProviders.Composite/9.0.0.0": {
         "compile": {
           "Microsoft.Extensions.FileProviders.Composite.dll": {}
@@ -3875,6 +3723,30 @@
       "Microsoft.Extensions.FileProviders.Embedded.Reference/9.0.0.0": {
         "compile": {
           "Microsoft.Extensions.FileProviders.Embedded.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.FileProviders.Physical.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.FileProviders.Physical.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.FileSystemGlobbing.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.FileSystemGlobbing.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Hosting.Abstractions.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Hosting.Abstractions.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Hosting.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Hosting.dll": {}
         },
         "compileOnly": true
       },
@@ -3908,6 +3780,48 @@
         },
         "compileOnly": true
       },
+      "Microsoft.Extensions.Logging.Abstractions.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Logging.Abstractions.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Logging.Configuration.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Logging.Configuration.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Logging.Console.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Logging.Console.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Logging.Debug.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Logging.Debug.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Logging.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Logging.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Logging.EventLog.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Logging.EventLog.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Logging.EventSource.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Logging.EventSource.dll": {}
+        },
+        "compileOnly": true
+      },
       "Microsoft.Extensions.Logging.TraceSource/9.0.0.0": {
         "compile": {
           "Microsoft.Extensions.Logging.TraceSource.dll": {}
@@ -3920,9 +3834,27 @@
         },
         "compileOnly": true
       },
+      "Microsoft.Extensions.Options.ConfigurationExtensions.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
+        },
+        "compileOnly": true
+      },
       "Microsoft.Extensions.Options.DataAnnotations/9.0.0.0": {
         "compile": {
           "Microsoft.Extensions.Options.DataAnnotations.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Options.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Options.dll": {}
+        },
+        "compileOnly": true
+      },
+      "Microsoft.Extensions.Primitives.Reference/9.0.0.0": {
+        "compile": {
+          "Microsoft.Extensions.Primitives.dll": {}
         },
         "compileOnly": true
       },
@@ -4109,6 +4041,12 @@
       "System.Diagnostics.DiagnosticSource/9.0.0.0": {
         "compile": {
           "System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "compileOnly": true
+      },
+      "System.Diagnostics.EventLog.Reference/9.0.0.0": {
+        "compile": {
+          "System.Diagnostics.EventLog.dll": {}
         },
         "compileOnly": true
       },
@@ -6251,12 +6189,12 @@
       "path": "system.threading.tasks.dataflow/8.0.0",
       "hashPath": "system.threading.tasks.dataflow.8.0.0.nupkg.sha512"
     },
-    "xunit/2.9.3": {
+    "xunit/2.9.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-TlXQBinK35LpOPKHAqbLY4xlEen9TBafjs0V5KnA4wZsoQLQJiirCR4CbIXvOH8NzkW4YeJKP5P/Bnrodm0h9Q==",
-      "path": "xunit/2.9.3",
-      "hashPath": "xunit.2.9.3.nupkg.sha512"
+      "sha512": "sha512-7LhFS2N9Z6Xgg8aE5lY95cneYivRMfRI8v+4PATa4S64D5Z/Plkg0qa8dTRHSiGRgVZ/CL2gEfJDE5AUhOX+2Q==",
+      "path": "xunit/2.9.2",
+      "hashPath": "xunit.2.9.2.nupkg.sha512"
     },
     "xunit.abstractions/2.0.3": {
       "type": "package",
@@ -6265,40 +6203,47 @@
       "path": "xunit.abstractions/2.0.3",
       "hashPath": "xunit.abstractions.2.0.3.nupkg.sha512"
     },
-    "xunit.analyzers/1.18.0": {
+    "xunit.analyzers/1.16.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-OtFMHN8yqIcYP9wcVIgJrq01AfTxijjAqVDy/WeQVSyrDC1RzBWeQPztL49DN2syXRah8TYnfvk035s7L95EZQ==",
-      "path": "xunit.analyzers/1.18.0",
-      "hashPath": "xunit.analyzers.1.18.0.nupkg.sha512"
+      "sha512": "sha512-hptYM7vGr46GUIgZt21YHO4rfuBAQS2eINbFo16CV/Dqq+24Tp+P5gDCACu1AbFfW4Sp/WRfDPSK8fmUUb8s0Q==",
+      "path": "xunit.analyzers/1.16.0",
+      "hashPath": "xunit.analyzers.1.16.0.nupkg.sha512"
     },
-    "xunit.assert/2.9.3": {
+    "xunit.assert/2.9.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/Kq28fCE7MjOV42YLVRAJzRF0WmEqsmflm0cfpMjGtzQ2lR5mYVj1/i0Y8uDAOLczkL3/jArrwehfMD0YogMAA==",
-      "path": "xunit.assert/2.9.3",
-      "hashPath": "xunit.assert.2.9.3.nupkg.sha512"
+      "sha512": "sha512-QkNBAQG4pa66cholm28AxijBjrmki98/vsEh4Sx5iplzotvPgpiotcxqJQMRC8d7RV7nIT8ozh97957hDnZwsQ==",
+      "path": "xunit.assert/2.9.2",
+      "hashPath": "xunit.assert.2.9.2.nupkg.sha512"
     },
-    "xunit.core/2.9.3": {
+    "xunit.core/2.9.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BiAEvqGvyme19wE0wTKdADH+NloYqikiU0mcnmiNyXaF9HyHmE6sr/3DC5vnBkgsWaE6yPyWszKSPSApWdRVeQ==",
-      "path": "xunit.core/2.9.3",
-      "hashPath": "xunit.core.2.9.3.nupkg.sha512"
+      "sha512": "sha512-O6RrNSdmZ0xgEn5kT927PNwog5vxTtKrWMihhhrT0Sg9jQ7iBDciYOwzBgP2krBEk5/GBXI18R1lKvmnxGcb4w==",
+      "path": "xunit.core/2.9.2",
+      "hashPath": "xunit.core.2.9.2.nupkg.sha512"
     },
-    "xunit.extensibility.core/2.9.3": {
+    "xunit.extensibility.core/2.9.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kf3si0YTn2a8J8eZNb+zFpwfoyvIrQ7ivNk5ZYA5yuYk1bEtMe4DxJ2CF/qsRgmEnDr7MnW1mxylBaHTZ4qErA==",
-      "path": "xunit.extensibility.core/2.9.3",
-      "hashPath": "xunit.extensibility.core.2.9.3.nupkg.sha512"
+      "sha512": "sha512-Ol+KlBJz1x8BrdnhN2DeOuLrr1I/cTwtHCggL9BvYqFuVd/TUSzxNT5O0NxCIXth30bsKxgMfdqLTcORtM52yQ==",
+      "path": "xunit.extensibility.core/2.9.2",
+      "hashPath": "xunit.extensibility.core.2.9.2.nupkg.sha512"
     },
-    "xunit.extensibility.execution/2.9.3": {
+    "xunit.extensibility.execution/2.9.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-yMb6vMESlSrE3Wfj7V6cjQ3S4TXdXpRqYeNEI3zsX31uTsGMJjEw6oD5F5u1cHnMptjhEECnmZSsPxB6ChZHDQ==",
-      "path": "xunit.extensibility.execution/2.9.3",
-      "hashPath": "xunit.extensibility.execution.2.9.3.nupkg.sha512"
+      "sha512": "sha512-rKMpq4GsIUIJibXuZoZ8lYp5EpROlnYaRpwu9Zr0sRZXE7JqJfEEbCsUriZqB+ByXCLFBJyjkTRULMdC+U566g==",
+      "path": "xunit.extensibility.execution/2.9.2",
+      "hashPath": "xunit.extensibility.execution.2.9.2.nupkg.sha512"
+    },
+    "xunit.runner.visualstudio/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HggUqjQJe8PtDxcP25Q+CnR6Lz4oX3GElhD9V4oU2+75x9HI6A6sxbfKGS4UwU4t4yJaS9fBmAuriz8bQApNjw==",
+      "path": "xunit.runner.visualstudio/3.0.0",
+      "hashPath": "xunit.runner.visualstudio.3.0.0.nupkg.sha512"
     },
     "minitwit.core/1.0.0": {
       "type": "project",
@@ -6765,7 +6710,42 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.Extensions.Configuration.Abstractions.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration.Binder.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration.CommandLine.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration.EnvironmentVariables.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration.FileExtensions.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.Extensions.Configuration.Ini/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration.Json.Reference/9.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -6775,7 +6755,32 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.Extensions.Configuration.UserSecrets.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.Extensions.Configuration.Xml/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.DependencyInjection.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Diagnostics.Abstractions.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Diagnostics.Reference/9.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -6795,12 +6800,37 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.Extensions.FileProviders.Abstractions.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.Extensions.FileProviders.Composite/9.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
     },
     "Microsoft.Extensions.FileProviders.Embedded.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.FileProviders.Physical.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.FileSystemGlobbing.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Hosting.Abstractions.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Hosting.Reference/9.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -6830,6 +6860,41 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.Extensions.Logging.Abstractions.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.Configuration.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.Console.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.Debug.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.EventLog.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Logging.EventSource.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.Extensions.Logging.TraceSource/9.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
@@ -6840,7 +6905,22 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.Extensions.Options.ConfigurationExtensions.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.Extensions.Options.DataAnnotations/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Options.Reference/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Primitives.Reference/9.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -6996,6 +7076,11 @@
       "sha512": ""
     },
     "System.Diagnostics.DiagnosticSource/9.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Diagnostics.EventLog.Reference/9.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

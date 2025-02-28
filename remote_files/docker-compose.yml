@@ -1,0 +1,6 @@
+services:
+  minitwitimage:
+    image: ${DOCKER_USERNAME}/minitwitimage
+    container_name: minitwit
+    ports:
+      - '5000:5000'

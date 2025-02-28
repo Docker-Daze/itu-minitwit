@@ -1,17 +1,18 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using minitwit.core;
+using minitwit.web.Pages;
 
 namespace itu_minitwit.Pages;
 
+[IgnoreAntiforgeryToken]
 public class UserTimelineModel : PageModel
 {
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
-    public int _currentPage;
-    public List<MessageDTO> Messages { get; set; }
+    private int _currentPage;
+    public List<MessageDTO>? Messages { get; set; }
 
     public UserTimelineModel(IMessageRepository messageRepository, IUserRepository userRepository)
     {
@@ -23,19 +24,12 @@ public class UserTimelineModel : PageModel
     {
         _currentPage = page ?? 1;
 
-        if (User.Identity.Name == user)
-        {
-            Messages = await _messageRepository.GetMessagesOwnTimeline(user, _currentPage);
-        }
-        else
-        {
-            Messages = await _messageRepository.GetMessagesUserTimeline(user, _currentPage);
-        }
+        Messages = await _messageRepository.GetMessagesUserTimeline(user, _currentPage);
         return Page();
     }
 
     public async Task<bool> IsFollowing(string who){
-        if(User.Identity.Name != null){
+        if(User.Identity!.Name != null){
             return await _userRepository.IsFollowing(User.Identity.Name, who);
         }
         else return false;
@@ -54,11 +48,12 @@ public class UserTimelineModel : PageModel
             return Unauthorized();
         }
 
-        if(await _userRepository.IsFollowing(User.Identity.Name, user)){
+        if(await _userRepository.IsFollowing(User.Identity.Name!, user)){
             return RedirectToPage("/public");
         }
 
-        await _userRepository.FollowUser(User.Identity.Name, user);
+        await _userRepository.FollowUser(User.Identity.Name!, user);
+        TempData["FlashMessage"] = $"You are now following \"{user}\"";
         return RedirectToPage("/UserTimeline", new { user = user });
     } 
 
@@ -71,11 +66,13 @@ public class UserTimelineModel : PageModel
             return BadRequest("User or acions cannot be null");
         }
 
-        if(User.Identity?.IsAuthenticated != true){
+
+        if(User.Identity?.IsAuthenticated == false || User.Identity?.Name == null){
             return Unauthorized();
         }
 
-        await _userRepository.UnfollowUser(User.Identity.Name, user);
+        await _userRepository.UnfollowUser(User.Identity.Name!, user);
+        TempData["FlashMessage"] = $"You are no longer following \"{user}\"";
         return RedirectToPage("/UserTimeline", new { user = user });
     } 
 

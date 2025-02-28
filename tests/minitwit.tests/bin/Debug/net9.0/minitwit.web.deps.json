@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "minitwit.web/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.3.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.1",
           "Microsoft.AspNetCore.Identity.UI": "9.0.1",
           "Microsoft.Data.Sqlite": "9.0.1",
@@ -2031,16 +2032,7 @@
         }
       },
       "System.Data.DataSetExtensions/4.5.0": {},
-      "System.Diagnostics.EventLog/8.0.0": {
-        "runtimeTargets": {
-          "runtimes/win/lib/net8.0/System.Diagnostics.EventLog.Messages.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
-          }
-        }
-      },
+      "System.Diagnostics.EventLog/8.0.0": {},
       "System.Formats.Asn1/9.0.0-rc.2.24473.5": {},
       "System.IO.Pipelines/7.0.0": {},
       "System.Memory/4.5.3": {},

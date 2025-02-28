@@ -670,7 +670,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Cryptography.Internal/9.0.2": {
+      "Microsoft.AspNetCore.Cryptography.Internal/9.0.1": {
         "type": "package",
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
@@ -683,10 +683,10 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.2": {
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.Internal": "9.0.2"
+          "Microsoft.AspNetCore.Cryptography.Internal": "9.0.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
@@ -862,11 +862,11 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.2": {
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "9.0.2",
-          "Microsoft.Extensions.Identity.Stores": "9.0.2"
+          "Microsoft.EntityFrameworkCore.Relational": "9.0.1",
+          "Microsoft.Extensions.Identity.Stores": "9.0.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {
@@ -879,11 +879,11 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Identity.UI/9.0.2": {
+      "Microsoft.AspNetCore.Identity.UI/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.FileProviders.Embedded": "9.0.2",
-          "Microsoft.Extensions.Identity.Stores": "9.0.2"
+          "Microsoft.Extensions.FileProviders.Embedded": "9.0.1",
+          "Microsoft.Extensions.Identity.Stores": "9.0.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.AspNetCore.Identity.UI.dll": {
@@ -1573,13 +1573,13 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/9.0.2": {
+      "Microsoft.EntityFrameworkCore/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "9.0.2",
-          "Microsoft.EntityFrameworkCore.Analyzers": "9.0.2",
-          "Microsoft.Extensions.Caching.Memory": "9.0.2",
-          "Microsoft.Extensions.Logging": "9.0.2"
+          "Microsoft.EntityFrameworkCore.Abstractions": "9.0.1",
+          "Microsoft.EntityFrameworkCore.Analyzers": "9.0.1",
+          "Microsoft.Extensions.Caching.Memory": "9.0.1",
+          "Microsoft.Extensions.Logging": "9.0.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.dll": {
@@ -1595,7 +1595,7 @@
           "buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/9.0.2": {
+      "Microsoft.EntityFrameworkCore.Abstractions/9.0.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -1608,16 +1608,16 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/9.0.2": {
+      "Microsoft.EntityFrameworkCore.Analyzers/9.0.1": {
         "type": "package"
       },
-      "Microsoft.EntityFrameworkCore.Relational/9.0.2": {
+      "Microsoft.EntityFrameworkCore.Relational/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "9.0.2",
-          "Microsoft.Extensions.Caching.Memory": "9.0.2",
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.2",
-          "Microsoft.Extensions.Logging": "9.0.2"
+          "Microsoft.EntityFrameworkCore": "9.0.1",
+          "Microsoft.Extensions.Caching.Memory": "9.0.1",
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.1",
+          "Microsoft.Extensions.Logging": "9.0.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll": {
@@ -1672,10 +1672,10 @@
           }
         }
       },
-      "Microsoft.Extensions.Caching.Abstractions/9.0.2": {
+      "Microsoft.Extensions.Caching.Abstractions/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "9.0.2"
+          "Microsoft.Extensions.Primitives": "9.0.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Caching.Abstractions.dll": {
@@ -1691,14 +1691,14 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Caching.Memory/9.0.2": {
+      "Microsoft.Extensions.Caching.Memory/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Caching.Abstractions": "9.0.2",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.2",
-          "Microsoft.Extensions.Options": "9.0.2",
-          "Microsoft.Extensions.Primitives": "9.0.2"
+          "Microsoft.Extensions.Caching.Abstractions": "9.0.1",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.1",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.1",
+          "Microsoft.Extensions.Options": "9.0.1",
+          "Microsoft.Extensions.Primitives": "9.0.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Caching.Memory.dll": {
@@ -1991,10 +1991,10 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.FileProviders.Embedded/9.0.2": {
+      "Microsoft.Extensions.FileProviders.Embedded/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.FileProviders.Abstractions": "9.0.2"
+          "Microsoft.Extensions.FileProviders.Abstractions": "9.0.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.FileProviders.Embedded.dll": {
@@ -2113,12 +2113,12 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Identity.Core/9.0.2": {
+      "Microsoft.Extensions.Identity.Core/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.2",
-          "Microsoft.Extensions.Logging": "9.0.2",
-          "Microsoft.Extensions.Options": "9.0.2"
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.1",
+          "Microsoft.Extensions.Logging": "9.0.1",
+          "Microsoft.Extensions.Options": "9.0.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Identity.Core.dll": {
@@ -2131,12 +2131,12 @@
           }
         }
       },
-      "Microsoft.Extensions.Identity.Stores/9.0.2": {
+      "Microsoft.Extensions.Identity.Stores/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Caching.Abstractions": "9.0.2",
-          "Microsoft.Extensions.Identity.Core": "9.0.2",
-          "Microsoft.Extensions.Logging": "9.0.2"
+          "Microsoft.Extensions.Caching.Abstractions": "9.0.1",
+          "Microsoft.Extensions.Identity.Core": "9.0.1",
+          "Microsoft.Extensions.Logging": "9.0.1"
         },
         "compile": {
           "lib/net9.0/Microsoft.Extensions.Identity.Stores.dll": {
@@ -3709,12 +3709,12 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "xunit/2.9.3": {
+      "xunit/2.9.2": {
         "type": "package",
         "dependencies": {
-          "xunit.analyzers": "1.18.0",
-          "xunit.assert": "2.9.3",
-          "xunit.core": "[2.9.3]"
+          "xunit.analyzers": "1.16.0",
+          "xunit.assert": "2.9.2",
+          "xunit.core": "[2.9.2]"
         }
       },
       "xunit.abstractions/2.0.3": {
@@ -3730,10 +3730,10 @@
           }
         }
       },
-      "xunit.analyzers/1.18.0": {
+      "xunit.analyzers/1.16.0": {
         "type": "package"
       },
-      "xunit.assert/2.9.3": {
+      "xunit.assert/2.9.2": {
         "type": "package",
         "compile": {
           "lib/net6.0/xunit.assert.dll": {
@@ -3746,11 +3746,11 @@
           }
         }
       },
-      "xunit.core/2.9.3": {
+      "xunit.core/2.9.2": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.9.3]",
-          "xunit.extensibility.execution": "[2.9.3]"
+          "xunit.extensibility.core": "[2.9.2]",
+          "xunit.extensibility.execution": "[2.9.2]"
         },
         "build": {
           "build/xunit.core.props": {},
@@ -3761,7 +3761,7 @@
           "buildMultiTargeting/xunit.core.targets": {}
         }
       },
-      "xunit.extensibility.core/2.9.3": {
+      "xunit.extensibility.core/2.9.2": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "2.0.3"
@@ -3777,10 +3777,10 @@
           }
         }
       },
-      "xunit.extensibility.execution/2.9.3": {
+      "xunit.extensibility.execution/2.9.2": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.9.3]"
+          "xunit.extensibility.core": "[2.9.2]"
         },
         "compile": {
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {
@@ -3791,6 +3791,18 @@
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "xunit.runner.visualstudio/3.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
+        },
+        "build": {
+          "build/net6.0/xunit.runner.visualstudio.props": {}
         }
       },
       "minitwit.core/1.0.0": {
@@ -3826,8 +3838,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.2",
-          "Microsoft.AspNetCore.Identity.UI": "9.0.2",
+          "Microsoft.AspNetCore.Identity": "2.3.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.1",
+          "Microsoft.AspNetCore.Identity.UI": "9.0.1",
           "Microsoft.Data.Sqlite": "9.0.1",
           "Microsoft.EntityFrameworkCore.Sqlite": "9.0.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "9.0.0",
@@ -4645,10 +4658,10 @@
         "microsoft.aspnetcore.authentication.core.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Cryptography.Internal/9.0.2": {
-      "sha512": "c628W4yUQyeZAjagLDWINOVAakvELBhS6WmjBYpoFVxrvBquo0JDmDMkQLe0zGffnaK5JoWBBHhT3dTJ6s06fw==",
+    "Microsoft.AspNetCore.Cryptography.Internal/9.0.1": {
+      "sha512": "leaw8hC6wCKfAg2kAYT4plnaHI7o6bKB9IQy0yLWHmgV0GjE449pu0SEnnl7loEzdLgyQrKyVQvfz7wRErqmxQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.internal/9.0.2",
+      "path": "microsoft.aspnetcore.cryptography.internal/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4660,14 +4673,14 @@
         "lib/net9.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
-        "microsoft.aspnetcore.cryptography.internal.9.0.2.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.internal.9.0.1.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.internal.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.2": {
-      "sha512": "F4iMrER+27B2t4IkUhe7oZfFNPwg0ZRPSSCpA4H4FLAsmiUTN1k9sq2G187I3mUlPaysHh83JrPcMtZYtmKBBQ==",
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/9.0.1": {
+      "sha512": "/ibWvFYnxjCfOmtQtLTFUN9L70CrQH0daom6tE8/hlxTllUDeXM95fE45dC4u2tBOrfDqB6TPAkUzd/vWaAusA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.keyderivation/9.0.2",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4679,7 +4692,7 @@
         "lib/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
-        "microsoft.aspnetcore.cryptography.keyderivation.9.0.2.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.keyderivation.9.0.1.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
       ]
     },
@@ -4800,10 +4813,10 @@
         "microsoft.aspnetcore.identity.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.2": {
-      "sha512": "pWTIxKXMGmrTLPovVJDmkToemQU1/ovgB4LhKa+VfoZJ8nKYwIoBI/mMM5JOwJpLGX73a6kw7W8wIc69gvZwRQ==",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore/9.0.1": {
+      "sha512": "yZyj/m7nBsrx6JDIv5KSYH44lJsQ4K5RLEWaYRFQVoIRvGXQxMZ/TUCa7PKFtR/o6nz1fmy6bVciV/eN/NmjUw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.identity.entityframeworkcore/9.0.2",
+      "path": "microsoft.aspnetcore.identity.entityframeworkcore/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4811,14 +4824,14 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll",
         "lib/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
-        "microsoft.aspnetcore.identity.entityframeworkcore.9.0.2.nupkg.sha512",
+        "microsoft.aspnetcore.identity.entityframeworkcore.9.0.1.nupkg.sha512",
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Identity.UI/9.0.2": {
-      "sha512": "2oEQF1jRP7oM/PRKyhw8x1LxuP53xAXSwSMn+zPUH3J65M0wHmNpKTiSRVb4irErtrrK6OP8Y3KRQWiAyz3lbQ==",
+    "Microsoft.AspNetCore.Identity.UI/9.0.1": {
+      "sha512": "fryJKvns90Wr6csFuA07pVbc0rXdqDTZKXpyT7IrV264+Y9EmTBgypEYUqwiE1mB1KjJ8az5MFqtj1OZeKzhPw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.identity.ui/9.0.2",
+      "path": "microsoft.aspnetcore.identity.ui/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4835,7 +4848,7 @@
         "buildTransitive/Microsoft.AspNetCore.Identity.UI.targets",
         "lib/net9.0/Microsoft.AspNetCore.Identity.UI.dll",
         "lib/net9.0/Microsoft.AspNetCore.Identity.UI.xml",
-        "microsoft.aspnetcore.identity.ui.9.0.2.nupkg.sha512",
+        "microsoft.aspnetcore.identity.ui.9.0.1.nupkg.sha512",
         "microsoft.aspnetcore.identity.ui.nuspec",
         "staticwebassets/V4/css/site.css",
         "staticwebassets/V4/favicon.ico",
@@ -6273,10 +6286,10 @@
         "microsoft.dotnet.scaffolding.shared.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore/9.0.2": {
-      "sha512": "P90ZuybgcpW32y985eOYxSoZ9IiL0UTYQlY0y1Pt1iHAnpZj/dQHREpSpry1RNvk8YjAeoAkWFdem5conqB9zQ==",
+    "Microsoft.EntityFrameworkCore/9.0.1": {
+      "sha512": "E25w4XugXNykTr5Y/sLDGaQ4lf67n9aXVPvsdGsIZjtuLmbvb9AoYP8D50CDejY8Ro4D9GK2kNHz5lWHqSK+wg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/9.0.2",
+      "path": "microsoft.entityframeworkcore/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6285,14 +6298,14 @@
         "buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props",
         "lib/net8.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.9.0.2.nupkg.sha512",
+        "microsoft.entityframeworkcore.9.0.1.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/9.0.2": {
-      "sha512": "oVSjNSIYHsk0N66eqAWgDcyo9etEFbUswbz7SmlYR6nGp05byHrJAYM5N8U2aGWJWJI6WvIC2e4TXJgH6GZ6HQ==",
+    "Microsoft.EntityFrameworkCore.Abstractions/9.0.1": {
+      "sha512": "qy+taGVLUs82zeWfc32hgGL8Z02ZqAneYvqZiiXbxF4g4PBUcPRuxHM9K20USmpeJbn4/fz40GkCbyyCy5ojOA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/9.0.2",
+      "path": "microsoft.entityframeworkcore.abstractions/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6300,28 +6313,28 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.9.0.2.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.9.0.1.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/9.0.2": {
-      "sha512": "w4jzX7XI+L3erVGzbHXpx64A3QaLXxqG3f1vPpGYYZGpxOIHkh7e4iLLD7cq4Ng1vjkwzWl5ZJp0Kj/nHsgFYg==",
+    "Microsoft.EntityFrameworkCore.Analyzers/9.0.1": {
+      "sha512": "c6ZZJZhPKrXFkE2z/81PmuT69HBL6Y68Cl0xJ5SRrDjJyq5Aabkq15yCqPg9RQ3R0aFLVaJok2DA8R3TKpejDQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/9.0.2",
+      "path": "microsoft.entityframeworkcore.analyzers/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "docs/PACKAGE.md",
-        "microsoft.entityframeworkcore.analyzers.9.0.2.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.9.0.1.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational/9.0.2": {
-      "sha512": "r7O4N5uaM95InVSGUj7SMOQWN0f1PBF2Y30ow7Jg+pGX5GJCRVd/1fq83lQ50YMyq+EzyHac5o4CDQA2RsjKJQ==",
+    "Microsoft.EntityFrameworkCore.Relational/9.0.1": {
+      "sha512": "7Iu0h4oevRvH4IwPzmxuIJGYRt55TapoREGlluk75KCO7lenN0+QnzCl6cQDY48uDoxAUpJbpK2xW7o8Ix69dw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/9.0.2",
+      "path": "microsoft.entityframeworkcore.relational/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6329,7 +6342,7 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.9.0.2.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.9.0.1.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
@@ -6362,10 +6375,10 @@
         "microsoft.entityframeworkcore.sqlite.core.nuspec"
       ]
     },
-    "Microsoft.Extensions.Caching.Abstractions/9.0.2": {
-      "sha512": "a7QhA25n+BzSM5r5d7JznfyluMBGI7z3qyLlFviZ1Eiqv6DdiK27sLZdP/rpYirBM6UYAKxu5TbmfhIy13GN9A==",
+    "Microsoft.Extensions.Caching.Abstractions/9.0.1": {
+      "sha512": "Eghsg9SyIvq0c8x6cUpe71BbQoOmsytXxqw2+ZNiTnP8a8SBLKgEor1zZeWhC0588IbS2M0PP4gXGAd9qF862Q==",
       "type": "package",
-      "path": "microsoft.extensions.caching.abstractions/9.0.2",
+      "path": "microsoft.extensions.caching.abstractions/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6385,15 +6398,15 @@
         "lib/net9.0/Microsoft.Extensions.Caching.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.xml",
-        "microsoft.extensions.caching.abstractions.9.0.2.nupkg.sha512",
+        "microsoft.extensions.caching.abstractions.9.0.1.nupkg.sha512",
         "microsoft.extensions.caching.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Caching.Memory/9.0.2": {
-      "sha512": "AlEfp0DMz8E1h1Exi8LBrUCNmCYcGDfSM4F/uK1D1cYx/R3w0LVvlmjICqxqXTsy7BEZaCf5leRZY2FuPEiFaw==",
+    "Microsoft.Extensions.Caching.Memory/9.0.1": {
+      "sha512": "JeC+PP0BCKMwwLezPGDaciJSTfcFG4KjsG8rX4XZ6RSvzdxofrFmcnmW2L4+cWUcZSBTQ+Dd7H5Gs9XZz/OlCA==",
       "type": "package",
-      "path": "microsoft.extensions.caching.memory/9.0.2",
+      "path": "microsoft.extensions.caching.memory/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6413,7 +6426,7 @@
         "lib/net9.0/Microsoft.Extensions.Caching.Memory.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.xml",
-        "microsoft.extensions.caching.memory.9.0.2.nupkg.sha512",
+        "microsoft.extensions.caching.memory.9.0.1.nupkg.sha512",
         "microsoft.extensions.caching.memory.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -6829,10 +6842,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.FileProviders.Embedded/9.0.2": {
-      "sha512": "guQjtnav6bkds3jBqvzLUN3CtFhrwwE2MvES4kukalrFnRkFCncumYBrycM3urilJ7ffetA1/XBcD5ChMJa+AA==",
+    "Microsoft.Extensions.FileProviders.Embedded/9.0.1": {
+      "sha512": "Pnw9plviwRguhVxHjthooumWH8yUxfF54tuu/+VoVBOuqBmzu6VUnn4NGf3eVkEO1k5q2nihOIAQL/7UMemSmQ==",
       "type": "package",
-      "path": "microsoft.extensions.fileproviders.embedded/9.0.2",
+      "path": "microsoft.extensions.fileproviders.embedded/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6847,7 +6860,7 @@
         "lib/net9.0/Microsoft.Extensions.FileProviders.Embedded.xml",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.xml",
-        "microsoft.extensions.fileproviders.embedded.9.0.2.nupkg.sha512",
+        "microsoft.extensions.fileproviders.embedded.9.0.1.nupkg.sha512",
         "microsoft.extensions.fileproviders.embedded.nuspec",
         "tasks/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.Manifest.Task.dll"
       ]
@@ -6968,10 +6981,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Identity.Core/9.0.2": {
-      "sha512": "rD3WoEPV4TJ4sb/SLaf7GHwSv8iZhIpviigAxloYivrPTaN8MbOLhSZMn53LtVXFugTQzkBlGSOcB99vJdk5pA==",
+    "Microsoft.Extensions.Identity.Core/9.0.1": {
+      "sha512": "dbvAQhwSyBbgB2BuVJ8PMVx7BK6WZHWhV/vsSnXl6sRLs9D7yXiIiRpgcPVvN5E/UkzRGW1EPXyc3t1EDxWSzg==",
       "type": "package",
-      "path": "microsoft.extensions.identity.core/9.0.2",
+      "path": "microsoft.extensions.identity.core/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6983,14 +6996,14 @@
         "lib/net9.0/Microsoft.Extensions.Identity.Core.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Core.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Core.xml",
-        "microsoft.extensions.identity.core.9.0.2.nupkg.sha512",
+        "microsoft.extensions.identity.core.9.0.1.nupkg.sha512",
         "microsoft.extensions.identity.core.nuspec"
       ]
     },
-    "Microsoft.Extensions.Identity.Stores/9.0.2": {
-      "sha512": "1gY/SvkkvMv/Ea/UUMpTmkMI8ZP+I3dLBiPMSaaSaDK7WclHifheUmmsJqnXrhsswAI0xLLbGwff4xcsXedt4A==",
+    "Microsoft.Extensions.Identity.Stores/9.0.1": {
+      "sha512": "lBErjDqd7i2RGpDr040lGm/HbMvxG/1Ta1aSFh91vYtSwEY2rtMI9o7xIDWgNmBKu8ko+XBxt0WcQh6TNFVe7g==",
       "type": "package",
-      "path": "microsoft.extensions.identity.stores/9.0.2",
+      "path": "microsoft.extensions.identity.stores/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -7002,7 +7015,7 @@
         "lib/net9.0/Microsoft.Extensions.Identity.Stores.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Stores.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Identity.Stores.xml",
-        "microsoft.extensions.identity.stores.9.0.2.nupkg.sha512",
+        "microsoft.extensions.identity.stores.9.0.1.nupkg.sha512",
         "microsoft.extensions.identity.stores.nuspec"
       ]
     },
@@ -9287,16 +9300,16 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "xunit/2.9.3": {
-      "sha512": "TlXQBinK35LpOPKHAqbLY4xlEen9TBafjs0V5KnA4wZsoQLQJiirCR4CbIXvOH8NzkW4YeJKP5P/Bnrodm0h9Q==",
+    "xunit/2.9.2": {
+      "sha512": "7LhFS2N9Z6Xgg8aE5lY95cneYivRMfRI8v+4PATa4S64D5Z/Plkg0qa8dTRHSiGRgVZ/CL2gEfJDE5AUhOX+2Q==",
       "type": "package",
-      "path": "xunit/2.9.3",
+      "path": "xunit/2.9.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "_content/README.md",
         "_content/logo-128-transparent.png",
-        "xunit.2.9.3.nupkg.sha512",
+        "xunit.2.9.2.nupkg.sha512",
         "xunit.nuspec"
       ]
     },
@@ -9317,10 +9330,10 @@
         "xunit.abstractions.nuspec"
       ]
     },
-    "xunit.analyzers/1.18.0": {
-      "sha512": "OtFMHN8yqIcYP9wcVIgJrq01AfTxijjAqVDy/WeQVSyrDC1RzBWeQPztL49DN2syXRah8TYnfvk035s7L95EZQ==",
+    "xunit.analyzers/1.16.0": {
+      "sha512": "hptYM7vGr46GUIgZt21YHO4rfuBAQS2eINbFo16CV/Dqq+24Tp+P5gDCACu1AbFfW4Sp/WRfDPSK8fmUUb8s0Q==",
       "type": "package",
-      "path": "xunit.analyzers/1.18.0",
+      "path": "xunit.analyzers/1.16.0",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -9331,14 +9344,14 @@
         "analyzers/dotnet/cs/xunit.analyzers.fixes.dll",
         "tools/install.ps1",
         "tools/uninstall.ps1",
-        "xunit.analyzers.1.18.0.nupkg.sha512",
+        "xunit.analyzers.1.16.0.nupkg.sha512",
         "xunit.analyzers.nuspec"
       ]
     },
-    "xunit.assert/2.9.3": {
-      "sha512": "/Kq28fCE7MjOV42YLVRAJzRF0WmEqsmflm0cfpMjGtzQ2lR5mYVj1/i0Y8uDAOLczkL3/jArrwehfMD0YogMAA==",
+    "xunit.assert/2.9.2": {
+      "sha512": "QkNBAQG4pa66cholm28AxijBjrmki98/vsEh4Sx5iplzotvPgpiotcxqJQMRC8d7RV7nIT8ozh97957hDnZwsQ==",
       "type": "package",
-      "path": "xunit.assert/2.9.3",
+      "path": "xunit.assert/2.9.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9348,14 +9361,14 @@
         "lib/net6.0/xunit.assert.xml",
         "lib/netstandard1.1/xunit.assert.dll",
         "lib/netstandard1.1/xunit.assert.xml",
-        "xunit.assert.2.9.3.nupkg.sha512",
+        "xunit.assert.2.9.2.nupkg.sha512",
         "xunit.assert.nuspec"
       ]
     },
-    "xunit.core/2.9.3": {
-      "sha512": "BiAEvqGvyme19wE0wTKdADH+NloYqikiU0mcnmiNyXaF9HyHmE6sr/3DC5vnBkgsWaE6yPyWszKSPSApWdRVeQ==",
+    "xunit.core/2.9.2": {
+      "sha512": "O6RrNSdmZ0xgEn5kT927PNwog5vxTtKrWMihhhrT0Sg9jQ7iBDciYOwzBgP2krBEk5/GBXI18R1lKvmnxGcb4w==",
       "type": "package",
-      "path": "xunit.core/2.9.3",
+      "path": "xunit.core/2.9.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9365,14 +9378,14 @@
         "build/xunit.core.targets",
         "buildMultiTargeting/xunit.core.props",
         "buildMultiTargeting/xunit.core.targets",
-        "xunit.core.2.9.3.nupkg.sha512",
+        "xunit.core.2.9.2.nupkg.sha512",
         "xunit.core.nuspec"
       ]
     },
-    "xunit.extensibility.core/2.9.3": {
-      "sha512": "kf3si0YTn2a8J8eZNb+zFpwfoyvIrQ7ivNk5ZYA5yuYk1bEtMe4DxJ2CF/qsRgmEnDr7MnW1mxylBaHTZ4qErA==",
+    "xunit.extensibility.core/2.9.2": {
+      "sha512": "Ol+KlBJz1x8BrdnhN2DeOuLrr1I/cTwtHCggL9BvYqFuVd/TUSzxNT5O0NxCIXth30bsKxgMfdqLTcORtM52yQ==",
       "type": "package",
-      "path": "xunit.extensibility.core/2.9.3",
+      "path": "xunit.extensibility.core/2.9.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9385,14 +9398,14 @@
         "lib/net452/xunit.runner.utility.net452.dll",
         "lib/netstandard1.1/xunit.core.dll",
         "lib/netstandard1.1/xunit.core.xml",
-        "xunit.extensibility.core.2.9.3.nupkg.sha512",
+        "xunit.extensibility.core.2.9.2.nupkg.sha512",
         "xunit.extensibility.core.nuspec"
       ]
     },
-    "xunit.extensibility.execution/2.9.3": {
-      "sha512": "yMb6vMESlSrE3Wfj7V6cjQ3S4TXdXpRqYeNEI3zsX31uTsGMJjEw6oD5F5u1cHnMptjhEECnmZSsPxB6ChZHDQ==",
+    "xunit.extensibility.execution/2.9.2": {
+      "sha512": "rKMpq4GsIUIJibXuZoZ8lYp5EpROlnYaRpwu9Zr0sRZXE7JqJfEEbCsUriZqB+ByXCLFBJyjkTRULMdC+U566g==",
       "type": "package",
-      "path": "xunit.extensibility.execution/2.9.3",
+      "path": "xunit.extensibility.execution/2.9.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9402,8 +9415,29 @@
         "lib/net452/xunit.execution.desktop.xml",
         "lib/netstandard1.1/xunit.execution.dotnet.dll",
         "lib/netstandard1.1/xunit.execution.dotnet.xml",
-        "xunit.extensibility.execution.2.9.3.nupkg.sha512",
+        "xunit.extensibility.execution.2.9.2.nupkg.sha512",
         "xunit.extensibility.execution.nuspec"
+      ]
+    },
+    "xunit.runner.visualstudio/3.0.0": {
+      "sha512": "HggUqjQJe8PtDxcP25Q+CnR6Lz4oX3GElhD9V4oU2+75x9HI6A6sxbfKGS4UwU4t4yJaS9fBmAuriz8bQApNjw==",
+      "type": "package",
+      "path": "xunit.runner.visualstudio/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "_content/README.md",
+        "_content/logo-128-transparent.png",
+        "build/net472/xunit.abstractions.dll",
+        "build/net472/xunit.runner.visualstudio.props",
+        "build/net472/xunit.runner.visualstudio.testadapter.dll",
+        "build/net6.0/xunit.abstractions.dll",
+        "build/net6.0/xunit.runner.visualstudio.props",
+        "build/net6.0/xunit.runner.visualstudio.testadapter.dll",
+        "lib/net472/_._",
+        "lib/net6.0/_._",
+        "xunit.runner.visualstudio.3.0.0.nupkg.sha512",
+        "xunit.runner.visualstudio.nuspec"
       ]
     },
     "minitwit.core/1.0.0": {
@@ -9427,36 +9461,38 @@
       "Microsoft.AspNetCore.Mvc.Testing >= 9.0.2",
       "Microsoft.NET.Test.Sdk >= 17.13.0",
       "minitwit.web >= 1.0.0",
-      "xunit >= 2.9.3"
+      "xunit >= 2.9.2",
+      "xunit.runner.visualstudio >= 2.9.2"
     ]
   },
   "packageFolders": {
-    "/Users/mathiashansen/.nuget/packages/": {}
+    "/home/aras/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+      "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
       "projectName": "minitwit.tests",
-      "projectPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
-      "packagesPath": "/Users/mathiashansen/.nuget/packages/",
-      "outputPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/obj/",
+      "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+      "packagesPath": "/home/aras/.nuget/packages/",
+      "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/mathiashansen/.nuget/NuGet/NuGet.Config"
+        "/home/aras/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
-              "projectPath": "/Users/mathiashansen/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
+            "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
+              "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
             }
           }
         }
@@ -9470,7 +9506,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -9486,7 +9523,11 @@
           },
           "xunit": {
             "target": "Package",
-            "version": "[2.9.3, )"
+            "version": "[2.9.2, )"
+          },
+          "xunit.runner.visualstudio": {
+            "target": "Package",
+            "version": "[2.9.2, )"
           }
         },
         "imports": [
@@ -9505,8 +9546,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "minitwit.tests depends on xunit.runner.visualstudio (>= 2.9.2) but xunit.runner.visualstudio 2.9.2 was not found. xunit.runner.visualstudio 3.0.0 was resolved instead.",
+      "libraryId": "xunit.runner.visualstudio",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

@@ -22,17 +22,19 @@ public class UserRepository : IUserRepository
             select Users;
         
         var user = await query.FirstOrDefaultAsync();
-        return user;
+      
+        return user!;
     }
 
-    public async Task<string> GetUserID(string username)
+    public async Task<string?> GetUserID(string username)
     {
         var query = from Users in _dbContext.Users
             where Users.UserName == username
             select Users.Id;
 
         var id = await query.FirstOrDefaultAsync();
-        return id;
+        if (id != null) return id;
+        return null;
     }
     
     
@@ -56,37 +58,52 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task<bool> FollowUser(string whoUsername, string whomUsername)
-{
-    string whomId = await GetUserID(whomUsername);
-    string whoId = await GetUserID(whoUsername);
-
-    if (string.IsNullOrEmpty(whomId))
+    public async Task FollowUser(string whoUsername, string whomUsername)
     {
-        return false; // User not found, follow operation failed
+        var isFollowing = await IsFollowing(whomUsername, whoUsername);
+        if (isFollowing)
+        {
+            throw new InvalidOperationException("You are already following this user");
+        }
+        
+        var whoId = await GetUserID(whoUsername);
+        var whomId = await GetUserID(whomUsername);
+        
+        if (string.IsNullOrEmpty(whomId))
+        {
+            throw new ArgumentException("The user to be followed does not exist.");
+        }
+        
+        if (whoId == whomId)
+        {
+            throw new InvalidOperationException("You cannot follow yourself.");
+        }
+
+        var follow = new Follower
+        {
+            WhoId = whoId,
+            WhomId = whomId
+        };
+
+        await _dbContext.Followers.AddAsync(follow);
+        await _dbContext.SaveChangesAsync();
     }
 
-    var newFollowing = new Follower
+
+    public async Task UnfollowUser(string whoUsername, string whomUsername)
     {
-        WhoId = whoId,
-        WhomId = whomId
-    };
-
-    await _dbContext.Followers.AddAsync(newFollowing);
-    await _dbContext.SaveChangesAsync();
-
-    return true; // Follow operation successful
-}
-
-
-    public async Task<bool> UnfollowUser(string whoUsername, string whomUsername)
-    {
-        string whomId = await GetUserID(whomUsername);
-        string whoId = await GetUserID(whoUsername);
+        var isFollowing = await IsFollowing(whoUsername, whomUsername);
+        if (!isFollowing)
+        {
+            throw new InvalidOperationException("You need to follow the user to unfollow");
+        }
+        
+        var whomId = await GetUserID(whomUsername);
+        var whoId = await GetUserID(whoUsername);
 
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
-            return false; // User not found, unfollow operation failed
+            throw new ArgumentException("The user to be unfollowed could not be found");
         }
 
         var followerEntry = await _dbContext.Followers
@@ -94,13 +111,11 @@ public class UserRepository : IUserRepository
 
         if (followerEntry == null)
         {
-            return false; // No follow entry found
+            throw new InvalidOperationException("Not found");
         }
 
         _dbContext.Followers.Remove(followerEntry);
         await _dbContext.SaveChangesAsync();
-
-        return true; // Successfully unfollowed
     }
 
     public async Task<bool> IsFollowing(string whoUsername, string whomUsername)
@@ -117,7 +132,29 @@ public class UserRepository : IUserRepository
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
 
+    public async Task<List<APIFollowingDTO>> GetFollowers(string username)
+    {
+        var userId = await GetUserID(username);
 
+        // Get the IDs of the users that 'username' is following
+        var followedUserIds = await _dbContext.Followers
+            .Where(f => f.WhoId == userId)
+            .Select(f => f.WhomId)
+            .ToListAsync();
+
+        var dtos = new List<APIFollowingDTO>();
+
+        foreach (var followedUserId in followedUserIds)
+        {
+            var user = await GetUser(followedUserId);
+            dtos.Add(new APIFollowingDTO
+            {
+                follows = user.UserName! 
+            });
+        }
+
+        return dtos;
+    }
     
 
 

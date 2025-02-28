@@ -2,6 +2,6 @@ namespace minitwit.core;
 
 public class Follower
 {
-    public string WhoId {get; set;}
-    public string WhomId {get; set;}
+    public required string WhoId {get; set;}
+    public required string WhomId {get; set;}
 }
