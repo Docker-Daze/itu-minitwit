@@ -36,6 +36,17 @@ public class ApiController : Controller
         _userRepository = userRepository;
     }
     
+    public IActionResult? NotReqFromSimulator(HttpRequest request)
+    {
+        var fromSimulator = request.Headers["Authorization"];
+        if (fromSimulator != "Basic c2ltdWxhdG9yOnN1cGVyX3NhZmUh")
+        {
+            return Unauthorized(new { status = 403, error_msg = "You are not authorized to use this resource!" });
+        }
+
+        return null;
+    }
+    
     // GET for latest
     [HttpGet("/api/latest")]
     public async Task<IActionResult> Latest()
@@ -47,7 +58,6 @@ public class ApiController : Controller
     [HttpPost("/api/register")]
     public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
     {
-        Console.WriteLine("HERERERERERE");
         _latest = latest;
         var user = Activator.CreateInstance<User>();
 
@@ -91,6 +101,13 @@ public class ApiController : Controller
     public async Task<IActionResult> GetUserMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
+        
+        var notFromSimResponse = NotReqFromSimulator(HttpContext.Request);
+        if (notFromSimResponse != null)
+        {
+            return notFromSimResponse;
+        }
+        
         var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no);
         return Ok(messages);
     }
@@ -100,6 +117,13 @@ public class ApiController : Controller
     public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
+        
+        var notFromSimResponse = NotReqFromSimulator(HttpContext.Request);
+        if (notFromSimResponse != null)
+        {
+            return notFromSimResponse;
+        }
+        
         var messages = await _messageRepository.GetMessagesSpecifiedAmount(no);
         return Ok(messages);
     }
@@ -136,6 +160,13 @@ public class ApiController : Controller
     public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
+        
+        var notFromSimResponse = NotReqFromSimulator(HttpContext.Request);
+        if (notFromSimResponse != null)
+        {
+            return notFromSimResponse;
+        }
+
         var followers = await _userRepository.GetFollowers(username);
         return Ok(new { follows = followers.Select(f => f.follows).ToList() });
     }
