@@ -83,8 +83,8 @@ public class ApiController : Controller
 
             await _signInManager.SignInAsync(user, isPersistent: false);
             HttpContext.Session.SetString("UserId", user.Id);
-                
-            return StatusCode(204);        
+            
+            return NoContent();
         }
 
         foreach (var error in result.Errors)
