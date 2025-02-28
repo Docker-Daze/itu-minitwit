@@ -1,0 +1,82 @@
+name: Build and Release (Scheduled)
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs every Sunday at midnight UTC
+
+jobs:
+  check-release:
+    runs-on: ubuntu-latest
+    outputs:
+      release_found: ${{ steps.check.outputs.release_found }}
+
+    steps:
+      - name: Get Current Week Start Date
+        id: week_start
+        run: echo "start_date=$(date -u -d 'last sunday +1 day' +'%Y-%m-%dT00:00:00Z')" >> $GITHUB_ENV
+
+      - name: Fetch Releases
+        id: check
+        run: |
+          releases=$(gh api repos/${{ github.repository }}/releases --jq '[.[] | select(.created_at >= "${{ env.start_date }}") | .tag_name]')
+          echo "Releases from this week: $releases"
+          if [[ "$releases" != "[]" ]]; then
+            echo "release_found=true" >> $GITHUB_OUTPUT
+          else
+            echo "release_found=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    needs: check-release
+    if: needs.check-release.outputs.release_found == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "9.x"
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build ./src/minitwit.web/minitwit.web.csproj --configuration Release --no-restore
+
+      - name: Publish for Ubuntu
+        run: dotnet publish ./src/minitwit.web/minitwit.web.csproj --configuration Release --runtime linux-x64 --self-contained -o ./publish/ubuntu
+
+      - name: Zip Ubuntu build
+        run: zip -r ubuntu-build.zip ./publish/ubuntu
+
+      - name: Upload zipped artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ubuntu-build
+          path: ubuntu-build.zip
+
+  create-release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download Ubuntu build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ubuntu-build
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          files: ubuntu-build.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
