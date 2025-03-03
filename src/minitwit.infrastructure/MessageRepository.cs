@@ -68,6 +68,7 @@ public class MessageRepository : IMessageRepository
             {
                 content = message.Text,
                 user = message.User.UserName,
+                pub_date = message.PubDate.ToString(),
             }).Take(amount);
         
         var result = await query.ToListAsync();
@@ -103,6 +104,7 @@ public class MessageRepository : IMessageRepository
             {
                 content = message.Text,
                 user = message.User.UserName,
+                pub_date = message.PubDate.ToString(),
             }).Take(amount);
         
         var result = await query.ToListAsync();
