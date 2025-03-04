@@ -13,7 +13,6 @@ public class MessageRepository : IMessageRepository
     {
         _dbContext = dbContext;
         _userRepository = userRepository;
-        
     }
     
     public async Task AddMessage(string userId, string message)
@@ -68,7 +67,7 @@ public class MessageRepository : IMessageRepository
             {
                 content = message.Text,
                 user = message.User.UserName,
-                pub_date = message.PubDate.ToString(),
+                pub_date = ((DateTimeOffset)message.PubDate).ToUnixTimeSeconds(),
             }).Take(amount);
         
         var result = await query.ToListAsync();
@@ -104,7 +103,7 @@ public class MessageRepository : IMessageRepository
             {
                 content = message.Text,
                 user = message.User.UserName,
-                pub_date = message.PubDate.ToString(),
+                pub_date = ((DateTimeOffset)message.PubDate).ToUnixTimeSeconds(),
             }).Take(amount);
         
         var result = await query.ToListAsync();
