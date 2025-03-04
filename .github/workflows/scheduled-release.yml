@@ -30,7 +30,7 @@ jobs:
 
   build:
     needs: check-release
-    if: needs.check-release.outputs.release_found == 'true'
+    if: needs.check-release.outputs.release_found == 'false'
     runs-on: ubuntu-latest
 
     steps:
