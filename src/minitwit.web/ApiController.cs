@@ -136,6 +136,8 @@ public class ApiController : Controller
         }
         
         var message = request.Content;
+        var flagged = request.flagged;
+   
         if (string.IsNullOrWhiteSpace(message))
         {
             ModelState.AddModelError("Message", "Message cannot be empty.");
@@ -146,7 +148,7 @@ public class ApiController : Controller
         }
         
         var userId = await _userRepository.GetUserID(username);
-        await _messageRepository.AddMessage(userId, message);
+        await _messageRepository.AddMessage(userId, message, flagged);
         
         return Ok(new { message = "Message posted successfully" });
     }

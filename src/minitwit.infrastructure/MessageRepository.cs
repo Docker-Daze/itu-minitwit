@@ -15,7 +15,7 @@ public class MessageRepository : IMessageRepository
         _userRepository = userRepository;
     }
     
-    public async Task AddMessage(string userId, string message)
+    public async Task AddMessage(string userId, string message, int flagged = 0)
     {
         if (string.IsNullOrWhiteSpace(message))
         {
@@ -32,7 +32,8 @@ public class MessageRepository : IMessageRepository
         {
             Text = message,
             PubDate = DateTime.Now,
-            User = user
+            User = user,
+            Flagged = flagged
         };
         
         await _dbContext.Messages.AddAsync(newMessage); // does not write to the database!
