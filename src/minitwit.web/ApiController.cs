@@ -36,12 +36,16 @@ public class ApiController : Controller
         _userRepository = userRepository;
     }
     
-    public IActionResult? NotReqFromSimulator(HttpRequest request)
+    public async Task<IActionResult?> NotReqFromSimulator(HttpContext context)
     {
-        var fromSimulator = request.Headers["Authorization"];
+        var fromSimulator = context.Request.Headers["Authorization"];
         if (fromSimulator != "Basic c2ltdWxhdG9yOnN1cGVyX3NhZmUh")
         {
-            return Forbid();
+            return StatusCode(StatusCodes.Status403Forbidden, new 
+            { 
+                status = 403, 
+                error_msg = "You are not authorized to use this resource!" 
+            });
         }
 
         return null;
@@ -102,6 +106,12 @@ public class ApiController : Controller
     {
         _latest = latest;
         
+        var notFromSimResponse = NotReqFromSimulator(HttpContext);
+        if (notFromSimResponse != null)
+        {
+            return await notFromSimResponse;
+        }
+        
         if (_userRepository.GetUserID(username).Result == null)
         {
             return NotFound();
@@ -116,6 +126,13 @@ public class ApiController : Controller
     public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
+        
+        var notFromSimResponse = NotReqFromSimulator(HttpContext);
+        if (notFromSimResponse != null)
+        {
+            return await notFromSimResponse;
+        }
+        
         var messages = await _messageRepository.GetMessagesSpecifiedAmount(no);
         return Ok(messages);
     }
@@ -159,6 +176,13 @@ public class ApiController : Controller
     public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
+        
+        var notFromSimResponse = NotReqFromSimulator(HttpContext);
+        if (notFromSimResponse != null)
+        {
+            return await notFromSimResponse;
+        }
+        
         if (_userRepository.GetUserID(username).Result == null)
         {
             return NotFound();
