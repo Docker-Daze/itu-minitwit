@@ -21,7 +21,7 @@ builder.Services.AddSession(options =>
 });
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddDefaultIdentity<User>(options =>
     {
