@@ -166,8 +166,8 @@ public class ApiController : Controller
         
         var userId = await _userRepository.GetUserID(username);
         await _messageRepository.AddMessage(userId, message, flagged);
-        
-        return Ok(new { message = "Message posted successfully" });
+        return NoContent();
+        //return Ok(new { message = "Message posted successfully" });
     }
     
     // POST and GET for follow.
@@ -206,10 +206,12 @@ public class ApiController : Controller
         if (request.follow != null)
         {
             await _userRepository.FollowUser(username, request.follow);
-            return Ok(new { message = "Followed successfully" });
+            //return Ok(new { message = "Followed successfully" });
+            return NoContent();
         }
         await _userRepository.UnfollowUser(username, request.unfollow!);
-        return Ok(new { message = "Unfollowed successfully" });
+        return NoContent();
+        //return Ok(new { message = "Unfollowed successfully" });
     }
     
 }
