@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("4e6d66e3-4527-4e6f-b798-86452d6bd8d1")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("minitwit.infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ff5bd9fbec6e5824ebda6f0d124368c3242c3c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0177838de79c45c39c6d19bc3421adf5323a0ed0")]
 [assembly: System.Reflection.AssemblyProductAttribute("minitwit.infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("minitwit.infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

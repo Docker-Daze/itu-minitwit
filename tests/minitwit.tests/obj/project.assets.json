@@ -3844,6 +3844,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Microsoft.Extensions.Configuration": "9.0.2",
+          "Microsoft.Extensions.Configuration.UserSecrets": "9.0.2",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
           "minitwit.core": "1.0.0"
         },
