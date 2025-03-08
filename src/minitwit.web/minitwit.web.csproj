@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
     <ProjectReference Include="..\minitwit.infrastructure\minitwit.infrastructure.csproj" />
@@ -41,6 +41,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>3f7a962a-5504-45af-87d3-9e05401083f3</UserSecretsId>
   </PropertyGroup>
 
 </Project>
