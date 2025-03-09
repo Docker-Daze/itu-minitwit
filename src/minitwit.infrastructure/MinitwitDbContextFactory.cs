@@ -12,6 +12,7 @@ public class MinitwitDbContextFactory : IDesignTimeDbContextFactory<MinitwitDbCo
             
         var configuration = new ConfigurationBuilder()
             .AddUserSecrets<MinitwitDbContextFactory>()
+            .AddEnvironmentVariables()
             .Build();
         
         var connectionString = configuration.GetConnectionString("DefaultConnection");

@@ -1579,3 +1579,4 @@ C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Microsoft.Extensions.Configuration.UserSecrets.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Microsoft.Extensions.FileProviders.Physical.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Microsoft.Extensions.FileSystemGlobbing.dll
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll

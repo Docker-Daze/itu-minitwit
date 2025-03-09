@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "itd55QlZOMQ=",
+  "dgSpecHash": "bApetqfpKI8=",
   "success": true,
   "projectFilePath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj",
   "expectedPackageFiles": [
@@ -104,6 +104,7 @@
     "/Users/nikolai/.nuget/packages/microsoft.extensions.caching.memory/9.0.1/microsoft.extensions.caching.memory.9.0.1.nupkg.sha512",
     "/Users/nikolai/.nuget/packages/microsoft.extensions.configuration/9.0.2/microsoft.extensions.configuration.9.0.2.nupkg.sha512",
     "/Users/nikolai/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.2/microsoft.extensions.configuration.abstractions.9.0.2.nupkg.sha512",
+    "/Users/nikolai/.nuget/packages/microsoft.extensions.configuration.environmentvariables/9.0.2/microsoft.extensions.configuration.environmentvariables.9.0.2.nupkg.sha512",
     "/Users/nikolai/.nuget/packages/microsoft.extensions.configuration.fileextensions/9.0.2/microsoft.extensions.configuration.fileextensions.9.0.2.nupkg.sha512",
     "/Users/nikolai/.nuget/packages/microsoft.extensions.configuration.json/9.0.2/microsoft.extensions.configuration.json.9.0.2.nupkg.sha512",
     "/Users/nikolai/.nuget/packages/microsoft.extensions.configuration.usersecrets/9.0.2/microsoft.extensions.configuration.usersecrets.9.0.2.nupkg.sha512",
