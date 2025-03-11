@@ -58,7 +58,7 @@ jobs:
         run: >
           ssh $SSH_USER@$SSH_HOST
           -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no \
-          "echo 'export DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}' >> ~/.bash_profile && \
+          echo 'export DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}' >> ~/.bash_profile && \
           '/minitwit/deploy.sh'
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
