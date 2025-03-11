@@ -1,12 +1,12 @@
 services:
   minitwitimage:
-    image: ${DOCKER_USERNAME}/minitwitimage
+    image: nikolai/minitwitimage
     container_name: minitwit
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "5200:5000"
     environment:
       - ASPNETCORE_URLS=http://+:5000
       - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
