@@ -4,7 +4,6 @@ using minitwit.infrastructure;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.WebHost.UseStaticWebAssets();
 
 // Add services to the container.
@@ -20,8 +19,11 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+
+builder.Configuration.AddUserSecrets<Program>()
+    .AddEnvironmentVariables();
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddDefaultIdentity<User>(options =>
     {

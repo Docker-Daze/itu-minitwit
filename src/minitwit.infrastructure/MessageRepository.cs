@@ -31,7 +31,7 @@ public class MessageRepository : IMessageRepository
         Message newMessage = new()
         {
             Text = message,
-            PubDate = DateTime.Now,
+            PubDate = DateTime.UtcNow,
             User = user,
             Flagged = flagged
         };

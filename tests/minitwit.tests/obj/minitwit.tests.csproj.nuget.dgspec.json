@@ -131,9 +131,21 @@
               "target": "Package",
               "version": "[9.0.1, )"
             },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
+            "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.Extensions.Configuration.EnvironmentVariables": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
             }
           },
           "imports": [
@@ -214,17 +226,9 @@
               "target": "Package",
               "version": "[9.0.1, )"
             },
-            "Microsoft.Data.Sqlite": {
-              "target": "Package",
-              "version": "[9.0.1, )"
-            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.1, )"
-            },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[9.0.1, )"
             },

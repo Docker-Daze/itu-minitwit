@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace minitwit.infrastructure;
 
@@ -9,8 +10,14 @@ public class MinitwitDbContextFactory : IDesignTimeDbContextFactory<MinitwitDbCo
     {
         var optionsBuilder = new DbContextOptionsBuilder<MinitwitDbContext>();
             
-        optionsBuilder.UseSqlite("Data Source=minitwit.db");
-
+        var configuration = new ConfigurationBuilder()
+            .AddUserSecrets<MinitwitDbContextFactory>()
+            .AddEnvironmentVariables()
+            .Build();
+        
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        optionsBuilder.UseNpgsql(connectionString);
+        
         return new MinitwitDbContext(optionsBuilder.Options);
     }
 }
