@@ -21,9 +21,10 @@ public class ApiController : Controller
     private readonly IUserRepository _userRepository;
     private static int _latest = 0;
     
+    private readonly MetricsService _metricsService;
+    
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
-        IUserStore<User> userStore,
-        SignInManager<User> signInManager)
+        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
@@ -34,6 +35,7 @@ public class ApiController : Controller
         _signInManager = signInManager;
 
         _userRepository = userRepository;
+        _metricsService = metricsService;
     }
     
     public async Task<IActionResult?> NotReqFromSimulator(HttpContext context)
@@ -62,6 +64,7 @@ public class ApiController : Controller
     [HttpPost("/api/register")]
     public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
     {
+        _metricsService.IncrementRegisterCounter();
         _latest = latest;
         var user = Activator.CreateInstance<User>();
 
@@ -141,6 +144,7 @@ public class ApiController : Controller
     [HttpPost("/api/msgs/{username}")]
     public async Task<IActionResult> PostMsgs(string username, [FromBody] MessageRequest request, [FromQuery] int latest)
     {
+        _metricsService.IncrementPostMsgsCounter();
         _latest = latest;
         if (string.IsNullOrEmpty(username))
         {
@@ -205,13 +209,14 @@ public class ApiController : Controller
         
         if (request.follow != null)
         {
+            _metricsService.IncrementFollowCounter();
             await _userRepository.FollowUser(username, request.follow);
-            //return Ok(new { message = "Followed successfully" });
             return NoContent();
         }
+        _metricsService.IncrementUnFollowCounter();
         await _userRepository.UnfollowUser(username, request.unfollow!);
         return NoContent();
-        //return Ok(new { message = "Unfollowed successfully" });
+        
     }
     
 }

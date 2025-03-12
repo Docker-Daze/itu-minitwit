@@ -6,7 +6,31 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5114:8080"
+      - "5114:5114"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+    networks:
+      - itu-minitwit_default
+  
+  
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - itu-minitwit_default
+
+  grafana:
+    image: grafana/grafana:10.2.4
+    ports:
+      - "3000:3000"
+    networks:
+      - itu-minitwit_default
+  
+networks:
+  itu-minitwit_default:
+    driver: bridge
