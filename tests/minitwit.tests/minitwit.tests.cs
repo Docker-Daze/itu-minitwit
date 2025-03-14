@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Data.Sqlite;
+using Npgsql;
 using Microsoft.EntityFrameworkCore;
 using minitwit.infrastructure;
 using Xunit;
 using Xunit.Abstractions;
+using Microsoft.Extensions.Configuration;
 
 namespace minitwit.tests;
 
@@ -13,7 +14,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly HttpClient _client;
     private MinitwitDbContext _dbContext;
-    private SqliteConnection _connection;
+    private NpgsqlConnection _connection;
 
     public TestAPI(WebApplicationFactory<Program> fixture, ITestOutputHelper testOutputHelper)
     {
@@ -25,7 +26,15 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 
     private async Task InitializeDbContext()
     {
-        _connection = new SqliteConnection("DataSource=:memory:");
+
+        var configuration = new ConfigurationBuilder()
+            .AddUserSecrets<MinitwitDbContextFactory>()
+            .AddEnvironmentVariables()
+            .Build();
+        
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        
+        _connection = new NpgsqlConnection(connectionString);
         _connection.Open();
 
         var options = new DbContextOptionsBuilder<MinitwitDbContext>()
