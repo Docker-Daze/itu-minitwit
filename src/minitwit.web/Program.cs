@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 using minitwit.infrastructure;
 using Microsoft.AspNetCore.Identity;
+using minitwit.web;
+using Prometheus;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseStaticWebAssets();
@@ -10,6 +13,7 @@ builder.WebHost.UseStaticWebAssets();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddSingleton<MetricsService>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -67,6 +71,10 @@ app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
 app.MapControllers();
+
+Metrics.SuppressDefaultMetrics();
+app.UseHttpMetrics();
+app.MapMetrics();
 
 
 
