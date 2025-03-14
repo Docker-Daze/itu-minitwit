@@ -13,6 +13,7 @@ services:
     networks:
       - itu-minitwit_default
 
+
   prometheus:
     image: prom/prometheus
     container_name: prometheus

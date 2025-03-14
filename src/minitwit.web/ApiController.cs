@@ -64,7 +64,7 @@ public class ApiController : Controller
     [HttpPost("/api/register")]
     public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
     {
-        _metricsService.IncrementRegisterCounter();
+        
         _latest = latest;
         var user = Activator.CreateInstance<User>();
 
@@ -90,7 +90,7 @@ public class ApiController : Controller
 
             await _signInManager.SignInAsync(user, isPersistent: false);
             HttpContext.Session.SetString("UserId", user.Id);
-            
+            _metricsService.IncrementRegisterCounter();
             return NoContent();
         }
 
@@ -144,7 +144,7 @@ public class ApiController : Controller
     [HttpPost("/api/msgs/{username}")]
     public async Task<IActionResult> PostMsgs(string username, [FromBody] MessageRequest request, [FromQuery] int latest)
     {
-        _metricsService.IncrementPostMsgsCounter();
+        
         _latest = latest;
         if (string.IsNullOrEmpty(username))
         {
@@ -168,6 +168,7 @@ public class ApiController : Controller
             ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
         }
         
+        _metricsService.IncrementPostMsgsCounter();
         var userId = await _userRepository.GetUserID(username);
         await _messageRepository.AddMessage(userId, message, flagged);
         return NoContent();

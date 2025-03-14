@@ -34,7 +34,7 @@ services:
       - "3000:3000"
     networks:
       - itu-minitwit_default
-  
+
 networks:
   itu-minitwit_default:
     driver: bridge
