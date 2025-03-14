@@ -9,8 +9,6 @@ using Prometheus;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseStaticWebAssets();
 
-builder.WebHost.UseUrls("http://0.0.0.0:5114");
-
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
