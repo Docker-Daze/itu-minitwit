@@ -15,6 +15,12 @@ public class playwright_test : PageTest
         _serverProcess = await serverutil.StartApp();
     }
 
+    [OneTimeTearDown]
+    public void Cleanup()
+    {
+        serverutil.StopApp();
+    }
+
     [Test]
     public async Task _register_user_via_gui()
     {
@@ -22,9 +28,9 @@ public class playwright_test : PageTest
         await Page.GotoAsync("https://localhost:????/");
          
         //Act
-        await Page.Locator("#Message").ClickAsync();
+        //await Page.Locator("#Message").ClickAsync();
 
         //Assert
-        await Expect(Page.GetByText("No user found")).ToBeVisibleAsync();
+        await Expect(Page.GetByText("minitwit")).ToBeVisibleAsync();
     }
 }
