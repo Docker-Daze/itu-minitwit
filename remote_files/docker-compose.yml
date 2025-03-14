@@ -18,7 +18,7 @@ services:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - /minitwit/prometheus_data:/prometheus
+      - prometheus_data:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
@@ -35,3 +35,6 @@ services:
 networks:
   itu-minitwit_default:
     driver: bridge
+    
+volumes:
+  prometheus_data:
