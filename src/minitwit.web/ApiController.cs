@@ -15,7 +15,6 @@ public class ApiController : Controller
     private readonly UserManager<User> _userManager;
     private readonly IUserStore<User> _userStore;
     private readonly IUserEmailStore<User> _emailStore;
-    
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
     private static int _latest = 0;
@@ -104,6 +103,7 @@ public class ApiController : Controller
     [HttpGet("/api/msgs/{username}")]
     public async Task<IActionResult> GetUserMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
     {
+        _metricsService.IncrementGetRequestsCounterCounter();
         _latest = latest;
         
         var notFromSimResponse = NotReqFromSimulator(HttpContext);
@@ -125,6 +125,7 @@ public class ApiController : Controller
     [HttpGet("/api/msgs")]
     public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
     {
+        _metricsService.IncrementGetRequestsCounterCounter();
         _latest = latest;
         
         var notFromSimResponse = NotReqFromSimulator(HttpContext);
@@ -177,6 +178,7 @@ public class ApiController : Controller
     [HttpGet("/api/fllws/{username}")]
     public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
     {
+        _metricsService.IncrementGetRequestsCounterCounter();
         _latest = latest;
         var notFromSimResponse = NotReqFromSimulator(HttpContext);
         if (notFromSimResponse != null)
