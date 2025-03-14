@@ -18,9 +18,10 @@ services:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - /minitwit/prometheus_data:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - /minitwit/prometheus_data:/prometheus
     command:
+      - '--config.file=/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.time=120d'
     ports:
