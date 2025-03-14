@@ -1,4 +1,5 @@
 source ~/.bash_profile
+cd remote_files
 
 echo "Starting deployment..."
 
