@@ -11,7 +11,7 @@ services:
       - ASPNETCORE_URLS=http://+:5000
       - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
     networks:
-      - itu-minitwit_default
+      - remote_files_itu-minitwit_default
 
 
   prometheus:
@@ -22,14 +22,14 @@ services:
     ports:
       - "9090:9090"
     networks:
-      - itu-minitwit_default
+      - remote_files_itu-minitwit_default
 
   grafana:
     image: grafana/grafana:10.2.4
     ports:
       - "3000:3000"
     networks:
-      - itu-minitwit_default
+      - itu-minitwit_defaultremote_files_itu-minitwit_default
 
 networks:
   itu-minitwit_default:
