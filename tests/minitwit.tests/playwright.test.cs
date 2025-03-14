@@ -25,7 +25,7 @@ public class playwright_test : PageTest
     public async Task _register_user_via_gui()
     {
         //Arrange
-        await Page.GotoAsync("https://localhost:????/");
+        await Page.GotoAsync("https://localhost:5114/");
          
         //Act
         //await Page.Locator("#Message").ClickAsync();
