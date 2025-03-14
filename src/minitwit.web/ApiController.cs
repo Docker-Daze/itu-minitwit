@@ -178,7 +178,6 @@ public class ApiController : Controller
     public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
     {
         _latest = latest;
-        
         var notFromSimResponse = NotReqFromSimulator(HttpContext);
         if (notFromSimResponse != null)
         {
