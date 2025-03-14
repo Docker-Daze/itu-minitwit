@@ -20,10 +20,6 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - /minitwit/prometheus_data:/prometheus
-    command:
-      - '--config.file=/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention.time=120d'
     ports:
       - "9090:9090"
     networks:
