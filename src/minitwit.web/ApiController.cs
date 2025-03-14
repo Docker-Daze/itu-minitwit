@@ -15,7 +15,6 @@ public class ApiController : Controller
     private readonly UserManager<User> _userManager;
     private readonly IUserStore<User> _userStore;
     private readonly IUserEmailStore<User> _emailStore;
-
     
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
@@ -49,7 +48,6 @@ public class ApiController : Controller
                 error_msg = "You are not authorized to use this resource!" 
             });
         }
-
         return null;
     }
     
@@ -64,7 +62,6 @@ public class ApiController : Controller
     [HttpPost("/api/register")]
     public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
     {
-        
         _latest = latest;
         var user = Activator.CreateInstance<User>();
 
@@ -172,7 +169,7 @@ public class ApiController : Controller
         var userId = await _userRepository.GetUserID(username);
         await _messageRepository.AddMessage(userId, message, flagged);
         return NoContent();
-        //return Ok(new { message = "Message posted successfully" });
+       
     }
     
     // POST and GET for follow.
@@ -217,7 +214,6 @@ public class ApiController : Controller
         _metricsService.IncrementUnFollowCounter();
         await _userRepository.UnfollowUser(username, request.unfollow!);
         return NoContent();
-        
     }
     
 }
