@@ -2059,6 +2059,24 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "Microsoft.Extensions.Http/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.0",
+          "Microsoft.Extensions.Logging": "3.1.0",
+          "Microsoft.Extensions.Options": "3.1.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Identity.Core/9.0.1": {
         "type": "package",
         "dependencies": {
@@ -2672,6 +2690,42 @@
         "runtime": {
           "lib/netstandard2.0/NuGet.Versioning.dll": {}
         }
+      },
+      "prometheus-net/8.2.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Http": "3.1.0",
+          "Microsoft.Extensions.ObjectPool": "7.0.0"
+        },
+        "compile": {
+          "lib/net7.0/Prometheus.NetStandard.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Prometheus.NetStandard.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "prometheus-net.AspNetCore/8.2.1": {
+        "type": "package",
+        "dependencies": {
+          "prometheus-net": "8.2.1"
+        },
+        "compile": {
+          "lib/net6.0/Prometheus.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Prometheus.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
         "type": "package",
@@ -6333,6 +6387,22 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Microsoft.Extensions.Http/3.1.0": {
+      "sha512": "DLigdcV0nYaT6/ly0rnfP80BnXq8NNd/h8/SkfY39uio7Bd9LauVntp6RcRh1Kj23N+uf80GgL7Win6P3BCtoQ==",
+      "type": "package",
+      "path": "microsoft.extensions.http/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Http.dll",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Http.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.xml",
+        "microsoft.extensions.http.3.1.0.nupkg.sha512",
+        "microsoft.extensions.http.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "Microsoft.Extensions.Identity.Core/9.0.1": {
       "sha512": "dbvAQhwSyBbgB2BuVJ8PMVx7BK6WZHWhV/vsSnXl6sRLs9D7yXiIiRpgcPVvN5E/UkzRGW1EPXyc3t1EDxWSzg==",
       "type": "package",
@@ -7398,6 +7468,42 @@
         "nuget.versioning.nuspec"
       ]
     },
+    "prometheus-net/8.2.1": {
+      "sha512": "3wVgdEPOCBF752s2xps5T+VH+c9mJK8S8GKEDg49084P6JZMumTZI5Te6aJ9MQpX0sx7om6JOnBpIi7ZBmmiDQ==",
+      "type": "package",
+      "path": "prometheus-net/8.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net462/Prometheus.NetStandard.dll",
+        "lib/net462/Prometheus.NetStandard.xml",
+        "lib/net6.0/Prometheus.NetStandard.dll",
+        "lib/net6.0/Prometheus.NetStandard.xml",
+        "lib/net7.0/Prometheus.NetStandard.dll",
+        "lib/net7.0/Prometheus.NetStandard.xml",
+        "lib/netstandard2.0/Prometheus.NetStandard.dll",
+        "lib/netstandard2.0/Prometheus.NetStandard.xml",
+        "prometheus-net-logo.png",
+        "prometheus-net.8.2.1.nupkg.sha512",
+        "prometheus-net.nuspec"
+      ]
+    },
+    "prometheus-net.AspNetCore/8.2.1": {
+      "sha512": "/4TfTvbwIDqpaKTiWvEsjUywiHYF9zZvGZF5sK15avoDsUO/WPQbKsF8TiMaesuphdFQPK2z52P0zk6j26V0rQ==",
+      "type": "package",
+      "path": "prometheus-net.aspnetcore/8.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net6.0/Prometheus.AspNetCore.dll",
+        "lib/net6.0/Prometheus.AspNetCore.xml",
+        "prometheus-net-logo.png",
+        "prometheus-net.aspnetcore.8.2.1.nupkg.sha512",
+        "prometheus-net.aspnetcore.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
       "sha512": "UxWuisvZ3uVcVOLJQv7urM/JiQH+v3TmaJc1BLKl5Dxfm/nTzTUrqswCqg/INiYLi61AXnHo1M1JPmPqqLnAdg==",
       "type": "package",
@@ -8354,7 +8460,9 @@
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 9.0.0",
       "minitwit.core >= 1.0.0",
-      "minitwit.infrastructure >= 1.0.0"
+      "minitwit.infrastructure >= 1.0.0",
+      "prometheus-net >= 8.2.1",
+      "prometheus-net.AspNetCore >= 8.2.1"
     ]
   },
   "packageFolders": {
@@ -8434,6 +8542,14 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[9.0.0, )"
+          },
+          "prometheus-net": {
+            "target": "Package",
+            "version": "[8.2.1, )"
+          },
+          "prometheus-net.AspNetCore": {
+            "target": "Package",
+            "version": "[8.2.1, )"
           }
         },
         "imports": [

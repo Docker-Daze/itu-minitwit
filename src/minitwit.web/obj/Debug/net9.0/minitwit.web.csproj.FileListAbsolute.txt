@@ -1572,7 +1572,6 @@ C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Npgsql.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/appsettings.Development.json
-/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/appsettings.Production.json
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Microsoft.Extensions.Configuration.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Microsoft.Extensions.Configuration.FileExtensions.dll
 /Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Json.dll

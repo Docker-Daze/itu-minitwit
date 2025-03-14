@@ -55,11 +55,14 @@ jobs:
 
       - name: Deploy to server
         # Configure the ~./bash_profile and deploy.sh file on the Vagrantfile
-        run: >
-          ssh $SSH_USER@$SSH_HOST
-          -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no \
-          "echo 'export DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}' >> ~/.bash_profile && \
-          '/minitwit/deploy.sh'
+        run: |
+          scp -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no -r remote_files $SSH_USER@$SSH_HOST:/minitwit 
+          ssh $SSH_USER@$SSH_HOST -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no "
+            echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
+            cd /minitwit && \
+            ./remote_files/deploy.sh
+          "
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using minitwit.infrastructure;
@@ -11,9 +12,11 @@ using minitwit.infrastructure;
 namespace minitwit.infrastructure.Migrations
 {
     [DbContext(typeof(MinitwitDbContext))]
-    partial class MinitwitDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250308153019_InitialCreatePostgres")]
+    partial class InitialCreatePostgres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,8 +220,6 @@ namespace minitwit.infrastructure.Migrations
 
                     b.HasIndex("MessageId")
                         .IsUnique();
-
-                    b.HasIndex("PubDate");
 
                     b.HasIndex("UserId");
 

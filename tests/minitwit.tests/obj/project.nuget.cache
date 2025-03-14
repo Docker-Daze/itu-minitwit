@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sfuUSQSW07g=",
+  "dgSpecHash": "scd3O2Vmjx0=",
   "success": true,
   "projectFilePath": "/Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
   "expectedPackageFiles": [
@@ -120,6 +120,7 @@
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.filesystemglobbing/9.0.2/microsoft.extensions.filesystemglobbing.9.0.2.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.hosting/9.0.2/microsoft.extensions.hosting.9.0.2.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.hosting.abstractions/9.0.2/microsoft.extensions.hosting.abstractions.9.0.2.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/microsoft.extensions.http/3.1.0/microsoft.extensions.http.3.1.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.identity.core/9.0.1/microsoft.extensions.identity.core.9.0.1.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.identity.stores/9.0.1/microsoft.extensions.identity.stores.9.0.1.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.logging/9.0.2/microsoft.extensions.logging.9.0.2.nupkg.sha512",
@@ -167,6 +168,8 @@
     "/Users/mathiashansen/.nuget/packages/nuget.versioning/6.11.0/nuget.versioning.6.11.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/nunit/3.13.2/nunit.3.13.2.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/nunit3testadapter/4.0.0/nunit3testadapter.4.0.0.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/prometheus-net/8.2.1/prometheus-net.8.2.1.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/prometheus-net.aspnetcore/8.2.1/prometheus-net.aspnetcore.8.2.1.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.10/sqlitepclraw.bundle_e_sqlite3.2.1.10.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/sqlitepclraw.core/2.1.10/sqlitepclraw.core.2.1.10.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.10/sqlitepclraw.lib.e_sqlite3.2.1.10.nupkg.sha512",

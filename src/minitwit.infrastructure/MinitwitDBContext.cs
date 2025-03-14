@@ -46,6 +46,8 @@ public class MinitwitDbContext : IdentityDbContext<User>
         modelBuilder.Entity<Message>()
             .HasIndex(m => m.MessageId)
             .IsUnique();
+        modelBuilder.Entity<Message>()
+            .HasIndex(m => m.PubDate);
         
     }
 }
