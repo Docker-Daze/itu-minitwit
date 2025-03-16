@@ -14,7 +14,9 @@ public class MetricsService
         .CreateCounter("minitwit_unfollow_counter", "Total number of unfollow requests received.");
     private static readonly Counter GetRequestsCounter = Metrics
         .CreateCounter("minitwit_getRequests_counter", "Total number of get requests received.");
-    
+    private static readonly Counter ErrorCounter = Metrics
+            .CreateCounter("minitwit_ErrorCounter_counter", "Total number of Errors received.");
+        
 
     private static readonly Histogram RequestDuration = Metrics
         .CreateHistogram("app_request_duration_seconds", "Histogram of request duration.");
@@ -36,7 +38,11 @@ public class MetricsService
     {
         UnfollowCounter.Inc();
     }
-    public void IncrementGetRequestsCounterCounter()
+    public void IncrementGetRequestsCounter()
+    {
+        GetRequestsCounter.Inc();
+    }
+    public void IncrementErrorCounter()
     {
         GetRequestsCounter.Inc();
     }

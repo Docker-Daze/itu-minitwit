@@ -71,6 +71,7 @@ public class ApiController : Controller
             var existingUser = await _userManager.FindByEmailAsync(request.email);
             if (existingUser != null)
             {
+                _metricsService.IncrementErrorCounter();
                 ModelState.AddModelError(string.Empty, "Email address already exists.");
                 return BadRequest(ModelState);
             }
@@ -109,17 +110,19 @@ public class ApiController : Controller
     {
         using (_metricsService.MeasureRequestDuration())
         {
-            _metricsService.IncrementGetRequestsCounterCounter();
+            _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
+                _metricsService.IncrementErrorCounter();
                 return await notFromSimResponse;
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
+                _metricsService.IncrementErrorCounter();
                 return NotFound();
             }
 
@@ -134,12 +137,13 @@ public class ApiController : Controller
     {
         using (_metricsService.MeasureRequestDuration())
         {
-            _metricsService.IncrementGetRequestsCounterCounter();
+            _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
+                _metricsService.IncrementErrorCounter();
                 return await notFromSimResponse;
             }
 
@@ -157,11 +161,13 @@ public class ApiController : Controller
             _latest = latest;
             if (string.IsNullOrEmpty(username))
             {
+                _metricsService.IncrementErrorCounter();
                 return Unauthorized();
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
+                _metricsService.IncrementErrorCounter();
                 return NotFound();
             }
 
@@ -170,10 +176,12 @@ public class ApiController : Controller
 
             if (string.IsNullOrWhiteSpace(message))
             {
+                _metricsService.IncrementErrorCounter();
                 ModelState.AddModelError("Message", "Message cannot be empty.");
             }
             else if (message.Length > 160)
             {
+                _metricsService.IncrementErrorCounter();
                 ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
             }
 
@@ -191,16 +199,18 @@ public class ApiController : Controller
     {
         using (_metricsService.MeasureRequestDuration())
         {
-            _metricsService.IncrementGetRequestsCounterCounter();
+            _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
+                _metricsService.IncrementErrorCounter();
                 return await notFromSimResponse;
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
+                _metricsService.IncrementErrorCounter();
                 return NotFound();
             }
 
@@ -219,6 +229,7 @@ public class ApiController : Controller
 
             if (_userRepository.GetUserID(username).Result == null)
             {
+                _metricsService.IncrementErrorCounter();
                 return NotFound();
             }
 
