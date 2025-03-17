@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using minitwit.core;
+using minitwit.web;
 
 namespace minitwit.infrastructure;
 
@@ -10,10 +11,12 @@ public class UserRepository : IUserRepository
 {
     
     private readonly MinitwitDbContext _dbContext;
+    private readonly MetricsService _metricsService;
     
-    public UserRepository(MinitwitDbContext dbContext)
+    public UserRepository(MinitwitDbContext dbContext, MetricsService metricsService)
     {
         _dbContext = dbContext;
+        _metricsService = metricsService;
     }
     public async Task<User> GetUser(string userId)
     {
@@ -105,11 +108,13 @@ public class UserRepository : IUserRepository
         var isFollowing = await IsFollowingUserID(whoId, whomId);
         if (!isFollowing)
         {
+            _metricsService.IncrementUnfollowNeedToFollowCounter();
             throw new InvalidOperationException("You need to follow the user to unfollow");
         }
 
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
+            _metricsService.IncrementUnfollowfollowerEntryNullCounter();
             throw new ArgumentException("The user to be unfollowed could not be found");
         }
 
@@ -118,6 +123,7 @@ public class UserRepository : IUserRepository
 
         if (followerEntry == null)
         {
+            _metricsService.IncrementUnfollowNoWhoOrWhomCounter();
             throw new InvalidOperationException("Not found");
         }
 

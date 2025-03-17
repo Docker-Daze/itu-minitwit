@@ -17,6 +17,12 @@ public class MetricsService
     private static readonly Counter ErrorCounter = Metrics
             .CreateCounter("minitwit_ErrorCounter_counter", "Total number of Errors received.");
         
+    private static readonly Counter UnfollowNeedToFollowCounter = Metrics
+        .CreateCounter("minitwit_UnfollowNeedToFollow_counter", "Total number of UnfollowNeedToFollow error received.");
+    private static readonly Counter UnfollowNoWhoOrWhomCounter = Metrics
+        .CreateCounter("minitwit_UnfollowNoWhoOrWhom_counter", "Total number of unfollowNoWhoOrWhom error received.");
+    private static readonly Counter UnfollowfollowerEntryNullCounter = Metrics
+        .CreateCounter("minitwit_UnfollowfollowerEntryNull_counter", "Total number of UnfollowfollowerEntryNull error received.");
 
     private static readonly Histogram RequestDuration = Metrics
         .CreateHistogram("app_request_duration_seconds", "Histogram of request duration.");
@@ -44,7 +50,19 @@ public class MetricsService
     }
     public void IncrementErrorCounter()
     {
-        GetRequestsCounter.Inc();
+        ErrorCounter.Inc();
+    }
+    public void IncrementUnfollowNeedToFollowCounter()
+    {
+        UnfollowNeedToFollowCounter.Inc();
+    }
+    public void IncrementUnfollowNoWhoOrWhomCounter()
+    {
+        UnfollowNoWhoOrWhomCounter.Inc();
+    }
+    public void IncrementUnfollowfollowerEntryNullCounter()
+    {
+        UnfollowfollowerEntryNullCounter.Inc();
     }
     
 
