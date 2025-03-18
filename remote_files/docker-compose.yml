@@ -33,6 +33,8 @@ services:
       - itu-minitwit_default
     volumes:
       - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SERVER_HTTP_ADDR=0.0.0.0
 
 networks:
   itu-minitwit_default:
