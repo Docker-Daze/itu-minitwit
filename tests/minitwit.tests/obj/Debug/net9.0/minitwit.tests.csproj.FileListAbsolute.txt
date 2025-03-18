@@ -2245,3 +2245,5 @@
 /Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.pdb
 /Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.genruntimeconfig.cache
 /Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/obj/Debug/net9.0/ref/minitwit.tests.dll
+/Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/Prometheus.NetStandard.dll
+/Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/Prometheus.AspNetCore.dll
