@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1ekEqBRmipM=",
+  "dgSpecHash": "RVKCWKZSHuA=",
   "success": true,
   "projectFilePath": "/Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
   "expectedPackageFiles": [
@@ -55,6 +55,7 @@
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.fileproviders.physical/9.0.2/microsoft.extensions.fileproviders.physical.9.0.2.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.filesystemglobbing/9.0.2/microsoft.extensions.filesystemglobbing.9.0.2.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.hosting.abstractions/8.0.1/microsoft.extensions.hosting.abstractions.8.0.1.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/microsoft.extensions.http/3.1.0/microsoft.extensions.http.3.1.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.identity.core/9.0.1/microsoft.extensions.identity.core.9.0.1.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.identity.stores/9.0.1/microsoft.extensions.identity.stores.9.0.1.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/microsoft.extensions.logging/9.0.1/microsoft.extensions.logging.9.0.1.nupkg.sha512",
@@ -69,6 +70,7 @@
     "/Users/mathiashansen/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/npgsql/9.0.3/npgsql.9.0.3.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.4/npgsql.entityframeworkcore.postgresql.9.0.4.nupkg.sha512",
+    "/Users/mathiashansen/.nuget/packages/prometheus-net/8.2.1/prometheus-net.8.2.1.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.10/sqlitepclraw.bundle_e_sqlite3.2.1.10.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/sqlitepclraw.core/2.1.10/sqlitepclraw.core.2.1.10.nupkg.sha512",
     "/Users/mathiashansen/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.10/sqlitepclraw.lib.e_sqlite3.2.1.10.nupkg.sha512",
