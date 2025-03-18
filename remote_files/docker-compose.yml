@@ -35,6 +35,7 @@ services:
       - grafana_data:/var/lib/grafana
     environment:
       - GF_SERVER_HTTP_ADDR=0.0.0.0
+      - GF_SERVER_ROOT_URL=http://164.90.240.84/:3000
 
 networks:
   itu-minitwit_default:
