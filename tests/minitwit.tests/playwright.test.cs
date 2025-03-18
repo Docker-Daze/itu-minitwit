@@ -7,20 +7,6 @@ namespace minitwit.tests;
 
 public class playwright_test : PageTest
 {                 
-    private Process _serverProcess;
-
-    [OneTimeSetUp]
-    public async Task Setup()
-    {
-        _serverProcess = await serverutil.StartApp();
-    }
-
-    [OneTimeTearDown]
-    public void Cleanup()
-    {
-        serverutil.StopApp();
-    }
-
     [Test]
     public async Task _register_user_via_gui()
     {
