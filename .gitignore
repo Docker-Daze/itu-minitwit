@@ -275,6 +275,7 @@ __pycache__/
 # .NET Core build folders
 bin/
 obj/
+src/minitwit.core/obj/
 tests/minitwit.tests/bin/
 
 # Common node modules locations
