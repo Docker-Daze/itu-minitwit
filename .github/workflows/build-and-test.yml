@@ -33,7 +33,7 @@ jobs:
     - name: Wait for Services to be Ready
       run: |
         echo "Waiting for Docker services to be ready..."
-        while ! docker-compose ps | grep "healthy"; do
+        while ! docker compose ps | grep "healthy"; do
           echo "Waiting..."
           sleep 5
         done
