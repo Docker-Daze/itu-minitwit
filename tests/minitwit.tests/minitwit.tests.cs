@@ -26,24 +26,28 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 
     private async Task InitializeDbContext()
     {
-
         var configuration = new ConfigurationBuilder()
             .AddUserSecrets<MinitwitDbContextFactory>()
             .AddEnvironmentVariables()
             .Build();
-        
+
         var connectionString = configuration.GetConnectionString("DefaultConnection");
-        
+
         _connection = new NpgsqlConnection(connectionString);
-        _connection.Open();
+        await _connection.OpenAsync();
 
         var options = new DbContextOptionsBuilder<MinitwitDbContext>()
-            .UseSqlite(_connection)
+            .UseNpgsql(connectionString)  // Use Npgsql for PostgreSQL
             .Options;
 
         _dbContext = new MinitwitDbContext(options);
-        await _dbContext.Database.EnsureCreatedAsync();
+
+        
+        await _dbContext.Database.EnsureDeletedAsync(); // Delete the database if it exists
+        await _dbContext.Database.EnsureCreatedAsync(); // Create a fresh database
     }
+
+
 
     private async Task DisposeDbContext()
     {

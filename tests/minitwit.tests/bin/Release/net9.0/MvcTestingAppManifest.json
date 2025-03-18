@@ -1,5 +1,5 @@
 {
-  "minitwit.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/nikolai\/Library\/Mobile Documents\/com~apple~CloudDocs\/ITU\/BSc Softwareudvikling\/4. semester\/DevOps\/itu-minitwit\/src\/minitwit.core",
-  "minitwit.infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/nikolai\/Library\/Mobile Documents\/com~apple~CloudDocs\/ITU\/BSc Softwareudvikling\/4. semester\/DevOps\/itu-minitwit\/src\/minitwit.infrastructure",
-  "minitwit.web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/nikolai\/Library\/Mobile Documents\/com~apple~CloudDocs\/ITU\/BSc Softwareudvikling\/4. semester\/DevOps\/itu-minitwit\/src\/minitwit.web"
+  "minitwit.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/aras\/Desktop\/DevOps\/itu-minitwit\/src\/minitwit.core",
+  "minitwit.infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/aras\/Desktop\/DevOps\/itu-minitwit\/src\/minitwit.infrastructure",
+  "minitwit.web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/aras\/Desktop\/DevOps\/itu-minitwit\/src\/minitwit.web"
 }

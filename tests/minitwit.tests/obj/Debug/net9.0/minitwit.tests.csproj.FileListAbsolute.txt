@@ -641,7 +641,6 @@
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/minitwit.web.runtimeconfig.json
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/out/web.config
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/appsettings.Development.json
-/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/appsettings.json
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/out/appsettings.Development.json
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/out/appsettings.json
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/out/minitwit.web.deps.json
@@ -1274,3 +1273,5 @@
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/obj/Debug/net9.0/minitwit.tests.genruntimeconfig.cache
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/obj/Debug/net9.0/ref/minitwit.tests.dll
 /home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/xunit.runner.visualstudio.testadapter.dll
+/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/Npgsql.dll
+/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
