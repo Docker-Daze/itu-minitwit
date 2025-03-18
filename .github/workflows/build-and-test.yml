@@ -27,8 +27,25 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
+    - name: Start Docker Compose Services
+      run: docker-compose up -d
+
+    - name: Wait for Services to be Ready
+      run: |
+        echo "Waiting for Docker services to be ready..."
+        while ! docker-compose ps | grep "healthy"; do
+          echo "Waiting..."
+          sleep 5
+        done
+        echo "All services are ready!"
+
     - name: Ensure browsers are installed
       run: pwsh tests/minitwit.tests/bin/Debug/net9.0/playwright.ps1 install --with-deps
     
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    
+    - name: Stop Docker Compose Services
+      if: always()
+      run: docker-compose down
