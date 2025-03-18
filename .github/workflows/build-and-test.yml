@@ -28,7 +28,7 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Start Docker Compose Services
-      run: docker-compose up -d
+      run: docker compose up -d
 
     - name: Wait for Services to be Ready
       run: |
@@ -48,4 +48,4 @@ jobs:
     
     - name: Stop Docker Compose Services
       if: always()
-      run: docker-compose down
+      run: docker compose down
