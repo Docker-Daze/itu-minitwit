@@ -28,7 +28,10 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Start Docker Compose Services
-      run: docker compose up -d
+      run: |
+        echo 'export DB_CONNECTION_STRING=\"${DB_CONN_STRING_HERE}\"' >> ~/.bash_profile
+        source ~/.bash_profile
+        docker compose up -d
 
     - name: Wait for Services to be Ready
       run: |
