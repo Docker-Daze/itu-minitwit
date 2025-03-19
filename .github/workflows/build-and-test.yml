@@ -1,4 +1,4 @@
-name: Build Tests
+name: Build & test
 
 on:
   push:
@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
     - uses: actions/checkout@v4
       
     - name: Setup .NET
@@ -25,22 +26,19 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore      
 
-    - name: Start Docker Compose Services
-      run: |
-        echo 'export DB_CONNECTION_STRING=\"${DB_CONN_STRING_HERE}\"' >> ~/.bash_profile
-        source ~/.bash_profile
-        docker compose up -d
+    - name: Start Docker Compose
+      run: docker compose up -d
 
-    - name: Wait for Services to be Ready
+    - name: Wait for Docker to be ready
       run: |
         echo "Waiting for Docker services to be ready..."
         while ! docker compose ps | grep "healthy"; do
           echo "Waiting..."
           sleep 5
         done
-        echo "All services are ready!"
+        echo "Docker is ready!"
 
     - name: Ensure browsers are installed
       run: pwsh tests/minitwit.tests/bin/Debug/net9.0/playwright.ps1 install --with-deps
@@ -48,7 +46,6 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
-    
-    - name: Stop Docker Compose Services
+    - name: Stop Docker
       if: always()
       run: docker compose down

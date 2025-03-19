@@ -1940,3 +1940,5 @@ C:/Users/rasmu/OneDrive/Desktop/Code/4.Semester/DevOps/itu-minitwit/src/minitwit
 /Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/ref/minitwit.web.dll
 /Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Prometheus.NetStandard.dll
 /Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Prometheus.AspNetCore.dll
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Prometheus.NetStandard.dll
+/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/src/minitwit.web/bin/Debug/net9.0/Prometheus.AspNetCore.dll

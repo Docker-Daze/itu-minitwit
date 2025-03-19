@@ -25,6 +25,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 
     private async Task InitializeDbContext()
     {
+        
         _connection = new SqliteConnection("DataSource=:memory:");
         _connection.Open();
 
