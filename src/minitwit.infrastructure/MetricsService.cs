@@ -25,12 +25,11 @@ public class MetricsService
         .CreateCounter("minitwit_UnfollowfollowerEntryNull_counter", "Total number of UnfollowfollowerEntryNull error received.");
     
     private static readonly Counter RegisterCounterErrorExistingUser = Metrics
-            .CreateCounter("minitwit_RegisterCounterErrorExistingUser_counter_total", "Total number of UnfollowfollowerEntryNull error received.");
-
+            .CreateCounter("minitwit_RegisterCounterErrorExistingUser_counter_total", "Total number of RegisterCounterErrorExistingUser error received.");
     private static readonly Counter RegisterCounterResultSuccess = Metrics
-        .CreateCounter("minitwit_RegisterCounterSuccessfull_counter_total", "Total number of UnfollowfollowerEntryNull error received.");
+        .CreateCounter("minitwit_RegisterCounterSuccessfull_counter_total", "Total number of RegisterCounterSuccessfull received.");
     private static readonly Counter RegisterCounterNothingHappend = Metrics
-        .CreateCounter("minitwit_RegisterCounterSuccessfull_counter_total", "Total number of UnfollowfollowerEntryNull error received.");
+        .CreateCounter("minitwit_RegisterCounterNothingHappend_counter_total", "Total number of RegisterCounterNothingHappend error received.");
 
     private static readonly Histogram RequestDuration = Metrics
         .CreateHistogram("app_request_duration_seconds", "Histogram of request duration.");
