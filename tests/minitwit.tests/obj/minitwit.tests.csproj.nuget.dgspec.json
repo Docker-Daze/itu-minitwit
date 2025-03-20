@@ -337,6 +337,10 @@
               "target": "Package",
               "version": "[17.13.0, )"
             },
+            "Microsoft.Playwright.NUnit": {
+              "target": "Package",
+              "version": "[1.50.0, )"
+            },
             "xunit": {
               "target": "Package",
               "version": "[2.9.2, )"

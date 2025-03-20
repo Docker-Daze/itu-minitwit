@@ -12,20 +12,43 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "9.x"
+    - name: Start Docker Compose Services
+      run: |
+        echo 'export DB_CONNECTION_STRING=\"${DB_CONN_STRING_HERE}\"' >> ~/.bash_profile
+        source ~/.bash_profile
+        docker compose up -d
 
-      - name: Install dependencies
-        run: |
-          dotnet restore ./src/minitwit.web/minitwit.web.csproj
-          dotnet restore ./tests/minitwit.tests/minitwit.tests.csproj
-          dotnet add ./tests/minitwit.tests/minitwit.tests.csproj package xunit --version 2.9.2
+    - name: Wait for Services to be Ready
+      run: |
+        echo "Waiting for Docker services to be ready..."
+        while ! docker compose ps | grep "healthy"; do
+          echo "Waiting..."
+          sleep 5
+        done
+        echo "All services are ready!"
 
-      - name: dotnet test
-        run: dotnet test tests/minitwit.tests/minitwit.tests.csproj
+    - name: Ensure browsers are installed
+      run: pwsh tests/minitwit.tests/bin/Debug/net9.0/playwright.ps1 install --with-deps
+    
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
+    
+    - name: Stop Docker Compose Services
+      if: always()
+      run: docker compose down
