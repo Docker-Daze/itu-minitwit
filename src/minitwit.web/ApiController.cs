@@ -71,7 +71,7 @@ public class ApiController : Controller
             var existingUser = await _userManager.FindByEmailAsync(request.email);
             if (existingUser != null)
             {
-                _metricsService.IncrementErrorCounter();
+                _metricsService.IncrementRegisterCounterErrorExistingUser();
                 ModelState.AddModelError(string.Empty, "Email address already exists.");
                 return BadRequest(ModelState);
             }
@@ -83,6 +83,7 @@ public class ApiController : Controller
 
             if (result.Succeeded)
             {
+                _metricsService.IncrementRegisterCounterResultSuccess();
                 user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
 
                 var claim = new Claim("User Name", request.username);
@@ -94,6 +95,7 @@ public class ApiController : Controller
                 return NoContent();
             }
 
+            _metricsService.IncrementRegisterCounterNothingHappend();
             foreach (var error in result.Errors)
             {
                 Console.WriteLine(error.Description);

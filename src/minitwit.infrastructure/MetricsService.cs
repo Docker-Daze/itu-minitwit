@@ -23,6 +23,14 @@ public class MetricsService
         .CreateCounter("minitwit_UnfollowNoWhoOrWhom_counter", "Total number of unfollowNoWhoOrWhom error received.");
     private static readonly Counter UnfollowfollowerEntryNullCounter = Metrics
         .CreateCounter("minitwit_UnfollowfollowerEntryNull_counter", "Total number of UnfollowfollowerEntryNull error received.");
+    
+    private static readonly Counter RegisterCounterErrorExistingUser = Metrics
+            .CreateCounter("minitwit_RegisterCounterErrorExistingUser_counter_total", "Total number of UnfollowfollowerEntryNull error received.");
+
+    private static readonly Counter RegisterCounterResultSuccess = Metrics
+        .CreateCounter("minitwit_RegisterCounterSuccessfull_counter_total", "Total number of UnfollowfollowerEntryNull error received.");
+    private static readonly Counter RegisterCounterNothingHappend = Metrics
+        .CreateCounter("minitwit_RegisterCounterSuccessfull_counter_total", "Total number of UnfollowfollowerEntryNull error received.");
 
     private static readonly Histogram RequestDuration = Metrics
         .CreateHistogram("app_request_duration_seconds", "Histogram of request duration.");
@@ -63,6 +71,21 @@ public class MetricsService
     public void IncrementUnfollowfollowerEntryNullCounter()
     {
         UnfollowfollowerEntryNullCounter.Inc();
+    }
+
+    public void IncrementRegisterCounterErrorExistingUser()
+    {
+        RegisterCounterErrorExistingUser.Inc();
+    }
+
+    public void IncrementRegisterCounterResultSuccess()
+    {
+        RegisterCounterResultSuccess.Inc();
+    }
+
+    public void IncrementRegisterCounterNothingHappend()
+    {
+        RegisterCounterNothingHappend.Inc();
     }
     
 
