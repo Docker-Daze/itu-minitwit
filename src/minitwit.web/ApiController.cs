@@ -243,8 +243,16 @@ public class ApiController : Controller
             }
 
             _metricsService.IncrementUnFollowCounter();
-            await _userRepository.UnfollowUser(username, request.unfollow!);
-            return NoContent();
+            try
+            {
+                await _userRepository.UnfollowUser(username, request.unfollow!);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return NoContent();
+            }
+            
         }
     }
     
