@@ -63,45 +63,50 @@ public class ApiController : Controller
     {
         using (_metricsService.MeasureRequestDuration())
         {
-            _latest = latest;
-            var user = Activator.CreateInstance<User>();
-
-            user.UserName = request.username;
-
-            var existingUser = await _userManager.FindByEmailAsync(request.email);
-            if (existingUser != null)
+            using (_metricsService.MeasureRequestRegisterDuration())
             {
-                _metricsService.IncrementRegisterCounterErrorExistingUser();
-                ModelState.AddModelError(string.Empty, "Email address already exists.");
-                return BadRequest(ModelState);
+
+
+                _latest = latest;
+                var user = Activator.CreateInstance<User>();
+
+                user.UserName = request.username;
+
+                var existingUser = await _userManager.FindByEmailAsync(request.email);
+                if (existingUser != null)
+                {
+                    _metricsService.IncrementRegisterCounterErrorExistingUser();
+                    ModelState.AddModelError(string.Empty, "Email address already exists.");
+                    return BadRequest(ModelState);
+                }
+
+                _metricsService.IncrementRegisterCounter();
+                await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
+                await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
+                var result = await _userManager.CreateAsync(user, request.pwd);
+
+                if (result.Succeeded)
+                {
+                    _metricsService.IncrementRegisterCounterResultSuccess();
+                    user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
+
+                    var claim = new Claim("User Name", request.username);
+                    await _userManager.AddClaimAsync(user, claim);
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    HttpContext.Session.SetString("UserId", user.Id);
+
+                    return NoContent();
+                }
+
+                _metricsService.IncrementRegisterCounterNothingHappend();
+                foreach (var error in result.Errors)
+                {
+                    Console.WriteLine(error.Description);
+                }
+
+                return LocalRedirect("/api/register");
             }
-
-            _metricsService.IncrementRegisterCounter();
-            await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
-            await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
-            var result = await _userManager.CreateAsync(user, request.pwd);
-
-            if (result.Succeeded)
-            {
-                _metricsService.IncrementRegisterCounterResultSuccess();
-                user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
-
-                var claim = new Claim("User Name", request.username);
-                await _userManager.AddClaimAsync(user, claim);
-
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                HttpContext.Session.SetString("UserId", user.Id);
-
-                return NoContent();
-            }
-
-            _metricsService.IncrementRegisterCounterNothingHappend();
-            foreach (var error in result.Errors)
-            {
-                Console.WriteLine(error.Description);
-            }
-
-            return LocalRedirect("/api/register");
         }
     }
     
@@ -160,37 +165,42 @@ public class ApiController : Controller
     {
         using (_metricsService.MeasureRequestDuration())
         {
-            _latest = latest;
-            if (string.IsNullOrEmpty(username))
+            using (_metricsService.MeasureRequestPostMsgsDuration())
             {
-                _metricsService.IncrementErrorCounter();
-                return Unauthorized();
-            }
 
-            if (_userRepository.GetUserID(username).Result == null)
-            {
-                _metricsService.IncrementErrorCounter();
-                return NotFound();
-            }
 
-            var message = request.Content;
-            var flagged = request.flagged;
+                _latest = latest;
+                if (string.IsNullOrEmpty(username))
+                {
+                    _metricsService.IncrementErrorCounter();
+                    return Unauthorized();
+                }
 
-            if (string.IsNullOrWhiteSpace(message))
-            {
-                _metricsService.IncrementErrorCounter();
-                ModelState.AddModelError("Message", "Message cannot be empty.");
-            }
-            else if (message.Length > 160)
-            {
-                _metricsService.IncrementErrorCounter();
-                ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
-            }
+                if (_userRepository.GetUserID(username).Result == null)
+                {
+                    _metricsService.IncrementErrorCounter();
+                    return NotFound();
+                }
 
-            _metricsService.IncrementPostMsgsCounter();
-            var userId = await _userRepository.GetUserID(username);
-            await _messageRepository.AddMessage(userId, message, flagged);
-            return NoContent();
+                var message = request.Content;
+                var flagged = request.flagged;
+
+                if (string.IsNullOrWhiteSpace(message))
+                {
+                    _metricsService.IncrementErrorCounter();
+                    ModelState.AddModelError("Message", "Message cannot be empty.");
+                }
+                else if (message.Length > 160)
+                {
+                    _metricsService.IncrementErrorCounter();
+                    ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
+                }
+
+                _metricsService.IncrementPostMsgsCounter();
+                var userId = await _userRepository.GetUserID(username);
+                await _messageRepository.AddMessage(userId, message, flagged);
+                return NoContent();
+            }
         }
     }
     
@@ -237,29 +247,35 @@ public class ApiController : Controller
 
             if (request.follow != null)
             {
-                _metricsService.IncrementFollowCounter();
+                using (_metricsService.MeasureRequestFollowDuration())
+                {
+                    _metricsService.IncrementFollowCounter();
+                    try
+                    {
+                        await _userRepository.FollowUser(username, request.follow);
+                        return NoContent();
+                    }
+                    catch (Exception e)
+                    {
+                        return NoContent();
+                    }
+                }
+            }
+
+            using (_metricsService.MeasureRequestUnfollowDuration())
+            {
+                _metricsService.IncrementUnFollowCounter();
                 try
                 {
-                    await _userRepository.FollowUser(username, request.follow);
+                    await _userRepository.UnfollowUser(username, request.unfollow!);
                     return NoContent();
                 }
                 catch (Exception e)
                 {
                     return NoContent();
                 }
-                
             }
-
-            _metricsService.IncrementUnFollowCounter();
-            try
-            {
-                await _userRepository.UnfollowUser(username, request.unfollow!);
-                return NoContent();
-            }
-            catch (Exception e)
-            {
-                return NoContent();
-            }
+            
             
         }
     }

@@ -31,8 +31,16 @@ public class MetricsService
     private static readonly Counter RegisterCounterNothingHappend = Metrics
         .CreateCounter("minitwit_RegisterCounterNothingHappend_counter_total", "Total number of RegisterCounterNothingHappend error received.");
 
-    private static readonly Histogram RequestDuration = Metrics
+    private static readonly Histogram RequestDurationAVG = Metrics
         .CreateHistogram("app_request_duration_seconds", "Histogram of request duration.");
+    private static readonly Histogram RequestDurationFollow = Metrics
+        .CreateHistogram("app_RequestDurationFollow_seconds", "Histogram of RequestDurationFollow duration.");
+    private static readonly Histogram RequestDurationUnfollow = Metrics
+        .CreateHistogram("app_RequestDurationUnfollow_seconds", "Histogram of RequestDurationUnfollow duration.");
+    private static readonly Histogram RequestDurationPostMsgs = Metrics
+        .CreateHistogram("app_RequestDurationPostMsgs_seconds", "Histogram of request duration.");
+    private static readonly Histogram RequestDurationRegister = Metrics
+        .CreateHistogram("app_RequestDurationRegister_seconds", "Histogram of request duration.");
     
     
     public void IncrementRegisterCounter()
@@ -91,6 +99,23 @@ public class MetricsService
     // Method to observe request duration
     public IDisposable MeasureRequestDuration()
     {
-        return RequestDuration.NewTimer();
+        return RequestDurationAVG.NewTimer();
     }
+    public IDisposable MeasureRequestFollowDuration()
+    {
+        return RequestDurationFollow.NewTimer();
+    }
+    public IDisposable MeasureRequestUnfollowDuration()
+    {
+        return RequestDurationUnfollow.NewTimer();
+    }
+    public IDisposable MeasureRequestPostMsgsDuration()
+    {
+        return RequestDurationPostMsgs.NewTimer();
+    }
+    public IDisposable MeasureRequestRegisterDuration()
+    {
+        return RequestDurationRegister.NewTimer();
+    }
+    
 }
