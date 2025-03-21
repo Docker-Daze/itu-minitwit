@@ -1,6 +1,7 @@
 {
   "Files": [
     {
+<<<<<<< HEAD
       "Id": "/app/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
       "PackagePath": "staticwebassets/minitwit.web.l4pgqo5upe.bundle.scp.css"
     },
@@ -14,6 +15,21 @@
     },
     {
       "Id": "/app/src/minitwit.web/wwwroot/js/site.js",
+=======
+      "Id": "/Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/obj/Debug/net9.0/scopedcss/projectbundle/minitwit.web.bundle.scp.css",
+      "PackagePath": "staticwebassets/minitwit.web.l4pgqo5upe.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/wwwroot/css/style.css",
+      "PackagePath": "staticwebassets/css/style.css"
+    },
+    {
+      "Id": "/Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/mathiashansen/Library/Mobile Documents/com~apple~CloudDocs/Documents/Main/ITU/4. semester/DevOps/ITU-minitwit/itu-minitwit/src/minitwit.web/wwwroot/js/site.js",
+>>>>>>> main
       "PackagePath": "staticwebassets/js/site.js"
     },
     {

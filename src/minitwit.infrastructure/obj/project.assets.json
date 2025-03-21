@@ -1127,6 +1127,24 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "Microsoft.Extensions.Http/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.0",
+          "Microsoft.Extensions.Logging": "3.1.0",
+          "Microsoft.Extensions.Options": "3.1.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Identity.Core/9.0.1": {
         "type": "package",
         "dependencies": {
@@ -1365,6 +1383,23 @@
         },
         "runtime": {
           "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "prometheus-net/8.2.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Http": "3.1.0",
+          "Microsoft.Extensions.ObjectPool": "7.0.0"
+        },
+        "compile": {
+          "lib/net7.0/Prometheus.NetStandard.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Prometheus.NetStandard.dll": {
             "related": ".xml"
           }
         }
@@ -3694,6 +3729,22 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Microsoft.Extensions.Http/3.1.0": {
+      "sha512": "DLigdcV0nYaT6/ly0rnfP80BnXq8NNd/h8/SkfY39uio7Bd9LauVntp6RcRh1Kj23N+uf80GgL7Win6P3BCtoQ==",
+      "type": "package",
+      "path": "microsoft.extensions.http/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Http.dll",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Http.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.xml",
+        "microsoft.extensions.http.3.1.0.nupkg.sha512",
+        "microsoft.extensions.http.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "Microsoft.Extensions.Identity.Core/9.0.1": {
       "sha512": "dbvAQhwSyBbgB2BuVJ8PMVx7BK6WZHWhV/vsSnXl6sRLs9D7yXiIiRpgcPVvN5E/UkzRGW1EPXyc3t1EDxWSzg==",
       "type": "package",
@@ -4061,6 +4112,27 @@
         "npgsql.entityframeworkcore.postgresql.9.0.4.nupkg.sha512",
         "npgsql.entityframeworkcore.postgresql.nuspec",
         "postgresql.png"
+      ]
+    },
+    "prometheus-net/8.2.1": {
+      "sha512": "3wVgdEPOCBF752s2xps5T+VH+c9mJK8S8GKEDg49084P6JZMumTZI5Te6aJ9MQpX0sx7om6JOnBpIi7ZBmmiDQ==",
+      "type": "package",
+      "path": "prometheus-net/8.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net462/Prometheus.NetStandard.dll",
+        "lib/net462/Prometheus.NetStandard.xml",
+        "lib/net6.0/Prometheus.NetStandard.dll",
+        "lib/net6.0/Prometheus.NetStandard.xml",
+        "lib/net7.0/Prometheus.NetStandard.dll",
+        "lib/net7.0/Prometheus.NetStandard.xml",
+        "lib/netstandard2.0/Prometheus.NetStandard.dll",
+        "lib/netstandard2.0/Prometheus.NetStandard.xml",
+        "prometheus-net-logo.png",
+        "prometheus-net.8.2.1.nupkg.sha512",
+        "prometheus-net.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
@@ -4795,15 +4867,21 @@
       "Microsoft.Extensions.Configuration.EnvironmentVariables >= 9.0.2",
       "Microsoft.Extensions.Configuration.UserSecrets >= 9.0.2",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.4",
-      "minitwit.core >= 1.0.0"
+      "minitwit.core >= 1.0.0",
+      "prometheus-net >= 8.2.1"
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "/root/.nuget/packages/": {}
+=======
+    "C:\\Users\\rasmu\\.nuget\\packages\\": {}
+>>>>>>> main
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
       "projectName": "minitwit.infrastructure",
       "projectPath": "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
@@ -4812,19 +4890,36 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/root/.nuget/NuGet/NuGet.Config"
+=======
+      "projectUniqueName": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj",
+      "projectName": "minitwit.infrastructure",
+      "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj",
+      "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+>>>>>>> main
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
+<<<<<<< HEAD
             "/app/src/minitwit.core/minitwit.core.csproj": {
               "projectPath": "/app/src/minitwit.core/minitwit.core.csproj"
+=======
+            "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj": {
+              "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj"
+>>>>>>> main
             }
           }
         }
@@ -4838,8 +4933,12 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
+<<<<<<< HEAD
       },
       "SdkAnalysisLevel": "9.0.200"
+=======
+      }
+>>>>>>> main
     },
     "frameworks": {
       "net9.0": {
@@ -4866,6 +4965,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[9.0.4, )"
+          },
+          "prometheus-net": {
+            "target": "Package",
+            "version": "[8.2.1, )"
           }
         },
         "imports": [
@@ -4884,7 +4987,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
+>>>>>>> main
       }
     }
   }

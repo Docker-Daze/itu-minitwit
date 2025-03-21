@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "/app/src/minitwit.web/minitwit.web.csproj": {}
   },
   "projects": {
@@ -15,11 +16,29 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/root/.nuget/NuGet/NuGet.Config"
+=======
+    "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj",
+        "projectName": "minitwit.core",
+        "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj",
+        "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+>>>>>>> main
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,8 +56,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
+<<<<<<< HEAD
         },
         "SdkAnalysisLevel": "9.0.200"
+=======
+        }
+>>>>>>> main
       },
       "frameworks": {
         "net9.0": {
@@ -79,6 +102,7 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
@@ -94,19 +118,43 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/root/.nuget/NuGet/NuGet.Config"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj",
+        "projectName": "minitwit.infrastructure",
+        "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj",
+        "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+>>>>>>> main
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+<<<<<<< HEAD
               "/app/src/minitwit.core/minitwit.core.csproj": {
                 "projectPath": "/app/src/minitwit.core/minitwit.core.csproj"
+=======
+              "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj": {
+                "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj"
+>>>>>>> main
               }
             }
           }
@@ -120,8 +168,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
+<<<<<<< HEAD
         },
         "SdkAnalysisLevel": "9.0.200"
+=======
+        }
+>>>>>>> main
       },
       "frameworks": {
         "net9.0": {
@@ -148,6 +200,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "prometheus-net": {
+              "target": "Package",
+              "version": "[8.2.1, )"
             }
           },
           "imports": [
@@ -166,6 +222,7 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
@@ -181,22 +238,49 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/root/.nuget/NuGet/NuGet.Config"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj",
+        "projectName": "minitwit.web",
+        "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\minitwit.web.csproj",
+        "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.web\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+>>>>>>> main
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+<<<<<<< HEAD
               "/app/src/minitwit.core/minitwit.core.csproj": {
                 "projectPath": "/app/src/minitwit.core/minitwit.core.csproj"
               },
               "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
                 "projectPath": "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj"
+=======
+              "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj": {
+                "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj"
+              },
+              "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj": {
+                "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.infrastructure\\minitwit.infrastructure.csproj"
+>>>>>>> main
               }
             }
           }
@@ -210,8 +294,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
+<<<<<<< HEAD
         },
         "SdkAnalysisLevel": "9.0.200"
+=======
+        }
+>>>>>>> main
       },
       "frameworks": {
         "net9.0": {
@@ -244,6 +332,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "prometheus-net": {
+              "target": "Package",
+              "version": "[8.2.1, )"
+            },
+            "prometheus-net.AspNetCore": {
+              "target": "Package",
+              "version": "[8.2.1, )"
             }
           },
           "imports": [
@@ -265,7 +361,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
+>>>>>>> main
         }
       }
     }

@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using minitwit.core;
+using minitwit.web;
 
 namespace minitwit.infrastructure;
 
@@ -10,10 +11,12 @@ public class UserRepository : IUserRepository
 {
     
     private readonly MinitwitDbContext _dbContext;
+    private readonly MetricsService _metricsService;
     
-    public UserRepository(MinitwitDbContext dbContext)
+    public UserRepository(MinitwitDbContext dbContext, MetricsService metricsService)
     {
         _dbContext = dbContext;
+        _metricsService = metricsService;
     }
     public async Task<User> GetUser(string userId)
     {
@@ -60,14 +63,14 @@ public class UserRepository : IUserRepository
 
     public async Task FollowUser(string whoUsername, string whomUsername)
     {
-        var isFollowing = await IsFollowing(whomUsername, whoUsername);
+        var whoId = await GetUserID(whoUsername);
+        var whomId = await GetUserID(whomUsername);
+        
+        var isFollowing = await IsFollowingUserID(whoId, whomId);
         if (isFollowing)
         {
             throw new InvalidOperationException("You are already following this user");
         }
-        
-        var whoId = await GetUserID(whoUsername);
-        var whomId = await GetUserID(whomUsername);
         
         if (string.IsNullOrEmpty(whomId))
         {
@@ -85,24 +88,33 @@ public class UserRepository : IUserRepository
             WhomId = whomId
         };
 
-        await _dbContext.Followers.AddAsync(follow);
-        await _dbContext.SaveChangesAsync();
+        try
+        {
+            await _dbContext.Followers.AddAsync(follow);
+            await _dbContext.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            throw new InvalidOperationException("Failed to follow user, possible duplicate entry.", ex);
+        }
     }
 
 
     public async Task UnfollowUser(string whoUsername, string whomUsername)
     {
-        var isFollowing = await IsFollowing(whoUsername, whomUsername);
+        var whoId = await GetUserID(whoUsername);
+        var whomId = await GetUserID(whomUsername);
+        
+        var isFollowing = await IsFollowingUserID(whoId, whomId);
         if (!isFollowing)
         {
+            _metricsService.IncrementUnfollowNeedToFollowCounter();
             throw new InvalidOperationException("You need to follow the user to unfollow");
         }
-        
-        var whomId = await GetUserID(whomUsername);
-        var whoId = await GetUserID(whoUsername);
 
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
+            _metricsService.IncrementUnfollowfollowerEntryNullCounter();
             throw new ArgumentException("The user to be unfollowed could not be found");
         }
 
@@ -111,6 +123,7 @@ public class UserRepository : IUserRepository
 
         if (followerEntry == null)
         {
+            _metricsService.IncrementUnfollowNoWhoOrWhomCounter();
             throw new InvalidOperationException("Not found");
         }
 
@@ -123,6 +136,17 @@ public class UserRepository : IUserRepository
         string whomId = await GetUserID(whomUsername);
         string whoId = await GetUserID(whoUsername);
 
+        if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
+        {
+            return false; // User not found, cannot be following
+        }
+
+        return await _dbContext.Followers
+            .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
+    }
+    
+    public async Task<bool> IsFollowingUserID(string whomId, string whoId)
+    {
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
             return false; // User not found, cannot be following

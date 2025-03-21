@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
   "minitwit.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/app\/src\/minitwit.core",
   "minitwit.infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/app\/src\/minitwit.infrastructure",
   "minitwit.web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/app\/src\/minitwit.web"
+=======
+  "minitwit.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/mathiashansen\/Library\/Mobile Documents\/com~apple~CloudDocs\/Documents\/Main\/ITU\/4. semester\/DevOps\/ITU-minitwit\/itu-minitwit\/src\/minitwit.core",
+  "minitwit.infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/mathiashansen\/Library\/Mobile Documents\/com~apple~CloudDocs\/Documents\/Main\/ITU\/4. semester\/DevOps\/ITU-minitwit\/itu-minitwit\/src\/minitwit.infrastructure",
+  "minitwit.web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/mathiashansen\/Library\/Mobile Documents\/com~apple~CloudDocs\/Documents\/Main\/ITU\/4. semester\/DevOps\/ITU-minitwit\/itu-minitwit\/src\/minitwit.web"
+>>>>>>> main
 }

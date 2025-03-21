@@ -12,11 +12,46 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
+    - uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.x
         
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
 
-      - name: Run Docker Test-Containers
-        run: docker compose -f './docker-compose.yml' up --build 'test-runner'
+    - name: Run Docker API-Test-Containers
+      run: docker compose -f './docker-compose.yml' up --build 'test-runner'
+      
+    - name: Start Docker Compose Services
+      run: |
+        echo 'export DB_CONNECTION_STRING=\"${DB_CONN_STRING_HERE}\"' >> ~/.bash_profile
+        source ~/.bash_profile
+        docker compose up -d
+
+    - name: Wait for Services to be Ready
+      run: |
+        echo "Waiting for Docker services to be ready..."
+        while ! docker compose ps | grep "healthy"; do
+          echo "Waiting..."
+          sleep 5
+        done
+        echo "All services are ready!"
+
+    - name: Ensure browsers are installed
+      run: pwsh tests/minitwit.tests/bin/Debug/net9.0/playwright.ps1 install --with-deps
+    
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
+    
+    - name: Stop Docker Compose Services
+      if: always()
+      run: docker compose down

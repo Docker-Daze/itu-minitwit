@@ -1,0 +1,46 @@
+services:
+  minitwitimage:
+    image: ${DOCKER_USERNAME}/minitwitimage
+    container_name: minitwit
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+    networks:
+      - itu-minitwit_default
+
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - itu-minitwit_default
+
+  grafana:
+    image: grafana/grafana:10.2.4
+    ports:
+      - "3000:3000"
+    networks:
+      - itu-minitwit_default
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SERVER_HTTP_ADDR=0.0.0.0
+      - GF_SERVER_ROOT_URL=http://164.90.240.84:3000  
+
+networks:
+  itu-minitwit_default:
+    driver: bridge
+    
+volumes:
+  prometheus_data:
+  grafana_data:
