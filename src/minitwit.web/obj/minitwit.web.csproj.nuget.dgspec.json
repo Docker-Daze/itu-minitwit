@@ -253,6 +253,10 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
+            "Serilog.Sinks.Elasticsearch": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
             "prometheus-net": {
               "target": "Package",
               "version": "[8.2.1, )"
