@@ -4364,25 +4364,26 @@
     ]
   },
   "packageFolders": {
-    "/home/aras/.nuget/packages/": {}
+    "C:\\Users\\rasmu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
+      "projectUniqueName": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj",
       "projectName": "minitwit.core",
-      "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
-      "packagesPath": "/home/aras/.nuget/packages/",
-      "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/obj/",
+      "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj",
+      "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/aras/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "/usr/lib/dotnet/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4400,8 +4401,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+      }
     },
     "frameworks": {
       "net9.0": {
@@ -4442,7 +4442,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
