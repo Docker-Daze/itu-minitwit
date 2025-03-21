@@ -9505,33 +9505,32 @@
     ]
   },
   "packageFolders": {
-    "/home/aras/.nuget/packages/": {}
+    "/root/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+      "projectUniqueName": "/app/tests/minitwit.tests/minitwit.tests.csproj",
       "projectName": "minitwit.tests",
-      "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
-      "packagesPath": "/home/aras/.nuget/packages/",
-      "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/obj/",
+      "projectPath": "/app/tests/minitwit.tests/minitwit.tests.csproj",
+      "packagesPath": "/root/.nuget/packages/",
+      "outputPath": "/app/tests/minitwit.tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/aras/.nuget/NuGet/NuGet.Config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
-              "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
+            "/app/src/minitwit.web/minitwit.web.csproj": {
+              "projectPath": "/app/src/minitwit.web/minitwit.web.csproj"
             }
           }
         }
@@ -9546,7 +9545,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -9585,7 +9584,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

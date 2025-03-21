@@ -1,12 +1,45 @@
 services:
-  minitwitimage:
-    image: ${DOCKER_USERNAME}/minitwitimage
-    container_name: minitwit
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
+   # minitwitimage:
+   # image: ${DOCKER_USERNAME}/minitwitimage
+     #container_name: minitwit
+     #build:
+     #  context: .
+      # dockerfile: Dockerfile
+     #ports:
+     #  - "5000:5000"
+     #environment:
+      # - ASPNETCORE_URLS=http://+:5000
+      # - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+
+  postgres:
+    image: postgres:16
+    container_name: test_postgres
+    restart: always
+    shm_size: 128mb
     environment:
-      - ASPNETCORE_URLS=http://+:5000
-      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: testdb
+      POSTGRES_USER: testuser
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U testuser -d testdb "]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  test-runner:
+    image: mcr.microsoft.com/dotnet/sdk:9.0
+    container_name: dotnet_test_runner
+    working_dir: /app
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      sh -c "cd tests/minitwit.tests &&
+      dotnet restore && 
+      dotnet test"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=test_postgres;Port=5432;Database=testdb;Username=testuser;Password=testpassword

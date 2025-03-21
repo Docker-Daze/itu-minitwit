@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj": {}
+    "/app/tests/minitwit.tests/minitwit.tests.csproj": {}
   },
   "projects": {
-    "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
+    "/app/src/minitwit.core/minitwit.core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
+        "projectUniqueName": "/app/src/minitwit.core/minitwit.core.csproj",
         "projectName": "minitwit.core",
-        "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
-        "packagesPath": "/home/aras/.nuget/packages/",
-        "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/obj/",
+        "projectPath": "/app/src/minitwit.core/minitwit.core.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/app/src/minitwit.core/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/aras/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -80,35 +79,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
+    "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
+        "projectUniqueName": "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
         "projectName": "minitwit.infrastructure",
-        "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
-        "packagesPath": "/home/aras/.nuget/packages/",
-        "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/obj/",
+        "projectPath": "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/app/src/minitwit.infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/aras/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
-                "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
+              "/app/src/minitwit.core/minitwit.core.csproj": {
+                "projectPath": "/app/src/minitwit.core/minitwit.core.csproj"
               }
             }
           }
@@ -123,7 +121,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -168,38 +166,37 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
+    "/app/src/minitwit.web/minitwit.web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj",
+        "projectUniqueName": "/app/src/minitwit.web/minitwit.web.csproj",
         "projectName": "minitwit.web",
-        "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj",
-        "packagesPath": "/home/aras/.nuget/packages/",
-        "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/obj/",
+        "projectPath": "/app/src/minitwit.web/minitwit.web.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/app/src/minitwit.web/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/aras/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj": {
-                "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj"
+              "/app/src/minitwit.core/minitwit.core.csproj": {
+                "projectPath": "/app/src/minitwit.core/minitwit.core.csproj"
               },
-              "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
-                "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.infrastructure/minitwit.infrastructure.csproj"
+              "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj": {
+                "projectPath": "/app/src/minitwit.infrastructure/minitwit.infrastructure.csproj"
               }
             }
           }
@@ -214,7 +211,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -268,35 +265,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj": {
+    "/app/tests/minitwit.tests/minitwit.tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
+        "projectUniqueName": "/app/tests/minitwit.tests/minitwit.tests.csproj",
         "projectName": "minitwit.tests",
-        "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
-        "packagesPath": "/home/aras/.nuget/packages/",
-        "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/tests/minitwit.tests/obj/",
+        "projectPath": "/app/tests/minitwit.tests/minitwit.tests.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/app/tests/minitwit.tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/aras/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj": {
-                "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.web/minitwit.web.csproj"
+              "/app/src/minitwit.web/minitwit.web.csproj": {
+                "projectPath": "/app/src/minitwit.web/minitwit.web.csproj"
               }
             }
           }
@@ -311,7 +307,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -350,7 +346,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
