@@ -4,6 +4,7 @@ using minitwit.infrastructure;
 using Microsoft.AspNetCore.Identity;
 using minitwit.web;
 using Prometheus;
+using Serilog;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,18 @@ builder.Services.AddSession(options =>
 
 builder.Configuration.AddUserSecrets<Program>()
     .AddEnvironmentVariables();
+
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.Elasticsearch(new Serilog.Sinks.Elasticsearch.ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
+    {
+        AutoRegisterTemplate = true,
+        IndexFormat = "minitwit-logs-{0:yyyy.MM.dd}"
+    })
+);
+
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseNpgsql(connectionString));
 
