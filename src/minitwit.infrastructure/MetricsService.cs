@@ -38,9 +38,9 @@ public class MetricsService
     private static readonly Histogram RequestDurationUnfollow = Metrics
         .CreateHistogram("app_RequestDurationUnfollow_seconds", "Histogram of RequestDurationUnfollow duration.");
     private static readonly Histogram RequestDurationPostMsgs = Metrics
-        .CreateHistogram("app_RequestDurationPostMsgs_seconds", "Histogram of request duration.");
+        .CreateHistogram("app_RequestDurationPostMsgs_seconds", "Histogram of RequestDurationPostMsgs duration.");
     private static readonly Histogram RequestDurationRegister = Metrics
-        .CreateHistogram("app_RequestDurationRegister_seconds", "Histogram of request duration.");
+        .CreateHistogram("app_RequestDurationRegister_seconds", "Histogram of RequestDurationRegister duration.");
     
     
     public void IncrementRegisterCounter()
