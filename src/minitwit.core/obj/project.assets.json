@@ -4364,41 +4364,25 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "/root/.nuget/packages/": {}
-=======
-    "C:\\Users\\rasmu\\.nuget\\packages\\": {}
->>>>>>> main
+    "/home/aras/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "/app/src/minitwit.core/minitwit.core.csproj",
+      "projectUniqueName": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
       "projectName": "minitwit.core",
-      "projectPath": "/app/src/minitwit.core/minitwit.core.csproj",
-      "packagesPath": "/root/.nuget/packages/",
-      "outputPath": "/app/src/minitwit.core/obj/",
+      "projectPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/minitwit.core.csproj",
+      "packagesPath": "/home/aras/.nuget/packages/",
+      "outputPath": "/home/aras/Desktop/DevOps/itu-minitwit/src/minitwit.core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/root/.nuget/NuGet/NuGet.Config"
-=======
-      "projectUniqueName": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj",
-      "projectName": "minitwit.core",
-      "projectPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\minitwit.core.csproj",
-      "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rasmu\\OneDrive\\Desktop\\Code\\4.Semester\\DevOps\\itu-minitwit\\src\\minitwit.core\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
->>>>>>> main
+        "/home/aras/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4416,12 +4400,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-<<<<<<< HEAD
       },
-      "SdkAnalysisLevel": "9.0.200"
-=======
-      }
->>>>>>> main
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -4462,11 +4442,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
->>>>>>> main
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
