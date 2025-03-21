@@ -16,14 +16,14 @@ public class MetricsService
         .CreateCounter("minitwit_getRequests_counter", "Total number of get requests received.");
     private static readonly Counter ErrorCounter = Metrics
             .CreateCounter("minitwit_ErrorCounter_counter", "Total number of Errors received.");
-
+        
     private static readonly Counter UnfollowNeedToFollowCounter = Metrics
         .CreateCounter("minitwit_UnfollowNeedToFollow_counter", "Total number of UnfollowNeedToFollow error received.");
     private static readonly Counter UnfollowNoWhoOrWhomCounter = Metrics
         .CreateCounter("minitwit_UnfollowNoWhoOrWhom_counter", "Total number of unfollowNoWhoOrWhom error received.");
     private static readonly Counter UnfollowfollowerEntryNullCounter = Metrics
         .CreateCounter("minitwit_UnfollowfollowerEntryNull_counter", "Total number of UnfollowfollowerEntryNull error received.");
-
+    
     private static readonly Counter RegisterCounterErrorExistingUser = Metrics
             .CreateCounter("minitwit_RegisterCounterErrorExistingUser_counter_total", "Total number of RegisterCounterErrorExistingUser error received.");
     private static readonly Counter RegisterCounterResultSuccess = Metrics
@@ -38,84 +38,84 @@ public class MetricsService
     private static readonly Histogram RequestDurationUnfollow = Metrics
         .CreateHistogram("app_RequestDurationUnfollow_seconds", "Histogram of RequestDurationUnfollow duration.");
     private static readonly Histogram RequestDurationPostMsgs = Metrics
-        .CreateHistogram("app_RequestDurationPostMsgs_seconds", "Histogram of request duration.");
+        .CreateHistogram("app_RequestDurationPostMsgs_seconds", "Histogram of RequestDurationPostMsgs duration.");
     private static readonly Histogram RequestDurationRegister = Metrics
-        .CreateHistogram("app_RequestDurationRegister_seconds", "Histogram of request duration.");
-
-
-    public static void IncrementRegisterCounter()
+        .CreateHistogram("app_RequestDurationRegister_seconds", "Histogram of RequestDurationRegister duration.");
+    
+    
+    public void IncrementRegisterCounter()
     {
         RegisterCounter.Inc();
     }
-    public static void IncrementPostMsgsCounter()
+    public void IncrementPostMsgsCounter()
     {
         PostMsgsCounter.Inc();
     }
-    public static void IncrementFollowCounter()
+    public void IncrementFollowCounter()
     {
         FollowCounter.Inc();
     }
-    public static void IncrementUnFollowCounter()
+    public void IncrementUnFollowCounter()
     {
         UnfollowCounter.Inc();
     }
-    public static void IncrementGetRequestsCounter()
+    public void IncrementGetRequestsCounter()
     {
         GetRequestsCounter.Inc();
     }
-    public static void IncrementErrorCounter()
+    public void IncrementErrorCounter()
     {
         ErrorCounter.Inc();
     }
-    public static void IncrementUnfollowNeedToFollowCounter()
+    public void IncrementUnfollowNeedToFollowCounter()
     {
         UnfollowNeedToFollowCounter.Inc();
     }
-    public static void IncrementUnfollowNoWhoOrWhomCounter()
+    public void IncrementUnfollowNoWhoOrWhomCounter()
     {
         UnfollowNoWhoOrWhomCounter.Inc();
     }
-    public static void IncrementUnfollowfollowerEntryNullCounter()
+    public void IncrementUnfollowfollowerEntryNullCounter()
     {
         UnfollowfollowerEntryNullCounter.Inc();
     }
 
-    public static void IncrementRegisterCounterErrorExistingUser()
+    public void IncrementRegisterCounterErrorExistingUser()
     {
         RegisterCounterErrorExistingUser.Inc();
     }
 
-    public static void IncrementRegisterCounterResultSuccess()
+    public void IncrementRegisterCounterResultSuccess()
     {
         RegisterCounterResultSuccess.Inc();
     }
 
-    public static void IncrementRegisterCounterNothingHappend()
+    public void IncrementRegisterCounterNothingHappend()
     {
         RegisterCounterNothingHappend.Inc();
     }
-
+    
 
     // Method to observe request duration
-    public static IDisposable MeasureRequestDuration()
+    public IDisposable MeasureRequestDuration()
     {
         return RequestDurationAVG.NewTimer();
     }
-    public static IDisposable MeasureRequestFollowDuration()
+    public IDisposable MeasureRequestFollowDuration()
     {
         return RequestDurationFollow.NewTimer();
     }
-    public static IDisposable MeasureRequestUnfollowDuration()
+    public IDisposable MeasureRequestUnfollowDuration()
     {
         return RequestDurationUnfollow.NewTimer();
     }
-    public static IDisposable MeasureRequestPostMsgsDuration()
+    public IDisposable MeasureRequestPostMsgsDuration()
     {
         return RequestDurationPostMsgs.NewTimer();
     }
-    public static IDisposable MeasureRequestRegisterDuration()
+    public IDisposable MeasureRequestRegisterDuration()
     {
         return RequestDurationRegister.NewTimer();
     }
-
+    
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ny1yOyc9blQ=",
+  "dgSpecHash": "V9TyC3qPBzk=",
   "success": true,
   "projectFilePath": "/Users/nikolai/Library/Mobile Documents/com~apple~CloudDocs/ITU/BSc Softwareudvikling/4. semester/DevOps/itu-minitwit/tests/minitwit.tests/minitwit.tests.csproj",
   "expectedPackageFiles": [
@@ -221,7 +221,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "minitwit.tests depends on xunit.runner.visualstudio (>= 2.9.2) but xunit.runner.visualstudio 2.9.2 was not found. xunit.runner.visualstudio 3.0.0 was resolved instead.",
+      "message": "minitwit.tests depends on xunit.runner.visualstudio (>= 2.9.2) but xunit.runner.visualstudio 2.9.2 was not found. An approximate best match of xunit.runner.visualstudio 3.0.0 was resolved.",
       "libraryId": "xunit.runner.visualstudio",
       "targetGraphs": [
         "net9.0"
