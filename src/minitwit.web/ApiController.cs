@@ -238,8 +238,16 @@ public class ApiController : Controller
             if (request.follow != null)
             {
                 _metricsService.IncrementFollowCounter();
-                await _userRepository.FollowUser(username, request.follow);
-                return NoContent();
+                try
+                {
+                    await _userRepository.FollowUser(username, request.follow);
+                    return NoContent();
+                }
+                catch (Exception e)
+                {
+                    return NoContent();
+                }
+                
             }
 
             _metricsService.IncrementUnFollowCounter();
