@@ -27,6 +27,9 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
+    - name: Run Docker API-Test-Containers
+      run: docker compose -f './docker-compose.yml' up --build 'test-runner'
+      
     - name: Start Docker Compose Services
       run: |
         echo 'export DB_CONNECTION_STRING=\"${DB_CONN_STRING_HERE}\"' >> ~/.bash_profile

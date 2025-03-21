@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Data.Sqlite;
+using Npgsql;
 using Microsoft.EntityFrameworkCore;
 using minitwit.infrastructure;
 using Xunit;
 using Xunit.Abstractions;
+using Microsoft.Extensions.Configuration;
 
 namespace minitwit.tests;
 
@@ -13,7 +14,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly HttpClient _client;
     private MinitwitDbContext _dbContext;
-    private SqliteConnection _connection;
+    private NpgsqlConnection _connection;
 
     public TestAPI(WebApplicationFactory<Program> fixture, ITestOutputHelper testOutputHelper)
     {
@@ -25,16 +26,28 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 
     private async Task InitializeDbContext()
     {
-        _connection = new SqliteConnection("DataSource=:memory:");
-        _connection.Open();
+        var configuration = new ConfigurationBuilder()
+            .AddUserSecrets<MinitwitDbContextFactory>()
+            .AddEnvironmentVariables()
+            .Build();
+
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        _connection = new NpgsqlConnection(connectionString);
+        await _connection.OpenAsync();
 
         var options = new DbContextOptionsBuilder<MinitwitDbContext>()
-            .UseSqlite(_connection)
+            .UseNpgsql(connectionString)  // Use Npgsql for PostgreSQL
             .Options;
 
         _dbContext = new MinitwitDbContext(options);
-        await _dbContext.Database.EnsureCreatedAsync();
+
+        
+        await _dbContext.Database.EnsureDeletedAsync(); // Delete the database if it exists
+        await _dbContext.Database.EnsureCreatedAsync(); // Create a fresh database
     }
+
+
 
     private async Task DisposeDbContext()
     {
