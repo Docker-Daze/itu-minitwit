@@ -27,7 +27,7 @@ public class MessageBatchService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             // Wait for 2 seconds or until cancellation
-            await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken).ConfigureAwait(false);
 
             // If there are no messages, continue
             if (_messageQueue.IsEmpty)
@@ -46,7 +46,7 @@ public class MessageBatchService : BackgroundService
                 {
                     var dbContext = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
                     dbContext.Messages.AddRange(messagesToInsert);
-                    await dbContext.SaveChangesAsync(stoppingToken);
+                    await dbContext.SaveChangesAsync(stoppingToken).ConfigureAwait(false);
                 }
             }
         }

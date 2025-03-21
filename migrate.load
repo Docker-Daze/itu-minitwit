@@ -1,5 +1,0 @@
-load database
-    from sqlite://../backup/minitwit.db
-    into postgresql://nikolai:passwordhehe@localhost/minitwit_dev
-
-with include no drop, data only, create no tables, create indexes, reset sequences;

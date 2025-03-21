@@ -2,5 +2,5 @@
 
 public class APIFollowingDTO
 {
-    public required string follows {get; set;}
+    public required string follows { get; set; }
 }

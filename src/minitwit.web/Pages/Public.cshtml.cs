@@ -11,7 +11,7 @@ public class PublicModel : PageModel
     public List<MessageDTO> Messages { get; set; }
     public int _currentPage;
 
-    public PublicModel(IMessageRepository messageRepository, IUserRepository userRepository)
+    public PublicModel(IMessageRepository messageRepository)
     {
         _messageRepository = messageRepository;
     }
@@ -19,7 +19,7 @@ public class PublicModel : PageModel
     public async Task<ActionResult> OnGet([FromQuery] int? page)
     {
         _currentPage = page ?? 1;
-        Messages = await _messageRepository.GetMessages(_currentPage);
+        Messages = await _messageRepository.GetMessages(_currentPage).ConfigureAwait(false);
         return Page();
     }
 }

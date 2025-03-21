@@ -9,15 +9,15 @@ public class MinitwitDbContextFactory : IDesignTimeDbContextFactory<MinitwitDbCo
     public MinitwitDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<MinitwitDbContext>();
-            
+
         var configuration = new ConfigurationBuilder()
             .AddUserSecrets<MinitwitDbContextFactory>()
             .AddEnvironmentVariables()
             .Build();
-        
+
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         optionsBuilder.UseNpgsql(connectionString);
-        
+
         return new MinitwitDbContext(optionsBuilder.Options);
     }
 }

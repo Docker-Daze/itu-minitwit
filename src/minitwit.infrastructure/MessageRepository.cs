@@ -8,13 +8,13 @@ public class MessageRepository : IMessageRepository
     private readonly MinitwitDbContext _dbContext;
     private IUserRepository _userRepository;
     private const int PerPage = 10;
-    
+
     public MessageRepository(MinitwitDbContext dbContext, IUserRepository userRepository)
     {
         _dbContext = dbContext;
         _userRepository = userRepository;
     }
-    
+
     public async Task AddMessage(string userId, string message, int flagged = 0)
     {
         if (string.IsNullOrWhiteSpace(message))
@@ -25,8 +25,8 @@ public class MessageRepository : IMessageRepository
         {
             throw new ArgumentException("Message text cannot exceed 160 characters.");
         }
-        
-        var user = await _userRepository.GetUser(userId);
+
+        var user = await _userRepository.GetUser(userId).ConfigureAwait(false);
 
         Message newMessage = new()
         {
@@ -35,106 +35,106 @@ public class MessageRepository : IMessageRepository
             User = user,
             Flagged = flagged
         };
-        
-        await _dbContext.Messages.AddAsync(newMessage); // does not write to the database!
-        await _dbContext.SaveChangesAsync(); // persist the changes in the database
+
+        await _dbContext.Messages.AddAsync(newMessage).ConfigureAwait(false); // does not write to the database!
+        await _dbContext.SaveChangesAsync().ConfigureAwait(false); // persist the changes in the database
     }
 
     public async Task<List<MessageDTO>> GetMessages(int page)
     {
         int offset = (page - 1) * PerPage;
-        
+
         var query = (from message in _dbContext.Messages
-            orderby message.PubDate descending
-            where message.Flagged == 0
-            select new MessageDTO
-            {
-                Text = message.Text,
-                Username = message.User.UserName,
-                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
-                GravatarUrl = message.User.GravatarURL
-            }).Skip(offset).Take(PerPage);
-        
-        var result = await query.ToListAsync();
+                     orderby message.PubDate descending
+                     where message.Flagged == 0
+                     select new MessageDTO
+                     {
+                         Text = message.Text,
+                         Username = message.User.UserName,
+                         PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
+                         GravatarUrl = message.User.GravatarURL
+                     }).Skip(offset).Take(PerPage);
+
+        var result = await query.ToListAsync().ConfigureAwait(false);
         return result;
     }
 
     public async Task<List<APIMessageDTO>> GetMessagesSpecifiedAmount(int amount)
     {
         var query = (from message in _dbContext.Messages
-            orderby message.PubDate descending
-            where message.Flagged == 0
-            select new APIMessageDTO
-            {
-                content = message.Text,
-                user = message.User.UserName,
-                pub_date = ((DateTimeOffset)message.PubDate).ToUnixTimeSeconds(),
-            }).Take(amount);
-        
-        var result = await query.ToListAsync();
+                     orderby message.PubDate descending
+                     where message.Flagged == 0
+                     select new APIMessageDTO
+                     {
+                         content = message.Text,
+                         user = message.User.UserName,
+                         pub_date = ((DateTimeOffset)message.PubDate).ToUnixTimeSeconds(),
+                     }).Take(amount);
+
+        var result = await query.ToListAsync().ConfigureAwait(false);
         return result;
     }
 
     public async Task<List<MessageDTO>> GetMessagesUserTimeline(string username, int page)
     {
         int offset = (page - 1) * PerPage;
-        
+
         var query = (from message in _dbContext.Messages
-            orderby message.PubDate descending
-            where message.Flagged == 0 && message.User.UserName == username
-            select new MessageDTO
-            {
-                Text = message.Text,
-                Username = message.User.UserName,
-                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
-                GravatarUrl = message.User.GravatarURL
-            }).Skip(offset).Take(PerPage);
-        
-        var result = await query.ToListAsync();
+                     orderby message.PubDate descending
+                     where message.Flagged == 0 && message.User.UserName == username
+                     select new MessageDTO
+                     {
+                         Text = message.Text,
+                         Username = message.User.UserName,
+                         PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
+                         GravatarUrl = message.User.GravatarURL
+                     }).Skip(offset).Take(PerPage);
+
+        var result = await query.ToListAsync().ConfigureAwait(false);
         return result;
     }
-    
+
     public async Task<List<APIMessageDTO>> GetMessagesFromUsernameSpecifiedAmount(string username, int amount)
     {
 
         var query = (from message in _dbContext.Messages
-            orderby message.PubDate descending
-            where message.Flagged == 0 && message.User.UserName == username
-            select new APIMessageDTO
-            {
-                content = message.Text,
-                user = message.User.UserName,
-                pub_date = ((DateTimeOffset)message.PubDate).ToUnixTimeSeconds(),
-            }).Take(amount);
-        
-        var result = await query.ToListAsync();
+                     orderby message.PubDate descending
+                     where message.Flagged == 0 && message.User.UserName == username
+                     select new APIMessageDTO
+                     {
+                         content = message.Text,
+                         user = message.User.UserName,
+                         pub_date = ((DateTimeOffset)message.PubDate).ToUnixTimeSeconds(),
+                     }).Take(amount);
+
+        var result = await query.ToListAsync().ConfigureAwait(false);
         return result;
     }
-    
+
     public async Task<List<MessageDTO>> GetMessagesOwnTimeline(string username, int page)
     {
         int offset = (page - 1) * PerPage;
-        
-        var userId = await _userRepository.GetUserID(username);
+
+        var userId = await _userRepository.GetUserID(username).ConfigureAwait(false);
 
         var following = await _dbContext.Followers
             .Where(f => f.WhoId == userId)
             .Select(f => f.WhomId)
-            .ToListAsync();
-        
+            .ToListAsync().ConfigureAwait(false);
+
         var query = (from message in _dbContext.Messages
-            orderby message.PubDate descending
-            where message.Flagged == 0 
-                  && (message.User.UserName == username || following.Contains(message.User.Id)) 
-            select new MessageDTO
-            {
-                Text = message.Text,
-                Username = message.User.UserName,
-                PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
-                GravatarUrl = message.User.GravatarURL
-            }).Skip(offset).Take(PerPage);
-        
-        var result = await query.ToListAsync();
+                     orderby message.PubDate descending
+                     where message.Flagged == 0
+                           && (message.User.UserName == username || following.Contains(message.User.Id))
+                     select new MessageDTO
+                     {
+                         Text = message.Text,
+                         Username = message.User.UserName,
+                         PubDate = message.PubDate.ToString("MM'/'dd'/'yy H':'mm':'ss"),
+                         GravatarUrl = message.User.GravatarURL
+                     }).Skip(offset).Take(PerPage);
+
+        var result = await query.ToListAsync().ConfigureAwait(false);
         return result;
     }
 }

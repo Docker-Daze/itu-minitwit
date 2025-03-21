@@ -19,16 +19,16 @@ public class AddMessageModel : PageModel
         _messageRepository = messageRepository;
         _userRepository = userRepository;
     }
-    
+
     public async Task<IActionResult> OnPost()
     {
-        
-        var userId = await _userRepository.GetUserID(User.Identity!.Name!);
+
+        var userId = await _userRepository.GetUserID(User.Identity!.Name!).ConfigureAwait(false);
         if (userId == null)
         {
             return Unauthorized();
         }
-        
+
         var message = MessageInput.Text;
         if (MessageInput?.Text == null || string.IsNullOrWhiteSpace(MessageInput.Text))
         {
@@ -43,7 +43,7 @@ public class AddMessageModel : PageModel
             return Redirect("/");
         }
 
-        await _messageRepository.AddMessage(userId, message);
+        await _messageRepository.AddMessage(userId, message).ConfigureAwait(false);
         TempData["FlashMessage"] = "Your message was recorded";
         return Redirect("/");
     }

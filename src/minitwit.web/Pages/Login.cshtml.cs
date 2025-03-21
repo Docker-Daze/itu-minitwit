@@ -19,7 +19,7 @@ public class LoginModel : PageModel
         _logger = logger;
         _userManager = userManager;
     }
-    
+
     [BindProperty]
     public string Username { get; set; }
     [BindProperty]
@@ -34,23 +34,23 @@ public class LoginModel : PageModel
         }
 
         // Clear the existing external cookie to ensure a clean login process
-        await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+        await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme).ConfigureAwait(false);
 
         if (returnUrl != null) ReturnUrl = returnUrl;
-        
+
     }
 
-    public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
+    public async Task<IActionResult> OnPostAsync()
     {
-        var user = await _userManager.FindByNameAsync(Username);
-        
+        var user = await _userManager.FindByNameAsync(Username).ConfigureAwait(false);
+
         if (user == null)
         {
             ModelState.AddModelError(string.Empty, "Invalid username");
             return Page();
-        } 
-        
-        var result = await _signInManager.PasswordSignInAsync(user, Password, false, true);
+        }
+
+        var result = await _signInManager.PasswordSignInAsync(user, Password, false, true).ConfigureAwait(false);
         if (!result.Succeeded)
         {
             ModelState.AddModelError(string.Empty, "Invalid password");
@@ -59,5 +59,10 @@ public class LoginModel : PageModel
         TempData["FlashMessage"] = "You were logged in";
         HttpContext.Session.SetString("UserId", user.Id);
         return LocalRedirect("/public");
+    }
+
+    public async Task OnGetAsync(Uri returnUrl = null)
+    {
+        throw new NotImplementedException();
     }
 }

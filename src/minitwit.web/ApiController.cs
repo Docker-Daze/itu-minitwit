@@ -17,16 +17,16 @@ public class ApiController : Controller
     private readonly IUserEmailStore<User> _emailStore;
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
-    private static int _latest = 0;
-    
+    private static int _latest;
+
     private readonly MetricsService _metricsService;
-    
+
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
         IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
-        
+
         _userManager = userManager;
         _userStore = userStore;
         _emailStore = (IUserEmailStore<User>)_userStore;
@@ -35,35 +35,35 @@ public class ApiController : Controller
         _userRepository = userRepository;
         _metricsService = metricsService;
     }
-    
+
     public async Task<IActionResult?> NotReqFromSimulator(HttpContext context)
     {
         var fromSimulator = context.Request.Headers["Authorization"];
         if (fromSimulator != "Basic c2ltdWxhdG9yOnN1cGVyX3NhZmUh")
         {
-            return StatusCode(StatusCodes.Status403Forbidden, new 
-            { 
-                status = 403, 
-                error_msg = "You are not authorized to use this resource!" 
+            return StatusCode(StatusCodes.Status403Forbidden, new
+            {
+                status = 403,
+                error_msg = "You are not authorized to use this resource!"
             });
         }
         return null;
     }
-    
+
     // GET for latest
     [HttpGet("/api/latest")]
     public async Task<IActionResult> Latest()
     {
         return Ok(new { latest = _latest });
     }
-    
+
     // POST for register
     [HttpPost("/api/register")]
     public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
     {
-        using (_metricsService.MeasureRequestDuration())
+        using (MetricsService.MeasureRequestDuration())
         {
-            using (_metricsService.MeasureRequestRegisterDuration())
+            using (MetricsService.MeasureRequestRegisterDuration())
             {
 
 
@@ -72,34 +72,34 @@ public class ApiController : Controller
 
                 user.UserName = request.username;
 
-                var existingUser = await _userManager.FindByEmailAsync(request.email);
+                var existingUser = await _userManager.FindByEmailAsync(request.email).ConfigureAwait(false);
                 if (existingUser != null)
                 {
-                    _metricsService.IncrementRegisterCounterErrorExistingUser();
+                    MetricsService.IncrementRegisterCounterErrorExistingUser();
                     ModelState.AddModelError(string.Empty, "Email address already exists.");
                     return BadRequest(ModelState);
                 }
 
-                _metricsService.IncrementRegisterCounter();
-                await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, request.pwd);
+                MetricsService.IncrementRegisterCounter();
+                await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None).ConfigureAwait(false);
+                await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None).ConfigureAwait(false);
+                var result = await _userManager.CreateAsync(user, request.pwd).ConfigureAwait(false);
 
                 if (result.Succeeded)
                 {
-                    _metricsService.IncrementRegisterCounterResultSuccess();
-                    user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
+                    MetricsService.IncrementRegisterCounterResultSuccess();
+                    user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80).ConfigureAwait(false);
 
                     var claim = new Claim("User Name", request.username);
-                    await _userManager.AddClaimAsync(user, claim);
+                    await _userManager.AddClaimAsync(user, claim).ConfigureAwait(false);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false).ConfigureAwait(false);
                     HttpContext.Session.SetString("UserId", user.Id);
 
                     return NoContent();
                 }
 
-                _metricsService.IncrementRegisterCounterNothingHappend();
+                MetricsService.IncrementRegisterCounterNothingHappend();
                 foreach (var error in result.Errors)
                 {
                     Console.WriteLine(error.Description);
@@ -109,76 +109,76 @@ public class ApiController : Controller
             }
         }
     }
-    
+
     // GET and POST messages
     // GET specified user latest messages.
     [HttpGet("/api/msgs/{username}")]
     public async Task<IActionResult> GetUserMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
     {
-        using (_metricsService.MeasureRequestDuration())
+        using (MetricsService.MeasureRequestDuration())
         {
-            _metricsService.IncrementGetRequestsCounter();
+            MetricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
-                _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                MetricsService.IncrementErrorCounter();
+                return await notFromSimResponse.ConfigureAwait(false);
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
-                _metricsService.IncrementErrorCounter();
+                MetricsService.IncrementErrorCounter();
                 return NotFound();
             }
 
-            var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no);
+            var messages = await _messageRepository.GetMessagesFromUsernameSpecifiedAmount(username, no).ConfigureAwait(false);
             return Ok(messages);
         }
     }
-    
+
     // GET latest messages. Doesn't matter who posted.
     [HttpGet("/api/msgs")]
     public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
     {
-        using (_metricsService.MeasureRequestDuration())
+        using (MetricsService.MeasureRequestDuration())
         {
-            _metricsService.IncrementGetRequestsCounter();
+            MetricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
-                _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                MetricsService.IncrementErrorCounter();
+                return await notFromSimResponse.ConfigureAwait(false);
             }
 
-            var messages = await _messageRepository.GetMessagesSpecifiedAmount(no);
+            var messages = await _messageRepository.GetMessagesSpecifiedAmount(no).ConfigureAwait(false);
             return Ok(messages);
         }
     }
-    
+
     // POST a message. Author is the {username}.
     [HttpPost("/api/msgs/{username}")]
     public async Task<IActionResult> PostMsgs(string username, [FromBody] MessageRequest request, [FromQuery] int latest)
     {
-        using (_metricsService.MeasureRequestDuration())
+        using (MetricsService.MeasureRequestDuration())
         {
-            using (_metricsService.MeasureRequestPostMsgsDuration())
+            using (MetricsService.MeasureRequestPostMsgsDuration())
             {
 
 
                 _latest = latest;
                 if (string.IsNullOrEmpty(username))
                 {
-                    _metricsService.IncrementErrorCounter();
+                    MetricsService.IncrementErrorCounter();
                     return Unauthorized();
                 }
 
                 if (_userRepository.GetUserID(username).Result == null)
                 {
-                    _metricsService.IncrementErrorCounter();
+                    MetricsService.IncrementErrorCounter();
                     return NotFound();
                 }
 
@@ -187,72 +187,72 @@ public class ApiController : Controller
 
                 if (string.IsNullOrWhiteSpace(message))
                 {
-                    _metricsService.IncrementErrorCounter();
+                    MetricsService.IncrementErrorCounter();
                     ModelState.AddModelError("Message", "Message cannot be empty.");
                 }
                 else if (message.Length > 160)
                 {
-                    _metricsService.IncrementErrorCounter();
+                    MetricsService.IncrementErrorCounter();
                     ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
                 }
 
-                _metricsService.IncrementPostMsgsCounter();
-                var userId = await _userRepository.GetUserID(username);
-                await _messageRepository.AddMessage(userId, message, flagged);
+                MetricsService.IncrementPostMsgsCounter();
+                var userId = await _userRepository.GetUserID(username).ConfigureAwait(false);
+                await _messageRepository.AddMessage(userId, message, flagged).ConfigureAwait(false);
                 return NoContent();
             }
         }
     }
-    
+
     // POST and GET for follow.
     // GET for follow. Gets json on who it follows
     [HttpGet("/api/fllws/{username}")]
-    public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
+    public async Task<IActionResult> GetFollow(string username, [FromQuery] int latest)
     {
-        using (_metricsService.MeasureRequestDuration())
+        using (MetricsService.MeasureRequestDuration())
         {
-            _metricsService.IncrementGetRequestsCounter();
+            MetricsService.IncrementGetRequestsCounter();
             _latest = latest;
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
-                _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                MetricsService.IncrementErrorCounter();
+                return await notFromSimResponse.ConfigureAwait(false);
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
-                _metricsService.IncrementErrorCounter();
+                MetricsService.IncrementErrorCounter();
                 return NotFound();
             }
 
-            var followers = await _userRepository.GetFollowers(username);
+            var followers = await _userRepository.GetFollowers(username).ConfigureAwait(false);
             return Ok(new { follows = followers.Select(f => f.follows).ToList() });
         }
     }
-    
+
     // POST for follow and unfolow. {Username} is the person who will follow/unfollow someone.
     [HttpPost("/api/fllws/{username}")]
     public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request, [FromQuery] int latest)
     {
-        using (_metricsService.MeasureRequestDuration())
+        using (MetricsService.MeasureRequestDuration())
         {
             _latest = latest;
 
             if (_userRepository.GetUserID(username).Result == null)
             {
-                _metricsService.IncrementErrorCounter();
+                MetricsService.IncrementErrorCounter();
                 return NotFound();
             }
 
             if (request.follow != null)
             {
-                using (_metricsService.MeasureRequestFollowDuration())
+                using (MetricsService.MeasureRequestFollowDuration())
                 {
-                    _metricsService.IncrementFollowCounter();
+                    MetricsService.IncrementFollowCounter();
                     try
                     {
-                        await _userRepository.FollowUser(username, request.follow);
+                        await _userRepository.FollowUser(username, request.follow).ConfigureAwait(false);
                         return NoContent();
                     }
                     catch (Exception e)
@@ -262,12 +262,12 @@ public class ApiController : Controller
                 }
             }
 
-            using (_metricsService.MeasureRequestUnfollowDuration())
+            using (MetricsService.MeasureRequestUnfollowDuration())
             {
-                _metricsService.IncrementUnFollowCounter();
+                MetricsService.IncrementUnFollowCounter();
                 try
                 {
-                    await _userRepository.UnfollowUser(username, request.unfollow!);
+                    await _userRepository.UnfollowUser(username, request.unfollow!).ConfigureAwait(false);
                     return NoContent();
                 }
                 catch (Exception e)
@@ -275,9 +275,9 @@ public class ApiController : Controller
                     return NoContent();
                 }
             }
-            
-            
+
+
         }
     }
-    
+
 }

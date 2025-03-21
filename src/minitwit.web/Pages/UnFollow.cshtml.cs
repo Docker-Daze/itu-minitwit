@@ -9,19 +9,19 @@ public class UnFollow : PageModel
 {
     private readonly IUserRepository _userRepository;
     [BindProperty(SupportsGet = true)]
-    public string? user {get; set;}
-    
-    public UnFollow(IMessageRepository messageRepository, IUserRepository userRepository)
+    public string? user { get; set; }
+
+    public UnFollow(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
-    
+
     public async Task<ActionResult> OnGet()
     {
         if (User.Identity!.IsAuthenticated)
         {
-            await _userRepository.UnfollowUser(User.Identity.Name!, user!);
-            TempData["FlashMessage"] = $"You are no longer following \"{user}\""; 
+            await _userRepository.UnfollowUser(User.Identity.Name!, user!).ConfigureAwait(false);
+            TempData["FlashMessage"] = $"You are no longer following \"{user}\"";
             return Redirect($"/{user}");
         }
 
