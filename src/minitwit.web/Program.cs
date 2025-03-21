@@ -100,4 +100,6 @@ using (var scope = app.Services.CreateScope())
 
 app.Run();
 
+Log.CloseAndFlush(); //Clean and shutdown logs
+
 public partial class Program {}
