@@ -27,7 +27,7 @@ services:
   grafana:
     image: grafana/grafana:10.2.4
     ports:
-      - "3000:3000"
+      - "3005:3005"
     networks:
       - itu-minitwit_default
   
@@ -35,14 +35,10 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.12.1
     container_name: elasticsearch
     environment:
-      - discovery.type=single-node
       - bootstrap.memory_lock=true
       - xpack.security.enabled=false
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+      - discovery.type=single-node
     volumes:
       - esdata:/usr/share/elasticsearch/data
     ports:
