@@ -7,12 +7,33 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5114:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=testdb;Username=postgres;Password=testpassword
     networks:
       - itu-minitwit_default
-  
+        
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: testdb
+      POSTGRES_USER: postgres
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d testdb " ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    networks:
+      - itu-minitwit_default
   
   prometheus:
     image: prom/prometheus
