@@ -72,11 +72,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ubuntu-build
-
+      
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: v${{ github.run_number }}  # Unique tag based on run number
           files: ubuntu-build.zip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}  # Use GitHub's built-in token
