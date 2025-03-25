@@ -73,18 +73,18 @@ public class ApiController : Controller
                 user.UserName = request.username;
 
                 var existingUser = await _userManager.FindByEmailAsync(request.email);
-                if (existingUser != null)
+                if (existingUser != null || user.UserName == null)
                 {
                     _metricsService.IncrementRegisterCounterErrorExistingUser();
                     ModelState.AddModelError(string.Empty, "Email address already exists.");
                     return BadRequest(ModelState);
                 }
 
-                _metricsService.IncrementRegisterCounter();
+               
                 await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, request.pwd);
-
+                _metricsService.IncrementRegisterCounter();
                 if (result.Succeeded)
                 {
                     _metricsService.IncrementRegisterCounterResultSuccess();
@@ -279,9 +279,6 @@ public class ApiController : Controller
                     return NoContent();
                 }
             }
-            
-            
         }
     }
-    
 }

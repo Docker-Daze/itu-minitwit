@@ -863,5 +863,15 @@ FodyWeavers.xsd
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
+# Ignore all bin/ and obj/ folders recursively
+**/bin/
+**/obj/
 
+# Ignore DLLs and build artifacts in case some still sneak in
+*.dll
+*.pdb
+*.exe
+*.json
+*.deps.json
+*.runtimeconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,macos,rider,visualstudio,dotnetcore,aspnetcore,python,vagrant
