@@ -3,8 +3,8 @@ services:
     image: nikolai/minitwitimage
     container_name: minitwit
     build:
-       context: .
-       dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "5114:8080"
     environment:
@@ -64,7 +64,7 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection=Host=test_postgres;Port=5432;Database=testdb;Username=testuser;Password=testpassword
 
-  
+
 networks:
   itu-minitwit_default:
     driver: bridge

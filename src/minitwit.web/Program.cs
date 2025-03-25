@@ -1,9 +1,18 @@
+using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 using minitwit.infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using minitwit.web;
 using Prometheus;
+using Serilog;
+using Serilog.Formatting.Display;
+using Serilog.Sinks.Network;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +35,16 @@ builder.Services.AddSession(options =>
 
 builder.Configuration.AddUserSecrets<Program>()
     .AddEnvironmentVariables();
+
+var outputTemplate = "{Timestamp:dd-MM-YYYY HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}";
+
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .MinimumLevel.Warning()
+    .ReadFrom.Configuration(context.Configuration)
+    .Enrich.FromLogContext()
+    .WriteTo.TCPSink("tcp://logstash:5012", new MessageTemplateTextFormatter(outputTemplate))
+);
+
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseNpgsql(connectionString));
 
@@ -86,5 +105,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+Log.CloseAndFlush(); //Clean and shutdown logs
 
 public partial class Program {}
