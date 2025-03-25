@@ -33,7 +33,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     .ReadFrom.Configuration(context.Configuration)
     .Enrich.FromLogContext()
     .WriteTo.Console()
-    .WriteTo.TCPSink("logstash", 5012)
+    .WriteTo.TCPSink("tcp://logstash:5012")
 );
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
