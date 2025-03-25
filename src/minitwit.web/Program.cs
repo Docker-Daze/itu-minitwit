@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using minitwit.web;
 using Prometheus;
 using Serilog;
+using Serilog.Sinks.Network;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
         AutoRegisterTemplate = true,
         IndexFormat = "minitwit-logs-{0:yyyy.MM.dd}"
     })
+    .WriteTo.TCPSink("logstash", 5000)
 );
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
