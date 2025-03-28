@@ -42,7 +42,7 @@ services:
     environment:
       - bootstrap.memory_lock=true
       - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms124m -Xmx124m
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - discovery.type=single-node
     volumes:
       - esdata:/usr/share/elasticsearch/data
