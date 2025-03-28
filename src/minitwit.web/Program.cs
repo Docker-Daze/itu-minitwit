@@ -39,7 +39,7 @@ builder.Configuration.AddUserSecrets<Program>()
 var outputTemplate = "{Timestamp:dd-MM-YYYY HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}";
 
 builder.Host.UseSerilog((context, services, configuration) => configuration
-    .MinimumLevel.Warning()
+    .MinimumLevel.Information()
     .ReadFrom.Configuration(context.Configuration)
     .Enrich.FromLogContext()
     .WriteTo.TCPSink("tcp://209.38.112.21:5012", new MessageTemplateTextFormatter(outputTemplate))
