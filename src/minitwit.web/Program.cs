@@ -39,10 +39,10 @@ builder.Configuration.AddUserSecrets<Program>()
 var outputTemplate = "{Timestamp:dd-MM-YYYY HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}";
 
 builder.Host.UseSerilog((context, services, configuration) => configuration
-    .MinimumLevel.Error()
+    .MinimumLevel.Warning()
     .ReadFrom.Configuration(context.Configuration)
     .Enrich.FromLogContext()
-    .WriteTo.TCPSink("tcp://logstash:5012", new MessageTemplateTextFormatter(outputTemplate))
+    .WriteTo.TCPSink("tcp://209.38.112.21:5012", new MessageTemplateTextFormatter(outputTemplate))
 );
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
