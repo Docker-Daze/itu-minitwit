@@ -43,7 +43,8 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     .ReadFrom.Configuration(context.Configuration)
     .Enrich.FromLogContext()
     .WriteTo.Console(new RenderedCompactJsonFormatter())
-    .WriteTo.TCPSink("209.38.112.21", 5012, new RenderedCompactJsonFormatter())
+    .WriteTo.TCPSink("tcp://209.38.112.21:5012", new RenderedCompactJsonFormatter())
+
 );
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
