@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using minitwit.core;
 using minitwit.infrastructure;
 using minitwit.web.Pages;
+using Serilog;
 
 namespace minitwit.web;
 
@@ -256,6 +257,7 @@ public class ApiController : Controller
                     }
                     catch (Exception e)
                     {
+                        Log.Warning(e, "User {User} tried to follow {Target} but something went wrong", username, request.follow);
                         return NoContent();
                     }
                 }
@@ -276,6 +278,7 @@ public class ApiController : Controller
                 }
                 catch (Exception e)
                 {
+                    Log.Warning(e, "User {User} tried to unfollow {Target} but something went wrong", username, request.unfollow);
                     return NoContent();
                 }
             }
