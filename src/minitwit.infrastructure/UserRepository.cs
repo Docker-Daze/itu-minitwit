@@ -145,7 +145,7 @@ public class UserRepository : IUserRepository
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
     
-    public async Task<bool> IsFollowingUserID(string whomId, string whoId)
+    public async Task<bool> IsFollowingUserID(string whoId, string whomId)
     {
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
