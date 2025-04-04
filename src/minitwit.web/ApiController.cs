@@ -66,8 +66,6 @@ public class ApiController : Controller
         {
             using (_metricsService.MeasureRequestRegisterDuration())
             {
-
-
                 _latest = latest;
                 var user = Activator.CreateInstance<User>();
 
@@ -80,8 +78,7 @@ public class ApiController : Controller
                     ModelState.AddModelError(string.Empty, "Email address already exists.");
                     return BadRequest(ModelState);
                 }
-
-               
+                
                 await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, request.pwd);
@@ -101,11 +98,6 @@ public class ApiController : Controller
                 }
 
                 _metricsService.IncrementRegisterCounterNothingHappend();
-                foreach (var error in result.Errors)
-                {
-                    Console.WriteLine(error.Description);
-                }
-
                 return LocalRedirect("/api/register");
             }
         }
@@ -185,11 +177,10 @@ public class ApiController : Controller
 
                 var message = request.Content;
                 var flagged = request.flagged;
-                
-                _metricsService.IncrementPostMsgsCounter();
                 try
                 {
                     await _messageRepository.AddMessage(userId, message, flagged);
+                    _metricsService.IncrementPostMsgsCounter();
                     return NoContent();
                 }
                 catch (Exception e)
