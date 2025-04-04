@@ -5,15 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 using minitwit.infrastructure;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using minitwit.web;
 using Prometheus;
 using Serilog;
+using Serilog.Events;
 using Serilog.Formatting.Display;
 using Serilog.Sinks.Network;
-
+using Serilog.Formatting.Compact;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseStaticWebAssets();
@@ -39,10 +37,14 @@ builder.Configuration.AddUserSecrets<Program>()
 var outputTemplate = "{Timestamp:dd-MM-YYYY HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}";
 
 builder.Host.UseSerilog((context, services, configuration) => configuration
-    .MinimumLevel.Warning()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("System", LogEventLevel.Warning)
+    .MinimumLevel.Information()
     .ReadFrom.Configuration(context.Configuration)
     .Enrich.FromLogContext()
-    .WriteTo.TCPSink("tcp://209.38.112.21:5012", new MessageTemplateTextFormatter(outputTemplate))
+    .WriteTo.Console(new RenderedCompactJsonFormatter())
+    .WriteTo.TCPSink("tcp://209.38.112.21:5012", new RenderedCompactJsonFormatter())
+
 );
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -76,10 +78,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-
+app.UseMiddleware<LogEnrichmentMiddleware>();
 app.UseRouting();
 
 app.UseAuthorization();

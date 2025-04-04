@@ -61,9 +61,9 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task FollowUser(string whoUsername, string whomUsername)
+    public async Task FollowUser(string whoUsername, string whomUsername, string? whoId = null)
     {
-        var whoId = await GetUserID(whoUsername);
+        whoId ??= await GetUserID(whoUsername);
         var whomId = await GetUserID(whomUsername);
         
         var isFollowing = await IsFollowingUserID(whoId, whomId);
@@ -100,9 +100,9 @@ public class UserRepository : IUserRepository
     }
 
 
-    public async Task UnfollowUser(string whoUsername, string whomUsername)
+    public async Task UnfollowUser(string whoUsername, string whomUsername, string? whoId)
     {
-        var whoId = await GetUserID(whoUsername);
+        whoId ??= await GetUserID(whoUsername);
         var whomId = await GetUserID(whomUsername);
         
         var isFollowing = await IsFollowingUserID(whoId, whomId);
@@ -145,7 +145,7 @@ public class UserRepository : IUserRepository
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
     
-    public async Task<bool> IsFollowingUserID(string whomId, string whoId)
+    public async Task<bool> IsFollowingUserID(string whoId, string whomId)
     {
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {

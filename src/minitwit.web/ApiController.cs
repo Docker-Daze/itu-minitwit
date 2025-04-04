@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using minitwit.core;
 using minitwit.infrastructure;
 using minitwit.web.Pages;
+using Serilog;
 
 namespace minitwit.web;
 
@@ -65,8 +66,6 @@ public class ApiController : Controller
         {
             using (_metricsService.MeasureRequestRegisterDuration())
             {
-
-
                 _latest = latest;
                 var user = Activator.CreateInstance<User>();
 
@@ -79,8 +78,7 @@ public class ApiController : Controller
                     ModelState.AddModelError(string.Empty, "Email address already exists.");
                     return BadRequest(ModelState);
                 }
-
-               
+                
                 await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, request.pwd);
@@ -100,11 +98,6 @@ public class ApiController : Controller
                 }
 
                 _metricsService.IncrementRegisterCounterNothingHappend();
-                foreach (var error in result.Errors)
-                {
-                    Console.WriteLine(error.Description);
-                }
-
                 return LocalRedirect("/api/register");
             }
         }
@@ -120,16 +113,17 @@ public class ApiController : Controller
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
-            var notFromSimResponse = NotReqFromSimulator(HttpContext);
+            var notFromSimResponse = await NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
                 _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                return notFromSimResponse;
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
                 _metricsService.IncrementErrorCounter();
+                Log.Warning("there was no user with name: {username}", username);
                 return NotFound();
             }
 
@@ -147,11 +141,11 @@ public class ApiController : Controller
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
-            var notFromSimResponse = NotReqFromSimulator(HttpContext);
+            var notFromSimResponse = await NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
                 _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                return notFromSimResponse;
             }
 
             var messages = await _messageRepository.GetMessagesSpecifiedAmount(no);
@@ -167,39 +161,34 @@ public class ApiController : Controller
         {
             using (_metricsService.MeasureRequestPostMsgsDuration())
             {
-
-
                 _latest = latest;
                 if (string.IsNullOrEmpty(username))
                 {
                     _metricsService.IncrementErrorCounter();
                     return Unauthorized();
                 }
-
-                if (_userRepository.GetUserID(username).Result == null)
+                
+                var userId = await _userRepository.GetUserID(username);
+                if (userId == null)
                 {
-                    _metricsService.IncrementErrorCounter();
+                    Log.Warning("there was no user with name: {username}", username);
                     return NotFound();
                 }
 
                 var message = request.Content;
                 var flagged = request.flagged;
-
-                if (string.IsNullOrWhiteSpace(message))
+                try
                 {
-                    _metricsService.IncrementErrorCounter();
-                    ModelState.AddModelError("Message", "Message cannot be empty.");
+                    await _messageRepository.AddMessage(userId, message, flagged);
+                    _metricsService.IncrementPostMsgsCounter();
+                    return NoContent();
                 }
-                else if (message.Length > 160)
+                catch (Exception e)
                 {
-                    _metricsService.IncrementErrorCounter();
-                    ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
+                    Log.Warning(e, "Could not add the message: {message} to the database", message);
+                    return NoContent();
                 }
-
-                _metricsService.IncrementPostMsgsCounter();
-                var userId = await _userRepository.GetUserID(username);
-                await _messageRepository.AddMessage(userId, message, flagged);
-                return NoContent();
+                
             }
         }
     }
@@ -213,16 +202,17 @@ public class ApiController : Controller
         {
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
-            var notFromSimResponse = NotReqFromSimulator(HttpContext);
-            if (notFromSimResponse != null)
+            
+            if (await NotReqFromSimulator(HttpContext) != null)
             {
                 _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                return null;
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
                 _metricsService.IncrementErrorCounter();
+                Log.Warning("there was no user with name: {username}", username);
                 return NotFound();
             }
 
@@ -238,24 +228,26 @@ public class ApiController : Controller
         using (_metricsService.MeasureRequestDuration())
         {
             _latest = latest;
-
+            var userId = await _userRepository.GetUserID(username);
+            if (userId == null)
+            {
+                _metricsService.IncrementErrorCounter();
+                Log.Warning("there was no user with name: {username}", username);
+                return NotFound();
+            }
             if (request.follow != null)
             {
                 using (_metricsService.MeasureRequestFollowDuration())
                 {
                     _metricsService.IncrementFollowCounter();
-                    if (_userRepository.GetUserID(username).Result == null)
-                    {
-                        _metricsService.IncrementErrorCounter();
-                        return NotFound();
-                    }
                     try
                     {
-                        await _userRepository.FollowUser(username, request.follow);
+                        await _userRepository.FollowUser(username, request.follow, userId);
                         return NoContent();
                     }
                     catch (Exception e)
                     {
+                        Log.Warning(e, "User {User} tried to follow {Target} but something went wrong", username, request.follow);
                         return NoContent();
                     }
                 }
@@ -264,18 +256,14 @@ public class ApiController : Controller
             using (_metricsService.MeasureRequestUnfollowDuration())
             {
                 _metricsService.IncrementUnFollowCounter();
-                if (_userRepository.GetUserID(username).Result == null)
-                {
-                    _metricsService.IncrementErrorCounter();
-                    return NotFound();
-                }
                 try
                 {
-                    await _userRepository.UnfollowUser(username, request.unfollow!);
+                    await _userRepository.UnfollowUser(username, request.unfollow!, userId);
                     return NoContent();
                 }
                 catch (Exception e)
                 {
+                    Log.Warning(e, "User {User} tried to unfollow {Target} but something went wrong", username, request.unfollow);
                     return NoContent();
                 }
             }
