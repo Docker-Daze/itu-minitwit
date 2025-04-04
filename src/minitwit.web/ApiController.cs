@@ -121,16 +121,17 @@ public class ApiController : Controller
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
-            var notFromSimResponse = NotReqFromSimulator(HttpContext);
+            var notFromSimResponse = await NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
                 _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                return notFromSimResponse;
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
                 _metricsService.IncrementErrorCounter();
+                Log.Warning("there was no user with name: {username}", username);
                 return NotFound();
             }
 
@@ -148,11 +149,11 @@ public class ApiController : Controller
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
-            var notFromSimResponse = NotReqFromSimulator(HttpContext);
+            var notFromSimResponse = await NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
                 _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                return notFromSimResponse;
             }
 
             var messages = await _messageRepository.GetMessagesSpecifiedAmount(no);
@@ -168,39 +169,35 @@ public class ApiController : Controller
         {
             using (_metricsService.MeasureRequestPostMsgsDuration())
             {
-
-
                 _latest = latest;
                 if (string.IsNullOrEmpty(username))
                 {
                     _metricsService.IncrementErrorCounter();
                     return Unauthorized();
                 }
-
-                if (_userRepository.GetUserID(username).Result == null)
+                
+                var userId = await _userRepository.GetUserID(username);
+                if (userId == null)
                 {
-                    _metricsService.IncrementErrorCounter();
+                    Log.Warning("there was no user with name: {username}", username);
                     return NotFound();
                 }
 
                 var message = request.Content;
                 var flagged = request.flagged;
-
-                if (string.IsNullOrWhiteSpace(message))
-                {
-                    _metricsService.IncrementErrorCounter();
-                    ModelState.AddModelError("Message", "Message cannot be empty.");
-                }
-                else if (message.Length > 160)
-                {
-                    _metricsService.IncrementErrorCounter();
-                    ModelState.AddModelError("Message", "Message cannot be more 160 characters.");
-                }
-
+                
                 _metricsService.IncrementPostMsgsCounter();
-                var userId = await _userRepository.GetUserID(username);
-                await _messageRepository.AddMessage(userId, message, flagged);
-                return NoContent();
+                try
+                {
+                    await _messageRepository.AddMessage(userId, message, flagged);
+                    return NoContent();
+                }
+                catch (Exception e)
+                {
+                    Log.Warning(e, "Could not add the message: {message} to the database", message);
+                    return NoContent();
+                }
+                
             }
         }
     }
@@ -214,16 +211,17 @@ public class ApiController : Controller
         {
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
-            var notFromSimResponse = NotReqFromSimulator(HttpContext);
-            if (notFromSimResponse != null)
+            
+            if (await NotReqFromSimulator(HttpContext) != null)
             {
                 _metricsService.IncrementErrorCounter();
-                return await notFromSimResponse;
+                return null;
             }
 
             if (_userRepository.GetUserID(username).Result == null)
             {
                 _metricsService.IncrementErrorCounter();
+                Log.Warning("there was no user with name: {username}", username);
                 return NotFound();
             }
 
@@ -239,20 +237,21 @@ public class ApiController : Controller
         using (_metricsService.MeasureRequestDuration())
         {
             _latest = latest;
-
+            var userId = await _userRepository.GetUserID(username);
+            if (userId == null)
+            {
+                _metricsService.IncrementErrorCounter();
+                Log.Warning("there was no user with name: {username}", username);
+                return NotFound();
+            }
             if (request.follow != null)
             {
                 using (_metricsService.MeasureRequestFollowDuration())
                 {
                     _metricsService.IncrementFollowCounter();
-                    if (_userRepository.GetUserID(username).Result == null)
-                    {
-                        _metricsService.IncrementErrorCounter();
-                        return NotFound();
-                    }
                     try
                     {
-                        await _userRepository.FollowUser(username, request.follow);
+                        await _userRepository.FollowUser(username, request.follow, userId);
                         return NoContent();
                     }
                     catch (Exception e)
@@ -266,14 +265,9 @@ public class ApiController : Controller
             using (_metricsService.MeasureRequestUnfollowDuration())
             {
                 _metricsService.IncrementUnFollowCounter();
-                if (_userRepository.GetUserID(username).Result == null)
-                {
-                    _metricsService.IncrementErrorCounter();
-                    return NotFound();
-                }
                 try
                 {
-                    await _userRepository.UnfollowUser(username, request.unfollow!);
+                    await _userRepository.UnfollowUser(username, request.unfollow!, userId);
                     return NoContent();
                 }
                 catch (Exception e)
