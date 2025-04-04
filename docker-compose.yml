@@ -35,6 +35,27 @@ services:
     networks:
       - itu-minitwit_default
 
+  test-runner:
+    image: mcr.microsoft.com/dotnet/sdk:9.0
+    container_name: dotnet_test_runner
+    working_dir: /app
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      sh -c "cd tests/minitwit.tests &&
+      dotnet restore && 
+      dotnet test"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=test_postgres;Port=5432;Database=testdb;Username=testuser;Password=testpassword
+
+
+
+
+
+
 networks:
   itu-minitwit_default:
     driver: bridge
