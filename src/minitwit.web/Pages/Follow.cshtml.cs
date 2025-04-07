@@ -24,7 +24,7 @@ public class Follow : PageModel
             return Unauthorized();
         }
 
-        await _userRepository.FollowUser(User.Identity.Name, user);
+        await _userRepository.FollowUser(User.Identity.Name, user!);
         TempData["FlashMessage"] = $"You are now following \"{user}\"";
         return Redirect($"/{user}");
     }

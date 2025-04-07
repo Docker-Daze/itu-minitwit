@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -203,12 +203,12 @@ public class ApiController : Controller
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
-            if (NotReqFromSimulator(HttpContext) != null)
+            var notFromSimResponse = NotReqFromSimulator(HttpContext);
+            if (notFromSimResponse != null)
             {
                 _metricsService.IncrementErrorCounter();
-                return null;
+                return notFromSimResponse;
             }
-
             if (await _userRepository.GetUserID(username) == null)
             {
                 _metricsService.IncrementErrorCounter();

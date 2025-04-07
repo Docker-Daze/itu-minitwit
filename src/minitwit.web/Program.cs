@@ -34,8 +34,6 @@ builder.Services.AddSession(options =>
 builder.Configuration.AddUserSecrets<Program>()
     .AddEnvironmentVariables();
 
-var outputTemplate = "{Timestamp:dd-MM-YYYY HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}";
-
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .MinimumLevel.Override("System", LogEventLevel.Warning)
@@ -119,4 +117,4 @@ app.Run();
 
 Log.CloseAndFlush(); //Clean and shutdown logs
 
-public partial class Program {}
+public partial class Program { }

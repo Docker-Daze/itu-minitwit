@@ -35,19 +35,20 @@ public class RegisterModel : PageModel
     }
     
     [BindProperty]
-    public string Username { get; set; }
+    public required string Username { get; set; }
     [BindProperty]
-    public string Email { get; set; }
+    public required string Email { get; set; }
     [BindProperty]
-    public string Password { get; set; }
+    public required string Password { get; set; }
     [BindProperty]
-    public string Password2 { get; set; }
-    public string ReturnUrl { get; set; }
+    public required string Password2 { get; set; }
+    public string? ReturnUrl { get; set; }
     
 
-    public async Task OnGetAsync(string? returnUrl = null)
+    public Task OnGetAsync(string? returnUrl = null)
     {
         if(returnUrl != null) ReturnUrl = returnUrl;
+        return Task.CompletedTask;
     }
     
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null)

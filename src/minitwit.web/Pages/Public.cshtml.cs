@@ -14,6 +14,7 @@ public class PublicModel : PageModel
     public PublicModel(IMessageRepository messageRepository, IUserRepository userRepository)
     {
         _messageRepository = messageRepository;
+        Messages = new List<MessageDTO>();
     }
 
     public async Task<ActionResult> OnGet([FromQuery] int? page)

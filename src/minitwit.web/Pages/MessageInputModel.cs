@@ -8,5 +8,5 @@ public class MessageInputModel
     [Required (ErrorMessage = "Message cannot be empty")]
     [StringLength(160, ErrorMessage = "Maximum length is 160 characters")]
     [Display(Name = "Message Text")]
-    public string Text { get; set; }
+    public required string Text { get; set; }
 }
