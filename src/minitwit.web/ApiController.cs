@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -19,15 +19,15 @@ public class ApiController : Controller
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
     private static int _latest = 0;
-    
+
     private readonly MetricsService _metricsService;
-    
+
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
         IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
-        
+
         _userManager = userManager;
         _userStore = userStore;
         _emailStore = (IUserEmailStore<User>)_userStore;
@@ -36,28 +36,28 @@ public class ApiController : Controller
         _userRepository = userRepository;
         _metricsService = metricsService;
     }
-    
-    public async Task<IActionResult?> NotReqFromSimulator(HttpContext context)
+
+    public IActionResult? NotReqFromSimulator(HttpContext context)
     {
         var fromSimulator = context.Request.Headers["Authorization"];
         if (fromSimulator != "Basic c2ltdWxhdG9yOnN1cGVyX3NhZmUh")
         {
-            return StatusCode(StatusCodes.Status403Forbidden, new 
-            { 
-                status = 403, 
-                error_msg = "You are not authorized to use this resource!" 
+            return StatusCode(StatusCodes.Status403Forbidden, new
+            {
+                status = 403,
+                error_msg = "You are not authorized to use this resource!"
             });
         }
         return null;
     }
-    
+
     // GET for latest
     [HttpGet("/api/latest")]
     public async Task<IActionResult> Latest()
     {
-        return Ok(new { latest = _latest });
+        return await Task.FromResult(Ok(new { latest = _latest }));
     }
-    
+
     // POST for register
     [HttpPost("/api/register")]
     public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
@@ -78,7 +78,7 @@ public class ApiController : Controller
                     ModelState.AddModelError(string.Empty, "Email address already exists.");
                     return BadRequest(ModelState);
                 }
-                
+
                 await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, request.pwd);
@@ -102,7 +102,7 @@ public class ApiController : Controller
             }
         }
     }
-    
+
     // GET and POST messages
     // GET specified user latest messages.
     [HttpGet("/api/msgs/{username}")]
@@ -113,7 +113,7 @@ public class ApiController : Controller
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
-            var notFromSimResponse = await NotReqFromSimulator(HttpContext);
+            var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
                 _metricsService.IncrementErrorCounter();
@@ -131,7 +131,7 @@ public class ApiController : Controller
             return Ok(messages);
         }
     }
-    
+
     // GET latest messages. Doesn't matter who posted.
     [HttpGet("/api/msgs")]
     public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
@@ -141,7 +141,7 @@ public class ApiController : Controller
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
 
-            var notFromSimResponse = await NotReqFromSimulator(HttpContext);
+            var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
                 _metricsService.IncrementErrorCounter();
@@ -152,7 +152,7 @@ public class ApiController : Controller
             return Ok(messages);
         }
     }
-    
+
     // POST a message. Author is the {username}.
     [HttpPost("/api/msgs/{username}")]
     public async Task<IActionResult> PostMsgs(string username, [FromBody] MessageRequest request, [FromQuery] int latest)
@@ -167,7 +167,7 @@ public class ApiController : Controller
                     _metricsService.IncrementErrorCounter();
                     return Unauthorized();
                 }
-                
+
                 var userId = await _userRepository.GetUserID(username);
                 if (userId == null)
                 {
@@ -188,11 +188,11 @@ public class ApiController : Controller
                     Log.Warning(e, "Could not add the message: {message} to the database", message);
                     return NoContent();
                 }
-                
+
             }
         }
     }
-    
+
     // POST and GET for follow.
     // GET for follow. Gets json on who it follows
     [HttpGet("/api/fllws/{username}")]
@@ -202,8 +202,8 @@ public class ApiController : Controller
         {
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
-            
-            if (await NotReqFromSimulator(HttpContext) != null)
+
+            if (NotReqFromSimulator(HttpContext) != null)
             {
                 _metricsService.IncrementErrorCounter();
                 return null;
@@ -220,7 +220,7 @@ public class ApiController : Controller
             return Ok(new { follows = followers.Select(f => f.follows).ToList() });
         }
     }
-    
+
     // POST for follow and unfolow. {Username} is the person who will follow/unfollow someone.
     [HttpPost("/api/fllws/{username}")]
     public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request, [FromQuery] int latest)

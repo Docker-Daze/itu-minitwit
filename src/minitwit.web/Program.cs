@@ -47,20 +47,12 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     // Buffer, batch write, and configure TCP with retry and circuit breaker
     .WriteTo.Async(a => a.TCPSink(
         "tcp://209.38.112.21:5012",
-        new RenderedCompactJsonFormatter(),
-        batchPostingLimit: 50,
-        period: TimeSpan.FromSeconds(2),
-        queueLimit: 100000
-    ))
-    // Add in-memory buffer
-    .WriteTo.Async(a => a.Buffer(
-        bufferSize: 1000,
-        flushInterval: TimeSpan.FromSeconds(2)
+        new RenderedCompactJsonFormatter()
     ))
     // Filter out noise
-    .Filter.ByExcluding(evt => 
-        evt.Level == LogEventLevel.Information && 
-        evt.Properties.ContainsKey("RequestPath") && 
+    .Filter.ByExcluding(evt =>
+        evt.Level == LogEventLevel.Information &&
+        evt.Properties.ContainsKey("RequestPath") &&
         evt.Properties["RequestPath"].ToString().Contains("/metrics"))
 );
 
