@@ -45,7 +45,7 @@ jobs:
           cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/minitwitimage:webbuildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/minitwitimage:webbuildcache,mode=max
 
-      - name: Configure SSH
+      - name: Configure SSH to Primary Server
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/do_ssh_key
@@ -53,7 +53,7 @@ jobs:
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
 
-      - name: Deploy to server
+      - name: Deploy to Primary Server
         # Configure the ~./bash_profile and deploy.sh file on the Vagrantfile
         run: |
           scp -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no -r remote_files $SSH_USER@$SSH_HOST:/minitwit 
@@ -65,4 +65,26 @@ jobs:
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+
+      - name: Configure SSH to Secondary Server
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH2_KEY" > ~/.ssh/do_ssh_key2
+          chmod 600 ~/.ssh/do_ssh_key2
+        env:
+          SSH2_KEY: ${{ secrets.SSH2_KEY }}
+
+      - name: Deploy to Secondary Server
+        # Configure the ~./bash_profile and deploy.sh file on the Vagrantfile
+        run: |
+          scp -i ~/.ssh/do_ssh_key2 -o StrictHostKeyChecking=no -r remote_files $SSH2_USER@$SSH2_HOST:/minitwit 
+          ssh $SSH2_USER@$SSH2_HOST -i ~/.ssh/do_ssh_key2 -o StrictHostKeyChecking=no "
+            echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
+            cd /minitwit/remote_files && \
+            ./deploy.sh
+          "
+        env:
+          SSH2_USER: ${{ secrets.SSH2_USER }}
+          SSH2_HOST: ${{ secrets.SSH2_HOST }}
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
