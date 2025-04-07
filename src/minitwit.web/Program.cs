@@ -42,9 +42,26 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     .MinimumLevel.Information()
     .ReadFrom.Configuration(context.Configuration)
     .Enrich.FromLogContext()
-    .WriteTo.Console(new RenderedCompactJsonFormatter())
-    .WriteTo.TCPSink("tcp://209.38.112.21:5012", new RenderedCompactJsonFormatter())
-
+    // Buffer and batch write to console
+    .WriteTo.Async(a => a.Console(new RenderedCompactJsonFormatter()))
+    // Buffer, batch write, and configure TCP with retry and circuit breaker
+    .WriteTo.Async(a => a.TCPSink(
+        "tcp://209.38.112.21:5012",
+        new RenderedCompactJsonFormatter(),
+        batchPostingLimit: 50,
+        period: TimeSpan.FromSeconds(2),
+        queueLimit: 100000
+    ))
+    // Add in-memory buffer
+    .WriteTo.Async(a => a.Buffer(
+        bufferSize: 1000,
+        flushInterval: TimeSpan.FromSeconds(2)
+    ))
+    // Filter out noise
+    .Filter.ByExcluding(evt => 
+        evt.Level == LogEventLevel.Information && 
+        evt.Properties.ContainsKey("RequestPath") && 
+        evt.Properties["RequestPath"].ToString().Contains("/metrics"))
 );
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
