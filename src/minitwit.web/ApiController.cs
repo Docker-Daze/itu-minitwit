@@ -120,7 +120,7 @@ public class ApiController : Controller
                 return notFromSimResponse;
             }
 
-            if (_userRepository.GetUserID(username).Result == null)
+            if (await _userRepository.GetUserID(username) == null)
             {
                 _metricsService.IncrementErrorCounter();
                 Log.Warning("there was no user with name: {username}", username);
@@ -209,7 +209,7 @@ public class ApiController : Controller
                 return null;
             }
 
-            if (_userRepository.GetUserID(username).Result == null)
+            if (await _userRepository.GetUserID(username) == null)
             {
                 _metricsService.IncrementErrorCounter();
                 Log.Warning("there was no user with name: {username}", username);
