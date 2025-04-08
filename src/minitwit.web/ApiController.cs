@@ -168,8 +168,8 @@ public class ApiController : Controller
                     return Unauthorized();
                 }
 
-                var userId = await _userRepository.GetUserID(username);
-                if (userId == null)
+                var user = await _userRepository.GetUserFromUsername(username);
+                if (user == null)
                 {
                     Log.Warning("there was no user with name: {username}", username);
                     return NotFound();
@@ -179,7 +179,7 @@ public class ApiController : Controller
                 var flagged = request.flagged;
                 try
                 {
-                    await _messageRepository.AddMessage(userId, message, flagged);
+                    await _messageRepository.AddMessage(user, message, flagged);
                     _metricsService.IncrementPostMsgsCounter();
                     return NoContent();
                 }
@@ -209,7 +209,7 @@ public class ApiController : Controller
                 _metricsService.IncrementErrorCounter();
                 return notFromSimResponse;
             }
-            if (await _userRepository.GetUserID(username) == null)
+            if (await _userRepository.GetUserFromUsername(username) == null)
             {
                 _metricsService.IncrementErrorCounter();
                 Log.Warning("there was no user with name: {username}", username);

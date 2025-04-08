@@ -15,7 +15,7 @@ public class MessageRepository : IMessageRepository
         _userRepository = userRepository;
     }
 
-    public async Task AddMessage(string userId, string message, int flagged = 0)
+    public async Task AddMessage(User user, string message, int flagged = 0)
     {
         if (string.IsNullOrWhiteSpace(message))
         {
@@ -25,8 +25,6 @@ public class MessageRepository : IMessageRepository
         {
             throw new ArgumentException("Message text cannot exceed 160 characters.");
         }
-
-        var user = await _userRepository.GetUser(userId);
 
         Message newMessage = new()
         {

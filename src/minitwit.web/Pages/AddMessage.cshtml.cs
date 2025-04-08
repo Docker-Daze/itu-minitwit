@@ -23,8 +23,8 @@ public class AddMessageModel : PageModel
     public async Task<IActionResult> OnPost()
     {
         
-        var userId = await _userRepository.GetUserID(User.Identity!.Name!);
-        if (userId == null)
+        var user = await _userRepository.GetUserFromUsername(User.Identity!.Name!);
+        if (user == null)
         {
             return Unauthorized();
         }
@@ -43,7 +43,7 @@ public class AddMessageModel : PageModel
             return Redirect("/");
         }
 
-        await _messageRepository.AddMessage(userId, message);
+        await _messageRepository.AddMessage(user, message);
         TempData["FlashMessage"] = "Your message was recorded";
         return Redirect("/");
     }

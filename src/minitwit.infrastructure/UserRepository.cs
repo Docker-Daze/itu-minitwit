@@ -9,10 +9,10 @@ namespace minitwit.infrastructure;
 
 public class UserRepository : IUserRepository
 {
-    
+
     private readonly MinitwitDbContext _dbContext;
     private readonly MetricsService _metricsService;
-    
+
     public UserRepository(MinitwitDbContext dbContext, MetricsService metricsService)
     {
         _dbContext = dbContext;
@@ -21,26 +21,36 @@ public class UserRepository : IUserRepository
     public async Task<User> GetUser(string userId)
     {
         var query = from Users in _dbContext.Users
-            where Users.Id == userId
-            select Users;
-        
+                    where Users.Id == userId
+                    select Users;
+
         var user = await query.FirstOrDefaultAsync();
-      
+
+        return user!;
+    }
+    public async Task<User> GetUserFromUsername(string username)
+    {
+        var query = from Users in _dbContext.Users
+                    where Users.UserName == username
+                    select Users;
+
+        var user = await query.FirstOrDefaultAsync();
+
         return user!;
     }
 
     public async Task<string?> GetUserID(string username)
     {
         var query = from Users in _dbContext.Users
-            where Users.UserName == username
-            select Users.Id;
+                    where Users.UserName == username
+                    select Users.Id;
 
         var id = await query.FirstOrDefaultAsync();
         if (id != null) return id;
         return null;
     }
-    
-    
+
+
     public Task<string> GetGravatarURL(string email)
     {
         throw new NotImplementedException();
@@ -70,12 +80,12 @@ public class UserRepository : IUserRepository
         {
             throw new InvalidOperationException("You are already following this user");
         }
-        
+
         if (string.IsNullOrEmpty(whomId))
         {
             throw new ArgumentException("The user to be followed does not exist.");
         }
-        
+
         if (whoId == whomId)
         {
             throw new InvalidOperationException("You cannot follow yourself.");
@@ -103,7 +113,7 @@ public class UserRepository : IUserRepository
     {
         whoId ??= await GetUserID(whoUsername);
         var whomId = await GetUserID(whomUsername);
-        
+
         var isFollowing = await IsFollowingUserID(whoId, whomId);
         if (!isFollowing)
         {
@@ -143,7 +153,7 @@ public class UserRepository : IUserRepository
         return await _dbContext.Followers
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
-    
+
     public async Task<bool> IsFollowingUserID(string? whoId, string? whomId)
     {
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
@@ -172,13 +182,13 @@ public class UserRepository : IUserRepository
             var user = await GetUser(followedUserId);
             dtos.Add(new APIFollowingDTO
             {
-                follows = user.UserName! 
+                follows = user.UserName!
             });
         }
 
         return dtos;
     }
-    
+
 
 
 }
