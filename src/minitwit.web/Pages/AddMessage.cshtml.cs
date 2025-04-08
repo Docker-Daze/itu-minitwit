@@ -11,7 +11,7 @@ public class AddMessageModel : PageModel
     private readonly IUserRepository _userRepository;
 
     [BindProperty]
-    public MessageInputModel MessageInput { get; set; } = new();
+    public MessageInputModel MessageInput { get; set; } = new() { Text = string.Empty };
 
 
     public AddMessageModel(IMessageRepository messageRepository, IUserRepository userRepository)

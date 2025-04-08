@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Npgsql;
 using Microsoft.EntityFrameworkCore;
 using minitwit.infrastructure;
@@ -13,8 +13,8 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
     private readonly WebApplicationFactory<Program> _fixture;
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly HttpClient _client;
-    private MinitwitDbContext _dbContext;
-    private NpgsqlConnection _connection;
+    private MinitwitDbContext? _dbContext;
+    private NpgsqlConnection? _connection;
 
     public TestAPI(WebApplicationFactory<Program> fixture, ITestOutputHelper testOutputHelper)
     {
@@ -51,10 +51,16 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 
     private async Task DisposeDbContext()
     {
-        await _dbContext.DisposeAsync();
+        if (_dbContext != null)
+        {
+            await _dbContext.DisposeAsync();
+        }
         
-        _connection.Close();
-        _connection.Dispose();
+        if (_connection != null)
+        {
+            _connection.Close();
+            _connection.Dispose();
+        }
     }
 
 
