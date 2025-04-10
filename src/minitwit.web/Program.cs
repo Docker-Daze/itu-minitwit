@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using minitwit.core;
 using minitwit.infrastructure;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,9 @@ using Serilog.Events;
 using Serilog.Formatting.Display;
 using Serilog.Sinks.Network;
 using Serilog.Formatting.Compact;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseStaticWebAssets();
@@ -55,7 +59,17 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
 );
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<MinitwitDbContext>(options => options.UseNpgsql(connectionString));
+var npgsqlBuilder = new NpgsqlConnectionStringBuilder(connectionString)
+{
+    MaxPoolSize = 47,
+    MinPoolSize = 10
+};
+
+builder.Services.AddDbContext<MinitwitDbContext>(options =>
+    options.UseNpgsql(npgsqlBuilder.ConnectionString, npgsqlOptions =>
+    {
+        npgsqlOptions.EnableRetryOnFailure();
+    }));
 
 builder.Services.AddDefaultIdentity<User>(options =>
     {
