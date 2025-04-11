@@ -163,26 +163,15 @@ public class UserRepository : IUserRepository
     {
         var userId = await GetUserID(username);
 
-        // Get the IDs of the users that 'username' is following
-        var followedUserIds = await _dbContext.Followers
+        return await _dbContext.Followers
             .Where(f => f.WhoId == userId)
-            .Select(f => f.WhomId)
+            .Join(_dbContext.Users,
+                f => f.WhomId,
+                u => u.Id,
+                (f, u) => new APIFollowingDTO
+                {
+                    follows = u.UserName!
+                })
             .ToListAsync();
-
-        var dtos = new List<APIFollowingDTO>();
-
-        foreach (var followedUserId in followedUserIds)
-        {
-            var user = await GetUser(followedUserId);
-            dtos.Add(new APIFollowingDTO
-            {
-                follows = user.UserName!
-            });
-        }
-
-        return dtos;
     }
-
-
-
 }
