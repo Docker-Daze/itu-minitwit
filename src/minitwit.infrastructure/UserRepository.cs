@@ -68,26 +68,22 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task FollowUser(string whoUsername, string whomUsername, string? whoId = null)
+    public async Task FollowUser(string whoUsername, string whomUsername)
     {
-        whoId ??= await GetUserID(whoUsername);
-        var whomId = await GetUserID(whomUsername);
-        var isFollowing = await IsFollowingUserID(whoId, whomId);
-        if (isFollowing)
-        {
-            throw new InvalidOperationException("You are already following this user");
-        }
-
-        if (string.IsNullOrEmpty(whomId))
-        {
-            throw new ArgumentException("The user to be followed does not exist.");
-        }
-
+        List<string> ids = await GetUserIDs(whoUsername,whomUsername);
+        string whoId = ids[0];
+        string whomId = ids[1];
         if (whoId == whomId)
         {
             throw new InvalidOperationException("You cannot follow yourself.");
         }
 
+        bool isFollowing = await IsFollowingUserID(whoId, whomId);
+        if (isFollowing)
+        {
+            throw new InvalidOperationException("You already follow this user");
+        }
+        
         var follow = new Follower
         {
             WhoId = whoId!,
@@ -106,20 +102,15 @@ public class UserRepository : IUserRepository
     }
 
 
-    public async Task UnfollowUser(string whoUsername, string whomUsername, string? whoId)
+    public async Task UnfollowUser(string whoUsername, string whomUsername)
     {
-        whoId ??= await GetUserID(whoUsername);
-        var whomId = await GetUserID(whomUsername);
-
+        List<string> ids = await GetUserIDs(whoUsername,whomUsername);
+        string whoId = ids[0];
+        string whomId = ids[1];
         var isFollowing = await IsFollowingUserID(whoId, whomId);
         if (!isFollowing)
         {
             throw new InvalidOperationException("You need to follow the user to unfollow");
-        }
-
-        if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
-        {
-            throw new ArgumentException("The user to be unfollowed could not be found");
         }
 
         var followerEntry = await _dbContext.Followers
@@ -173,5 +164,29 @@ public class UserRepository : IUserRepository
                     follows = u.UserName!
                 })
             .ToListAsync();
+    }
+
+    private async Task<List<string>> GetUserIDs(string whoUsername, string whomUsername)
+    {
+        List<string> ids = new List<string>();
+        
+        // Query the Users table once for both usernames.
+        var users = await _dbContext.Users
+            .Where(u => u.UserName == whoUsername || u.UserName == whomUsername)
+            .Select(u => new { u.UserName, u.Id })
+            .ToListAsync();
+        // Extract the IDs from the result.
+        var whoId = users.FirstOrDefault(u => u.UserName == whoUsername)?.Id;
+        var whomId = users.FirstOrDefault(u => u.UserName == whomUsername)?.Id;
+
+        // Check if either user was not found.
+        if (string.IsNullOrEmpty(whoId) || string.IsNullOrEmpty(whomId))
+        {
+            throw new InvalidOperationException("One of these users does not exists.");
+        }
+        ids.Add(whoId);
+        ids.Add(whomId);
+
+        return ids;
     }
 }

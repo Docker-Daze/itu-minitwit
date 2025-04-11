@@ -219,12 +219,6 @@ public class ApiController : Controller
         using (_metricsService.MeasureRequestDuration())
         {
             _latest = latest;
-            var userId = await _userRepository.GetUserID(username);
-            if (userId == null)
-            {
-                Log.Warning("there was no user with name: {username}", username);
-                return NotFound();
-            }
             if (request.follow != null)
             {
                 using (_metricsService.MeasureRequestFollowDuration())
@@ -232,7 +226,7 @@ public class ApiController : Controller
                     _metricsService.IncrementFollowCounter();
                     try
                     {
-                        await _userRepository.FollowUser(username, request.follow, userId);
+                        await _userRepository.FollowUser(username, request.follow);
                         return NoContent();
                     }
                     catch (Exception e)
@@ -248,7 +242,7 @@ public class ApiController : Controller
                 _metricsService.IncrementUnFollowCounter();
                 try
                 {
-                    await _userRepository.UnfollowUser(username, request.unfollow!, userId);
+                    await _userRepository.UnfollowUser(username, request.unfollow!);
                     return NoContent();
                 }
                 catch (Exception e)
