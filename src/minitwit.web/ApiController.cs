@@ -74,7 +74,6 @@ public class ApiController : Controller
                 var existingUser = await _userManager.FindByEmailAsync(request.email);
                 if (existingUser != null || user.UserName == null)
                 {
-                    _metricsService.IncrementRegisterCounterErrorExistingUser();
                     ModelState.AddModelError(string.Empty, "Email address already exists.");
                     return BadRequest(ModelState);
                 }
@@ -85,7 +84,6 @@ public class ApiController : Controller
                 _metricsService.IncrementRegisterCounter();
                 if (result.Succeeded)
                 {
-                    _metricsService.IncrementRegisterCounterResultSuccess();
                     user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
 
                     var claim = new Claim("User Name", request.username);
@@ -96,8 +94,7 @@ public class ApiController : Controller
 
                     return NoContent();
                 }
-
-                _metricsService.IncrementRegisterCounterNothingHappend();
+                
                 return LocalRedirect("/api/register");
             }
         }
@@ -116,13 +113,11 @@ public class ApiController : Controller
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
-                _metricsService.IncrementErrorCounter();
                 return notFromSimResponse;
             }
 
             if (await _userRepository.GetUserID(username) == null)
             {
-                _metricsService.IncrementErrorCounter();
                 Log.Warning("there was no user with name: {username}", username);
                 return NotFound();
             }
@@ -144,7 +139,6 @@ public class ApiController : Controller
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
-                _metricsService.IncrementErrorCounter();
                 return notFromSimResponse;
             }
 
@@ -164,7 +158,6 @@ public class ApiController : Controller
                 _latest = latest;
                 if (string.IsNullOrEmpty(username))
                 {
-                    _metricsService.IncrementErrorCounter();
                     return Unauthorized();
                 }
 
@@ -206,12 +199,10 @@ public class ApiController : Controller
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
-                _metricsService.IncrementErrorCounter();
                 return notFromSimResponse;
             }
             if (await _userRepository.GetUserFromUsername(username) == null)
             {
-                _metricsService.IncrementErrorCounter();
                 Log.Warning("there was no user with name: {username}", username);
                 return NotFound();
             }
@@ -231,7 +222,6 @@ public class ApiController : Controller
             var userId = await _userRepository.GetUserID(username);
             if (userId == null)
             {
-                _metricsService.IncrementErrorCounter();
                 Log.Warning("there was no user with name: {username}", username);
                 return NotFound();
             }

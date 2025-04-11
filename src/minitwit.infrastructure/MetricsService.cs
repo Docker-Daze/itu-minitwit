@@ -14,23 +14,8 @@ public class MetricsService
         .CreateCounter("minitwit_unfollow_counter", "Total number of unfollow requests received.");
     private static readonly Counter GetRequestsCounter = Metrics
         .CreateCounter("minitwit_getRequests_counter", "Total number of get requests received.");
-    private static readonly Counter ErrorCounter = Metrics
-            .CreateCounter("minitwit_ErrorCounter_counter", "Total number of Errors received.");
-        
-    private static readonly Counter UnfollowNeedToFollowCounter = Metrics
-        .CreateCounter("minitwit_UnfollowNeedToFollow_counter", "Total number of UnfollowNeedToFollow error received.");
-    private static readonly Counter UnfollowNoWhoOrWhomCounter = Metrics
-        .CreateCounter("minitwit_UnfollowNoWhoOrWhom_counter", "Total number of unfollowNoWhoOrWhom error received.");
-    private static readonly Counter UnfollowfollowerEntryNullCounter = Metrics
-        .CreateCounter("minitwit_UnfollowfollowerEntryNull_counter", "Total number of UnfollowfollowerEntryNull error received.");
     
-    private static readonly Counter RegisterCounterErrorExistingUser = Metrics
-            .CreateCounter("minitwit_RegisterCounterErrorExistingUser_counter_total", "Total number of RegisterCounterErrorExistingUser error received.");
-    private static readonly Counter RegisterCounterResultSuccess = Metrics
-        .CreateCounter("minitwit_RegisterCounterSuccessfull_counter_total", "Total number of RegisterCounterSuccessfull received.");
-    private static readonly Counter RegisterCounterNothingHappend = Metrics
-        .CreateCounter("minitwit_RegisterCounterNothingHappend_counter_total", "Total number of RegisterCounterNothingHappend error received.");
-
+    
     private static readonly Histogram RequestDurationAVG = Metrics
         .CreateHistogram("app_request_duration_seconds", "Histogram of request duration.");
     private static readonly Histogram RequestDurationFollow = Metrics
@@ -63,38 +48,6 @@ public class MetricsService
     {
         GetRequestsCounter.Inc();
     }
-    public void IncrementErrorCounter()
-    {
-        ErrorCounter.Inc();
-    }
-    public void IncrementUnfollowNeedToFollowCounter()
-    {
-        UnfollowNeedToFollowCounter.Inc();
-    }
-    public void IncrementUnfollowNoWhoOrWhomCounter()
-    {
-        UnfollowNoWhoOrWhomCounter.Inc();
-    }
-    public void IncrementUnfollowfollowerEntryNullCounter()
-    {
-        UnfollowfollowerEntryNullCounter.Inc();
-    }
-
-    public void IncrementRegisterCounterErrorExistingUser()
-    {
-        RegisterCounterErrorExistingUser.Inc();
-    }
-
-    public void IncrementRegisterCounterResultSuccess()
-    {
-        RegisterCounterResultSuccess.Inc();
-    }
-
-    public void IncrementRegisterCounterNothingHappend()
-    {
-        RegisterCounterNothingHappend.Inc();
-    }
-    
 
     // Method to observe request duration
     public IDisposable MeasureRequestDuration()

@@ -18,25 +18,23 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
         _metricsService = metricsService;
     }
-    public async Task<User> GetUser(string userId)
+    public async Task<User?> GetUser(string userId)
     {
         var query = from Users in _dbContext.Users
                     where Users.Id == userId
                     select Users;
 
         var user = await query.FirstOrDefaultAsync();
-
-        return user!;
+        return user;
     }
-    public async Task<User> GetUserFromUsername(string username)
+    public async Task<User?> GetUserFromUsername(string username)
     {
         var query = from Users in _dbContext.Users
                     where Users.UserName == username
                     select Users;
 
         var user = await query.FirstOrDefaultAsync();
-
-        return user!;
+        return user;
     }
 
     public async Task<string?> GetUserID(string username)
@@ -46,8 +44,7 @@ public class UserRepository : IUserRepository
                     select Users.Id;
 
         var id = await query.FirstOrDefaultAsync();
-        if (id != null) return id;
-        return null;
+        return id;
     }
 
 
@@ -117,13 +114,11 @@ public class UserRepository : IUserRepository
         var isFollowing = await IsFollowingUserID(whoId, whomId);
         if (!isFollowing)
         {
-            _metricsService.IncrementUnfollowNeedToFollowCounter();
             throw new InvalidOperationException("You need to follow the user to unfollow");
         }
 
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
-            _metricsService.IncrementUnfollowfollowerEntryNullCounter();
             throw new ArgumentException("The user to be unfollowed could not be found");
         }
 
@@ -132,7 +127,6 @@ public class UserRepository : IUserRepository
 
         if (followerEntry == null)
         {
-            _metricsService.IncrementUnfollowNoWhoOrWhomCounter();
             throw new InvalidOperationException("Not found");
         }
 

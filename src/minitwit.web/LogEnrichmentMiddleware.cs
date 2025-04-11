@@ -20,6 +20,7 @@ public class LogEnrichmentMiddleware
         var endpoint = context.Request.Path;
         var method = context.Request.Method;
         var requestId = context.TraceIdentifier;
+        var something = context.Request.Body;
 
         using (Serilog.Context.LogContext.PushProperty("RequestId", requestId))
         using (Serilog.Context.LogContext.PushProperty("Endpoint", endpoint))
