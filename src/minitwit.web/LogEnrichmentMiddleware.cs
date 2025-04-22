@@ -32,7 +32,7 @@ public class LogEnrichmentMiddleware
         sw.Stop();
         var duration = sw.ElapsedMilliseconds;
 
-        if (duration > 1000)
+        if (duration > 300)
         {
             _logger.LogWarning("Slow request: {Method} {Endpoint} took {Duration}ms", method, endpoint, duration);
         }
