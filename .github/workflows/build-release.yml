@@ -3,8 +3,7 @@ name: Build and Release
 on:
   push:
     tags:
-      - "v*"
-      
+      - "v*" # Trigger only on tags starting with "v"
 
 jobs:
   build:
@@ -48,11 +47,10 @@ jobs:
         with:
           name: ubuntu-build
 
-          
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ github.run_number }}  # Unique tag based on run number
+          tag_name: ${{ github.ref_name }} # Use the tag name from the push event
           files: ubuntu-build.zip
         env:
           GITHUB_TOKEN: ${{ github.token }}  # Use GitHub's built-in token

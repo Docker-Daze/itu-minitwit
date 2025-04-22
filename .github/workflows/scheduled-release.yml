@@ -5,78 +5,66 @@ on:
     - cron: '0 0 * * 0' # Runs every Sunday at midnight UTC
 
 jobs:
-  check-release:
-    runs-on: ubuntu-latest
-    outputs:
-      release_found: ${{ steps.check.outputs.release_found }}
-
-    steps:
-      - name: Get Current Week Start Date
-        id: week_start
-        run: echo "start_date=$(date -u -d 'last sunday +1 day' +'%Y-%m-%dT00:00:00Z')" >> $GITHUB_ENV
-
-      - name: Fetch Releases
-        id: check
-        run: |
-          releases=$(gh api repos/${{ github.repository }}/releases --jq '[.[] | select(.created_at >= "${{ env.start_date }}") | .tag_name]')
-          echo "Releases from this week: $releases"
-          if [[ "$releases" != "[]" ]]; then
-            echo "release_found=true" >> $GITHUB_OUTPUT
-          else
-            echo "release_found=false" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  build:
-    needs: check-release
-    if: needs.check-release.outputs.release_found == 'false'
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install GitHub CLI
+        run: sudo apt-get update && sudo apt-get install -y gh
+
+      - name: Authenticate GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Check for Releases This Week
+        id: check_releases
+        run: |
+          start_date=$(date -u -d 'last sunday +1 day' +'%Y-%m-%dT00:00:00Z')
+          releases=$(gh api repos/${{ github.repository }}/releases --jq '[.[] | select(.created_at >= "'$start_date'") | .tag_name]')
+          echo "Releases from this week: $releases"
+          if [[ "$releases" != "[]" ]]; then
+            echo "release_found=true" >> $GITHUB_ENV
+          else
+            echo "release_found=false" >> $GITHUB_ENV
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip Build if Release Found
+        if: env.release_found == 'true'
+        run: echo "Release already exists for this week. Skipping build."
+
       - name: Setup .NET
+        if: env.release_found == 'false'
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: "9.x"
 
       - name: Install dependencies
+        if: env.release_found == 'false'
         run: dotnet restore
 
       - name: Build project
+        if: env.release_found == 'false'
         run: dotnet build ./src/minitwit.web/minitwit.web.csproj --configuration Release --no-restore
 
       - name: Publish for Ubuntu
+        if: env.release_found == 'false'
         run: dotnet publish ./src/minitwit.web/minitwit.web.csproj --configuration Release --runtime linux-x64 --self-contained -o ./publish/ubuntu
 
-      - name: Zip Ubuntu build
+      - name: Zip Ubuntu Build
+        if: env.release_found == 'false'
         run: zip -r ubuntu-build.zip ./publish/ubuntu
 
-      - name: Upload zipped artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ubuntu-build
-          path: ubuntu-build.zip
-
-  create-release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Download Ubuntu build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ubuntu-build
-      
-      - name: Create GitHub release
+      - name: Create GitHub Release
+        if: env.release_found == 'false'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ github.run_number }}  # Unique tag based on run number
+          tag_name: "weekly-release-$(date +'%Y-%m-%d')"
           files: ubuntu-build.zip
         env:
           GITHUB_TOKEN: ${{ github.token }}  # Use GitHub's built-in token
