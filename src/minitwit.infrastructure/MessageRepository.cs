@@ -138,6 +138,14 @@ public class MessageRepository : IMessageRepository
     
     public async Task AddMessagesBatchAsync(IEnumerable<Message> messages)
     {
+        foreach (var msg in messages)
+        {
+            if (msg.User is not null)
+            {
+                // Tell EF that this User is already in the DB:
+                _dbContext.Entry(msg.User).State = EntityState.Unchanged;
+            }
+        }
         await _dbContext.Messages.AddRangeAsync(messages);
         await _dbContext.SaveChangesAsync();
     }
