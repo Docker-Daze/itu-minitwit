@@ -212,6 +212,12 @@ public class ApiController : Controller
         }
     }
 
+    // Get endpoint for healthcheck, used by nginx reverse-proxy and rolling updates.
+    [HttpGet("/api/health")]
+    public IActionResult HealthCheck(){
+        return Ok();
+    }
+
     // POST for follow and unfolow. {Username} is the person who will follow/unfollow someone.
     [HttpPost("/api/fllws/{username}")]
     public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request, [FromQuery] int latest)
