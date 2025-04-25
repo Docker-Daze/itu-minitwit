@@ -2,20 +2,20 @@
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 using minitwit.infrastructure;
 
-public class MessageBatchService : BackgroundService
+public class FollowerBatchService : BackgroundService
 {
     private const int BatchSize = 10;
-    private readonly Channel<Message> _chan;
+    private readonly Channel<Follower> _chan;
     private readonly IDbContextFactory<MinitwitDbContext> _factory;
 
-    public MessageBatchService(
-        Channel<Message> chan,
+    public FollowerBatchService(
+        Channel<Follower> chan,
         IDbContextFactory<MinitwitDbContext> factory)
     {
         _chan    = chan;
@@ -24,27 +24,28 @@ public class MessageBatchService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var buffer = new List<Message>(BatchSize);
+        var toFollow = new List<Follower>();
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            // 2a) Wait for at least one message
-            var msg = await _chan.Reader.ReadAsync(stoppingToken);
-            buffer.Add(msg);
+            // You could use two channels or embed an “action” in Follower,
+            // but here we assume two separate services/chan registrations.
 
-            // 2b) Drain up to BatchSize – 1 more
-            while (buffer.Count < BatchSize &&
+            // wait for follow events
+            var f = await _chan.Reader.ReadAsync(stoppingToken);
+            toFollow.Add(f);
+
+            while (toFollow.Count < BatchSize &&
                    _chan.Reader.TryRead(out var more))
             {
-                buffer.Add(more);
+                toFollow.Add(more);
             }
 
-            // 2c) Write the batch in one go
             await using var ctx = _factory.CreateDbContext();
-            await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
+            await ctx.Followers.AddRangeAsync(toFollow, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
 
-            buffer.Clear();
+            toFollow.Clear();
         }
     }
 }

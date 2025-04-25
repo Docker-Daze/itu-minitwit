@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Security.Claims;
+using System.Threading.Channels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -23,16 +24,12 @@ public class ApiController : Controller
     private readonly MetricsService _metricsService;
     
     
-    private static readonly List<Message> _pendingMessages = new();
-    private static readonly object _batchLock = new();
-    private static readonly List<Follower> _pendingFollows = new();
-    private static readonly object _batchLockFollow = new();
-    private static readonly List<Follower> _pendingUnFollows = new();
-    private static readonly object _batchLockUnFollow = new();
-    private const int BatchSize = 10;
+    private readonly Channel<Message> _msgChan;
+    private readonly Channel<Follower> _followersChan;
+    private readonly Channel<Follower> _unFollowersChan;
 
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
-        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService)
+        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<Message> messageChannel, Channel<Follower> followerChannel, Channel<Follower> unFollowersChannel)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
@@ -44,6 +41,9 @@ public class ApiController : Controller
 
         _userRepository = userRepository;
         _metricsService = metricsService;
+        _msgChan = messageChannel;
+        _followersChan = followerChannel;
+        _unFollowersChan = unFollowersChannel;
     }
 
     public IActionResult? NotReqFromSimulator(HttpContext context)
@@ -183,24 +183,7 @@ public class ApiController : Controller
                 {
                     Message theMessage = await _messageRepository.AddMessage(user, message, flagged);
                     _metricsService.IncrementPostMsgsCounter();
-                    lock (_batchLock)
-                    {
-                        _pendingMessages.Add(theMessage);
-
-                        if (_pendingMessages.Count < BatchSize)
-                        {
-                            // Not enough to flush yet
-                            return NoContent();
-                        }
-
-                        // Swap out the batch and clear buffer
-                        var batch = _pendingMessages.ToList();
-                        _pendingMessages.Clear();
-
-                        // Fire‐and‐forget the batch save
-                        _ = _messageRepository.AddMessagesBatchAsync(batch);
-                    }
-
+                    await _msgChan.Writer.WriteAsync(theMessage);
                     return NoContent();
                 }
                 catch (Exception e)
@@ -260,26 +243,10 @@ public class ApiController : Controller
                     _metricsService.IncrementFollowCounter();
                     try
                     {
-                        Follower theRequest = await _userRepository.FollowUser(username, request.follow);
-                        lock (_batchLockFollow)
-                        {
-                            _pendingFollows.Add(theRequest);
-
-                            if (_pendingFollows.Count < BatchSize)
-                            {
-                                // Not enough to flush yet
-                                return NoContent();
-                            }
-
-                            // Swap out the batch and clear buffer
-                            var batch = _pendingFollows.ToList();
-                            _pendingFollows.Clear();
-
-                            // Fire‐and‐forget the batch save
-                            _ = _userRepository.AddFollowersBatchAsync(batch);
-                        }
-
+                        Follower followRequest = await _userRepository.FollowUser(username, request.follow);
+                        await _followersChan.Writer.WriteAsync(followRequest);
                         return NoContent();
+
                     }
                     catch (Exception e)
                     {
@@ -295,24 +262,7 @@ public class ApiController : Controller
                 try
                 {
                     Follower theRequest = await _userRepository.UnfollowUser(username, request.unfollow!);
-                    lock (_batchLockUnFollow)
-                    {
-                        _pendingUnFollows.Add(theRequest);
-
-                        if (_pendingUnFollows.Count < BatchSize)
-                        {
-                            // Not enough to flush yet
-                            return NoContent();
-                        }
-
-                        // Swap out the batch and clear buffer
-                        var batch = _pendingUnFollows.ToList();
-                        _pendingUnFollows.Clear();
-
-                        // Fire‐and‐forget the batch save
-                        _ = _userRepository.RemoveFollowersBatchAsync(batch);
-                    }
-
+                    await _unFollowersChan.Writer.WriteAsync(theRequest);
                     return NoContent();
                 }
                 catch (Exception e)

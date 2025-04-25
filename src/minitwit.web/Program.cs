@@ -16,6 +16,7 @@ using Serilog.Formatting.Compact;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Threading.Channels;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseStaticWebAssets();
@@ -57,6 +58,16 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
         evt.Properties.ContainsKey("RequestPath") &&
         evt.Properties["RequestPath"].ToString().Contains("/metrics"))
 );
+
+// 1a) A channel for Messages
+builder.Services.AddSingleton(Channel.CreateUnbounded<Message>());
+
+// 1b) A channel for follow/unfollow
+builder.Services.AddSingleton(Channel.CreateUnbounded<Follower>());
+
+// 1c) Register the BackgroundServices
+builder.Services.AddHostedService<MessageBatchService>();
+builder.Services.AddHostedService<FollowerBatchService>();
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var npgsqlBuilder = new NpgsqlConnectionStringBuilder(connectionString)
