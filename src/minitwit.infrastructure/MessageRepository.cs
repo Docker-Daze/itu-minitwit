@@ -37,8 +37,6 @@ public class MessageRepository : IMessageRepository
             Flagged = flagged
         };
         return newMessage;
-        await _dbContext.Messages.AddAsync(newMessage); // does not write to the database!
-        await _dbContext.SaveChangesAsync(); // persist the changes in the database
     }
 
     public async Task<List<MessageDTO>> GetMessages(int page)
