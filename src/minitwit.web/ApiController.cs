@@ -25,6 +25,10 @@ public class ApiController : Controller
     
     private static readonly List<Message> _pendingMessages = new();
     private static readonly object _batchLock = new();
+    private static readonly List<Follower> _pendingFollows = new();
+    private static readonly object _batchLockFollow = new();
+    private static readonly List<Follower> _pendingUnFollows = new();
+    private static readonly object _batchLockUnFollow = new();
     private const int BatchSize = 10;
 
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
@@ -250,7 +254,25 @@ public class ApiController : Controller
                     _metricsService.IncrementFollowCounter();
                     try
                     {
-                        await _userRepository.FollowUser(username, request.follow);
+                        Follower theRequest = await _userRepository.FollowUser(username, request.follow);
+                        lock (_batchLockFollow)
+                        {
+                            _pendingFollows.Add(theRequest);
+
+                            if (_pendingFollows.Count < BatchSize)
+                            {
+                                // Not enough to flush yet
+                                return NoContent();
+                            }
+
+                            // Swap out the batch and clear buffer
+                            var batch = _pendingFollows.ToList();
+                            _pendingFollows.Clear();
+
+                            // Fire‐and‐forget the batch save
+                            _ = _userRepository.AddFollowersBatchAsync(batch);
+                        }
+
                         return NoContent();
                     }
                     catch (Exception e)
@@ -266,7 +288,25 @@ public class ApiController : Controller
                 _metricsService.IncrementUnFollowCounter();
                 try
                 {
-                    await _userRepository.UnfollowUser(username, request.unfollow!);
+                    Follower theRequest = await _userRepository.UnfollowUser(username, request.unfollow!);
+                    lock (_batchLockUnFollow)
+                    {
+                        _pendingUnFollows.Add(theRequest);
+
+                        if (_pendingUnFollows.Count < BatchSize)
+                        {
+                            // Not enough to flush yet
+                            return NoContent();
+                        }
+
+                        // Swap out the batch and clear buffer
+                        var batch = _pendingUnFollows.ToList();
+                        _pendingUnFollows.Clear();
+
+                        // Fire‐and‐forget the batch save
+                        _ = _userRepository.RemoveFollowersBatchAsync(batch);
+                    }
+
                     return NoContent();
                 }
                 catch (Exception e)

@@ -12,11 +12,14 @@ public class UserRepository : IUserRepository
 
     private readonly MinitwitDbContext _dbContext;
     private readonly MetricsService _metricsService;
+    
+    private readonly IDbContextFactory<MinitwitDbContext> _factory;
 
-    public UserRepository(MinitwitDbContext dbContext, MetricsService metricsService)
+    public UserRepository(MinitwitDbContext dbContext, MetricsService metricsService, IDbContextFactory<MinitwitDbContext> factory)
     {
         _dbContext = dbContext;
         _metricsService = metricsService;
+        _factory = factory;
     }
     public async Task<User?> GetUser(string userId)
     {
@@ -68,7 +71,7 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task FollowUser(string whoUsername, string whomUsername)
+    public async Task<Follower> FollowUser(string whoUsername, string whomUsername)
     {
         List<string> ids = await GetUserIDs(whoUsername,whomUsername);
         string whoId = ids[0];
@@ -90,19 +93,11 @@ public class UserRepository : IUserRepository
             WhomId = whomId
         };
 
-        try
-        {
-            await _dbContext.Followers.AddAsync(follow);
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (DbUpdateException ex)
-        {
-            throw new InvalidOperationException("Failed to follow user, possible duplicate entry.", ex);
-        }
+        return follow;
     }
 
 
-    public async Task UnfollowUser(string whoUsername, string whomUsername)
+    public async Task<Follower> UnfollowUser(string whoUsername, string whomUsername)
     {
         List<string> ids = await GetUserIDs(whoUsername,whomUsername);
         string whoId = ids[0];
@@ -121,8 +116,7 @@ public class UserRepository : IUserRepository
             throw new InvalidOperationException("Not found");
         }
 
-        _dbContext.Followers.Remove(followerEntry);
-        await _dbContext.SaveChangesAsync();
+        return followerEntry;
     }
 
     public async Task<bool> IsFollowing(string whoUsername, string whomUsername)
@@ -188,5 +182,37 @@ public class UserRepository : IUserRepository
         ids.Add(whomId);
 
         return ids;
+    }
+
+    public async Task AddFollowersBatchAsync(IEnumerable<Follower> follows)
+    {
+        try
+        {
+            // create a fresh, scoped context just for this batch
+            await using var ctx = _factory.CreateDbContext();
+
+            await ctx.Followers.AddRangeAsync(follows);
+            await ctx.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+    
+    public async Task RemoveFollowersBatchAsync(IEnumerable<Follower> follows)
+    {
+        try
+        {
+            // create a fresh, scoped context just for this batch
+            await using var ctx = _factory.CreateDbContext();
+
+            ctx.Followers.RemoveRange(follows);
+            await ctx.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 }
