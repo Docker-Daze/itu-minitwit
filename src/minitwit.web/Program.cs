@@ -71,6 +71,12 @@ builder.Services.AddDbContext<MinitwitDbContext>(options =>
         npgsqlOptions.EnableRetryOnFailure();
     }));
 
+builder.Services.AddDbContextFactory<MinitwitDbContext>(options =>
+    options.UseNpgsql(npgsqlBuilder.ConnectionString,
+        npgsqlOptions => npgsqlOptions.EnableRetryOnFailure())
+);
+
+
 builder.Services.AddDefaultIdentity<User>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;

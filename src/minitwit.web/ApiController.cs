@@ -22,6 +22,7 @@ public class ApiController : Controller
 
     private readonly MetricsService _metricsService;
     
+    
     private static readonly List<Message> _pendingMessages = new();
     private static readonly object _batchLock = new();
     private const int BatchSize = 10;
