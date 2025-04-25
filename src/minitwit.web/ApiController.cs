@@ -21,6 +21,10 @@ public class ApiController : Controller
     private static int _latest = 0;
 
     private readonly MetricsService _metricsService;
+    
+    private static readonly List<Message> _pendingMessages = new();
+    private static readonly object _batchLock = new();
+    private const int BatchSize = 10;
 
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
         IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService)
@@ -172,8 +176,26 @@ public class ApiController : Controller
                 var flagged = request.flagged;
                 try
                 {
-                    await _messageRepository.AddMessage(user, message, flagged);
+                    Message theMessage = await _messageRepository.AddMessage(user, message, flagged);
                     _metricsService.IncrementPostMsgsCounter();
+                    lock (_batchLock)
+                    {
+                        _pendingMessages.Add(theMessage);
+
+                        if (_pendingMessages.Count < BatchSize)
+                        {
+                            // Not enough to flush yet
+                            return NoContent();
+                        }
+
+                        // Swap out the batch and clear buffer
+                        var batch = _pendingMessages.ToList();
+                        _pendingMessages.Clear();
+
+                        // Fire‐and‐forget the batch save
+                        _ = _messageRepository.AddMessagesBatchAsync(batch);
+                    }
+
                     return NoContent();
                 }
                 catch (Exception e)
@@ -195,6 +217,7 @@ public class ApiController : Controller
         {
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
+            
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)

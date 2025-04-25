@@ -15,7 +15,7 @@ public class MessageRepository : IMessageRepository
         _userRepository = userRepository;
     }
 
-    public async Task AddMessage(User user, string message, int flagged = 0)
+    public async Task<Message> AddMessage(User user, string message, int flagged = 0)
     {
         if (string.IsNullOrWhiteSpace(message))
         {
@@ -33,7 +33,7 @@ public class MessageRepository : IMessageRepository
             User = user,
             Flagged = flagged
         };
-
+        return newMessage;
         await _dbContext.Messages.AddAsync(newMessage); // does not write to the database!
         await _dbContext.SaveChangesAsync(); // persist the changes in the database
     }
@@ -134,5 +134,11 @@ public class MessageRepository : IMessageRepository
 
         var result = await query.ToListAsync();
         return result;
+    }
+    
+    public async Task AddMessagesBatchAsync(IEnumerable<Message> messages)
+    {
+        await _dbContext.Messages.AddRangeAsync(messages);
+        await _dbContext.SaveChangesAsync();
     }
 }
