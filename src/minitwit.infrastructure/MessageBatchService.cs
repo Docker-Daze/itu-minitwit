@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -41,6 +41,12 @@ public class MessageBatchService : BackgroundService
 
             // 2c) Write the batch in one go
             await using var ctx = _factory.CreateDbContext();
+            // prevent re-inserting existing users
+            foreach (var message in buffer)
+            {
+                if (message.User != null)
+                    ctx.Entry(message.User).State = EntityState.Unchanged;
+            }
             await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
 
