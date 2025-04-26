@@ -18,7 +18,7 @@ public class MessageRepository : IMessageRepository
         _factory = factory;
     }
 
-    public async Task<Message> AddMessage(User user, string message, int flagged = 0)
+    public Task<Message> AddMessage(User user, string message, int flagged = 0)
     {
         if (string.IsNullOrWhiteSpace(message))
         {
@@ -36,7 +36,7 @@ public class MessageRepository : IMessageRepository
             User = user,
             Flagged = flagged
         };
-        return newMessage;
+        return Task.FromResult(newMessage);
     }
 
     public async Task<List<MessageDTO>> GetMessages(int page)

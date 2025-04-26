@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -15,10 +15,10 @@ public class FollowerBatchService : BackgroundService
     private readonly IDbContextFactory<MinitwitDbContext> _factory;
 
     public FollowerBatchService(
-        Channel<Follower> chan,
+        IFollowChannel followChannel,
         IDbContextFactory<MinitwitDbContext> factory)
     {
-        _chan    = chan;
+        _chan    = followChannel.Channel;
         _factory = factory;
     }
 

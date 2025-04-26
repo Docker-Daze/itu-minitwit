@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Channels;
 using Microsoft.AspNetCore.Identity;
@@ -29,7 +29,7 @@ public class ApiController : Controller
     private readonly Channel<Follower> _unFollowersChan;
 
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
-        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<Message> messageChannel, Channel<Follower> followerChannel, Channel<Follower> unFollowersChannel)
+        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<Message> messageChannel, IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
@@ -42,8 +42,8 @@ public class ApiController : Controller
         _userRepository = userRepository;
         _metricsService = metricsService;
         _msgChan = messageChannel;
-        _followersChan = followerChannel;
-        _unFollowersChan = unFollowersChannel;
+        _followersChan = followerChannel.Channel;
+        _unFollowersChan = unFollowersChannel.Channel;
     }
 
     public IActionResult? NotReqFromSimulator(HttpContext context)

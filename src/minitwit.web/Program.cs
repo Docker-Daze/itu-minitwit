@@ -63,11 +63,13 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
 builder.Services.AddSingleton(Channel.CreateUnbounded<Message>());
 
 // 1b) A channel for follow/unfollow
-builder.Services.AddSingleton(Channel.CreateUnbounded<Follower>());
+builder.Services.AddSingleton<IFollowChannel, FollowChannel>();
+builder.Services.AddSingleton<IUnfollowChannel, UnfollowChannel>();
 
 // 1c) Register the BackgroundServices
 builder.Services.AddHostedService<MessageBatchService>();
 builder.Services.AddHostedService<FollowerBatchService>();
+builder.Services.AddHostedService<UnFollowerBatchService>();
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var npgsqlBuilder = new NpgsqlConnectionStringBuilder(connectionString)
