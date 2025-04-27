@@ -24,19 +24,14 @@ public class MessageBatchService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var buffer = new List<Message>(BatchSize);
-
         while (!stoppingToken.IsCancellationRequested)
         {
-            // 2a) Wait for at least one message
-            var msg = await _chan.Reader.ReadAsync(stoppingToken);
-            buffer.Add(msg);
-
-            // 2b) Drain up to BatchSize – 1 more
-            while (buffer.Count < BatchSize &&
-                   _chan.Reader.TryRead(out var more))
+            // collect a full batch of messages
+            var buffer = new List<Message>(BatchSize);
+            for (int i = 0; i < BatchSize; i++)
             {
-                buffer.Add(more);
+                var msg = await _chan.Reader.ReadAsync(stoppingToken);
+                buffer.Add(msg);
             }
 
             // 2c) Write the batch in one go
@@ -49,8 +44,6 @@ public class MessageBatchService : BackgroundService
             }
             await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
-
-            buffer.Clear();
         }
     }
 }

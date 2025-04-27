@@ -24,28 +24,19 @@ public class FollowerBatchService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var toFollow = new List<Follower>();
-
         while (!stoppingToken.IsCancellationRequested)
         {
-            // You could use two channels or embed an “action” in Follower,
-            // but here we assume two separate services/chan registrations.
-
-            // wait for follow events
-            var f = await _chan.Reader.ReadAsync(stoppingToken);
-            toFollow.Add(f);
-
-            while (toFollow.Count < BatchSize &&
-                   _chan.Reader.TryRead(out var more))
+            // collect a full batch of follow events
+            var toFollow = new List<Follower>(BatchSize);
+            for (int i = 0; i < BatchSize; i++)
             {
-                toFollow.Add(more);
+                var f = await _chan.Reader.ReadAsync(stoppingToken);
+                toFollow.Add(f);
             }
 
             await using var ctx = _factory.CreateDbContext();
             await ctx.Followers.AddRangeAsync(toFollow, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
-
-            toFollow.Clear();
         }
     }
 }
