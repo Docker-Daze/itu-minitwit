@@ -52,7 +52,6 @@ namespace minitwit.infrastructure
                     {
                         user.GravatarURL = await userRepository.GetGravatarURL(request.email, 80);
                         await userManager.UpdateAsync(user);
-                        Log.Warning("Successfully added {username}", request.username);
                     }
                 }
                 catch (Exception ex)
