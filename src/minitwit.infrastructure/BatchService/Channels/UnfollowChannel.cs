@@ -5,11 +5,11 @@ namespace minitwit.infrastructure
 {
     public interface IUnfollowChannel
     {
-        Channel<Follower> Channel { get; }
+        Channel<string[]> Channel { get; }
     }
 
     public class UnfollowChannel : IUnfollowChannel
     {
-        public Channel<Follower> Channel { get; } = global::System.Threading.Channels.Channel.CreateUnbounded<Follower>();
+        public Channel<string[]> Channel { get; } = global::System.Threading.Channels.Channel.CreateUnbounded<string[]>();
     }
 }

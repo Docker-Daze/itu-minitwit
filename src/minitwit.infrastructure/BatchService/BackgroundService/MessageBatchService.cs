@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using minitwit.core;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Serilog;
 
 public class MessageBatchService : BackgroundService
 {
@@ -46,8 +47,9 @@ public class MessageBatchService : BackgroundService
                     var msg = await _messageRepository.AddMessage(user, att[1], int.Parse(att[2]));
                     buffer.Add(msg);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Log.Warning(e, "Could not add message to database");
                     continue;
                 }
             }

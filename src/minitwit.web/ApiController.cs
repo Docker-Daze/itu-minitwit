@@ -8,7 +8,6 @@ using minitwit.core;
 using minitwit.infrastructure;
 using minitwit.web.Pages;
 using Serilog;
-using System;
 using Microsoft.AspNetCore.Http;
 
 namespace minitwit.web;
@@ -27,11 +26,12 @@ public class ApiController : Controller
 
 
     private readonly Channel<string[]> _msgChan;
-    private readonly Channel<Follower> _followersChan;
-    private readonly Channel<Follower> _unFollowersChan;
+    private readonly Channel<string[]> _followersChan;
+    private readonly Channel<string[]> _unFollowersChan;
 
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
-        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<string[]> messageChannel, IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel)
+        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<string[]> messageChannel,
+        IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
@@ -171,10 +171,7 @@ public class ApiController : Controller
                 {
                     return Unauthorized();
                 }
-                string[] att = new string[3];
-                att[0] = username;
-                att[1] = request.Content;
-                att[2] = request.flagged.ToString();
+                string[] att = { username, request.Content, request.flagged.ToString() };
 
                 _metricsService.IncrementPostMsgsCounter();
                 await _msgChan.Writer.WriteAsync(att);
@@ -229,35 +226,18 @@ public class ApiController : Controller
                 using (_metricsService.MeasureRequestFollowDuration())
                 {
                     _metricsService.IncrementFollowCounter();
-                    try
-                    {
-                        Follower followRequest = await _userRepository.FollowUser(username, request.follow);
-                        await _followersChan.Writer.WriteAsync(followRequest);
-                        return NoContent();
-
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Warning(e, "User {User} tried to follow {Target} but something went wrong", username, request.follow);
-                        return NoContent();
-                    }
+                    string[] followRequest = { username, request.follow };
+                    await _followersChan.Writer.WriteAsync(followRequest);
+                    return NoContent();
                 }
             }
 
             using (_metricsService.MeasureRequestUnfollowDuration())
             {
                 _metricsService.IncrementUnFollowCounter();
-                try
-                {
-                    Follower theRequest = await _userRepository.UnfollowUser(username, request.unfollow!);
-                    await _unFollowersChan.Writer.WriteAsync(theRequest);
-                    return NoContent();
-                }
-                catch (Exception e)
-                {
-                    Log.Warning(e, "User {User} tried to unfollow {Target} but something went wrong", username, request.unfollow);
-                    return NoContent();
-                }
+                string[] unfollowRequest = { username, request.unfollow! };
+                await _unFollowersChan.Writer.WriteAsync(unfollowRequest);
+                return NoContent();
             }
         }
     }

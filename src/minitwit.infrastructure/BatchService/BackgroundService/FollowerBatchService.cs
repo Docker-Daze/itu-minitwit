@@ -8,20 +8,23 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using minitwit.core;
 using minitwit.infrastructure;
-
+using Serilog;
 
 public class FollowerBatchService : BackgroundService
 {
     private const int BatchSize = 10;
-    private readonly Channel<Follower> _chan;
+    private readonly Channel<string[]> _chan;
     private readonly IDbContextFactory<MinitwitDbContext> _factory;
+    private readonly IUserRepository _userRepository;
 
     public FollowerBatchService(
         IFollowChannel followChannel,
-        IDbContextFactory<MinitwitDbContext> factory)
+        IDbContextFactory<MinitwitDbContext> factory,
+        IUserRepository userRepository)
     {
-        _chan    = followChannel.Channel;
+        _chan = followChannel.Channel;
         _factory = factory;
+        _userRepository = userRepository;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -32,8 +35,17 @@ public class FollowerBatchService : BackgroundService
             var toFollow = new List<Follower>(BatchSize);
             for (int i = 0; i < BatchSize; i++)
             {
-                var f = await _chan.Reader.ReadAsync(stoppingToken);
-                toFollow.Add(f);
+                var followRequest = await _chan.Reader.ReadAsync(stoppingToken);
+                try
+                {
+                    var request = await _userRepository.FollowUser(followRequest[0], followRequest[1]);
+                    toFollow.Add(request);
+                }
+                catch (Exception e)
+                {
+                    Log.Warning(e, "User {User} tried to follow {Target} but something went wrong", followRequest[0], followRequest[1]);
+                    continue;
+                }
             }
 
             await using var ctx = _factory.CreateDbContext();
