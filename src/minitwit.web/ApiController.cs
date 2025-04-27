@@ -28,10 +28,11 @@ public class ApiController : Controller
     private readonly Channel<string[]> _msgChan;
     private readonly Channel<string[]> _followersChan;
     private readonly Channel<string[]> _unFollowersChan;
+    private readonly Channel<RegisterRequest> _registerChan;
 
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
         IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<string[]> messageChannel,
-        IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel)
+        IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel, IRegisterChannel registerChannel)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
@@ -46,6 +47,7 @@ public class ApiController : Controller
         _msgChan = messageChannel;
         _followersChan = followerChannel.Channel;
         _unFollowersChan = unFollowersChannel.Channel;
+        _registerChan = registerChannel.Channel;
     }
 
     public IActionResult? NotReqFromSimulator(HttpContext context)
@@ -78,35 +80,9 @@ public class ApiController : Controller
             using (_metricsService.MeasureRequestRegisterDuration())
             {
                 _latest = latest;
-                var user = Activator.CreateInstance<User>();
-
-                user.UserName = request.username;
-
-                var existingUser = await _userManager.FindByEmailAsync(request.email);
-                if (existingUser != null || user.UserName == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Email address already exists.");
-                    return BadRequest(ModelState);
-                }
-
-                await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, request.pwd);
                 _metricsService.IncrementRegisterCounter();
-                if (result.Succeeded)
-                {
-                    user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
-
-                    var claim = new Claim("User Name", request.username);
-                    await _userManager.AddClaimAsync(user, claim);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    HttpContext.Session.SetString("UserId", user.Id);
-
-                    return NoContent();
-                }
-
-                return LocalRedirect("/api/register");
+                await _registerChan.Writer.WriteAsync(request);
+                return NoContent();
             }
         }
     }
