@@ -65,11 +65,13 @@ builder.Services.AddSingleton(Channel.CreateUnbounded<string[]>());
 // 1b) A channel for follow/unfollow
 builder.Services.AddSingleton<IFollowChannel, FollowChannel>();
 builder.Services.AddSingleton<IUnfollowChannel, UnfollowChannel>();
+builder.Services.AddSingleton<IRegisterChannel, RegisterChannel>();
 
 // 1c) Register the BackgroundServices
 builder.Services.AddHostedService<MessageBatchService>();
 builder.Services.AddHostedService<FollowerBatchService>();
 builder.Services.AddHostedService<UnFollowerBatchService>();
+builder.Services.AddHostedService<RegisterBatchService>();
 
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var npgsqlBuilder = new NpgsqlConnectionStringBuilder(connectionString)
