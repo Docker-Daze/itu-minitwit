@@ -36,9 +36,9 @@ public class MessageBatchService : BackgroundService
             var buffer = new List<Message>(BatchSize);
             for (int i = 0; i < BatchSize; i++)
             {
+                var att = await _chan.Reader.ReadAsync(stoppingToken);
                 try
                 {
-                    var att = await _chan.Reader.ReadAsync(stoppingToken);
                     var user = await _userRepository.GetUserFromUsername(att[0]);
                     if (user == null)
                     {
@@ -49,7 +49,7 @@ public class MessageBatchService : BackgroundService
                 }
                 catch (Exception e)
                 {
-                    Log.Warning(e, "Could not add message to database");
+                    Log.Warning(e, "Could not add message from {username} to database", att[0]);
                     continue;
                 }
             }
