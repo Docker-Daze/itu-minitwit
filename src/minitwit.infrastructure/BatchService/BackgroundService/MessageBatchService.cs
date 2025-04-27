@@ -37,12 +37,18 @@ public class MessageBatchService : BackgroundService
 
             // 2c) Write the batch in one go
             await using var ctx = _factory.CreateDbContext();
-            // prevent re-inserting existing users
-            foreach (var message in buffer)
+            // unify user instances to prevent tracking conflicts
+            var userMap = new Dictionary<string, User>();
+            foreach (var msg in buffer)
             {
-                if (message.User != null)
-                    ctx.Entry(message.User).State = EntityState.Unchanged;
+                if (msg.User == null) continue;
+                if (userMap.TryGetValue(msg.User.Id, out var existing))
+                    msg.User = existing;
+                else
+                    userMap[msg.User.Id] = msg.User;
             }
+            foreach (var user in userMap.Values)
+                ctx.Entry(user).State = EntityState.Unchanged;
             await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
         }
