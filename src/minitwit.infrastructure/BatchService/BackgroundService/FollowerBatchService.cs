@@ -1,3 +1,4 @@
+namespace minitwit.infrastructure;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Channels;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using minitwit.core;
 using minitwit.infrastructure;
+
 
 public class FollowerBatchService : BackgroundService
 {

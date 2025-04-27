@@ -1,3 +1,4 @@
+namespace minitwit.infrastructure;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Channels;
@@ -18,7 +19,7 @@ public class MessageBatchService : BackgroundService
         Channel<Message> chan,
         IDbContextFactory<MinitwitDbContext> factory)
     {
-        _chan    = chan;
+        _chan = chan;
         _factory = factory;
     }
 

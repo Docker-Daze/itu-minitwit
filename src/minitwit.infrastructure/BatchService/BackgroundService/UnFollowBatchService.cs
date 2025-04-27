@@ -1,3 +1,4 @@
+namespace minitwit.infrastructure;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Channels;
@@ -18,7 +19,7 @@ public class UnFollowerBatchService : BackgroundService
         IUnfollowChannel unfollowChannel,
         IDbContextFactory<MinitwitDbContext> factory)
     {
-        _chan    = unfollowChannel.Channel;
+        _chan = unfollowChannel.Channel;
         _factory = factory;
     }
 
