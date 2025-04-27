@@ -60,7 +60,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
 );
 
 // 1a) A channel for Messages
-builder.Services.AddSingleton(Channel.CreateUnbounded<Message>());
+builder.Services.AddSingleton(Channel.CreateUnbounded<string[]>());
 
 // 1b) A channel for follow/unfollow
 builder.Services.AddSingleton<IFollowChannel, FollowChannel>();

@@ -24,14 +24,14 @@ public class ApiController : Controller
     private static int _latest = 0;
 
     private readonly MetricsService _metricsService;
-    
-    
-    private readonly Channel<Message> _msgChan;
+
+
+    private readonly Channel<string[]> _msgChan;
     private readonly Channel<Follower> _followersChan;
     private readonly Channel<Follower> _unFollowersChan;
 
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
-        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<Message> messageChannel, IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel)
+        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<string[]> messageChannel, IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
@@ -105,7 +105,7 @@ public class ApiController : Controller
 
                     return NoContent();
                 }
-                
+
                 return LocalRedirect("/api/register");
             }
         }
@@ -171,29 +171,14 @@ public class ApiController : Controller
                 {
                     return Unauthorized();
                 }
+                string[] att = new string[3];
+                att[0] = username;
+                att[1] = request.Content;
+                att[2] = request.flagged.ToString();
 
-                var user = await _userRepository.GetUserFromUsername(username);
-                if (user == null)
-                {
-                    Log.Warning("there was no user with name: {username}", username);
-                    return NotFound();
-                }
-
-                var message = request.Content;
-                var flagged = request.flagged;
-                try
-                {
-                    Message theMessage = await _messageRepository.AddMessage(user, message, flagged);
-                    _metricsService.IncrementPostMsgsCounter();
-                    await _msgChan.Writer.WriteAsync(theMessage);
-                    return NoContent();
-                }
-                catch (Exception e)
-                {
-                    Log.Warning(e, "Could not add the message: {message} to the database", message);
-                    return NoContent();
-                }
-
+                _metricsService.IncrementPostMsgsCounter();
+                await _msgChan.Writer.WriteAsync(att);
+                return NoContent();
             }
         }
     }
@@ -207,7 +192,7 @@ public class ApiController : Controller
         {
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
-            
+
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
@@ -227,7 +212,8 @@ public class ApiController : Controller
 
     // Get endpoint for healthcheck, used by nginx reverse-proxy and rolling updates.
     [HttpGet("/api/health")]
-    public IActionResult HealthCheck(){
+    public IActionResult HealthCheck()
+    {
         return Ok();
     }
 
