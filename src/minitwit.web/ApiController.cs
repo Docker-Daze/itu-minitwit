@@ -36,8 +36,10 @@ public class ApiController : Controller
 
     public IActionResult? NotReqFromSimulator(HttpContext context)
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         var fromSimulator = context.Request.Headers.Authorization;
         if (fromSimulator != "Basic c2ltdWxhdG9yOnN1cGVyX3NhZmUh")
@@ -55,8 +57,10 @@ public class ApiController : Controller
     [HttpGet("/api/latest")]
     public async Task<IActionResult> Latest()
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         return await Task.FromResult(Ok(new { latest = _tracker.Latest }));
     }
@@ -65,8 +69,10 @@ public class ApiController : Controller
     [HttpPost("/api/register")]
     public async Task<IActionResult> PostRegister([FromBody] RegisterRequest request, [FromQuery] int latest)
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         using (_metricsService.MeasureRequestDuration())
         {
@@ -85,8 +91,10 @@ public class ApiController : Controller
     [HttpGet("/api/msgs/{username}")]
     public async Task<IActionResult> GetUserMsgs(string username, [FromQuery] int no, [FromQuery] int latest)
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         using (_metricsService.MeasureRequestDuration())
         {
@@ -114,8 +122,10 @@ public class ApiController : Controller
     [HttpGet("/api/msgs")]
     public async Task<IActionResult> GetMsgs([FromQuery] int no, [FromQuery] int latest)
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         using (_metricsService.MeasureRequestDuration())
         {
@@ -137,8 +147,10 @@ public class ApiController : Controller
     [HttpPost("/api/msgs/{username}")]
     public async Task<IActionResult> PostMsgs(string username, [FromBody] MessageRequest request, [FromQuery] int latest)
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         using (_metricsService.MeasureRequestDuration())
         {
@@ -163,8 +175,10 @@ public class ApiController : Controller
     [HttpGet("/api/fllws/{username}")]
     public async Task<IActionResult> GetFollow(string username, [FromQuery] int no, [FromQuery] int latest)
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         using (_metricsService.MeasureRequestDuration())
         {
@@ -192,8 +206,10 @@ public class ApiController : Controller
     [HttpGet("/api/health")]
     public IActionResult HealthCheck()
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         return Ok();
     }
@@ -202,8 +218,10 @@ public class ApiController : Controller
     [HttpPost("/api/fllws/{username}")]
     public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request, [FromQuery] int latest)
     {
-        var modelError = CheckModelState();
-        if (modelError != null) return modelError;
+        if (!ModelState.IsValid)
+        {
+            return View("public");
+        }
 
         using (_metricsService.MeasureRequestDuration())
         {
@@ -227,14 +245,5 @@ public class ApiController : Controller
                 return NoContent();
             }
         }
-    }
-    private IActionResult? CheckModelState()
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        return null;
     }
 }
