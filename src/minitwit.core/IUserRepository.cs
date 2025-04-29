@@ -11,8 +11,4 @@ public interface IUserRepository
     public Task<bool> IsFollowing(string whoUsername, string whomUsername);
     public Task<bool> IsFollowingUserID(string whoId, string whomId);
     public Task<List<APIFollowingDTO>> GetFollowers(string username);
-    
-    Task AddFollowersBatchAsync(IEnumerable<Follower> follows);
-    Task RemoveFollowersBatchAsync(IEnumerable<Follower> follows);
-
 }

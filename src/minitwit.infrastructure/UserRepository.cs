@@ -47,26 +47,17 @@ public class UserRepository : IUserRepository
         var id = await query.FirstOrDefaultAsync();
         return id;
     }
-
-
-    public Task<string> GetGravatarURL(string email)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public async Task<string> GetGravatarURL(string email, int size = 80)
     {
         string normalizedEmail = email.Trim().ToLower();
 
         // Compute the MD5 hash of the email
-        using (MD5 md5 = MD5.Create())
-        {
-            byte[] hashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(normalizedEmail));
-            string hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+        byte[] hashBytes = MD5.HashData(Encoding.UTF8.GetBytes(normalizedEmail));
+        string hash = Convert.ToHexStringLower(hashBytes);
 
-            // Return the gravatar URL asynchronously
-            return await Task.FromResult($"http://www.gravatar.com/avatar/{hash}?d=identicon&s={size}");
-        }
+        // Return the gravatar URL asynchronously
+        return await Task.FromResult($"http://www.gravatar.com/avatar/{hash}?d=identicon&s={size}");
     }
 
     public async Task<Follower> FollowUser(string whoUsername, string whomUsername)
@@ -185,37 +176,5 @@ public class UserRepository : IUserRepository
         ids.Add(whomId);
 
         return ids;
-    }
-
-    public async Task AddFollowersBatchAsync(IEnumerable<Follower> follows)
-    {
-        try
-        {
-            // create a fresh, scoped context just for this batch
-            await using var ctx = _factory.CreateDbContext();
-
-            await ctx.Followers.AddRangeAsync(follows);
-            await ctx.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-    }
-
-    public async Task RemoveFollowersBatchAsync(IEnumerable<Follower> follows)
-    {
-        try
-        {
-            // create a fresh, scoped context just for this batch
-            await using var ctx = _factory.CreateDbContext();
-
-            ctx.Followers.RemoveRange(follows);
-            await ctx.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
     }
 }
