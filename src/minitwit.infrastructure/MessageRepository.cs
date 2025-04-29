@@ -8,14 +8,17 @@ public class MessageRepository : IMessageRepository
     private readonly MinitwitDbContext _dbContext;
     private IUserRepository _userRepository;
     private const int PerPage = 10;
+    
+    private readonly IDbContextFactory<MinitwitDbContext> _factory;
 
-    public MessageRepository(MinitwitDbContext dbContext, IUserRepository userRepository)
+    public MessageRepository(MinitwitDbContext dbContext, IUserRepository userRepository, IDbContextFactory<MinitwitDbContext> factory)
     {
         _dbContext = dbContext;
         _userRepository = userRepository;
+        _factory = factory;
     }
 
-    public async Task AddMessage(User user, string message, int flagged = 0)
+    public Task<Message> AddMessage(User user, string message, int flagged = 0)
     {
         if (string.IsNullOrWhiteSpace(message))
         {
@@ -33,9 +36,7 @@ public class MessageRepository : IMessageRepository
             User = user,
             Flagged = flagged
         };
-
-        await _dbContext.Messages.AddAsync(newMessage); // does not write to the database!
-        await _dbContext.SaveChangesAsync(); // persist the changes in the database
+        return Task.FromResult(newMessage);
     }
 
     public async Task<List<MessageDTO>> GetMessages(int page)
@@ -134,5 +135,26 @@ public class MessageRepository : IMessageRepository
 
         var result = await query.ToListAsync();
         return result;
+    }
+    
+    public async Task AddMessagesBatchAsync(IEnumerable<Message> messages)
+    {
+        try
+        {
+            // create a fresh, scoped context just for this batch
+            await using var ctx = _factory.CreateDbContext();
+
+            // if you still have navigations on your Message, mark them Unchanged:
+            foreach (var msg in messages)
+                if (msg.User is not null)
+                    ctx.Entry(msg.User).State = EntityState.Unchanged;
+
+            await ctx.Messages.AddRangeAsync(messages);
+            await ctx.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 }

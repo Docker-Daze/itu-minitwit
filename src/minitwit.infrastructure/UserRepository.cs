@@ -10,17 +10,19 @@ namespace minitwit.infrastructure;
 public class UserRepository : IUserRepository
 {
 
-    private readonly MinitwitDbContext _dbContext;
     private readonly MetricsService _metricsService;
 
-    public UserRepository(MinitwitDbContext dbContext, MetricsService metricsService)
+    private readonly IDbContextFactory<MinitwitDbContext> _factory;
+
+    public UserRepository(MetricsService metricsService, IDbContextFactory<MinitwitDbContext> factory)
     {
-        _dbContext = dbContext;
         _metricsService = metricsService;
+        _factory = factory;
     }
     public async Task<User?> GetUser(string userId)
     {
-        var query = from Users in _dbContext.Users
+        await using var ctx = _factory.CreateDbContext();
+        var query = from Users in ctx.Users
                     where Users.Id == userId
                     select Users;
 
@@ -29,7 +31,8 @@ public class UserRepository : IUserRepository
     }
     public async Task<User?> GetUserFromUsername(string username)
     {
-        var query = from Users in _dbContext.Users
+        await using var ctx = _factory.CreateDbContext();
+        var query = from Users in ctx.Users
                     where Users.UserName == username
                     select Users;
 
@@ -39,7 +42,8 @@ public class UserRepository : IUserRepository
 
     public async Task<string?> GetUserID(string username)
     {
-        var query = from Users in _dbContext.Users
+        await using var ctx = _factory.CreateDbContext();
+        var query = from Users in ctx.Users
                     where Users.UserName == username
                     select Users.Id;
 
@@ -68,9 +72,9 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task FollowUser(string whoUsername, string whomUsername)
+    public async Task<Follower> FollowUser(string whoUsername, string whomUsername)
     {
-        List<string> ids = await GetUserIDs(whoUsername,whomUsername);
+        List<string> ids = await GetUserIDs(whoUsername, whomUsername);
         string whoId = ids[0];
         string whomId = ids[1];
         if (whoId == whomId)
@@ -83,28 +87,20 @@ public class UserRepository : IUserRepository
         {
             throw new InvalidOperationException("You already follow this user");
         }
-        
+
         var follow = new Follower
         {
             WhoId = whoId!,
             WhomId = whomId
         };
 
-        try
-        {
-            await _dbContext.Followers.AddAsync(follow);
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (DbUpdateException ex)
-        {
-            throw new InvalidOperationException("Failed to follow user, possible duplicate entry.", ex);
-        }
+        return follow;
     }
 
 
-    public async Task UnfollowUser(string whoUsername, string whomUsername)
+    public async Task<Follower> UnfollowUser(string whoUsername, string whomUsername)
     {
-        List<string> ids = await GetUserIDs(whoUsername,whomUsername);
+        List<string> ids = await GetUserIDs(whoUsername, whomUsername);
         string whoId = ids[0];
         string whomId = ids[1];
         var isFollowing = await IsFollowingUserID(whoId, whomId);
@@ -113,7 +109,8 @@ public class UserRepository : IUserRepository
             throw new InvalidOperationException("You need to follow the user to unfollow");
         }
 
-        var followerEntry = await _dbContext.Followers
+        await using var ctx = _factory.CreateDbContext();
+        var followerEntry = await ctx.Followers
             .FirstOrDefaultAsync(f => f.WhoId == whoId && f.WhomId == whomId);
 
         if (followerEntry == null)
@@ -121,12 +118,12 @@ public class UserRepository : IUserRepository
             throw new InvalidOperationException("Not found");
         }
 
-        _dbContext.Followers.Remove(followerEntry);
-        await _dbContext.SaveChangesAsync();
+        return followerEntry;
     }
 
     public async Task<bool> IsFollowing(string whoUsername, string whomUsername)
     {
+        await using var ctx = _factory.CreateDbContext();
         var whomId = await GetUserID(whomUsername);
         var whoId = await GetUserID(whoUsername);
 
@@ -135,28 +132,30 @@ public class UserRepository : IUserRepository
             return false; // User not found, cannot be following
         }
 
-        return await _dbContext.Followers
+        return await ctx.Followers
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
 
     public async Task<bool> IsFollowingUserID(string? whoId, string? whomId)
     {
+        await using var ctx = _factory.CreateDbContext();
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
             return false; // User not found, cannot be following
         }
 
-        return await _dbContext.Followers
+        return await ctx.Followers
             .AnyAsync(f => f.WhoId == whoId && f.WhomId == whomId);
     }
 
     public async Task<List<APIFollowingDTO>> GetFollowers(string username)
     {
+        await using var ctx = _factory.CreateDbContext();
         var userId = await GetUserID(username);
 
-        return await _dbContext.Followers
+        return await ctx.Followers
             .Where(f => f.WhoId == userId)
-            .Join(_dbContext.Users,
+            .Join(ctx.Users,
                 f => f.WhomId,
                 u => u.Id,
                 (f, u) => new APIFollowingDTO
@@ -168,10 +167,11 @@ public class UserRepository : IUserRepository
 
     private async Task<List<string>> GetUserIDs(string whoUsername, string whomUsername)
     {
+        await using var ctx = _factory.CreateDbContext();
         List<string> ids = new List<string>();
-        
+
         // Query the Users table once for both usernames.
-        var users = await _dbContext.Users
+        var users = await ctx.Users
             .Where(u => u.UserName == whoUsername || u.UserName == whomUsername)
             .Select(u => new { u.UserName, u.Id })
             .ToListAsync();
@@ -184,9 +184,41 @@ public class UserRepository : IUserRepository
         {
             throw new InvalidOperationException("One of these users does not exists.");
         }
-        ids.Add(whoId);
+        ids.Add(whoId!);
         ids.Add(whomId);
 
         return ids;
+    }
+
+    public async Task AddFollowersBatchAsync(IEnumerable<Follower> follows)
+    {
+        try
+        {
+            // create a fresh, scoped context just for this batch
+            await using var ctx = _factory.CreateDbContext();
+
+            await ctx.Followers.AddRangeAsync(follows);
+            await ctx.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public async Task RemoveFollowersBatchAsync(IEnumerable<Follower> follows)
+    {
+        try
+        {
+            // create a fresh, scoped context just for this batch
+            await using var ctx = _factory.CreateDbContext();
+
+            ctx.Followers.RemoveRange(follows);
+            await ctx.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 }

@@ -1,5 +1,6 @@
-﻿using System.Net;
+using System.Net;
 using System.Security.Claims;
+using System.Threading.Channels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using minitwit.core;
 using minitwit.infrastructure;
 using minitwit.web.Pages;
 using Serilog;
+using Microsoft.AspNetCore.Http;
 
 namespace minitwit.web;
 
@@ -22,8 +24,15 @@ public class ApiController : Controller
 
     private readonly MetricsService _metricsService;
 
+
+    private readonly Channel<string[]> _msgChan;
+    private readonly Channel<string[]> _followersChan;
+    private readonly Channel<string[]> _unFollowersChan;
+    private readonly Channel<RegisterRequest> _registerChan;
+
     public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
-        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService)
+        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<string[]> messageChannel,
+        IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel, IRegisterChannel registerChannel)
     {
         _messageRepository = messageRepository;
         _userRepository = userRepository;
@@ -35,6 +44,10 @@ public class ApiController : Controller
 
         _userRepository = userRepository;
         _metricsService = metricsService;
+        _msgChan = messageChannel;
+        _followersChan = followerChannel.Channel;
+        _unFollowersChan = unFollowersChannel.Channel;
+        _registerChan = registerChannel.Channel;
     }
 
     public IActionResult? NotReqFromSimulator(HttpContext context)
@@ -67,35 +80,9 @@ public class ApiController : Controller
             using (_metricsService.MeasureRequestRegisterDuration())
             {
                 _latest = latest;
-                var user = Activator.CreateInstance<User>();
-
-                user.UserName = request.username;
-
-                var existingUser = await _userManager.FindByEmailAsync(request.email);
-                if (existingUser != null || user.UserName == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Email address already exists.");
-                    return BadRequest(ModelState);
-                }
-
-                await _userStore.SetUserNameAsync(user, request.username, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, request.email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, request.pwd);
                 _metricsService.IncrementRegisterCounter();
-                if (result.Succeeded)
-                {
-                    user.GravatarURL = await _userRepository.GetGravatarURL(request.email, 80);
-
-                    var claim = new Claim("User Name", request.username);
-                    await _userManager.AddClaimAsync(user, claim);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    HttpContext.Session.SetString("UserId", user.Id);
-
-                    return NoContent();
-                }
-                
-                return LocalRedirect("/api/register");
+                await _registerChan.Writer.WriteAsync(request);
+                return NoContent();
             }
         }
     }
@@ -160,28 +147,11 @@ public class ApiController : Controller
                 {
                     return Unauthorized();
                 }
+                string[] att = { username, request.Content, request.flagged.ToString() };
 
-                var user = await _userRepository.GetUserFromUsername(username);
-                if (user == null)
-                {
-                    Log.Warning("there was no user with name: {username}", username);
-                    return NotFound();
-                }
-
-                var message = request.Content;
-                var flagged = request.flagged;
-                try
-                {
-                    await _messageRepository.AddMessage(user, message, flagged);
-                    _metricsService.IncrementPostMsgsCounter();
-                    return NoContent();
-                }
-                catch (Exception e)
-                {
-                    Log.Warning(e, "Could not add the message: {message} to the database", message);
-                    return NoContent();
-                }
-
+                _metricsService.IncrementPostMsgsCounter();
+                await _msgChan.Writer.WriteAsync(att);
+                return NoContent();
             }
         }
     }
@@ -195,6 +165,7 @@ public class ApiController : Controller
         {
             _metricsService.IncrementGetRequestsCounter();
             _latest = latest;
+
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
@@ -212,6 +183,13 @@ public class ApiController : Controller
         }
     }
 
+    // Get endpoint for healthcheck, used by nginx reverse-proxy and rolling updates.
+    [HttpGet("/api/health")]
+    public IActionResult HealthCheck()
+    {
+        return Ok();
+    }
+
     // POST for follow and unfolow. {Username} is the person who will follow/unfollow someone.
     [HttpPost("/api/fllws/{username}")]
     public async Task<IActionResult> PostFollow(string username, [FromBody] FollowRequest request, [FromQuery] int latest)
@@ -224,32 +202,18 @@ public class ApiController : Controller
                 using (_metricsService.MeasureRequestFollowDuration())
                 {
                     _metricsService.IncrementFollowCounter();
-                    try
-                    {
-                        await _userRepository.FollowUser(username, request.follow);
-                        return NoContent();
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Warning(e, "User {User} tried to follow {Target} but something went wrong", username, request.follow);
-                        return NoContent();
-                    }
+                    string[] followRequest = { username, request.follow };
+                    await _followersChan.Writer.WriteAsync(followRequest);
+                    return NoContent();
                 }
             }
 
             using (_metricsService.MeasureRequestUnfollowDuration())
             {
                 _metricsService.IncrementUnFollowCounter();
-                try
-                {
-                    await _userRepository.UnfollowUser(username, request.unfollow!);
-                    return NoContent();
-                }
-                catch (Exception e)
-                {
-                    Log.Warning(e, "User {User} tried to unfollow {Target} but something went wrong", username, request.unfollow);
-                    return NoContent();
-                }
+                string[] unfollowRequest = { username, request.unfollow! };
+                await _unFollowersChan.Writer.WriteAsync(unfollowRequest);
+                return NoContent();
             }
         }
     }

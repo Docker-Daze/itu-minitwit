@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
-namespace minitwit.web;
+
+namespace minitwit.infrastructure;
 
 public class LogEnrichmentMiddleware
 {

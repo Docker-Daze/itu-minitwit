@@ -5,6 +5,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.50.0" />
