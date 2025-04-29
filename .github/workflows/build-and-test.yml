@@ -24,11 +24,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Format code
-      run: dotnet format --verify-no-changes
-      
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build and lint code
+      run: dotnet build --no-restore --warnaserror
       
     - uses: hadolint/hadolint-action@v3.1.0
       id: hadolint
