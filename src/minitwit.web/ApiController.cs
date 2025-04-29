@@ -2,10 +2,11 @@ using System.Threading.Channels;
 using Microsoft.AspNetCore.Mvc;
 using minitwit.core;
 using minitwit.infrastructure;
+using minitwit.web.Pages;
 using Serilog;
 
 namespace minitwit.web;
-
+[ApiController]
 public class ApiController : Controller
 {
     private readonly IMessageRepository _messageRepository;
