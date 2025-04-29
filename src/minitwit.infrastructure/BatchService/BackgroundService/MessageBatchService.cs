@@ -52,7 +52,7 @@ public class MessageBatchService : BackgroundService
             await using var ctx = _factory.CreateDbContext();
 
             // unify user instances
-            var userMap = await MakeUserDict(buffer);
+            var userMap = MakeUserDict(buffer);
             
             foreach (var user in userMap.Values)
                 ctx.Entry(user).State = EntityState.Unchanged;
@@ -71,7 +71,7 @@ public class MessageBatchService : BackgroundService
         return await _messageRepository.AddMessage(user, att[1], int.Parse(att[2]));
     }
 
-    private async Task<Dictionary<string, User>> MakeUserDict(List<Message> messages)
+    private Dictionary<string, User> MakeUserDict(List<Message> messages)
     {
         var userMap = new Dictionary<string, User>();
         foreach (var msg in messages)

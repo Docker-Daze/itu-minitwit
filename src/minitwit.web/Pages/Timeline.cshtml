@@ -5,7 +5,7 @@
     ViewData["Title"] = "Minitwit";
     Layout = "Shared/_Layout";
 }
-<h2> @User.Identity.Name's Timeline </h2>
+<h2> @User.Identity!.Name's Timeline </h2>
 @if (User.Identity.IsAuthenticated)
 {
     <partial name="Shared/_MessageBoxPartial" model="Model.MessageInput" />
