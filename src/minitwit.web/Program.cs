@@ -145,12 +145,11 @@ app.MapMetrics();
 using (var scope = app.Services.CreateScope())
 {
     var minitwitDbContext = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
-    minitwitDbContext.Database.EnsureCreated();
-    //DbInitializer.SeedDatabase(minitwitDbContext);
+    await minitwitDbContext.Database.EnsureCreatedAsync();
 }
 
-app.Run();
+await app.RunAsync();
 
-Log.CloseAndFlush(); //Clean and shutdown logs
+await Log.CloseAndFlushAsync();
 
 public partial class Program { }
