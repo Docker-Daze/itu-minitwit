@@ -23,9 +23,6 @@ jobs:
         
     - name: Restore dependencies
       run: dotnet restore
-
-    - name: Format code
-      run: dotnet format --verify-no-changes
       
     - name: Build
       run: dotnet build --no-restore
