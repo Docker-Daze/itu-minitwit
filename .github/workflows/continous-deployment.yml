@@ -141,7 +141,7 @@ jobs:
         run: |
           scp -i ~/.ssh/do_ssh_key2 -o StrictHostKeyChecking=no -r remote_files $SSH2_USER@$SSH2_HOST:/minitwit 
 
-          scp -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no .env $SSH_USER@$SSH_HOST:/minitwit/.env
+          scp -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no .env $SSH2_USER@$SSH2_HOST:/minitwit/.env
 
           ssh $SSH2_USER@$SSH2_HOST -i ~/.ssh/do_ssh_key2 -o StrictHostKeyChecking=no "
             echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
