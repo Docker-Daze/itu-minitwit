@@ -21,7 +21,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for better analysis
+          fetch-depth: 0
 
       - name: Cache SonarQube Cloud packages
         uses: actions/cache@v4
@@ -45,25 +45,13 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
-      - name: Install ReportGenerator
-        shell: powershell
-        run: dotnet tool install -g dotnet-reportgenerator-globaltool
-
-      - name: Run tests with coverage
+      - name: Run tests with coverage using Coverlet
         shell: powershell
         run: |
           dotnet test --no-build --verbosity normal .\tests\minitwit.tests\minitwit.tests.csproj `
-            --collect:"XPlat Code Coverage" `
-            --results-directory .\tests\minitwit.tests\TestResults
-
-      - name: Generate coverage report
-        shell: powershell
-        run: |
-          $env:PATH += ";$env:USERPROFILE\.dotnet\tools"
-          reportgenerator `
-            -reports:".\tests\minitwit.tests\TestResults\**\coverage.cobertura.xml" `
-            -targetdir:"coveragereport" `
-            -reporttypes:Cobertura
+            /p:CollectCoverage=true `
+            /p:CoverletOutput=.\tests\minitwit.tests\coverage\ `
+            /p:CoverletOutputFormat=cobertura
 
       - name: Build and analyze with SonarScanner
         env:
@@ -75,7 +63,7 @@ jobs:
             /o:"docker-daze" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.host.url="https://sonarcloud.io" `
-            /d:sonar.cs.cobertura.reportsPaths="coveragereport/Cobertura.xml"
+            /d:sonar.cs.cobertura.reportsPaths="tests/minitwit.tests/coverage/coverage.cobertura.xml"
           
           dotnet build
 
