@@ -33,7 +33,7 @@ public class RegisterModel : PageModel
         _emailSender = emailSender;
         _userRepository = userRepository;
     }
-    
+
     [BindProperty]
     public required string Username { get; set; }
     [BindProperty]
@@ -43,14 +43,14 @@ public class RegisterModel : PageModel
     [BindProperty]
     public required string Password2 { get; set; }
     public string? ReturnUrl { get; set; }
-    
+
 
     public Task OnGetAsync(string? returnUrl = null)
     {
-        if(returnUrl != null) ReturnUrl = returnUrl;
+        if (returnUrl != null) ReturnUrl = returnUrl;
         return Task.CompletedTask;
     }
-    
+
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {
         if (string.IsNullOrEmpty(Username))
@@ -65,36 +65,36 @@ public class RegisterModel : PageModel
         }
         else if (string.IsNullOrEmpty(Password))
         {
-            ModelState.AddModelError(string.Empty,"You have to enter a password");
+            ModelState.AddModelError(string.Empty, "You have to enter a password");
             return Page();
         }
         else if (Password != Password2)
         {
-            ModelState.AddModelError(string.Empty,"The two passwords do not match");
+            ModelState.AddModelError(string.Empty, "The two passwords do not match");
             return Page();
         }
         else if (await _userManager.FindByNameAsync(Username) is not null)
         {
-            TempData["FlashMessage"] ="The username is already taken";
+            TempData["FlashMessage"] = "The username is already taken";
             return Page();
         }
-        
+
         if (ModelState.IsValid)
         {
             var user = CreateUser();
 
             user.UserName = Username;
-                
+
             await _userStore.SetUserNameAsync(user, Username, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Email, CancellationToken.None);
             var result = await _userManager.CreateAsync(user, Password);
-                
+
             if (result.Succeeded)
             {
-                TempData["FlashMessage"] ="You were successfully registered and can login now";
+                TempData["FlashMessage"] = "You were successfully registered and can login now";
 
                 user.GravatarURL = await _userRepository.GetGravatarURL(Email, 80);
-                
+
                 return LocalRedirect("/login");
             }
             foreach (var error in result.Errors)

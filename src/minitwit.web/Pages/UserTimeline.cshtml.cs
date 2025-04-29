@@ -19,7 +19,7 @@ public class UserTimelineModel : PageModel
         _messageRepository = messageRepository;
         _userRepository = userRepository;
     }
-    
+
     public async Task<ActionResult> OnGet(string user, [FromQuery] int? page)
     {
         _currentPage = page ?? 1;
@@ -28,8 +28,10 @@ public class UserTimelineModel : PageModel
         return Page();
     }
 
-    public async Task<bool> IsFollowing(string who){
-        if(User.Identity!.Name != null){
+    public async Task<bool> IsFollowing(string who)
+    {
+        if (User.Identity!.Name != null)
+        {
             return await _userRepository.IsFollowing(User.Identity.Name, who);
         }
         else return false;
@@ -39,41 +41,44 @@ public class UserTimelineModel : PageModel
     {
         await Task.CompletedTask;
 
-        if(string.IsNullOrEmpty(user))
+        if (string.IsNullOrEmpty(user))
         {
             return BadRequest("User or acions cannot be null");
         }
 
-        if(User.Identity?.IsAuthenticated != true){
+        if (User.Identity?.IsAuthenticated != true)
+        {
             return Unauthorized();
         }
 
-        if(await _userRepository.IsFollowing(User.Identity.Name!, user)){
+        if (await _userRepository.IsFollowing(User.Identity.Name!, user))
+        {
             return RedirectToPage("/public");
         }
 
         await _userRepository.FollowUser(User.Identity.Name!, user);
         TempData["FlashMessage"] = $"You are now following \"{user}\"";
         return RedirectToPage("/UserTimeline", new { user = user });
-    } 
+    }
 
     public async Task<IActionResult> OnPostUnFollowAsync(string user)
     {
         await Task.CompletedTask;
 
-        if(string.IsNullOrEmpty(user))
+        if (string.IsNullOrEmpty(user))
         {
             return BadRequest("User or acions cannot be null");
         }
 
 
-        if(User.Identity?.IsAuthenticated == false || User.Identity?.Name == null){
+        if (User.Identity?.IsAuthenticated == false || User.Identity?.Name == null)
+        {
             return Unauthorized();
         }
 
         await _userRepository.UnfollowUser(User.Identity.Name!, user);
         TempData["FlashMessage"] = $"You are no longer following \"{user}\"";
         return RedirectToPage("/UserTimeline", new { user = user });
-    } 
+    }
 
 }

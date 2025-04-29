@@ -14,8 +14,8 @@ public class MetricsService
         .CreateCounter("minitwit_unfollow_counter", "Total number of unfollow requests received.");
     private static readonly Counter GetRequestsCounter = Metrics
         .CreateCounter("minitwit_getRequests_counter", "Total number of get requests received.");
-    
-    
+
+
     private static readonly Histogram RequestDurationAVG = Metrics
         .CreateHistogram("app_request_duration_seconds", "Histogram of request duration.");
     private static readonly Histogram RequestDurationFollow = Metrics
@@ -26,8 +26,8 @@ public class MetricsService
         .CreateHistogram("app_RequestDurationPostMsgs_seconds", "Histogram of RequestDurationPostMsgs duration.");
     private static readonly Histogram RequestDurationRegister = Metrics
         .CreateHistogram("app_RequestDurationRegister_seconds", "Histogram of RequestDurationRegister duration.");
-    
-    
+
+
     public void IncrementRegisterCounter()
     {
         RegisterCounter.Inc();
@@ -70,5 +70,5 @@ public class MetricsService
     {
         return RequestDurationRegister.NewTimer();
     }
-    
+
 }

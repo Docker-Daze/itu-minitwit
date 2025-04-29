@@ -11,9 +11,9 @@ public class ApiController : Controller
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
     private readonly LatestTracker _tracker;
-    
+
     private readonly MetricsService _metricsService;
-    
+
     private readonly Channel<string[]> _msgChan;
     private readonly Channel<string[]> _followersChan;
     private readonly Channel<string[]> _unFollowersChan;
@@ -26,7 +26,7 @@ public class ApiController : Controller
         _tracker = tracker;
         _messageRepository = messageRepository;
         _userRepository = userRepository;
-        
+
         _metricsService = metricsService;
         _msgChan = messageChannel;
         _followersChan = followerChannel.Channel;
@@ -100,7 +100,7 @@ public class ApiController : Controller
         {
             _metricsService.IncrementGetRequestsCounter();
             _tracker.Latest = latest;
-            
+
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {

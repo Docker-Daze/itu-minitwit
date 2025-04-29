@@ -19,16 +19,16 @@ public class AddMessageModel : PageModel
         _messageRepository = messageRepository;
         _userRepository = userRepository;
     }
-    
+
     public async Task<IActionResult> OnPost()
     {
-        
+
         var user = await _userRepository.GetUserFromUsername(User.Identity!.Name!);
         if (user == null)
         {
             return Unauthorized();
         }
-        
+
         var message = MessageInput.Text;
         if (MessageInput?.Text == null || string.IsNullOrWhiteSpace(MessageInput.Text))
         {

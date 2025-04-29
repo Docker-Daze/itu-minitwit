@@ -53,7 +53,7 @@ public class MessageBatchService : BackgroundService
 
             // unify user instances
             var userMap = MakeUserDict(buffer);
-            
+
             foreach (var user in userMap.Values)
                 ctx.Entry(user).State = EntityState.Unchanged;
             await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
