@@ -45,6 +45,16 @@ jobs:
           cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/minitwitimage:webbuildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/minitwitimage:webbuildcache,mode=max
 
+      - name: Create Environment File 
+        run: |
+          echo "DB_CONNECTION_STRING='$DB_CONNECTION_STRING'" > .env
+          echo "DOCKER_USERNAME='$DOCKER_USERNAME'" >> .env
+          echo "DOCKER_PASSWORD='$DOCKER_PASSWORD'" >> .env
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Configure SSH to Primary Server
         run: |
           mkdir -p ~/.ssh/
@@ -59,6 +69,9 @@ jobs:
         # Configure the ~./bash_profile and deploy.sh file on the Vagrantfile
         run: |
           scp -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no -r remote_files $SSH_USER@$SSH_HOST:/minitwit 
+
+          scp -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no .env $SSH_USER@$SSH_HOST:/minitwit/.env
+
           ssh $SSH_USER@$SSH_HOST -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no "
             echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
             cd /minitwit/remote_files && \
@@ -103,6 +116,16 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
+      - name: Create Environment File for Secondary Server
+        run: |
+          echo "DB_CONNECTION_STRING='$DB_CONNECTION_STRING'" > .env
+          echo "DOCKER_USERNAME='$DOCKER_USERNAME'" >> .env
+          echo "DOCKER_PASSWORD='$DOCKER_PASSWORD'" >> .env
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Configure SSH to Secondary Server
         run: |
           mkdir -p ~/.ssh/
@@ -117,6 +140,9 @@ jobs:
         # Configure the ~./bash_profile and deploy.sh file on the Vagrantfile
         run: |
           scp -i ~/.ssh/do_ssh_key2 -o StrictHostKeyChecking=no -r remote_files $SSH2_USER@$SSH2_HOST:/minitwit 
+
+          scp -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no .env $SSH_USER@$SSH_HOST:/minitwit/.env
+
           ssh $SSH2_USER@$SSH2_HOST -i ~/.ssh/do_ssh_key2 -o StrictHostKeyChecking=no "
             echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
             cd /minitwit/remote_files && \
