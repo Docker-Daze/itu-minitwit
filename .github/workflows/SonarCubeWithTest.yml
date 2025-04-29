@@ -52,9 +52,9 @@ jobs:
       - name: Run tests with coverage
         shell: powershell
         run: |
-          dotnet test .\itu-minitwit\tests\minitwit.tests\minitwit.tests.csproj `
+          dotnet test .\tests\minitwit.tests\minitwit.tests.csproj `
             --collect:"XPlat Code Coverage" `
-            --results-directory .\itu-minitwit\tests\minitwit.tests\TestResults
+            --results-directory .\tests\minitwit.tests\TestResults
 
       - name: Generate coverage report
         shell: powershell
