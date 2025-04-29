@@ -59,15 +59,16 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
         evt.Properties["RequestPath"].ToString().Contains("/metrics"))
 );
 
-// 1a) A channel for Messages
+// channel for Messages
 builder.Services.AddSingleton(Channel.CreateUnbounded<string[]>());
+builder.Services.AddSingleton<LatestTracker>();
 
-// 1b) A channel for follow/unfollow
+// channel for follow/unfollow
 builder.Services.AddSingleton<IFollowChannel, FollowChannel>();
 builder.Services.AddSingleton<IUnfollowChannel, UnfollowChannel>();
 builder.Services.AddSingleton<IRegisterChannel, RegisterChannel>();
 
-// 1c) Register the BackgroundServices
+// Register the BackgroundServices
 builder.Services.AddHostedService<MessageBatchService>();
 builder.Services.AddHostedService<FollowerBatchService>();
 builder.Services.AddHostedService<UnFollowerBatchService>();

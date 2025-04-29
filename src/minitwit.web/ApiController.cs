@@ -1,48 +1,32 @@
-using System.Net;
-using System.Security.Claims;
 using System.Threading.Channels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using minitwit.core;
 using minitwit.infrastructure;
-using minitwit.web.Pages;
 using Serilog;
-using Microsoft.AspNetCore.Http;
 
 namespace minitwit.web;
 
 public class ApiController : Controller
 {
-    private readonly SignInManager<User> _signInManager;
-    private readonly UserManager<User> _userManager;
-    private readonly IUserStore<User> _userStore;
-    private readonly IUserEmailStore<User> _emailStore;
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
-    private static int _latest = 0;
-
+    private readonly LatestTracker _tracker;
+    
     private readonly MetricsService _metricsService;
-
-
+    
     private readonly Channel<string[]> _msgChan;
     private readonly Channel<string[]> _followersChan;
     private readonly Channel<string[]> _unFollowersChan;
     private readonly Channel<RegisterRequest> _registerChan;
 
-    public ApiController(IMessageRepository messageRepository, IUserRepository userRepository, UserManager<User> userManager,
-        IUserStore<User> userStore, SignInManager<User> signInManager, MetricsService metricsService, Channel<string[]> messageChannel,
+    public ApiController(IMessageRepository messageRepository, IUserRepository userRepository,
+        MetricsService metricsService, Channel<string[]> messageChannel, LatestTracker tracker,
         IFollowChannel followerChannel, IUnfollowChannel unFollowersChannel, IRegisterChannel registerChannel)
     {
+        _tracker = tracker;
         _messageRepository = messageRepository;
         _userRepository = userRepository;
-
-        _userManager = userManager;
-        _userStore = userStore;
-        _emailStore = (IUserEmailStore<User>)_userStore;
-        _signInManager = signInManager;
-
-        _userRepository = userRepository;
+        
         _metricsService = metricsService;
         _msgChan = messageChannel;
         _followersChan = followerChannel.Channel;
@@ -52,7 +36,7 @@ public class ApiController : Controller
 
     public IActionResult? NotReqFromSimulator(HttpContext context)
     {
-        var fromSimulator = context.Request.Headers["Authorization"];
+        var fromSimulator = context.Request.Headers.Authorization;
         if (fromSimulator != "Basic c2ltdWxhdG9yOnN1cGVyX3NhZmUh")
         {
             return StatusCode(StatusCodes.Status403Forbidden, new
@@ -68,7 +52,7 @@ public class ApiController : Controller
     [HttpGet("/api/latest")]
     public async Task<IActionResult> Latest()
     {
-        return await Task.FromResult(Ok(new { latest = _latest }));
+        return await Task.FromResult(Ok(new { latest = _tracker.Latest }));
     }
 
     // POST for register
@@ -79,7 +63,7 @@ public class ApiController : Controller
         {
             using (_metricsService.MeasureRequestRegisterDuration())
             {
-                _latest = latest;
+                _tracker.Latest = latest;
                 _metricsService.IncrementRegisterCounter();
                 await _registerChan.Writer.WriteAsync(request);
                 return NoContent();
@@ -95,8 +79,8 @@ public class ApiController : Controller
         using (_metricsService.MeasureRequestDuration())
         {
             _metricsService.IncrementGetRequestsCounter();
-            _latest = latest;
-
+            _tracker.Latest = latest;
+            
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
             {
@@ -121,7 +105,7 @@ public class ApiController : Controller
         using (_metricsService.MeasureRequestDuration())
         {
             _metricsService.IncrementGetRequestsCounter();
-            _latest = latest;
+            _tracker.Latest = latest;
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
             if (notFromSimResponse != null)
@@ -142,7 +126,7 @@ public class ApiController : Controller
         {
             using (_metricsService.MeasureRequestPostMsgsDuration())
             {
-                _latest = latest;
+                _tracker.Latest = latest;
                 if (string.IsNullOrEmpty(username))
                 {
                     return Unauthorized();
@@ -164,7 +148,7 @@ public class ApiController : Controller
         using (_metricsService.MeasureRequestDuration())
         {
             _metricsService.IncrementGetRequestsCounter();
-            _latest = latest;
+            _tracker.Latest = latest;
 
 
             var notFromSimResponse = NotReqFromSimulator(HttpContext);
@@ -196,7 +180,7 @@ public class ApiController : Controller
     {
         using (_metricsService.MeasureRequestDuration())
         {
-            _latest = latest;
+            _tracker.Latest = latest;
             if (request.follow != null)
             {
                 using (_metricsService.MeasureRequestFollowDuration())
