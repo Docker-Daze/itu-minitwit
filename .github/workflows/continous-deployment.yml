@@ -77,7 +77,7 @@ jobs:
           # Health check - try up to 10 times with 10 second intervals
           MAX_RETRIES=10
           RETRY_INTERVAL=5
-          HEALTH_CHECK_URL="http://${{ secrets.SSH_HOST }}:8080/api/health"
+          HEALTH_CHECK_URL="http://${{ secrets.SSH_HOST }}:5000/api/health"
           
           for i in $(seq 1 $MAX_RETRIES); do
             echo "Health check attempt $i of $MAX_RETRIES"
@@ -135,7 +135,7 @@ jobs:
           # Health check - try up to 10 times with 10 second intervals
           MAX_RETRIES=10
           RETRY_INTERVAL=5
-          HEALTH_CHECK_URL="http://${{ secrets.SSH2_HOST }}:8080/api/health"
+          HEALTH_CHECK_URL="http://${{ secrets.SSH2_HOST }}:5000/api/health"
           
           for i in $(seq 1 $MAX_RETRIES); do
             echo "Health check attempt $i of $MAX_RETRIES"
