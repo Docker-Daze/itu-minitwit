@@ -17,11 +17,11 @@ public class MinitwitDbContext : IdentityDbContext<User>
         Followers = Set<Follower>();
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(builder);
 
-        foreach (var entity in modelBuilder.Model.GetEntityTypes())
+        foreach (var entity in builder.Model.GetEntityTypes())
         {
             var tableName = entity.GetTableName();
             if (tableName != null)
@@ -39,27 +39,27 @@ public class MinitwitDbContext : IdentityDbContext<User>
             }
         }
 
-        modelBuilder.Entity<User>(entity =>
+        builder.Entity<User>(entity =>
         {
             entity.Property(e => e.EmailConfirmed)
                 .HasColumnType("boolean");
         });
 
-        modelBuilder.Entity<Message>(entity =>
+        builder.Entity<Message>(entity =>
         {
             entity.Property(m => m.PubDate)
                 .HasColumnType("timestamp with time zone");
         });
 
-        modelBuilder.Entity<Follower>()
+        builder.Entity<Follower>()
             .HasKey(f => new { f.WhoId, f.WhomId });
-        modelBuilder.Entity<User>()
+        builder.Entity<User>()
             .HasIndex(u => u.UserName)
             .IsUnique();
-        modelBuilder.Entity<Message>()
+        builder.Entity<Message>()
             .HasIndex(m => m.MessageId)
             .IsUnique();
-        modelBuilder.Entity<Message>()
+        builder.Entity<Message>()
             .HasIndex(m => m.PubDate);
 
     }

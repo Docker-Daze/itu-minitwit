@@ -10,13 +10,10 @@ namespace minitwit.infrastructure;
 public class UserRepository : IUserRepository
 {
 
-    private readonly MetricsService _metricsService;
-
     private readonly IDbContextFactory<MinitwitDbContext> _factory;
 
     public UserRepository(MetricsService metricsService, IDbContextFactory<MinitwitDbContext> factory)
     {
-        _metricsService = metricsService;
         _factory = factory;
     }
     public async Task<User?> GetUser(string userId)
