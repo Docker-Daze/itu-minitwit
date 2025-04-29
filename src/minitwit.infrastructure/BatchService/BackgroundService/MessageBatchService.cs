@@ -39,12 +39,7 @@ public class MessageBatchService : BackgroundService
                 var att = await _chan.Reader.ReadAsync(stoppingToken);
                 try
                 {
-                    var user = await _userRepository.GetUserFromUsername(att[0]);
-                    if (user == null)
-                    {
-                        throw new Exception("User not found");
-                    }
-                    var msg = await _messageRepository.AddMessage(user, att[1], int.Parse(att[2]));
+                    var msg = await ValidateMessage(att);
                     buffer.Add(msg);
                 }
                 catch (Exception e)
@@ -57,19 +52,37 @@ public class MessageBatchService : BackgroundService
             await using var ctx = _factory.CreateDbContext();
 
             // unify user instances
-            var userMap = new Dictionary<string, User>();
-            foreach (var msg in buffer)
-            {
-                if (msg.User == null) continue;
-                if (userMap.TryGetValue(msg.User.Id, out var existing))
-                    msg.User = existing;
-                else
-                    userMap[msg.User.Id] = msg.User;
-            }
+            var userMap = await MakeUserDict(buffer);
+            
             foreach (var user in userMap.Values)
                 ctx.Entry(user).State = EntityState.Unchanged;
             await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
         }
+    }
+
+    private async Task<Message> ValidateMessage(string[] att)
+    {
+        var user = await _userRepository.GetUserFromUsername(att[0]);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+        return await _messageRepository.AddMessage(user, att[1], int.Parse(att[2]));
+    }
+
+    private async Task<Dictionary<string, User>> MakeUserDict(List<Message> messages)
+    {
+        var userMap = new Dictionary<string, User>();
+        foreach (var msg in messages)
+        {
+            if (msg.User == null) continue;
+            if (userMap.TryGetValue(msg.User.Id, out var existing))
+                msg.User = existing;
+            else
+                userMap[msg.User.Id] = msg.User;
+        }
+
+        return userMap;
     }
 }
