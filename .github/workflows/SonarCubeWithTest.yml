@@ -61,7 +61,7 @@ jobs:
         run: |
           $env:PATH += ";$env:USERPROFILE\.dotnet\tools"
           reportgenerator `
-            -reports:".\itu-minitwit\tests\minitwit.tests\TestResults\**\coverage.cobertura.xml" `
+            -reports:".\tests\minitwit.tests\TestResults\**\coverage.cobertura.xml" `
             -targetdir:"coveragereport" `
             -reporttypes:Cobertura
 
