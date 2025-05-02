@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 9.x
         
-    - name: Prettify code
-      uses: creyD/prettier_action@v4.3
+    - name: Check C# Code Format
+      run: dotnet format --verify-no-changes --verbosity minimal
       
     - name: Build and lint code
       run: dotnet build --no-restore --warnaserror
