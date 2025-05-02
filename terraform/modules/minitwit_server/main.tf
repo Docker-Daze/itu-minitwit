@@ -61,6 +61,7 @@ resource "null_resource" "db_firewall_setup" {
 
   provisioner "remote-exec" {
     inline = [
+      "echo 'export LOGGING_SERVER_IP=\"${var.logging_server_ip}\"' >> ~/.bash_profile",
       "echo 'export DB_CONNECTION_STRING=\"${var.db_connection_string}\"' >> ~/.bash_profile",
       "echo 'export DOCKER_USERNAME=\"${var.docker_username}\"' >> ~/.bash_profile",
       "bash -c 'source ~/.bash_profile && cd /minitwit/remote_files && chmod +x deploy.sh && ./deploy.sh'"
