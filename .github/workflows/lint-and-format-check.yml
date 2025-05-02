@@ -3,10 +3,10 @@ name: Lint and Format check
 on:
   push:
     branches:
-      - format
+      - main
   pull_request:
     branches:
-      - format
+      - main
   workflow_dispatch: # Allows manual triggering
 
 jobs:
