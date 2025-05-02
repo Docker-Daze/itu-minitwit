@@ -19,7 +19,7 @@ public class LoginModel : PageModel
         _logger = logger;
         _userManager = userManager;
     }
-    
+
     [BindProperty]
     public required string Username { get; set; }
     [BindProperty]
@@ -37,19 +37,19 @@ public class LoginModel : PageModel
         await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
         if (returnUrl != null) ReturnUrl = returnUrl;
-        
+
     }
 
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {
         var user = await _userManager.FindByNameAsync(Username);
-        
+
         if (user == null)
         {
             ModelState.AddModelError(string.Empty, "Invalid username");
             return Page();
-        } 
-        
+        }
+
         var result = await _signInManager.PasswordSignInAsync(user, Password, false, true);
         if (!result.Succeeded)
         {

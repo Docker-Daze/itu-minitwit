@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace minitwit.tests;
 
 public class playwright_test : PageTest
-{     
+{
     public static async Task RegisterUser(IPage page, string username = "username", string email = "name@example.com", string password = "Password123!")
     {
         await page.GotoAsync("localhost:5114/");
@@ -31,7 +31,7 @@ public class playwright_test : PageTest
     {
         //Arrange
         await Page.GotoAsync("localhost:5114/");
-         
+
         //Act
         await RegisterUser(Page, username: "username", email: "name@example.com", password: "Password123!");
 

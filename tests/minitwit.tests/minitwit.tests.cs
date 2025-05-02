@@ -21,7 +21,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         _fixture = fixture;
         _testOutputHelper = testOutputHelper;
         _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions
-            { AllowAutoRedirect = true, HandleCookies = true });
+        { AllowAutoRedirect = true, HandleCookies = true });
     }
 
     private async Task InitializeDbContext()
@@ -42,7 +42,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 
         _dbContext = new MinitwitDbContext(options);
 
-        
+
         await _dbContext.Database.EnsureDeletedAsync(); // Delete the database if it exists
         await _dbContext.Database.EnsureCreatedAsync(); // Create a fresh database
     }
@@ -55,7 +55,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         {
             await _dbContext.DisposeAsync();
         }
-        
+
         if (_connection != null)
         {
             _connection.Close();
@@ -115,9 +115,9 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         {
             new KeyValuePair<string, string>("text", text)
         });
-        
+
         var response = await _client.PostAsync("/add_message", formData);
-        
+
         if (!string.IsNullOrEmpty(text) && response.IsSuccessStatusCode)
         {
             Assert.Contains("Your message was recorded", response.Content.ReadAsStringAsync().Result);
@@ -128,12 +128,12 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
     public async Task TestRegister()
     {
         await InitializeDbContext();
-        
+
         var response = await Register("user1", "default");
         var content = await response.Content.ReadAsStringAsync();
         _testOutputHelper.WriteLine(content);
         Assert.True(response.IsSuccessStatusCode);
-        
+
         response = await Register("user1", "default");
         content = await response.Content.ReadAsStringAsync();
         Assert.Contains("The username is already taken", content);
@@ -153,7 +153,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         response = await Register("meh", "foo", null, "broken");
         content = await response.Content.ReadAsStringAsync();
         Assert.Contains("You have to enter a valid email address", content);
-        
+
         await DisposeDbContext();
     }
 
@@ -161,7 +161,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
     public async Task TestLoginLogout()
     {
         await InitializeDbContext();
-        
+
         var response = await RegisterAndLogin("user1", "default");
         var content = await response.Content.ReadAsStringAsync();
         Assert.Contains("You were logged in", content);
@@ -177,60 +177,61 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         response = await Login("user2", "wrongpassword");
         content = await response.Content.ReadAsStringAsync();
         Assert.Contains("Invalid username", content);
-        
+
         await DisposeDbContext();
     }
-    
-        
+
+
     [Fact]
-    public async Task TestMessageRecording() {
+    public async Task TestMessageRecording()
+    {
         await InitializeDbContext();
-        
+
         await RegisterAndLogin("foo", "default");
         await AddMessage("test message 1");
         await AddMessage("<test message 2>");
-        
+
         var response = await _client.GetAsync("/public");
         var content = await response.Content.ReadAsStringAsync();
         Assert.Contains("test message 1", content);
         Assert.Contains("&lt;test message 2&gt;", content);
-        
+
         await DisposeDbContext();
     }
 
     [Fact]
-    public async Task TestTimelines() 
+    public async Task TestTimelines()
     {
         await InitializeDbContext();
-        
+
         await RegisterAndLogin("foo", "default");
         await AddMessage("the message by foo");
         await Logout();
-        
+
         await RegisterAndLogin("bar", "default");
         await AddMessage("the message by bar");
         var response = await _client.GetAsync("/public");
         var content = await response.Content.ReadAsStringAsync();
         Assert.Contains("the message by foo", content);
         Assert.Contains("the message by bar", content);
-        
+
         // bar's timeline should just show bar's message
         response = await _client.GetAsync("/");
         content = await response.Content.ReadAsStringAsync();
         Assert.DoesNotContain("the message by foo", content);
         Assert.Contains("the message by bar", content);
-        
+
         // now let's follow foo
         response = await _client.GetAsync("/foo/follow");
         content = await response.Content.ReadAsStringAsync();
         Assert.Contains("You are now following &quot;foo&quot;", content);
-        
+
         // we should now see foo's message
         response = await _client.GetAsync("/");
         content = await response.Content.ReadAsStringAsync();
         Assert.Contains("the message by foo", content);
         Assert.Contains("the message by bar", content);
-        
+
         // but on the user's page we only want the user's message
         response = await _client.GetAsync("/bar");
         content = await response.Content.ReadAsStringAsync();
@@ -241,7 +242,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         content = await response.Content.ReadAsStringAsync();
         Assert.Contains("the message by foo", content);
         Assert.DoesNotContain("the message by bar", content);
-        
+
         // now unfollow and check if that worked
         response = await _client.GetAsync("/foo/unfollow");
         content = await response.Content.ReadAsStringAsync();
@@ -250,7 +251,7 @@ public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
         content = await response.Content.ReadAsStringAsync();
         Assert.DoesNotContain("the message by foo", content);
         Assert.Contains("the message by bar", content);
-        
+
         await DisposeDbContext();
     }
 }

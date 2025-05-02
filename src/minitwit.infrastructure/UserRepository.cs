@@ -47,7 +47,7 @@ public class UserRepository : IUserRepository
         var id = await query.FirstOrDefaultAsync();
         return id;
     }
-    
+
     public async Task<string> GetGravatarURL(string email, int size = 80)
     {
         string normalizedEmail = email.Trim().ToLower();

@@ -8,7 +8,7 @@ public class MessageRepository : IMessageRepository
     private readonly MinitwitDbContext _dbContext;
     private IUserRepository _userRepository;
     private const int PerPage = 10;
-    
+
     private readonly IDbContextFactory<MinitwitDbContext> _factory;
 
     public MessageRepository(MinitwitDbContext dbContext, IUserRepository userRepository, IDbContextFactory<MinitwitDbContext> factory)
@@ -136,7 +136,7 @@ public class MessageRepository : IMessageRepository
         var result = await query.ToListAsync();
         return result;
     }
-    
+
     public async Task AddMessagesBatchAsync(IEnumerable<Message> messages)
     {
         try
