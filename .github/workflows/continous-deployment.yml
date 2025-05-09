@@ -74,6 +74,7 @@ jobs:
 
           ssh $SSH_USER@$SSH_HOST -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no "
             echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
+            echo 'export LOGGING_SERVER_IP=\"${LOGGING_SERVER_IP}\"' >> ~/.bash_profile && \
             cd /minitwit/remote_files && \
             ./deploy.sh
           "
@@ -81,6 +82,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+          LOGGING_SERVER_IP: ${{ secrets.LOGGING_SERVER_IP }}
 
       - name: Health Check Primary Server Post-deployment
         run: |
@@ -145,6 +147,7 @@ jobs:
 
           ssh $SSH2_USER@$SSH2_HOST -i ~/.ssh/do_ssh_key2 -o StrictHostKeyChecking=no "
             echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
+            echo 'export LOGGING_SERVER_IP=\"${LOGGING_SERVER_IP}\"' >> ~/.bash_profile && \
             cd /minitwit/remote_files && \
             ./deploy.sh
           "
@@ -152,6 +155,7 @@ jobs:
           SSH2_USER: ${{ secrets.SSH2_USER }}
           SSH2_HOST: ${{ secrets.SSH2_HOST }}
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+          LOGGING_SERVER_IP: ${{ secrets.LOGGING_SERVER_IP }}
 
       - name: Health Check Secondary Server Post-deployment
         run: |

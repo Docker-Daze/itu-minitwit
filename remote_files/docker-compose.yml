@@ -10,6 +10,7 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:5000
       - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+      - LOGGING_SERVER_IP=${LOGGING_SERVER_IP}
     networks:
       - itu-minitwit_default
 
