@@ -50,7 +50,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>3f7a962a-5504-45af-87d3-9e05401083f3</UserSecretsId>
-    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
   </PropertyGroup>
 
 </Project>
