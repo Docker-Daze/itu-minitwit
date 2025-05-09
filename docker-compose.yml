@@ -35,7 +35,34 @@ services:
       retries: 5
     networks:
       - itu-minitwit_default
+        
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9091:9090"
+    networks:
+      - itu-minitwit_default
+
+  grafana:
+    image: grafana/grafana:10.2.4
+    ports:
+      - "3001:3000"
+    networks:
+      - itu-minitwit_default
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SERVER_HTTP_ADDR=0.0.0.0
+      - GF_SERVER_ROOT_URL=http://0.0.0.0:3001
 
 networks:
   itu-minitwit_default:
     driver: bridge
+    
+volumes:
+  prometheus_data:
+  grafana_data:
