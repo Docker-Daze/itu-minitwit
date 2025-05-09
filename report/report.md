@@ -85,8 +85,71 @@ Instructions on how to run and use the project.
 ## Configuration
 Details about configuration files and environment variables.
 
-## Testing
-Explain how to run tests and ensure the project works as expected.
+# Process Perspective
+
+This perspective should clarify how code or other artifacts come from idea into the running system and everything that happens on the way.
+
+In particular, the following descriptions should be included:
+
+  - A complete description of stages and tools included in the CI/CD chains, including deployment and release of your systems.
+  - How do you monitor your systems and what precisely do you monitor?
+  - What do you log in your systems and how do you aggregate logs?
+  - Brief results of the security assessment and brief description of how did you harden the security of your system based on the analysis.
+  - Applied strategy for scaling and upgrades.
+
+
+## CI/CD Chains
+Our CI/CD Pipelines are built for the purpose of easier maintainess and security of our deployment to servers. ensureing that our infrastructure are up regardless of maintainess or failures for newly pushed commits.
+
+``` 
+/root
+    ├── workflows
+        ├── build-and-test.yml
+        ├── build-release.yml
+        ├── continous-deployment.yml
+        ├── lint-and-format-check.yml
+        ├── scheduled-release.yml
+        └── sonarcube.yml
+```
+
+The following workflows are implemented to ensure a robust CI/CD pipeline:
+
+1. **Build and Test Workflow**  
+    This workflow automates the build process and runs all unit and integration tests to ensure code quality.
+
+2. **Build Release Workflow**  
+    Automatically creates a release when a new tag is pushed to the repository.
+
+3. **Continuous Deployment Workflow**  
+    Deploys the application to the production server upon successful completion of tests and builds.
+
+4. **Lint and Format Check Workflow**  
+    Ensures that the code adheres to the project's linting and formatting standards.
+
+5. **Scheduled Release Workflow**  
+    Automates weekly releases to ensure regular updates and maintenance.
+
+6. **SonarQube Workflow**  
+    Performs static code analysis using SonarQube to identify potential bugs and vulnerabilities.
+
+Each workflow is defined in the `.github/workflows` directory and is triggered based on specific events such as pushes, pull requests, or scheduled intervals.
+
+### Deployment Chain
+The deployment process follows a structured chain format to ensure reliability and minimize downtime. The steps are as follows:
+
+1. **Linting and Code Quality Checks**  
+    The code is first analyzed for adherence to linting and formatting standards. This ensures that the codebase remains clean and maintainable.
+
+2. **Integration Testing**  
+    Once the linting checks pass, the commit undergoes rigorous integration testing to validate that all components work together as expected.
+
+3. **Deployment with Rolling Updates**  
+    If the commit successfully passes all previous stages, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
+
+    ![Deployment Chain](ITU_logo_KGH_DK.jpg.png)
+
+This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
+
 
 ```bash
 # Run tests
