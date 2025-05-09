@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using minitwit.core;
 
 namespace minitwit.infrastructure;
@@ -9,13 +10,13 @@ public class MessageRepository : IMessageRepository
     private IUserRepository _userRepository;
     private const int PerPage = 10;
 
-    private readonly IDbContextFactory<MinitwitDbContext> _factory;
+    private readonly IServiceScopeFactory _scopeFactory;
 
-    public MessageRepository(MinitwitDbContext dbContext, IUserRepository userRepository, IDbContextFactory<MinitwitDbContext> factory)
+    public MessageRepository(MinitwitDbContext dbContext, IUserRepository userRepository, IServiceScopeFactory scopeFactory)
     {
         _dbContext = dbContext;
         _userRepository = userRepository;
-        _factory = factory;
+        _scopeFactory = scopeFactory;
     }
 
     public Task<Message> AddMessage(User user, string message, int flagged = 0)
@@ -142,7 +143,8 @@ public class MessageRepository : IMessageRepository
         try
         {
             // create a fresh, scoped context just for this batch
-            await using var ctx = _factory.CreateDbContext();
+            using var scope = _scopeFactory.CreateScope();
+            var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
 
             // if you still have navigations on your Message, mark them Unchanged:
             foreach (var msg in messages)

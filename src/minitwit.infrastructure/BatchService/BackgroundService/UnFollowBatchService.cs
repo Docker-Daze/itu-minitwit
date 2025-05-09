@@ -14,16 +14,16 @@ public class UnFollowerBatchService : BackgroundService
 {
     private const int BatchSize = 10;
     private readonly Channel<string[]> _chan;
-    private readonly IDbContextFactory<MinitwitDbContext> _factory;
     private readonly IUserRepository _userRepository;
+    private readonly IServiceScopeFactory _scopeFactory;
 
     public UnFollowerBatchService(
           IUnfollowChannel unfollowChannel,
-          IDbContextFactory<MinitwitDbContext> factory,
+          IServiceScopeFactory scopeFactory,
           IUserRepository userRepository)
     {
         _chan = unfollowChannel.Channel;
-        _factory = factory;
+        _scopeFactory = scopeFactory;
         _userRepository = userRepository;
     }
 
@@ -48,8 +48,9 @@ public class UnFollowerBatchService : BackgroundService
                 }
             }
 
-            await using var ctx = _factory.CreateDbContext();
-            ctx.Followers.RemoveRange(toUnfollow);
+            using var scope = _scopeFactory.CreateScope();
+            var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+            await ctx.Followers.AddRangeAsync(toUnfollow, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
         }
     }

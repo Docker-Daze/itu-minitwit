@@ -14,18 +14,17 @@ public class MessageBatchService : BackgroundService
 {
     private const int BatchSize = 10;
     private readonly Channel<string[]> _chan;
-    private readonly IDbContextFactory<MinitwitDbContext> _factory;
     private readonly IUserRepository _userRepository;
     private readonly IMessageRepository _messageRepository;
+    private readonly IServiceScopeFactory _scopeFactory;
 
     public MessageBatchService(
-        Channel<string[]> chan,
-        IDbContextFactory<MinitwitDbContext> factory, IUserRepository userRepository, IMessageRepository messageRepository)
+        Channel<string[]> chan, IServiceScopeFactory scopeFactory, IUserRepository userRepository, IMessageRepository messageRepository)
     {
         _chan = chan;
-        _factory = factory;
         _userRepository = userRepository;
         _messageRepository = messageRepository;
+        _scopeFactory = scopeFactory;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -49,13 +48,14 @@ public class MessageBatchService : BackgroundService
                 }
             }
 
-            await using var ctx = _factory.CreateDbContext();
-
             // unify user instances
             var userMap = MakeUserDict(buffer);
-
+            using var scope = _scopeFactory.CreateScope();
+            var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+            
             foreach (var user in userMap.Values)
                 ctx.Entry(user).State = EntityState.Unchanged;
+            
             await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
         }
