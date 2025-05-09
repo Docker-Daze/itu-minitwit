@@ -39,6 +39,8 @@ builder.Services.AddSession(options =>
 builder.Configuration.AddUserSecrets<Program>()
     .AddEnvironmentVariables();
 
+string? loggingServerIp = Environment.GetEnvironmentVariable("LOGGING_SERVER_IP");
+
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .MinimumLevel.Override("System", LogEventLevel.Warning)
@@ -49,7 +51,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     .WriteTo.Async(a => a.Console(new RenderedCompactJsonFormatter()))
     // Buffer, batch write, and configure TCP with retry and circuit breaker
     .WriteTo.Async(a => a.TCPSink(
-        "tcp://209.38.112.21:5012",
+        $"tcp//{loggingServerIp}:5012",
         new RenderedCompactJsonFormatter()
     ))
     // Filter out noise
