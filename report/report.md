@@ -21,13 +21,42 @@ Provide a brief overview of the project, its purpose, and key features.
 Explain the directory structure and the purpose of each folder/file.
 
 ```
-/root
-    ├── src/          # Source code
-    ├── tests/        # Test cases
-    ├── docs/         # Documentation files
-    ├── config/       # Configuration files
-    ├── scripts/      # Utility scripts
-    └── README.md     # Project documentation
+/itu-minitwit
+    ├── .github/
+    │   └── workflows                       # GitHub Action workflows
+    │       ├── build-and-test.yml          # Automated build and test
+    │       ├── build-release.yml           # Creates release on push with a tag
+    │       ├── continous-deployment.yml    # Deployment to dig
+    │       ├── lint-and-format-check.yml   # Automated linter and formatting checks
+    │       ├── scheduled-release.yml       # Automated weekly release
+    │       └── sonarcube.yml               # Automated Sonarcube checks
+    ├── logging/                            # Logging configuration files
+    │        ├── docker-compose.yml         # Starts ELK stack and nginx containers
+    │        └── nginx.conf                 # Reverse proxy with authentication
+    ├── logstash/                           # Logstash configuration
+    ├── remote_files/                       # Files used remotely on the minitwit server for deployment
+    ├── report/                             # Report files
+    ├── src/                                # Source code
+    │   ├── minitwit.core/                  # Domain Layer - Domain models
+    │   ├── minitwit.infrastructure/        # Infrastructure Layer - Data access
+    │   └── minitwit.web/                   # Presentation Layer - Web app & API entry point
+    │       └── Program.cs                  # Program entrypoint
+    ├── terraform/                          # Terraform configurations for provisioning
+    │   ├── files/                          # Files used by terraform
+    │   ├── modules/
+    │   │   ├── minitwit_logging/           # Terraform code for logging infrastucture
+    │   │   └── minitwit_server/            # Terraform code for minitwit infrastucture
+    │   ├── main.tf                         # Terraform module definitions
+    │   ├── terraform.tfvars                # Terraform variables
+    │   └── variables.tf                    # Terraform variables declarations
+    ├── tests/                              # Test cases
+    │   └── minitwit.tests/
+    │       ├── minitwit.tests.cs           # API tests
+    │       └── playwright.test.cs          # UI tests
+    │
+    ├── docker-compose.yml                  # For running the program locally
+    ├── Dockerfile                          # Application Dockerfile
+    └── itu-minitwit.sln                    # Project solution file
 ```
 
 ## Installation
