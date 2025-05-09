@@ -1,0 +1,33 @@
+name: Check Push Trigger
+description: Checks if the original trigger event was a push.
+
+inputs:
+  artifact-name:
+    description: 'The name of the artifact containing the trigger source'
+    required: true
+    default: 'trigger-source'
+
+outputs:
+  is_push:
+    description: 'Whether the original event was a push'
+    value: ${{ steps.check.outputs.is_push }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Download trigger source artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}
+
+    - name: Read trigger source and set output
+      id: check
+      shell: bash
+      run: |
+        source=$(cat trigger_source.txt)
+        echo "Trigger source: $source"
+        if [[ "$source" == "push" ]]; then
+          echo "is_push=true" >> $GITHUB_OUTPUT
+        else
+          echo "is_push=false" >> $GITHUB_OUTPUT
+        fi
