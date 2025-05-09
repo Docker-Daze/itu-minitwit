@@ -36,7 +36,6 @@ namespace minitwit.infrastructure
                 try
                 {
                     var user = Activator.CreateInstance<User>();
-
                     user.UserName = request.username;
 
                     var existingUser = await userManager.FindByEmailAsync(request.email);

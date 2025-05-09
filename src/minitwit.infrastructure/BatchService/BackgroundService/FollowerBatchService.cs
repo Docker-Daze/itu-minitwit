@@ -14,17 +14,12 @@ public class FollowerBatchService : BackgroundService
 {
     private const int BatchSize = 10;
     private readonly Channel<string[]> _chan;
-    private readonly IDbContextFactory<MinitwitDbContext> _factory;
-    private readonly IUserRepository _userRepository;
+    private readonly IServiceScopeFactory _scopeFactory;
 
-    public FollowerBatchService(
-        IFollowChannel followChannel,
-        IDbContextFactory<MinitwitDbContext> factory,
-        IUserRepository userRepository)
+    public FollowerBatchService(Channel<string[]> chan, IServiceScopeFactory scopeFactory)
     {
-        _chan = followChannel.Channel;
-        _factory = factory;
-        _userRepository = userRepository;
+        _chan = chan;
+        _scopeFactory = scopeFactory;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -38,7 +33,9 @@ public class FollowerBatchService : BackgroundService
                 var followRequest = await _chan.Reader.ReadAsync(stoppingToken);
                 try
                 {
-                    var request = await _userRepository.FollowUser(followRequest[0], followRequest[1]);
+                    using var itemScope = _scopeFactory.CreateScope();
+                    var userRepo = itemScope.ServiceProvider.GetRequiredService<IUserRepository>();
+                    var request = await userRepo.FollowUser(followRequest[0], followRequest[1]);
                     toFollow.Add(request);
                 }
                 catch (Exception e)
@@ -47,8 +44,8 @@ public class FollowerBatchService : BackgroundService
                     continue;
                 }
             }
-
-            await using var ctx = _factory.CreateDbContext();
+            using var scope = _scopeFactory.CreateScope();
+            var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
             await ctx.Followers.AddRangeAsync(toFollow, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
         }

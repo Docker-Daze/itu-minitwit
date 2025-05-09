@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using minitwit.core;
 using minitwit.web;
 
@@ -10,15 +11,16 @@ namespace minitwit.infrastructure;
 public class UserRepository : IUserRepository
 {
 
-    private readonly IDbContextFactory<MinitwitDbContext> _factory;
+    private readonly IServiceScopeFactory _scopeFactory;
 
-    public UserRepository(MetricsService metricsService, IDbContextFactory<MinitwitDbContext> factory)
+    public UserRepository(IServiceScopeFactory scopeFactory)
     {
-        _factory = factory;
+        _scopeFactory = scopeFactory;
     }
     public async Task<User?> GetUser(string userId)
     {
-        await using var ctx = _factory.CreateDbContext();
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
         var query = from Users in ctx.Users
                     where Users.Id == userId
                     select Users;
@@ -28,7 +30,8 @@ public class UserRepository : IUserRepository
     }
     public async Task<User?> GetUserFromUsername(string username)
     {
-        await using var ctx = _factory.CreateDbContext();
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
         var query = from Users in ctx.Users
                     where Users.UserName == username
                     select Users;
@@ -39,7 +42,8 @@ public class UserRepository : IUserRepository
 
     public async Task<string?> GetUserID(string username)
     {
-        await using var ctx = _factory.CreateDbContext();
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
         var query = from Users in ctx.Users
                     where Users.UserName == username
                     select Users.Id;
@@ -97,7 +101,8 @@ public class UserRepository : IUserRepository
             throw new InvalidOperationException("You need to follow the user to unfollow");
         }
 
-        await using var ctx = _factory.CreateDbContext();
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
         var followerEntry = await ctx.Followers
             .FirstOrDefaultAsync(f => f.WhoId == whoId && f.WhomId == whomId);
 
@@ -111,7 +116,8 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> IsFollowing(string whoUsername, string whomUsername)
     {
-        await using var ctx = _factory.CreateDbContext();
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
         var whomId = await GetUserID(whomUsername);
         var whoId = await GetUserID(whoUsername);
 
@@ -126,7 +132,8 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> IsFollowingUserID(string? whoId, string? whomId)
     {
-        await using var ctx = _factory.CreateDbContext();
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
         if (string.IsNullOrEmpty(whomId) || string.IsNullOrEmpty(whoId))
         {
             return false; // User not found, cannot be following
@@ -138,7 +145,8 @@ public class UserRepository : IUserRepository
 
     public async Task<List<APIFollowingDTO>> GetFollowers(string username)
     {
-        await using var ctx = _factory.CreateDbContext();
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
         var userId = await GetUserID(username);
 
         return await ctx.Followers
@@ -155,7 +163,8 @@ public class UserRepository : IUserRepository
 
     private async Task<List<string>> GetUserIDs(string whoUsername, string whomUsername)
     {
-        await using var ctx = _factory.CreateDbContext();
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
         List<string> ids = new List<string>();
 
         // Query the Users table once for both usernames.
