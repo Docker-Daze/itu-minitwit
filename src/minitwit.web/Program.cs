@@ -51,7 +51,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     .WriteTo.Async(a => a.Console(new RenderedCompactJsonFormatter()))
     // Buffer, batch write, and configure TCP with retry and circuit breaker
     .WriteTo.Async(a => a.TCPSink(
-        $"tcp//{loggingServerIp}:5012",
+        $"tcp://{loggingServerIp}:5012",
         new RenderedCompactJsonFormatter()
     ))
     // Filter out noise
