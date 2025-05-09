@@ -11,6 +11,7 @@
 8. [Contributing](#contributing)
 9. [License](#license)
 10. [Acknowledgments](#acknowledgments)
+11. [System Architecture](#systemarchitecture)
 
 ---
 
@@ -105,7 +106,7 @@ This Project Itu_Minitwit is licensed and distributed under the MIT license
 Credit individuals or resources that helped in the project.
 
 
-## System Architecture
+## SystemArchitecture
 ```
 # Dependency List:
 1. Microsoft.EntityFrameworkCore.Design - Version: 9.0.1
