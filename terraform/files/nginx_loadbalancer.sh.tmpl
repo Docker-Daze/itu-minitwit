@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Script to set up Nginx Load Balancer
+
+# Step 1: Install Nginx
+echo "Updating package list and installing Nginx..."
+sudo apt update
+sudo apt install -y nginx
+
+# Step 2: Edit the Default Configuration File
+CONFIG_FILE="/etc/nginx/sites-available/default"
+
+echo "Writing new configuration to $CONFIG_FILE..."
+sudo bash -c "cat > $CONFIG_FILE" <<EOL
+upstream backend {
+    server ${PRIMARY_SERVER_IP}:5000 max_fails=3 fail_timeout=1m;
+    server ${SECONDARY_SERVER_IP}:5000 max_fails=3 fail_timeout=1m;
+}
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://backend;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        add_header X-Upstream-Server \$upstream_addr;
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 5s;
+        proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
+    }
+}
+EOL
+
+# Step 3: Test Nginx Configuration
+echo "Testing Nginx configuration..."
+sudo nginx -t
+
+# Step 4: Reload Nginx
+echo "Reloading Nginx to apply changes..."
+sudo ufw allow http
+sudo systemctl reload nginx
+
+echo "Nginx Load Balancer setup completed."
