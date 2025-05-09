@@ -106,8 +106,8 @@ Credit individuals or resources that helped in the project.
 
 
 ## System Architecture
-
-<h3>Dependency List<h3/>
+```
+# Dependency List:
 1. Microsoft.EntityFrameworkCore.Design - Version: 9.0.1
 2. Microsoft.Extensions.Configuration - Version: 9.0.2
 3. Microsoft.Extensions.Configuration.EnvironmentVariables - Version: 9.0.2
@@ -141,3 +141,4 @@ Credit individuals or resources that helped in the project.
 31. Nginx - Version: 1.27.0
 32. Dotnet_SDK - Version: 9.0.0
 33. org.Sonarcube - Version: 6.1.0
+```
