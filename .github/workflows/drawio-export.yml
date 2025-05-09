@@ -41,6 +41,7 @@ jobs:
           output: drawio-assets
 
       - name: Get author and committer info from HEAD commit
+        id: commit-data
         uses: rlespinasse/git-commit-data-action@v1
         if: github.ref == 'refs/heads/drawio'
 
@@ -48,7 +49,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "docs: sync draw.io exported files"
-          commit_user_name: "${{ env.GIT_COMMIT_COMMITTER_NAME }}"
-          commit_user_email: "${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
-          commit_author: "${{ env.GIT_COMMIT_AUTHOR }}"
+          commit_user_name: "${{ steps.commit-data.outputs.commit_committer_name }}"
+          commit_user_email: "${{ steps.commit-data.outputs.commit_committer_email }}"
+          commit_author: "${{ steps.commit-data.outputs.commit_author }}"
         if: github.ref == 'refs/heads/drawio'
