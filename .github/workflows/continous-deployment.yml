@@ -74,6 +74,7 @@ jobs:
 
           ssh $SSH_USER@$SSH_HOST -i ~/.ssh/do_ssh_key -o StrictHostKeyChecking=no "
             echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
+            echo 'export LOGGING_SERVER_IP=\"${LOGGING_SERVER_IP}\"' >> ~/.bash_profile && \
             cd /minitwit/remote_files && \
             ./deploy.sh
           "
@@ -145,6 +146,7 @@ jobs:
 
           ssh $SSH2_USER@$SSH2_HOST -i ~/.ssh/do_ssh_key2 -o StrictHostKeyChecking=no "
             echo 'export DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"' >> ~/.bash_profile && \
+            echo 'export LOGGING_SERVER_IP=\"${LOGGING_SERVER_IP}\"' >> ~/.bash_profile && \
             cd /minitwit/remote_files && \
             ./deploy.sh
           "
