@@ -6,15 +6,13 @@ namespace minitwit.infrastructure;
 
 public class MessageRepository : IMessageRepository
 {
-    private readonly MinitwitDbContext _dbContext;
     private IUserRepository _userRepository;
     private const int PerPage = 10;
 
     private readonly IServiceScopeFactory _scopeFactory;
 
-    public MessageRepository(MinitwitDbContext dbContext, IUserRepository userRepository, IServiceScopeFactory scopeFactory)
+    public MessageRepository(IUserRepository userRepository, IServiceScopeFactory scopeFactory)
     {
-        _dbContext = dbContext;
         _userRepository = userRepository;
         _scopeFactory = scopeFactory;
     }
@@ -43,8 +41,9 @@ public class MessageRepository : IMessageRepository
     public async Task<List<MessageDTO>> GetMessages(int page)
     {
         int offset = (page - 1) * PerPage;
-
-        var query = (from message in _dbContext.Messages
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+        var query = (from message in ctx.Messages
                      orderby message.PubDate descending
                      where message.Flagged == 0
                      select new MessageDTO
@@ -61,7 +60,9 @@ public class MessageRepository : IMessageRepository
 
     public async Task<List<APIMessageDTO>> GetMessagesSpecifiedAmount(int amount)
     {
-        var query = (from message in _dbContext.Messages
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+        var query = (from message in ctx.Messages
                      orderby message.PubDate descending
                      where message.Flagged == 0
                      select new APIMessageDTO
@@ -78,8 +79,9 @@ public class MessageRepository : IMessageRepository
     public async Task<List<MessageDTO>> GetMessagesUserTimeline(string username, int page)
     {
         int offset = (page - 1) * PerPage;
-
-        var query = (from message in _dbContext.Messages
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+        var query = (from message in ctx.Messages
                      orderby message.PubDate descending
                      where message.Flagged == 0 && message.User!.UserName == username
                      select new MessageDTO
@@ -96,8 +98,9 @@ public class MessageRepository : IMessageRepository
 
     public async Task<List<APIMessageDTO>> GetMessagesFromUsernameSpecifiedAmount(string username, int amount)
     {
-
-        var query = (from message in _dbContext.Messages
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+        var query = (from message in ctx.Messages
                      orderby message.PubDate descending
                      where message.Flagged == 0 && message.User!.UserName == username
                      select new APIMessageDTO
@@ -116,13 +119,14 @@ public class MessageRepository : IMessageRepository
         int offset = (page - 1) * PerPage;
 
         var userId = await _userRepository.GetUserID(username);
-
-        var following = await _dbContext.Followers
+        using var scope = _scopeFactory.CreateScope();
+        var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+        var following = await ctx.Followers
             .Where(f => f.WhoId == userId)
             .Select(f => f.WhomId)
             .ToListAsync();
 
-        var query = (from message in _dbContext.Messages
+        var query = (from message in ctx.Messages
                      orderby message.PubDate descending
                      where message.Flagged == 0
                            && (message.User!.UserName == username || following.Contains(message.User!.Id))

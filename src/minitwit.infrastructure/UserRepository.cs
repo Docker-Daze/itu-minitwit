@@ -13,7 +13,7 @@ public class UserRepository : IUserRepository
 
     private readonly IServiceScopeFactory _scopeFactory;
 
-    public UserRepository(MetricsService metricsService, IServiceScopeFactory scopeFactory)
+    public UserRepository(IServiceScopeFactory scopeFactory)
     {
         _scopeFactory = scopeFactory;
     }

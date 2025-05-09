@@ -14,16 +14,12 @@ public class MessageBatchService : BackgroundService
 {
     private const int BatchSize = 10;
     private readonly Channel<string[]> _chan;
-    private readonly IUserRepository _userRepository;
-    private readonly IMessageRepository _messageRepository;
     private readonly IServiceScopeFactory _scopeFactory;
 
     public MessageBatchService(
-        Channel<string[]> chan, IServiceScopeFactory scopeFactory, IUserRepository userRepository, IMessageRepository messageRepository)
+        Channel<string[]> chan, IServiceScopeFactory scopeFactory)
     {
         _chan = chan;
-        _userRepository = userRepository;
-        _messageRepository = messageRepository;
         _scopeFactory = scopeFactory;
     }
 
@@ -38,7 +34,10 @@ public class MessageBatchService : BackgroundService
                 var att = await _chan.Reader.ReadAsync(stoppingToken);
                 try
                 {
-                    var msg = await ValidateMessage(att);
+                    using var itemScope = _scopeFactory.CreateScope();
+                    var userRepo = itemScope.ServiceProvider.GetRequiredService<IUserRepository>();
+                    var msgRepo  = itemScope.ServiceProvider.GetRequiredService<IMessageRepository>();
+                    var msg = await ValidateMessage(att, userRepo, msgRepo);
                     buffer.Add(msg);
                 }
                 catch (Exception e)
@@ -61,14 +60,14 @@ public class MessageBatchService : BackgroundService
         }
     }
 
-    private async Task<Message> ValidateMessage(string[] att)
+    private async Task<Message> ValidateMessage(string[] att, IUserRepository userRepository, IMessageRepository messageRepository)
     {
-        var user = await _userRepository.GetUserFromUsername(att[0]);
+        var user = await userRepository.GetUserFromUsername(att[0]);
         if (user == null)
         {
             throw new Exception("User not found");
         }
-        return await _messageRepository.AddMessage(user, att[1], int.Parse(att[2]));
+        return await messageRepository.AddMessage(user, att[1], int.Parse(att[2]));
     }
 
     private Dictionary<string, User> MakeUserDict(List<Message> messages)

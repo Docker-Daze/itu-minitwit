@@ -14,16 +14,12 @@ public class FollowerBatchService : BackgroundService
 {
     private const int BatchSize = 10;
     private readonly Channel<string[]> _chan;
-    private readonly IUserRepository _userRepository;
     private readonly IServiceScopeFactory _scopeFactory;
 
-    public FollowerBatchService(
-        IFollowChannel followChannel, IServiceScopeFactory scopeFactory,
-        IUserRepository userRepository)
+    public FollowerBatchService(Channel<string[]> chan, IServiceScopeFactory scopeFactory)
     {
-        _chan = followChannel.Channel;
+        _chan = chan;
         _scopeFactory = scopeFactory;
-        _userRepository = userRepository;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -37,7 +33,9 @@ public class FollowerBatchService : BackgroundService
                 var followRequest = await _chan.Reader.ReadAsync(stoppingToken);
                 try
                 {
-                    var request = await _userRepository.FollowUser(followRequest[0], followRequest[1]);
+                    using var itemScope = _scopeFactory.CreateScope();
+                    var userRepo = itemScope.ServiceProvider.GetRequiredService<IUserRepository>();
+                    var request = await userRepo.FollowUser(followRequest[0], followRequest[1]);
                     toFollow.Add(request);
                 }
                 catch (Exception e)
