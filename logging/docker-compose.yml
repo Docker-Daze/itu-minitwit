@@ -25,6 +25,7 @@ services:
       - "5012:5012"
     environment:
       LS_JAVA_OPTS: "-Xms256m -Xmx256m"
+      SINK__TCP__URL: "tcp://logstash:5012"
     depends_on:
       - elasticsearch
     networks:
