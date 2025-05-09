@@ -99,7 +99,7 @@ Steps to deploy the project to production.
 Guidelines for contributing to the project.
 
 ## License
-State the license under which the project is distributed.
+This Project Itu_Minitwit is licensed and distributed under the MIT license
 
 ## Acknowledgments
 Credit individuals or resources that helped in the project.
