@@ -14,17 +14,14 @@ public class UnFollowerBatchService : BackgroundService
 {
     private const int BatchSize = 10;
     private readonly Channel<string[]> _chan;
-    private readonly IDbContextFactory<MinitwitDbContext> _factory;
-    private readonly IUserRepository _userRepository;
+    private readonly IServiceScopeFactory _scopeFactory;
 
     public UnFollowerBatchService(
           IUnfollowChannel unfollowChannel,
-          IDbContextFactory<MinitwitDbContext> factory,
-          IUserRepository userRepository)
+          IServiceScopeFactory scopeFactory)
     {
         _chan = unfollowChannel.Channel;
-        _factory = factory;
-        _userRepository = userRepository;
+        _scopeFactory = scopeFactory;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -38,7 +35,9 @@ public class UnFollowerBatchService : BackgroundService
                 var theRequest = await _chan.Reader.ReadAsync(stoppingToken);
                 try
                 {
-                    Follower request = await _userRepository.UnfollowUser(theRequest[0], theRequest[1]);
+                    using var itemScope = _scopeFactory.CreateScope();
+                    var userRepo = itemScope.ServiceProvider.GetRequiredService<IUserRepository>();
+                    Follower request = await userRepo.UnfollowUser(theRequest[0], theRequest[1]);
                     toUnfollow.Add(request);
                 }
                 catch (Exception e)
@@ -48,8 +47,9 @@ public class UnFollowerBatchService : BackgroundService
                 }
             }
 
-            await using var ctx = _factory.CreateDbContext();
-            ctx.Followers.RemoveRange(toUnfollow);
+            using var scope = _scopeFactory.CreateScope();
+            var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+            await ctx.Followers.AddRangeAsync(toUnfollow, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
         }
     }
