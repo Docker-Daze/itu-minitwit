@@ -197,8 +197,6 @@ The deployment process follows a structured chain format to ensure reliability a
 3. **Deployment with Rolling Updates**  
     If the commit successfully passes all previous stages, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
 
-    ![Deployment Chain](ITU_logo_KGH_DK.jpg.png)
-
 This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
 
 
@@ -283,7 +281,23 @@ Credit individuals or resources that helped in the project.
 32. Dotnet_SDK - Version: 9.0.0
 33. org.Sonarcube - Version: 6.1.0
 ```
-
+#### Logging
+For logging, our application uses Serilog as the API to collect log data. 
+This data is then transferred into the Elastic Stack, 
+which consists of Logstash, Elasticsearch, and Kibana—all used to process, query, and display the logging data.
+This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana (a data visualization and exploration tool).
+#### Monitoring
+For monitoring, our application uses Prometheus as a real-time metrics storage server. 
+On top of this, we use Grafana as a data visualization tool to display and analyze these metrics.
+#### Application
+We have built our application using the .NET software framework, following the onion architecture originally invented by Jeffrey Palermo. 
+We use the ASP.NET Core Identity package as an authentication system, allowing us to create and delete users.
+Initially, we used SQLite as our DBMS but later switched to Prometheus. 
+In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM).
+For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
+To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
+As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow. 
+SonarQube tracks security, reliability, maintainability, test coverage, and code duplications.
 
 ## Sequence Diagram for Simulator unfollow call
 ```mermaid
@@ -301,7 +315,7 @@ sequenceDiagram
     Minitwit_Application->>DataBase: Get UserId <user1> <user2>
     DataBase->>Minitwit_Application: UserId1 UserId2
     Note left of Minitwit_Application: checks if both users exists
-    Minitwit_Application->>DataBase: Doeme}
+    Minitwit_Application->>DataBase: Does User1 Follow User2
     Note right of Minitwit_Application: FollowRequests User1 Follow User2
     DataBase->>Minitwit_Application: Bollean
     Note left of Minitwit_Application: If true
@@ -320,7 +334,7 @@ sequenceDiagram
     participant Minitwit_Application
     participant DataBase
     User->>Minitwit_Application: Http UnFollow(username)
-    Note right of Minitwit_Application: FollowRequest
+    Note right of Minitwit_Application: UnFollowRequest
     Minitwit_Application->>DataBase: Get UserId <user1> <user2>
     DataBase->>Minitwit_Application: UserId1 UserId2
     Note left of Minitwit_Application: checks if both users exists
