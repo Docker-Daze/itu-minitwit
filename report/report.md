@@ -76,35 +76,9 @@ cd repo-name
 
 ## Usage
 
-Deploy the application
+The deployed the application accessible on "http://164.90.240.84:5000/public" How to deploy the application is mentioned in the deployment section.
 
-To deploy the application navigate to this folder:
-```bash
-# Folder
-/itu-minitwit/terraform
-```
-When inside folder run:
-```bash
-# Command initializes terraform files
-terraform init
-```
-Initialises terraform files if they are not already initialzed
-Then run:
-```bash
-# Command show terraform changes
-terraform plan
-```
-This show what changes will be made when running terraform apply.
-finally run:
-```bash
-# Command apply terraform changes
-terraform apply
-# Confirm changes by saying yes
-yes
-```
-Wait for the application to deploy. When the application is deployed the website will be accessible on "http://164.90.240.84:5000/public".
-
-Other ports running in the background for monitoring and logging.
+The other ports for accessing monitoring and logging for the deployed app is here:
 - Promethous is on "164.90.240.84:9091"
 - Grafana is on "164.90.240.84:3000"
 - elasticsearch is on "164.90.240.84:9200"
@@ -129,7 +103,7 @@ The ports for monitoring and logging is also accessible locally.
 - elasticsearch is on "localhost:9200"
 - kibana is on "localhost:5601"
 
-Note that no data and dashboard Grafana are set up locally.
+Note that no data and Grafana dashboard are set up locally.
 
 ## Configuration
 Details about configuration files and environment variables.
@@ -206,7 +180,33 @@ This deployment strategy ensures high availability and minimizes the risk of ser
 ```
 
 ## Deployment
-Steps to deploy the project to production.
+Deploy the application
+
+To deploy the application navigate to this folder:
+```bash
+# Folder
+/itu-minitwit/terraform
+```
+When inside folder run:
+```bash
+# Command initializes terraform files
+terraform init
+```
+Initialises terraform files if they are not already initialzed
+Then run:
+```bash
+# Command show terraform changes
+terraform plan
+```
+This show what changes will be made when running terraform apply.
+finally run:
+```bash
+# Command apply terraform changes
+terraform apply
+# Confirm changes by saying yes
+yes
+```
+Wait for the application to deploy. When the application is deployed the website will be accessible on "http://164.90.240.84:5000/public".
 
 ## Contributing
 Guidelines for contributing to the project.
