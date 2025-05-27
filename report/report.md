@@ -50,38 +50,19 @@ The application follows the onion architecture and is split into three layers.
 
 ![Package Diagram](images/package-diagram.drawio.svg)
 
-### Static view
+The infrastructure is deployed to Digital Ocean.
+* The minitwit application is hosted on two droplets - a primary and secondary.
+* A nginx loadbalancer distributes load between the two minitwit servers.
+* The Database is hosted as a PostgreSQL Database Cluster.
+* Logging is hosted on its own seperate droplet.
 
 ![Deployment Diagram](images/DeploymentDiagram.png)
-### Dynamic view
 
 ### Infrastruture as Code
+The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
+This includes modules for provisioning the application servers and logging stack. 
 
-The application infrastructure can be deployed via Terraform.
-```bash
-# Folder
-/itu-minitwit/terraform
-```
-When inside folder run:
-```bash
-# Command initializes terraform files
-terraform init
-```
-Initialises terraform files if they are not already initialzed
-Then run:
-```bash
-# Command show terraform changes
-terraform plan
-```
-This show what changes will be made when running terraform apply.
-finally run:
-```bash
-# Command apply terraform changes
-terraform apply
-# Confirm changes by saying yes
-yes
-```
-Wait for the application to deploy. When the application is deployed the website will be accessible on "http://164.90.240.84:5000/public".
+### Dynamic view
 
 
 ```
