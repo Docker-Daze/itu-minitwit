@@ -146,8 +146,6 @@ The deployment process follows a structured chain format to ensure reliability a
 3. **Deployment with Rolling Updates**  
     If the commit successfully passes all previous stages, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
 
-    ![Deployment Chain](ITU_logo_KGH_DK.jpg.png)
-
 This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
 
 

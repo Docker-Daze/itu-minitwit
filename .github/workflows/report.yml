@@ -20,6 +20,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-xetex
+          
+      - name: Create build directory
+        run: mkdir -p report/build
 
       - name: Convert Markdown to PDF
         run: |
