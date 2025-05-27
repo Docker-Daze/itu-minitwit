@@ -24,7 +24,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Build and lint code
+    - name: Build
       run: dotnet build --no-restore --warnaserror
       
     - name: Run Docker API-Test-Containers
