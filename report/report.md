@@ -189,7 +189,7 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 
 ## Current State of the System
 
-# Process' perspective  -- 571 words
+# Process' perspective  -- 1026 words
 
 ## Deployment and Release
 
