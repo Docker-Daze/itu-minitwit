@@ -273,7 +273,7 @@ sequenceDiagram
     Minitwit_Application->>DataBase: Get UserId <user1> <user2>
     DataBase->>Minitwit_Application: UserId1 UserId2
     Note left of Minitwit_Application: checks if both users exists
-    Minitwit_Application->>DataBase: Doeme}
+    Minitwit_Application->>DataBase: Does User1 Follow User2
     Note right of Minitwit_Application: FollowRequests User1 Follow User2
     DataBase->>Minitwit_Application: Bollean
     Note left of Minitwit_Application: If true
@@ -292,7 +292,7 @@ sequenceDiagram
     participant Minitwit_Application
     participant DataBase
     User->>Minitwit_Application: Http UnFollow(username)
-    Note right of Minitwit_Application: FollowRequest
+    Note right of Minitwit_Application: UnFollowRequest
     Minitwit_Application->>DataBase: Get UserId <user1> <user2>
     DataBase->>Minitwit_Application: UserId1 UserId2
     Note left of Minitwit_Application: checks if both users exists
