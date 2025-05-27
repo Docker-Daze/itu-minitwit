@@ -189,7 +189,11 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 ![User Seq Diagram](images/UMLSEQUser.png)
 
 ## Current State of the System
+The current state of our system is generally good. At all levels of the application, we are observing the results we expect and want.
+The biggest weakness in our application is the lack of testing, which is currently close to zero.
+Below is the result of a quality check run by our SonarQube workflow.
 
+![Sonar Cube quality check result](images/SonarCubeResult.png)
 # Process' perspective  -- 571 words
 
 ## Deployment and Release
