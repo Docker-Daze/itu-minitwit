@@ -15,10 +15,47 @@
 
 ---
 
-## Introduction
+# System's Perspective
+
+## Design and Architecture
+
+## Dependencies
+
+## Interactions of Subsystems
+
+## Current State of the System
+
+# Process' perspective
+
+## Deployment and Release
+
+## Monitoring
+
+## Logging
+
+## Security Assessment
+
+## Strategy for Scaling and Upgrades
+
+## The use of AI
+
+# Reflection Perspective
+
+## Evolution and Refactoring
+
+## Operation
+
+## Maintanence
+
+## DevOps
+
+
+
+
+# Introduction
 Provide a brief overview of the project, its purpose, and key features.
 
-## Project Structure
+# Project Structure
 Explain the directory structure and the purpose of each folder/file.
 
 ```
