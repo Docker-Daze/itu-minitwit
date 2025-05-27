@@ -273,7 +273,7 @@ The Application is made up of these assets:
 
 ![Risk matrix](images/Risk_matrix.png)
 
-The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Some ports requires login to access and droplets are secured by digitaloceans standard security.
+The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Monitoring and loggin requires login to access and droplets are secured by digitaloceans standard security.
 
 The biggest invulnerability is no failsafe against spamming and overloading the application with requests.
 
