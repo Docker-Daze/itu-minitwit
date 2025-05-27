@@ -49,6 +49,7 @@ The application follows the onion architecture and is split into three layers.
 
 ### Static view
 
+![Deployment Diagram](images/DeploymentDiagram.png)
 ### Dynamic view
 
 To deploy the application navigate to this folder:
