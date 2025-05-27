@@ -65,13 +65,17 @@ Step-by-step guide on how to set up the project locally.
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/repo-name.git
+git clone https://github.com/Docker-Daze/itu-minitwit.git
 
 # Navigate to the project directory
-cd repo-name
+cd itu-minitwit
 
 # Install dependencies
-<insert installation commands>
+dotnet restore
+dotnet build
+
+# Apply database migrations
+dotnet ef database update
 ```
 
 ## Usage
