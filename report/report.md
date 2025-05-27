@@ -2,25 +2,26 @@
 title: _minitwit_ Project Report
 subtitle: ITU DevOps 2025 Group `E`
 author:
-- "Magnus Thor Lessing Rolin <thmr@itu.dk>"
-- "Mathias Bindslev Hansen <bimh@itu.dk>"
-- "Nikolai Tilgreen Nielsen <nitn@itu.dk>"
-- "Rasmus Hassing Huge <rahu@itu.dk>"
-- "Rasmus Mygind Poulsen <rpou@itu.dk>"
+  - "Magnus Thor Lessing Rolin <thmr@itu.dk>"
+  - "Mathias Bindslev Hansen <bimh@itu.dk>"
+  - "Nikolai Tilgreen Nielsen <nitn@itu.dk>"
+  - "Rasmus Hassing Huge <rahu@itu.dk>"
+  - "Rasmus Mygind Poulsen <rpou@itu.dk>"
 numbersections: true
 ---
+
 \newpage
 
 # Table of Contents
 
 1. [System's Perspective](#systems-perspective)  
    1.1 [Design and Architecture](#design-and-architecture)  
-   1.2 [Dependencies](#dependencies)   
+   1.2 [Dependencies](#dependencies)  
    1.3 [Interactions of Subsystems](#interactions-of-subsystems)  
    1.4 [Current State of the System](#current-state-of-the-system)
 
 2. [Process' Perspective](#process-perspective)  
-   2.1 [Deployment and Release](#deployment-and-release)   
+   2.1 [Deployment and Release](#deployment-and-release)  
    2.2 [Monitoring](#monitoring-1)  
    2.3 [Logging of application](#logging-of-application)  
    2.4 [Security Assessment](#security-assessment)  
@@ -32,6 +33,7 @@ numbersections: true
    3.2 [Operation](#operation)  
    3.3 [Maintenance](#maintanence)  
    3.4 [DevOps](#devops)
+
 ---
 
 \newpage
@@ -44,23 +46,25 @@ numbersections: true
 
 The application follows the onion architecture and is split into three layers.
 
-* The **Domain Layer** contains the domain model.
-* The **Infrastructure Layer** contains the data manipulation and insertion logic.
-* The **Application Layer** contains the entrypoint of the applications and defines the endpoints of the API. This layer also contains the UI.
+- The **Domain Layer** contains the domain model.
+- The **Infrastructure Layer** contains the data manipulation and insertion logic.
+- The **Application Layer** contains the entrypoint of the applications and defines the endpoints of the API. This layer also contains the UI.
 
 ![Package Diagram](images/package-diagram.drawio.svg)
 
 The infrastructure is deployed to Digital Ocean.
-* The minitwit application is hosted on two droplets - a primary and secondary.
-* A nginx loadbalancer distributes load between the two minitwit servers.
-* The Database is hosted as a PostgreSQL Database Cluster.
-* Logging is hosted on its own seperate droplet.
+
+- The minitwit application is hosted on two droplets - a primary and secondary.
+- A nginx loadbalancer distributes load between the two minitwit servers.
+- The Database is hosted as a PostgreSQL Database Cluster.
+- Logging is hosted on its own seperate droplet.
 
 ![Deployment Diagram](images/DeploymentDiagram.png)
 
 ### Infrastruture as Code
+
 The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
-This includes modules for provisioning the application servers and logging stack. 
+This includes modules for provisioning the application servers and logging stack.
 
 ### Dynamic view
 
@@ -104,6 +108,7 @@ This includes modules for provisioning the application servers and logging stack
 ```
 
 ## Dependencies
+
 ```
 # Dependency List:
 1. Microsoft.EntityFrameworkCore.Design - Version: 9.0.1
@@ -140,7 +145,9 @@ This includes modules for provisioning the application servers and logging stack
 32. Dotnet_SDK - Version: 9.0.0
 33. org.Sonarcube - Version: 6.1.0
 ```
+
 #### Logging
+
 For logging, our application uses Serilog as the API to collect log data.
 This data is then transferred into the Elastic Stack,
 which consists of Logstash, Elasticsearch, and Kibana—all used to process, query, and display the logging data.
@@ -149,12 +156,14 @@ This setup is hidden behind Nginx, which acts as a reverse proxy and serves as a
 For elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access logs.
 
 #### Monitoring
+
 For monitoring, our application uses Prometheus as a real-time metrics storage server.
 On top of this, we use Grafana as a data visualization tool to display and analyze these metrics.
 
 For Grafana "164.90.240.84:3000" you can use the given login to access the dashboard.
 
 #### Application
+
 We have built our application using the .NET software framework, following the onion architecture originally invented by Jeffrey Palermo.
 We use the ASP.NET Core Identity package as an authentication system, allowing us to create and delete users.
 Initially, we used SQLite as our DBMS but later switched to Prometheus.
@@ -169,17 +178,18 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 **Sequence Diagram for Simulator unfollow call**
 ![API Seq Diagram](images/UMLSEQApi.png)
 
-
 **Sequence Diagram for User unfollow call**
 ![User Seq Diagram](images/UMLSEQUser.png)
 
 ## Current State of the System
+
 The current state of our system is generally good. At all levels of the application, we are observing the results we expect and want.
 The biggest weakness in our application is the lack of testing, which is currently close to zero.
 Below is the result of a quality check run by our SonarQube workflow.
 
 ![Sonar Cube Quality assesment](images/SonarCubeResult.png)
-# Process' perspective  -- 1026 words
+
+# Process' perspective -- 1026 words
 
 ## Deployment and Release
 
@@ -206,6 +216,7 @@ The following workflows are implemented to ensure a robust CI/CD pipeline:
 Each workflow is defined in the `.github/workflows` directory and is triggered based on specific events such as pushes, pull requests, or scheduled intervals.
 
 ### Deployment Chain
+
 The deployment process follows a structured chain format to ensure reliability and minimize downtime. The steps are as follows:
 
 1. **Linting and Code Quality Checks**  
@@ -219,8 +230,8 @@ The deployment process follows a structured chain format to ensure reliability a
 
 This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
 
-
 ## Monitoring
+
 The application utilizes Prometheus and Grafana for monitoring. Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
 Then Grafana retrieves the data from /metrics, and uses this as its data source. The relevant information could however not be found in the default configs .
 In the `MetricsService.cs` file, there are custom metrics to our application, such as the "minitwit_follow_counter and "app_request_duration_seconds"
@@ -241,6 +252,7 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 ## Security assessment
 
 The Application consists of the following assets:
+
 - Web application (Minitwit)
 - Monitoring (Prometheus + Grafana)
 - Logging (Logstash + Elasticsearch + Kibana)
@@ -249,27 +261,31 @@ The Application consists of the following assets:
 
 **Risk scenarios.**
 
-* R0: DDoS attack overwhelms the server, making the application unavailable.
+- R0: DDoS attack overwhelms the server, making the application unavailable.
 
 **General security:**
-* R1: Attacker uses exposed secrets to gain access to sensitive data.
-* R2: Attacker gains access to our API, and injects large amounts of data into our database, stressing the system.
-* R3: An attacker exploits a known vulnerability in an outdated dependency.
-* R4: Attacker extracts secrets from unprotected endpoints.
+
+- R1: Attacker uses exposed secrets to gain access to sensitive data.
+- R2: Attacker gains access to our API, and injects large amounts of data into our database, stressing the system.
+- R3: An attacker exploits a known vulnerability in an outdated dependency.
+- R4: Attacker extracts secrets from unprotected endpoints.
 
 **Web application threat sources:**
-* R5: Attacker performs SQL injection on our web application to download sensitive user data.
-* R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
-* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
-* R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
+
+- R5: Attacker performs SQL injection on our web application to download sensitive user data.
+- R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
+- R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
+- R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
 
 **Infrastructure threat sources:**
-* R9: An attacker scans for open ports and discovers multiple exposed services. this can lead to data exposure and disruption of service.
-* R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
-* R11: An attacker gains SSH access to our droplet and interacts with our running containers.
+
+- R9: An attacker scans for open ports and discovers multiple exposed services. this can lead to data exposure and disruption of service.
+- R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
+- R11: An attacker gains SSH access to our droplet and interacts with our running containers.
 
 **Monitoring/logging threat sources:**
-* R12: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
+
+- R12: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
 
 ![Risk matrix](images/Risk_matrix.png)
 
@@ -281,13 +297,17 @@ A possible solution to DDos attacks is to close the server when a certain amount
 
 ## Strategy for scaling and upgrade
 
+Our project is scalable. You can scale the system vertically by investing more in the hosting provider, or, in our case, we leverage the infrastructure we have built to scale horizontally.
+
+To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server. After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file. At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests. The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow. Once these steps are completed, the server will be fully integrated into the architecture of the application.
+
 ## The use of AI
 
 AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
-the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files. 
-This approach often speeded up development, as it often had great suggestions for common issues. 
-Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it. 
-In these cases, the TA's were useful. 
+the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files.
+This approach often speeded up development, as it often had great suggestions for common issues.
+Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
+In these cases, the TA's were useful.
 
 # Reflection Perspective -- 445 words
 
@@ -311,6 +331,7 @@ In the end it was decided that a status code 200 would be sent back immediately 
 and handled in the background, while the "user" would think everything went fine. The response time dropped to almost 0, and no requests from that point were lost.
 
 ## Maintenance
+
 At one point the Grafana and Prometheus data were gone. No one knew why it was gone, and it happened at a time, where everyone was working with something different.
 This made it difficult to trace why the error occured. Many hours were spent trying to find the issue, and it was finally discovered,
 that the snap version of Docker had been installed, over the official version. The snap version saved its volumes somewhere different,
@@ -320,5 +341,6 @@ After this issue was resolved, it was coincidentally discovered that the droplet
 It was therefore upgraded and disaster was avoided.
 
 ## DevOps
+
 There was an automatic linter and quality assessment tool, which together gave insights into, what needed to be changed.
 This removed unnecessary human intervention, that saved a lot of development time.
