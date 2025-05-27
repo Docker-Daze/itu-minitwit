@@ -174,9 +174,9 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 **Sequence Diagram for User unfollow call**
 ![User Seq Diagram](images/UMLSEQUser.png)
 
-## Current State of the System
+Current State of the System
 
-# Process' perspective  -- 571 words
+# Process' perspective  -- 650 words
 
 ## Deployment and Release
 
@@ -239,9 +239,10 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 
 ## Strategy for scaling and upgrade
 
+
 ## The use of AI
 
-AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
+AI tools such as ChatGPT was used for idea generation. When problems occured, and no one knew how to fix it,
 the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files. 
 This approach often speeded up development, as it often had great suggestions for common issues. 
 Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it. 
