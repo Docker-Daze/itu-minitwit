@@ -196,6 +196,7 @@ The current state of our system is generally good. At all levels of the applicat
 The biggest weakness in our application is the lack of testing, which is currently close to zero.
 Below is the result of a quality check run by our SonarQube workflow.
 
+![Sonar Cube Quality assesment](images/SonarCubeResult.png)
 # Process' perspective  -- 1026 words
 
 ## Deployment and Release
