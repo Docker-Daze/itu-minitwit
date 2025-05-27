@@ -65,22 +65,49 @@ Step-by-step guide on how to set up the project locally.
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/repo-name.git
+git clone https://github.com/Docker-Daze/itu-minitwit.git
 
 # Navigate to the project directory
-cd repo-name
+cd itu-minitwit
 
 # Install dependencies
-<insert installation commands>
+dotnet restore
+dotnet build
+
+# Apply database migrations
+dotnet ef database update
 ```
 
 ## Usage
-Instructions on how to run and use the project.
 
+The deployed the application accessible on "http://164.90.240.84:5000/public" How to deploy the application is mentioned in the deployment section.
+
+The other ports for accessing monitoring and logging for the deployed app is here:
+- Promethous is on "164.90.240.84:9091"
+- Grafana is on "164.90.240.84:3000"
+- elasticsearch is on "164.90.240.84:9200"
+- kibana is on "164.90.240.84:5601"
+
+It requires a login to access monitoring and logging.
+
+Run the application locally
+To run the application locally use this command inside the root folder itu-minitwit:
 ```bash
-# Example command to start the project
-<insert usage commands>
+# Command to run the project
+docker compose up --build
 ```
+
+When the minitwitimage service is built and all containers are created, then the application is up and running on "localhost:5114/". To access the application, navigate to "localhost:5114/" in the browser.
+
+You can use the applications features like creating an account and post on the public timeline.
+
+The ports for monitoring and logging is also accessible locally.
+- Promethous is on "localhost:9091"
+- Grafana is on "localhost:3001"
+- elasticsearch is on "localhost:9200"
+- kibana is on "localhost:5601"
+
+Note that no data and Grafana dashboard are set up locally.
 
 ## Configuration
 Details about configuration files and environment variables.
@@ -155,7 +182,33 @@ This deployment strategy ensures high availability and minimizes the risk of ser
 ```
 
 ## Deployment
-Steps to deploy the project to production.
+Deploy the application
+
+To deploy the application navigate to this folder:
+```bash
+# Folder
+/itu-minitwit/terraform
+```
+When inside folder run:
+```bash
+# Command initializes terraform files
+terraform init
+```
+Initialises terraform files if they are not already initialzed
+Then run:
+```bash
+# Command show terraform changes
+terraform plan
+```
+This show what changes will be made when running terraform apply.
+finally run:
+```bash
+# Command apply terraform changes
+terraform apply
+# Confirm changes by saying yes
+yes
+```
+Wait for the application to deploy. When the application is deployed the website will be accessible on "http://164.90.240.84:5000/public".
 
 ## Contributing
 Guidelines for contributing to the project.
@@ -205,18 +258,43 @@ Credit individuals or resources that helped in the project.
 33. org.Sonarcube - Version: 6.1.0
 ```
 
+
+## Sequence Diagram for Simulator unfollow call
 ```mermaid
 sequenceDiagram
     participant minitwit_Simulator
     participant Minitwit_Application
     participant DataBase
     minitwit_Simulator->>Minitwit_Application: Http Post (api/fllws/{username}) unfollow {username}
-    Note right of Minitwit_Application: FollowRequest
+    Note right of Minitwit_Application: UnFollowRequest
     Minitwit_Application-->>minitwit_Simulator: http statuscode 200
     Note left of minitwit_Simulator: Succesfull Response
     loop BatchInsert
     Minitwit_Application->>Minitwit_Application: Insert into batch queue
     end
+    Minitwit_Application->>DataBase: Get UserId <user1> <user2>
+    DataBase->>Minitwit_Application: UserId1 UserId2
+    Note left of Minitwit_Application: checks if both users exists
+    Minitwit_Application->>DataBase: Doeme}
+    Note right of Minitwit_Application: FollowRequests User1 Follow User2
+    DataBase->>Minitwit_Application: Bollean
+    Note left of Minitwit_Application: If true
+    Note right of DataBase: Unfollow Sql Command
+    Minitwit_Application->>DataBase: Put user1 unfollow user2
+    DataBase->>Minitwit_Application: Status Response 
+```
+
+
+
+## Sequence Diagram for User unfollow call
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Minitwit_Application
+    participant DataBase
+    User->>Minitwit_Application: Http UnFollow(username)
+    Note right of Minitwit_Application: FollowRequest
     Minitwit_Application->>DataBase: Get UserId <user1> <user2>
     DataBase->>Minitwit_Application: UserId1 UserId2
     Note left of Minitwit_Application: checks if both users exists
@@ -226,4 +304,6 @@ sequenceDiagram
     Note right of DataBase: Unfollow Sql Command
     Minitwit_Application->>DataBase: Put user1 unfollow user2
     DataBase->>Minitwit_Application: Status Response 
+    Minitwit_Application-->>User: http statuscode 200
+    Note left of User: Succesfull Response
 ```
