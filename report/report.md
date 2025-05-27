@@ -165,6 +165,12 @@ As a software quality measure, we use SonarQube, specifically integrating their 
 SonarQube tracks security, reliability, maintainability, test coverage, and code duplications.
 
 ## Interactions of Subsystems
+User requests and simulator requests are handled differently in our application.
+The two main differences between simulator and user requests are as follows:
+1. For simulator calls, a status code of 200 is sent immediately after receiving a prompt.
+2. simulator prompts are also collected in batches to reduce the number of database calls.
+
+Below, you will see a sequence diagram for an Unfollow requests, from both a user and the simulator
 
 **Sequence Diagram for Simulator unfollow call**
 ![API Seq Diagram](images/UMLSEQApi.png)
