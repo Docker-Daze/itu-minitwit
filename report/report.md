@@ -122,6 +122,30 @@ This perspective should clarify how code or other artifacts come from idea into 
 
 In particular, the following descriptions should be included:
 
+## Description of stages and tools included, including deployment and release of your systems.
+
+
+## Monitoring of application
+
+The application utilizes Prometheus and Grafana for monitoring. Prometheus scrapes port 5000, and sends the data to the /metrics endpoint.
+Then Grafana retrieves the data from /metrics, and uses this as its data source. The relevent information could however not be found in the default configs .
+In the `MetricsService.cs` file, there are custom metrics to our application, such as the "minitwit_follow_counter and "app_request_duration_seconds"
+The follow counter is implemented in the program by adding to the counter, every time a follow request is made.
+The duration is measured by starting a timer when a request comes in, and stopping it when the request has been processed.
+
+## Logging of application
+
+The application uses the ELK logging stack. In the beginning, the logs contained information from the information level and up.
+This resulted in a flood of logs, and it was impossible to see anything relevant. It was then configured to only show warnings and above.
+Here there were practically no logs. From here logging statements were added to the code, to log when problems occured.
+In the `ApiController.cs` there are custom creation of logs which are logged as warnings. 
+These logs include system failures such as unsuccessfull message post and failure to follow a user.
+This data is sent through Serialog to Logstash.
+
+## Security assessment
+
+## Strategy for scaling and upgrade
+
   - A complete description of stages and tools included in the CI/CD chains, including deployment and release of your systems.
   - How do you monitor your systems and what precisely do you monitor?
   - What do you log in your systems and how do you aggregate logs?
