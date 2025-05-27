@@ -50,6 +50,9 @@ The application follows the onion architecture and is split into three layers.
 
 ![Package Diagram](images/package-diagram.drawio.svg)
 
+### Static view
+
+![Deployment Diagram](images/DeploymentDiagram.png)
 ### Dynamic view
 
 ### Infrastruture as Code
@@ -192,7 +195,7 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 
 ## Current State of the System
 
-# Process' perspective  -- 571 words
+# Process' perspective  -- 1026 words
 
 ## Deployment and Release
 
@@ -260,7 +263,7 @@ The Application is made up of these assets:
 - DigitalOcean droplets
 - DigitalOcean database cluster
 
-**Possible risk scenarios.**
+**Risk scenarios.**
 
 * R0: DDos attack kills the server.
 
@@ -284,6 +287,7 @@ The Application is made up of these assets:
 **Monitoring/logging threat sources:**
 * R12: Attacker accesses our unauthorized elasticsearch log’s and creates a backup of vulnerable data.
 
+**Risk matrix**
 ![Risk matrix](images/Risk_matrix.png)
 
 The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Some ports requires login to access and droplets are secured by digitaloceans standard security.
