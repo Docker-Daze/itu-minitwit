@@ -3,10 +3,10 @@ name: Markdown to PDF
 on:
   push:
     branches:
-      - report-workflow
+      - main
   pull_request:
     branches:
-      - report-workflow
+      - main
 
 jobs:
   build:
