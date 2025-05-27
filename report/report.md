@@ -37,6 +37,16 @@ numbersections: true
 
 ## Design and Architecture
 
+**Module view of the Minitwit application**
+
+The application follows the onion architecture and is split into three layers.
+
+* The **Domain Layer** contains the domain model.
+* The **Infrastructure Layer** contains the data manipulation and insertion logic.
+* The **Application Layer** contains the entrypoint of the applications and defines the endpoints of the API. This layer also contains the UI.
+
+![Package Diagram](images/package-diagram.drawio.svg)
+
 ### Static view
 
 ### Dynamic view
