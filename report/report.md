@@ -150,51 +150,11 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 ## Interactions of Subsystems
 
 #### Sequence Diagram for Simulator unfollow call
-```mermaid
-sequenceDiagram
-    participant minitwit_Simulator
-    participant Minitwit_Application
-    participant DataBase
-    minitwit_Simulator->>Minitwit_Application: Http Post (api/fllws/{username}) unfollow {username}
-    Note right of Minitwit_Application: UnFollowRequest
-    Minitwit_Application-->>minitwit_Simulator: http statuscode 200
-    Note left of minitwit_Simulator: Succesfull Response
-    loop BatchInsert
-    Minitwit_Application->>Minitwit_Application: Insert into batch queue
-    end
-    Minitwit_Application->>DataBase: Get UserId <user1> <user2>
-    DataBase->>Minitwit_Application: UserId1 UserId2
-    Note left of Minitwit_Application: checks if both users exists
-    Minitwit_Application->>DataBase: Does User1 Follow User2
-    Note right of Minitwit_Application: FollowRequests User1 Follow User2
-    DataBase->>Minitwit_Application: Bollean
-    Note left of Minitwit_Application: If true
-    Note right of DataBase: Unfollow Sql Command
-    Minitwit_Application->>DataBase: Put user1 unfollow user2
-    DataBase->>Minitwit_Application: Status Response 
-```
+![API Seq Diagram](images/UMLSEQApi.png)
+
 
 #### Sequence Diagram for User unfollow call
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Minitwit_Application
-    participant DataBase
-    User->>Minitwit_Application: Http UnFollow(username)
-    Note right of Minitwit_Application: UnFollowRequest
-    Minitwit_Application->>DataBase: Get UserId <user1> <user2>
-    DataBase->>Minitwit_Application: UserId1 UserId2
-    Note left of Minitwit_Application: checks if both users exists
-    Minitwit_Application->>DataBase: Does User1 Follow User2
-    DataBase->>Minitwit_Application: Bollean
-    Note left of Minitwit_Application: If true
-    Note right of DataBase: Unfollow Sql Command
-    Minitwit_Application->>DataBase: Put user1 unfollow user2
-    DataBase->>Minitwit_Application: Status Response 
-    Minitwit_Application-->>User: http statuscode 200
-    Note left of User: Succesfull Response
-```
+![User Seq Diagram](images/UMLSEQUser.png)
 
 ## Current State of the System
 
