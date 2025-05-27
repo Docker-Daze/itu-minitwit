@@ -268,20 +268,20 @@ The Application is made up of these assets:
 * R0: DDos attack kills the server.
 
 **General security:**
-* R1: Attacker uses exposed secrets to gain access to vulnerable data.
-* R2: Attacker gains access to our API, and injects huge amounts of data into our database, stressing the system.
-* R3: Attacker uses a known exploit in an outdated dependency, exploiting that vulnerability on our system.
+* R1: Attacker uses exposed secrets to gain access to vulnerable data. 
+* R2: Attacker gains access to our API, and injects huge amounts of data into our database, stressing the system. 
+* R3: Attacker uses a known exploit in an outdated dependency, exploiting that vulnerability on our system. 
 * R4: Attacker gets secrets from open endpoints.
 
 **Web application threat sources:**
-* R5: Attacker performs SQL injection on our web application to download sensitive user data.
-* R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
-* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s credentials cookies and session.
+* R5: Attacker performs SQL injection on our web application to download sensitive user data. 
+* R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions. 
+* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s credentials cookies and session. 
 * R8: Attacker can interrupt unencrypted HTTP request and modify requests.
 
 **Infrastructure threat sources:**
-* R9: An attacker scans for open ports and discovers multiple exposed services on our server. The attacker can interact directly with these, which leads to data exposure and disruption of service.
-* R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
+* R9: An attacker scans for open ports and discovers multiple exposed services on our server. The attacker can interact directly with these, which leads to data exposure and disruption of service. 
+* R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data. 
 * R11: An attacker SSH into our droplet and interacts with our running containers.
 
 **Monitoring/logging threat sources:**
