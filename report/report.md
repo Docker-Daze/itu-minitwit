@@ -58,8 +58,8 @@ The infrastructure is deployed to Digital Ocean.
 
 ![Deployment Diagram](images/DeploymentDiagram.png)
 
-### Infrastruture as Code
-The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
+### Infrastructure as Code
+The Infrastructure above can be deployed with Terraform. The Infrastructure as code is documented in the `/terraform` directory.
 This includes modules for provisioning the application servers and logging stack. 
 
 ### Dynamic view
@@ -202,6 +202,8 @@ The following workflows are implemented to ensure a robust CI/CD pipeline:
 
 6. **SonarQube Workflow**  
    Performs static code analysis using SonarQube to identify potential bugs and vulnerabilities.
+
+![Build and Test workflow](images/build-and-test.drawio.png)
 
 Each workflow is defined in the `.github/workflows` directory and is triggered based on specific events such as pushes, pull requests, or scheduled intervals.
 
