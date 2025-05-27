@@ -37,6 +37,16 @@ numbersections: true
 
 ## Design and Architecture
 
+**Module view of the Minitwit application**
+
+The application follows the onion architecture and is split into three layers.
+
+* The **Domain Layer** contains the domain model.
+* The **Infrastructure Layer** contains the data manipulation and insertion logic.
+* The **Application Layer** contains the entrypoint of the applications and defines the endpoints of the API. This layer also contains the UI.
+
+![Package Diagram](images/package-diagram.drawio.svg)
+
 ### Static view
 
 ![Deployment Diagram](images/DeploymentDiagram.png)
@@ -248,7 +258,7 @@ The Application is made up of these assets:
 - DigitalOcean droplets
 - DigitalOcean database cluster
 
-**Possible risk scenarios.**
+**Risk scenarios.**
 
 * R0: DDos attack kills the server.
 
@@ -272,6 +282,7 @@ The Application is made up of these assets:
 **Monitoring/logging threat sources:**
 * R12: Attacker accesses our unauthorized elasticsearch log’s and creates a backup of vulnerable data.
 
+**Risk matrix**
 ![Risk matrix](images/Risk_matrix.png)
 
 The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Some ports requires login to access and droplets are secured by digitaloceans standard security.
