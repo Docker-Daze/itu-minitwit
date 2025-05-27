@@ -24,7 +24,7 @@ builder.WebHost.UseStaticWebAssets();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddSingleton<MetricsService>();
@@ -84,10 +84,7 @@ var npgsqlBuilder = new NpgsqlConnectionStringBuilder(connectionString)
 };
 
 builder.Services.AddDbContext<MinitwitDbContext>(options =>
-    options.UseNpgsql(npgsqlBuilder.ConnectionString, npgsqlOptions =>
-    {
-        npgsqlOptions.EnableRetryOnFailure();
-    }));
+    options.UseNpgsql(npgsqlBuilder.ConnectionString, npgsqlOptions => { npgsqlOptions.EnableRetryOnFailure(); }));
 
 
 builder.Services.AddDefaultIdentity<User>(options =>
@@ -130,13 +127,12 @@ app.UseSession();
 
 app.MapStaticAssets();
 app.MapRazorPages()
-   .WithStaticAssets();
+    .WithStaticAssets();
 app.MapControllers();
 
 Metrics.SuppressDefaultMetrics();
 app.UseHttpMetrics();
 app.MapMetrics();
-
 
 
 using (var scope = app.Services.CreateScope())
@@ -149,4 +145,6 @@ await app.RunAsync();
 
 await Log.CloseAndFlushAsync();
 
-public partial class Program { }
+public partial class Program
+{
+}
