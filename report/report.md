@@ -33,7 +33,7 @@ numbersections: true
    3.4 [DevOps](#devops)
 ---
 
-# System's Perspective
+# System's Perspective -- 400 words
 
 ## Design and Architecture
 
@@ -176,7 +176,7 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 
 ## Current State of the System
 
-# Process' perspective
+# Process' perspective  -- 571 words
 
 ## Deployment and Release
 
@@ -241,9 +241,14 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 
 ## The use of AI
 
-# Reflection Perspective
+# Reflection Perspective -- 445 words
 
 ## Evolution and Refactoring
+
+After implementing SonarQube quality assessment, a lot of code was refactored and renamed.
+Most of the codes issue was maintainability, where names did not align in different classes.
+This was quickly changed everywhere. Next issue was long functions, that did many different things.
+This was refactored out, so that one function has one job. This improved maintainability and readability of the code base.
 
 ## Operation
 
@@ -267,3 +272,5 @@ After this issue was resolved, it was coincidentally discovered that the droplet
 It was therefore upgraded and disaster was avoided.
 
 ## DevOps
+There was an automatic linter and quality assessment tool, which together gave insights into, what needed to be changed.
+This removed unnecessary human intervention, that saved a lot of development time.
