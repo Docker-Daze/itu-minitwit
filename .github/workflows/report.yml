@@ -22,16 +22,16 @@ jobs:
           sudo apt-get install -y pandoc texlive-xetex
 
       - name: Create build directory
-        run: mkdir -p build
+        run: mkdir -p report/build
 
       - name: Convert Markdown to PDF
         run: |
-          pandoc report/report.md -o build/report.pdf --pdf-engine=xelatex
+          pandoc report/report.md -o report/build/report.pdf --pdf-engine=xelatex
 
       - name: Commit report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f build/report.pdf
+          git add -f report/build/report.pdf
           git commit -m "Updated PDF from CI"
           git push
