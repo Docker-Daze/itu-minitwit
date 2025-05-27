@@ -10,7 +10,7 @@ author:
 numbersections: true
 ---
 
-## Table of Contents
+# Table of Contents
 
 1. [System's Perspective](#systems-perspective)  
    1.1 [Design and Architecture](#design-and-architecture)  
@@ -37,6 +37,9 @@ numbersections: true
 
 ## Design and Architecture
 
+### Static view
+
+### Dynamic view
 
 To deploy the application navigate to this folder:
 ```bash
