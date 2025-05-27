@@ -39,6 +39,7 @@ numbersections: true
 
 ### Static view
 
+![Deployment Diagram](images/DeploymentDiagram.png)
 ### Dynamic view
 
 To deploy the application navigate to this folder:
