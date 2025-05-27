@@ -65,46 +65,24 @@ Step-by-step guide on how to set up the project locally.
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/repo-name.git
+git clone https://github.com/Docker-Daze/itu-minitwit.git
 
 # Navigate to the project directory
-cd repo-name
+cd itu-minitwit
 
 # Install dependencies
-<insert installation commands>
+dotnet restore
+dotnet build
+
+# Apply database migrations
+dotnet ef database update
 ```
 
 ## Usage
 
-Deploy the application
+The deployed the application accessible on "http://164.90.240.84:5000/public" How to deploy the application is mentioned in the deployment section.
 
-To deploy the application navigate to this folder:
-```bash
-# Folder
-/itu-minitwit/terraform
-```
-When inside folder run:
-```bash
-# Command initializes terraform files
-terraform init
-```
-Initialises terraform files if they are not already initialzed
-Then run:
-```bash
-# Command show terraform changes
-terraform plan
-```
-This show what changes will be made when running terraform apply.
-finally run:
-```bash
-# Command apply terraform changes
-terraform apply
-# Confirm changes by saying yes
-yes
-```
-Wait for the application to deploy. When the application is deployed the website will be accessible on "http://164.90.240.84:5000/public".
-
-Other ports running in the background for monitoring and logging.
+The other ports for accessing monitoring and logging for the deployed app is here:
 - Promethous is on "164.90.240.84:9091"
 - Grafana is on "164.90.240.84:3000"
 - elasticsearch is on "164.90.240.84:9200"
@@ -129,7 +107,7 @@ The ports for monitoring and logging is also accessible locally.
 - elasticsearch is on "localhost:9200"
 - kibana is on "localhost:5601"
 
-Note that no data and dashboard Grafana are set up locally.
+Note that no data and Grafana dashboard are set up locally.
 
 ## Configuration
 Details about configuration files and environment variables.
@@ -195,8 +173,6 @@ The deployment process follows a structured chain format to ensure reliability a
 3. **Deployment with Rolling Updates**  
     If the commit successfully passes all previous stages, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
 
-    ![Deployment Chain](ITU_logo_KGH_DK.jpg.png)
-
 This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
 
 
@@ -206,7 +182,33 @@ This deployment strategy ensures high availability and minimizes the risk of ser
 ```
 
 ## Deployment
-Steps to deploy the project to production.
+Deploy the application
+
+To deploy the application navigate to this folder:
+```bash
+# Folder
+/itu-minitwit/terraform
+```
+When inside folder run:
+```bash
+# Command initializes terraform files
+terraform init
+```
+Initialises terraform files if they are not already initialzed
+Then run:
+```bash
+# Command show terraform changes
+terraform plan
+```
+This show what changes will be made when running terraform apply.
+finally run:
+```bash
+# Command apply terraform changes
+terraform apply
+# Confirm changes by saying yes
+yes
+```
+Wait for the application to deploy. When the application is deployed the website will be accessible on "http://164.90.240.84:5000/public".
 
 ## Contributing
 Guidelines for contributing to the project.
