@@ -16,20 +16,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Pandoc & LaTeX
+      - name: Install Pandoc and LaTeX
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-xetex
-          
+
       - name: Create build directory
-        run: mkdir -p report/build
+        run: mkdir -p build
 
       - name: Convert Markdown to PDF
         run: |
-          pandoc report/report.md -o report/build/report.pdf --pdf-engine=xelatex
+          pandoc report/report.md -o build/report.pdf --pdf-engine=xelatex
 
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: report-pdf
-          path: report/build/report.pdf
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f build/report.pdf
+          git commit -m "Updated PDF from CI"
+          git push
