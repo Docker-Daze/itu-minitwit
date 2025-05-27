@@ -240,7 +240,7 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 
 ## Security assessment
 
-The Application is made up of these assets:
+The Application consists of the following assets:
 - Web application (Minitwit)
 - Monitoring (Prometheus + Grafana)
 - Logging (Logstash + Elasticsearch + Kibana)
@@ -249,27 +249,27 @@ The Application is made up of these assets:
 
 **Risk scenarios.**
 
-* R0: DDos attack kills the server.
+* R0: DDoS attack overwhelms the server, making the application unavailable.
 
 **General security:**
-* R1: Attacker uses exposed secrets to gain access to vulnerable data.
-* R2: Attacker gains access to our API, and injects huge amounts of data into our database, stressing the system.
-* R3: Attacker uses a known exploit in an outdated dependency, exploiting that vulnerability on our system.
-* R4: Attacker gets secrets from open endpoints.
+* R1: Attacker uses exposed secrets to gain access to sensitive data.
+* R2: Attacker gains access to our API, and injects large amounts of data into our database, stressing the system.
+* R3: An attacker exploits a known vulnerability in an outdated dependency.
+* R4: Attacker extracts secrets from unprotected endpoints.
 
 **Web application threat sources:**
 * R5: Attacker performs SQL injection on our web application to download sensitive user data.
 * R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
-* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s credentials cookies and session.
-* R8: Attacker can interrupt unencrypted HTTP request and modify requests.
+* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
+* R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
 
 **Infrastructure threat sources:**
-* R9: An attacker scans for open ports and discovers multiple exposed services on our server. The attacker can interact directly with these, which leads to data exposure and disruption of service.
+* R9: An attacker scans for open ports and discovers multiple exposed services. this can lead to data exposure and disruption of service.
 * R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
-* R11: An attacker SSH into our droplet and interacts with our running containers.
+* R11: An attacker gains SSH access to our droplet and interacts with our running containers.
 
 **Monitoring/logging threat sources:**
-* R12: Attacker accesses our unauthorized elasticsearch log’s and creates a backup of vulnerable data.
+* R12: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
 
 ![Risk matrix](images/Risk_matrix.png)
 
