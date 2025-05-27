@@ -237,6 +237,45 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 
 ## Security assessment
 
+The Application is made up of these assets:
+- Web application (Minitwit)
+- Monitoring (Prometheus + Grafana)
+- Logging (Logstash + Elasticsearch + Kibana)
+- DigitalOcean droplets
+- DigitalOcean database cluster
+
+**Possible risk scenarios.**
+
+* R0: DDos attack kills the server.
+
+**General security:**
+* R1: Attacker uses exposed secrets to gain access to vulnerable data.
+* R2: Attacker gains access to our API, and injects huge amounts of data into our database, stressing the system.
+* R3: Attacker uses a known exploit in an outdated dependency, exploiting that vulnerability on our system.
+* R4: Attacker gets secrets from open endpoints.
+
+**Web application threat sources:**
+* R5: Attacker performs SQL injection on our web application to download sensitive user data.
+* R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
+* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s credentials cookies and session.
+* R8: Attacker can interrupt unencrypted HTTP request and modify requests.
+
+**Infrastructure threat sources:**
+* R9: An attacker scans for open ports and discovers multiple exposed services on our server. The attacker can interact directly with these, which leads to data exposure and disruption of service.
+* R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
+* R11: An attacker SSH into our droplet and interacts with our running containers.
+
+**Monitoring/logging threat sources:**
+* R12: Attacker accesses our unauthorized elasticsearch log’s and creates a backup of vulnerable data.
+
+![Risk matrix](images/Risk_matrix.png)
+
+The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Some ports requires login to access and droplets are secured by digitaloceans standard security.
+
+The biggest invulnerability is no failsafe against spamming and overloading the application with requests.
+
+A possible solution to DDos attacks is to close the server when a certain amounts of request per minuted exceeds a high number. To secure against attacks on HTTP request is to use HTTPS. To secure open ports is adding authorization to all the ports.
+
 ## Strategy for scaling and upgrade
 
 ## The use of AI
