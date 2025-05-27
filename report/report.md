@@ -58,8 +58,8 @@ The infrastructure is deployed to Digital Ocean.
 
 ![Deployment Diagram](images/DeploymentDiagram.png)
 
-### Infrastructure as Code
-The Infrastructure above can be deployed with Terraform. The Infrastructure as code is documented in the `/terraform` directory.
+### Infrastruture as Code
+The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
 This includes modules for provisioning the application servers and logging stack. 
 
 ### Dynamic view
@@ -203,8 +203,6 @@ The following workflows are implemented to ensure a robust CI/CD pipeline:
 6. **SonarQube Workflow**  
    Performs static code analysis using SonarQube to identify potential bugs and vulnerabilities.
 
-![Build and Test workflow](images/build-and-test.drawio.png)
-
 Each workflow is defined in the `.github/workflows` directory and is triggered based on specific events such as pushes, pull requests, or scheduled intervals.
 
 ### Deployment Chain
@@ -221,7 +219,6 @@ The deployment process follows a structured chain format to ensure reliability a
 
 This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
 
-![Continous deployment workflow](images/continous-deployment.png)
 
 ## Monitoring
 The application utilizes Prometheus and Grafana for monitoring. Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
@@ -243,7 +240,7 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 
 ## Security assessment
 
-The Application is made up of these assets:
+The Application consists of the following assets:
 - Web application (Minitwit)
 - Monitoring (Prometheus + Grafana)
 - Logging (Logstash + Elasticsearch + Kibana)
@@ -252,32 +249,31 @@ The Application is made up of these assets:
 
 **Risk scenarios.**
 
-* R0: DDos attack kills the server.
+* R0: DDoS attack overwhelms the server, making the application unavailable.
 
 **General security:**
-* R1: Attacker uses exposed secrets to gain access to vulnerable data.
-* R2: Attacker gains access to our API, and injects huge amounts of data into our database, stressing the system.
-* R3: Attacker uses a known exploit in an outdated dependency, exploiting that vulnerability on our system.
-* R4: Attacker gets secrets from open endpoints.
+* R1: Attacker uses exposed secrets to gain access to sensitive data.
+* R2: Attacker gains access to our API, and injects large amounts of data into our database, stressing the system.
+* R3: An attacker exploits a known vulnerability in an outdated dependency.
+* R4: Attacker extracts secrets from unprotected endpoints.
 
 **Web application threat sources:**
 * R5: Attacker performs SQL injection on our web application to download sensitive user data.
 * R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
-* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s credentials cookies and session.
-* R8: Attacker can interrupt unencrypted HTTP request and modify requests.
+* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
+* R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
 
 **Infrastructure threat sources:**
-* R9: An attacker scans for open ports and discovers multiple exposed services on our server. The attacker can interact directly with these, which leads to data exposure and disruption of service.
+* R9: An attacker scans for open ports and discovers multiple exposed services. this can lead to data exposure and disruption of service.
 * R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
-* R11: An attacker SSH into our droplet and interacts with our running containers.
+* R11: An attacker gains SSH access to our droplet and interacts with our running containers.
 
 **Monitoring/logging threat sources:**
-* R12: Attacker accesses our unauthorized elasticsearch log’s and creates a backup of vulnerable data.
+* R12: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
 
-**Risk matrix**
 ![Risk matrix](images/Risk_matrix.png)
 
-The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Some ports requires login to access and droplets are secured by Digital Ocean standard security.
+The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Monitoring and loggin requires login to access and droplets are secured by digitaloceans standard security.
 
 The biggest invulnerability is no failsafe against spamming and overloading the application with requests.
 

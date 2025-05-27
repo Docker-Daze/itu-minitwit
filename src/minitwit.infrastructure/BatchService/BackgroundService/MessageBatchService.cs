@@ -36,7 +36,7 @@ public class MessageBatchService : BackgroundService
                 {
                     using var itemScope = _scopeFactory.CreateScope();
                     var userRepo = itemScope.ServiceProvider.GetRequiredService<IUserRepository>();
-                    var msgRepo  = itemScope.ServiceProvider.GetRequiredService<IMessageRepository>();
+                    var msgRepo = itemScope.ServiceProvider.GetRequiredService<IMessageRepository>();
                     var msg = await ValidateMessage(att, userRepo, msgRepo);
                     buffer.Add(msg);
                 }
@@ -51,10 +51,10 @@ public class MessageBatchService : BackgroundService
             var userMap = MakeUserDict(buffer);
             using var scope = _scopeFactory.CreateScope();
             var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
-            
+
             foreach (var user in userMap.Values)
                 ctx.Entry(user).State = EntityState.Unchanged;
-            
+
             await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
         }
