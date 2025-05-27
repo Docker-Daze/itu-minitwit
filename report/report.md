@@ -1,6 +1,15 @@
-# Project Documentation Template
+---
+title: _minitwit_ Project Report
+subtitle: ITU DevOps 2025 Group `E`
+author:
+- "Magnus Thor Lessing Rolin <thmr@itu.dk>"
+- "Mathias Bindslev Hansen <bimh@itu.dk>"
+- "Nikolai Tilgreen Nielsen <nitn@itu.dk>"
+- "Rasmus Hassing Huge <rahu@itu.dk>"
+- "Rasmus Mygind Poulsen <rpou@itu.dk>"
+numbersections: true
+---
 
-## Table of Contents
 ## Table of Contents
 
 1. [System's Perspective](#systems-perspective)  
@@ -158,11 +167,11 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 
 ## Interactions of Subsystems
 
-#### Sequence Diagram for Simulator unfollow call
+**Sequence Diagram for Simulator unfollow call**
 ![API Seq Diagram](images/UMLSEQApi.png)
 
 
-#### Sequence Diagram for User unfollow call
+**Sequence Diagram for User unfollow call**
 ![User Seq Diagram](images/UMLSEQUser.png)
 
 ## Current State of the System
