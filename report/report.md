@@ -1,6 +1,6 @@
 ---
-title: DevOps, Software Evolution & Software Maintenance
-subtitle: "Course Code: BSDSESM1KU"
+title: _minitwit_ Project Report
+subtitle: ITU DevOps 2025 Group `E`
 author:
 - "Magnus Thor Lessing Rolin <thmr@itu.dk>"
 - "Mathias Bindslev Hansen <bimh@itu.dk>"
@@ -63,7 +63,6 @@ The infrastructure above can be deployed with Terraform. The infrastructure as c
 This includes modules for provisioning the application servers and logging stack. 
 
 ### Dynamic view
-
 
 ```
 /itu-minitwit
@@ -175,7 +174,11 @@ SonarQube tracks security, reliability, maintainability, test coverage, and code
 ![User Seq Diagram](images/UMLSEQUser.png)
 
 ## Current State of the System
+The current state of our system is generally good. At all levels of the application, we are observing the results we expect and want.
+The biggest weakness in our application is the lack of testing, which is currently close to zero.
+Below is the result of a quality check run by our SonarQube workflow.
 
+![Sonar Cube Quality assesment](images/SonarCubeResult.png)
 # Process' perspective  -- 1026 words
 
 ## Deployment and Release
