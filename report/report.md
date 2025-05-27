@@ -54,7 +54,7 @@ The infrastructure is deployed to Digital Ocean.
 * The minitwit application is hosted on two droplets - a primary and secondary.
 * A nginx loadbalancer distributes load between the two minitwit servers.
 * The Database is hosted as a PostgreSQL Database Cluster.
-* Logging is hosted on its own seperate droplet.
+* Logging is hosted on its own separate droplet.
 
 ![Deployment Diagram](images/DeploymentDiagram.png)
 
@@ -104,6 +104,7 @@ This includes modules for provisioning the application servers and logging stack
 ```
 
 ## Dependencies
+Here are the list of dependencies in the project. 
 ```
 # Dependency List:
 1. Microsoft.EntityFrameworkCore.Design - Version: 9.0.1
