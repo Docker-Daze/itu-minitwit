@@ -30,7 +30,7 @@ jobs:
 
       - name: Convert Markdown to PDF
         run: |
-          pandoc report/report.md -o report/build/report.pdf --pdf-engine=xelatex
+          pandoc report/report.md -o report/build/report.pdf --pdf-engine=xelatex --number-sections
 
       - name: Commit report
         run: |

@@ -15,10 +15,47 @@
 
 ---
 
-## Introduction
+# System's Perspective
+
+## Design and Architecture
+
+## Dependencies
+
+## Interactions of Subsystems
+
+## Current State of the System
+
+# Process' perspective
+
+## Deployment and Release
+
+## Monitoring
+
+## Logging
+
+## Security Assessment
+
+## Strategy for Scaling and Upgrades
+
+## The use of AI
+
+# Reflection Perspective
+
+## Evolution and Refactoring
+
+## Operation
+
+## Maintanence
+
+## DevOps
+
+
+
+
+# Introduction
 Provide a brief overview of the project, its purpose, and key features.
 
-## Project Structure
+# Project Structure
 Explain the directory structure and the purpose of each folder/file.
 
 ```
@@ -82,13 +119,17 @@ dotnet ef database update
 
 The deployed the application accessible on "http://164.90.240.84:5000/public" How to deploy the application is mentioned in the deployment section.
 
-The other ports for accessing monitoring and logging for the deployed app is here:
+The other ports running for monitoring and logging on the deployed app:
 - Promethous is on "164.90.240.84:9091"
 - Grafana is on "164.90.240.84:3000"
-- elasticsearch is on "164.90.240.84:9200"
-- kibana is on "164.90.240.84:5601"
+- elasticsearch is on "209.38.112.21:9200"
+- logstach is on "209.38.112.21:5044"
+- kibana is on "209.38.112.21:5601"
+- nginx is on "209.38.112.21:8080"
 
-It requires a login to access monitoring and logging.
+It requires a login to access monitoring and logging.             
+For Grafana "164.90.240.84:3000" you can use the given login to access the dashboard.
+For elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access logs. 
 
 Run the application locally
 To run the application locally use this command inside the root folder itu-minitwit:
