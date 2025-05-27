@@ -30,12 +30,28 @@
 ## Deployment and Release
 
 ## Monitoring
+The application utilizes Prometheus and Grafana for monitoring. Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
+Then Grafana retrieves the data from /metrics, and uses this as its data source. The relevant information could however not be found in the default configs .
+In the `MetricsService.cs` file, there are custom metrics to our application, such as the "minitwit_follow_counter and "app_request_duration_seconds"
+The follow counter is implemented in the program by adding to the counter, every time a follow request is made.
+The duration is measured by starting a timer when a request comes in, and stopping it when the request has been processed.
 
-## Logging
+## Logging of application
 
-## Security Assessment
+The application uses the ELK logging stack. In the beginning, the logs contained information from the information level and up.
+This resulted in a flood of logs, and it was impossible to see anything relevant. It was then configured to only show warnings and above.
+Here there were practically no logs. From here logging statements were added to the code, to log when problems occured.
+In the `ApiController.cs` there are custom creation of logs which are logged as warnings.
+These logs include system failures such as unsuccessful message post and failure to follow a user.
+This data is sent through Serialog to Logstash. Another important metric is logging of request times.
+If a request took longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that has occured.
+To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input "@m: slow", to get them all.
 
-## Strategy for Scaling and Upgrades
+## Security assessment
+
+## Strategy for scaling and upgrade
+
+Pay more money to digital ocean.
 
 ## The use of AI
 
@@ -185,6 +201,7 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 
 ## Strategy for scaling and upgrade
 
+Pay more money to digital ocean.
   - A complete description of stages and tools included in the CI/CD chains, including deployment and release of your systems.
   - How do you monitor your systems and what precisely do you monitor?
   - What do you log in your systems and how do you aggregate logs?
