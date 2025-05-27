@@ -241,6 +241,12 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 
 ## The use of AI
 
+AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
+the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files. 
+This approach often speeded up development, as it often had great suggestions for common issues. 
+Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it. 
+In these cases, the TA's were useful. 
+
 # Reflection Perspective -- 445 words
 
 ## Evolution and Refactoring
