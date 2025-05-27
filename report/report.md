@@ -20,8 +20,110 @@
 ## Design and Architecture
 
 ## Dependencies
+```
+# Dependency List:
+1. Microsoft.EntityFrameworkCore.Design - Version: 9.0.1
+2. Microsoft.Extensions.Configuration - Version: 9.0.2
+3. Microsoft.Extensions.Configuration.EnvironmentVariables - Version: 9.0.2
+4. Microsoft.Extensions.Configuration.UserSecrets - Version: 9.0.2
+5. Npgsql.EntityFrameworkCore.PostgreSQL - Version: 9.0.4
+6. prometheus-net - Version: 8.2.1
+7. Serilog.AspNetCore - Version: 9.0.0
+8. Serilog.Sinks.Console - Version: 6.0.0
+9. Microsoft.AspNetCore.Identity - Version: 2.3.1
+10. Microsoft.EntityFrameworkCore.Sqlite - Version: 9.0.1
+11. Microsoft.AspNetCore.Identity.EntityFrameworkCore - Version: 9.0.1
+12. Microsoft.AspNetCore.Identity.UI - Version: 9.0.1
+13. Microsoft.EntityFrameworkCore.Tools - Version: 9.0.0
+14. Microsoft.VisualStudio.Web.CodeGeneration.Design - Version: 9.0.0
+15. prometheus-net.AspNetCore - Version: 8.2.1
+16. Serilog - Version: 4.2.0
+17. Serilog.Formatting.Compact - Version: 3.0.0
+18. Serilog.Sinks.Elasticsearch - Version: 10.0.0
+19. Serilog.Sinks.Network - Version: 2.0.2.68
+20. Serilog.Sinks.Async - Version: 1.5.0
+21. coverlet.collector - Version: 6.0.4
+22. Microsoft.AspNetCore.Mvc.Testing - Version: 9.0.2
+23. Microsoft.NET.Test.Sdk - Version: 17.13.0
+24. Microsoft.Playwright.NUnit - Version: 1.50.0
+25. xunit - Version: 2.9.2
+26. xunit.runner.visualstudio - Version: 3.0.0
+27. Postgres - Version: 16.9
+28. Kibana - Version: 8.12.1
+29. logstash - Version: 8.12.1
+30. elasticsearch - Version: 8.12.1
+31. Nginx - Version: 1.27.0
+32. Dotnet_SDK - Version: 9.0.0
+33. org.Sonarcube - Version: 6.1.0
+```
+#### Logging
+For logging, our application uses Serilog as the API to collect log data.
+This data is then transferred into the Elastic Stack,
+which consists of Logstash, Elasticsearch, and Kibana—all used to process, query, and display the logging data.
+This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana (a data visualization and exploration tool).
+#### Monitoring
+For monitoring, our application uses Prometheus as a real-time metrics storage server.
+On top of this, we use Grafana as a data visualization tool to display and analyze these metrics.
+#### Application
+We have built our application using the .NET software framework, following the onion architecture originally invented by Jeffrey Palermo.
+We use the ASP.NET Core Identity package as an authentication system, allowing us to create and delete users.
+Initially, we used SQLite as our DBMS but later switched to Prometheus.
+In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM).
+For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
+To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
+As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
+SonarQube tracks security, reliability, maintainability, test coverage, and code duplications.
 
 ## Interactions of Subsystems
+
+#### Sequence Diagram for Simulator unfollow call
+```mermaid
+sequenceDiagram
+    participant minitwit_Simulator
+    participant Minitwit_Application
+    participant DataBase
+    minitwit_Simulator->>Minitwit_Application: Http Post (api/fllws/{username}) unfollow {username}
+    Note right of Minitwit_Application: UnFollowRequest
+    Minitwit_Application-->>minitwit_Simulator: http statuscode 200
+    Note left of minitwit_Simulator: Succesfull Response
+    loop BatchInsert
+    Minitwit_Application->>Minitwit_Application: Insert into batch queue
+    end
+    Minitwit_Application->>DataBase: Get UserId <user1> <user2>
+    DataBase->>Minitwit_Application: UserId1 UserId2
+    Note left of Minitwit_Application: checks if both users exists
+    Minitwit_Application->>DataBase: Does User1 Follow User2
+    Note right of Minitwit_Application: FollowRequests User1 Follow User2
+    DataBase->>Minitwit_Application: Bollean
+    Note left of Minitwit_Application: If true
+    Note right of DataBase: Unfollow Sql Command
+    Minitwit_Application->>DataBase: Put user1 unfollow user2
+    DataBase->>Minitwit_Application: Status Response 
+```
+
+
+
+#### Sequence Diagram for User unfollow call
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Minitwit_Application
+    participant DataBase
+    User->>Minitwit_Application: Http UnFollow(username)
+    Note right of Minitwit_Application: UnFollowRequest
+    Minitwit_Application->>DataBase: Get UserId <user1> <user2>
+    DataBase->>Minitwit_Application: UserId1 UserId2
+    Note left of Minitwit_Application: checks if both users exists
+    Minitwit_Application->>DataBase: Does User1 Follow User2
+    DataBase->>Minitwit_Application: Bollean
+    Note left of Minitwit_Application: If true
+    Note right of DataBase: Unfollow Sql Command
+    Minitwit_Application->>DataBase: Put user1 unfollow user2
+    DataBase->>Minitwit_Application: Status Response 
+    Minitwit_Application-->>User: http statuscode 200
+    Note left of User: Succesfull Response
+```
 
 ## Current State of the System
 
@@ -304,106 +406,6 @@ This Project Itu_Minitwit is licensed and distributed under the MIT license
 Credit individuals or resources that helped in the project.
 
 
-## SystemArchitecture
-```
-# Dependency List:
-1. Microsoft.EntityFrameworkCore.Design - Version: 9.0.1
-2. Microsoft.Extensions.Configuration - Version: 9.0.2
-3. Microsoft.Extensions.Configuration.EnvironmentVariables - Version: 9.0.2
-4. Microsoft.Extensions.Configuration.UserSecrets - Version: 9.0.2
-5. Npgsql.EntityFrameworkCore.PostgreSQL - Version: 9.0.4
-6. prometheus-net - Version: 8.2.1
-7. Serilog.AspNetCore - Version: 9.0.0
-8. Serilog.Sinks.Console - Version: 6.0.0
-9. Microsoft.AspNetCore.Identity - Version: 2.3.1
-10. Microsoft.EntityFrameworkCore.Sqlite - Version: 9.0.1
-11. Microsoft.AspNetCore.Identity.EntityFrameworkCore - Version: 9.0.1
-12. Microsoft.AspNetCore.Identity.UI - Version: 9.0.1
-13. Microsoft.EntityFrameworkCore.Tools - Version: 9.0.0
-14. Microsoft.VisualStudio.Web.CodeGeneration.Design - Version: 9.0.0
-15. prometheus-net.AspNetCore - Version: 8.2.1
-16. Serilog - Version: 4.2.0
-17. Serilog.Formatting.Compact - Version: 3.0.0
-18. Serilog.Sinks.Elasticsearch - Version: 10.0.0
-19. Serilog.Sinks.Network - Version: 2.0.2.68
-20. Serilog.Sinks.Async - Version: 1.5.0
-21. coverlet.collector - Version: 6.0.4
-22. Microsoft.AspNetCore.Mvc.Testing - Version: 9.0.2
-23. Microsoft.NET.Test.Sdk - Version: 17.13.0
-24. Microsoft.Playwright.NUnit - Version: 1.50.0
-25. xunit - Version: 2.9.2
-26. xunit.runner.visualstudio - Version: 3.0.0
-27. Postgres - Version: 16.9
-28. Kibana - Version: 8.12.1
-29. logstash - Version: 8.12.1
-30. elasticsearch - Version: 8.12.1
-31. Nginx - Version: 1.27.0
-32. Dotnet_SDK - Version: 9.0.0
-33. org.Sonarcube - Version: 6.1.0
-```
-#### Logging
-For logging, our application uses Serilog as the API to collect log data. 
-This data is then transferred into the Elastic Stack, 
-which consists of Logstash, Elasticsearch, and Kibana—all used to process, query, and display the logging data.
-This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana (a data visualization and exploration tool).
-#### Monitoring
-For monitoring, our application uses Prometheus as a real-time metrics storage server. 
-On top of this, we use Grafana as a data visualization tool to display and analyze these metrics.
-#### Application
-We have built our application using the .NET software framework, following the onion architecture originally invented by Jeffrey Palermo. 
-We use the ASP.NET Core Identity package as an authentication system, allowing us to create and delete users.
-Initially, we used SQLite as our DBMS but later switched to Prometheus. 
-In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM).
-For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
-To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
-As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow. 
-SonarQube tracks security, reliability, maintainability, test coverage, and code duplications.
-
-## Sequence Diagram for Simulator unfollow call
-```mermaid
-sequenceDiagram
-    participant minitwit_Simulator
-    participant Minitwit_Application
-    participant DataBase
-    minitwit_Simulator->>Minitwit_Application: Http Post (api/fllws/{username}) unfollow {username}
-    Note right of Minitwit_Application: UnFollowRequest
-    Minitwit_Application-->>minitwit_Simulator: http statuscode 200
-    Note left of minitwit_Simulator: Succesfull Response
-    loop BatchInsert
-    Minitwit_Application->>Minitwit_Application: Insert into batch queue
-    end
-    Minitwit_Application->>DataBase: Get UserId <user1> <user2>
-    DataBase->>Minitwit_Application: UserId1 UserId2
-    Note left of Minitwit_Application: checks if both users exists
-    Minitwit_Application->>DataBase: Does User1 Follow User2
-    Note right of Minitwit_Application: FollowRequests User1 Follow User2
-    DataBase->>Minitwit_Application: Bollean
-    Note left of Minitwit_Application: If true
-    Note right of DataBase: Unfollow Sql Command
-    Minitwit_Application->>DataBase: Put user1 unfollow user2
-    DataBase->>Minitwit_Application: Status Response 
-```
 
 
 
-## Sequence Diagram for User unfollow call
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Minitwit_Application
-    participant DataBase
-    User->>Minitwit_Application: Http UnFollow(username)
-    Note right of Minitwit_Application: UnFollowRequest
-    Minitwit_Application->>DataBase: Get UserId <user1> <user2>
-    DataBase->>Minitwit_Application: UserId1 UserId2
-    Note left of Minitwit_Application: checks if both users exists
-    Minitwit_Application->>DataBase: Does User1 Follow User2
-    DataBase->>Minitwit_Application: Bollean
-    Note left of Minitwit_Application: If true
-    Note right of DataBase: Unfollow Sql Command
-    Minitwit_Application->>DataBase: Put user1 unfollow user2
-    DataBase->>Minitwit_Application: Status Response 
-    Minitwit_Application-->>User: http statuscode 200
-    Note left of User: Succesfull Response
-```
