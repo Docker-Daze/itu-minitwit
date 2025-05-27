@@ -1,0 +1,41 @@
+name: Markdown to PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'report/report.md'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'report/report.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc and LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex
+
+      - name: Create build directory
+        run: mkdir -p report/build
+
+      - name: Convert Markdown to PDF
+        run: |
+          pandoc report/report.md -o report/build/report.pdf --pdf-engine=xelatex
+
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f report/build/report.pdf
+          git commit -m "Updated PDF from CI"
+          git push
