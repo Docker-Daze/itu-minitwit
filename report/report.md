@@ -247,7 +247,7 @@ The Application is made up of these assets:
 - DigitalOcean droplets
 - DigitalOcean database cluster
 
-**Possible risk scenarios.**
+**Risk scenarios.**
 
 * R0: DDos attack kills the server.
 
@@ -271,6 +271,7 @@ The Application is made up of these assets:
 **Monitoring/logging threat sources:**
 * R12: Attacker accesses our unauthorized elasticsearch log’s and creates a backup of vulnerable data.
 
+**Risk matrix**
 ![Risk matrix](images/Risk_matrix.png)
 
 The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Some ports requires login to access and droplets are secured by digitaloceans standard security.
