@@ -1,18 +1,27 @@
 # Project Documentation Template
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Project Structure](#project-structure)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Configuration](#configuration)
-6. [Testing](#testing)
-7. [Deployment](#deployment)
-8. [Contributing](#contributing)
-9. [License](#license)
-10. [Acknowledgments](#acknowledgments)
-11. [System Architecture](#systemarchitecture)
+## Table of Contents
 
+1. [System's Perspective](#systems-perspective)  
+   1.1 [Design and Architecture](#design-and-architecture)  
+   1.2 [Dependencies](#dependencies)   
+   1.3 [Interactions of Subsystems](#interactions-of-subsystems)  
+   1.4 [Current State of the System](#current-state-of-the-system)
+
+2. [Process' Perspective](#process-perspective)  
+   2.1 [Deployment and Release](#deployment-and-release)   
+   2.2 [Monitoring](#monitoring-1)  
+   2.3 [Logging of application](#logging-of-application)  
+   2.4 [Security Assessment](#security-assessment)  
+   2.5 [Strategy for Scaling and Upgrade](#strategy-for-scaling-and-upgrade)  
+   2.6 [The Use of AI](#the-use-of-ai)
+
+3. [Reflection Perspective](#reflection-perspective)  
+   3.1 [Evolution and Refactoring](#evolution-and-refactoring)  
+   3.2 [Operation](#operation)  
+   3.3 [Maintenance](#maintanence)  
+   3.4 [DevOps](#devops)
 ---
 
 # System's Perspective
