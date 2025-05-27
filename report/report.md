@@ -110,19 +110,18 @@ Other ports running in the background for monitoring and logging.
 - elasticsearch is on "164.90.240.84:9200"
 - kibana is on "164.90.240.84:5601"
 
-It requires a login to access both monitoring and logging.
+It requires a login to access monitoring and logging.
 
 Run the application locally
-To run the application locally use this command:
+To run the application locally use this command inside the root folder itu-minitwit:
 ```bash
 # Command to run the project
 docker compose up --build
 ```
-Inside the root folder itu-minitwit.
 
-When the minitwitimage service is built and all containers are created, then the application is up and running on "localhost:5114/". To access the application, navigate to "localhost:5114/" in your browser.
+When the minitwitimage service is built and all containers are created, then the application is up and running on "localhost:5114/". To access the application, navigate to "localhost:5114/" in the browser.
 
-You can use the applications features like having an account and post on the public timeline.
+You can use the applications features like creating an account and post on the public timeline.
 
 The ports for monitoring and logging is also accessible locally.
 - Promethous is on "localhost:9091"
