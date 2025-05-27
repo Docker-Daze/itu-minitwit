@@ -13,6 +13,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
+      - LOGGING_SERVER_IP=logstash 
       - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=testdb;Username=postgres;Password=testpassword
     networks:
       - itu-minitwit_default
@@ -35,28 +36,79 @@ services:
       retries: 5
     networks:
       - itu-minitwit_default
-
-  test-runner:
-    image: mcr.microsoft.com/dotnet/sdk:9.0
-    container_name: dotnet_test_runner
-    working_dir: /app
+        
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
     volumes:
-      - .:/app
-    depends_on:
-      postgres:
-        condition: service_healthy
-    command: >
-      sh -c "cd tests/minitwit.tests &&
-      dotnet restore && 
-      dotnet test"
+      - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9091:9090"
+    networks:
+      - itu-minitwit_default
+
+  grafana:
+    image: grafana/grafana:10.2.4
+    ports:
+      - "3001:3000"
+    networks:
+      - itu-minitwit_default
+    volumes:
+      - grafana_data:/var/lib/grafana
     environment:
-      - ConnectionStrings__DefaultConnection=Host=test_postgres;Port=5432;Database=testdb;Username=testuser;Password=testpassword
+      - GF_SERVER_HTTP_ADDR=0.0.0.0
+      - GF_SERVER_ROOT_URL=http://0.0.0.0:3001
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.1
+    container_name: elasticsearch
+    environment:
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - discovery.type=single-node
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - itu-minitwit_default
 
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.12.1
+    container_name: logstash
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    ports:
+      - "5044:5044"
+      - "5012:5012"
+    environment:
+      LS_JAVA_OPTS: "-Xms256m -Xmx256m"
+    depends_on:
+      - elasticsearch
+    networks:
+      - itu-minitwit_default
 
-
-
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.12.1
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - itu-minitwit_default
 
 
 networks:
   itu-minitwit_default:
     driver: bridge
+    
+volumes:
+  prometheus_data:
+  grafana_data:
+  esdata:

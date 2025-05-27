@@ -9,6 +9,7 @@ author:
 - "Rasmus Mygind Poulsen <rpou@itu.dk>"
 numbersections: true
 ---
+\newpage
 
 # Table of Contents
 
@@ -33,11 +34,13 @@ numbersections: true
    3.4 [DevOps](#devops)
 ---
 
-# System's Perspective -- 400 words
+\newpage
+
+# System's Perspective
 
 ## Design and Architecture
 
-**Module view of the Minitwit application**
+### Static view
 
 The application follows the onion architecture and is split into three layers.
 
@@ -193,8 +196,7 @@ The current state of our system is generally good. At all levels of the applicat
 The biggest weakness in our application is the lack of testing, which is currently close to zero.
 Below is the result of a quality check run by our SonarQube workflow.
 
-![Sonar Cube quality check result](images/SonarCubeResult.png)
-# Process' perspective  -- 571 words
+# Process' perspective  -- 1026 words
 
 ## Deployment and Release
 
