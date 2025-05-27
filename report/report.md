@@ -1,6 +1,6 @@
 ---
-title: _minitwit_ Project Report
-subtitle: ITU DevOps 2025 Group `E`
+title: DevOps, Software Evolution & Software Maintenance
+subtitle: "Course Code: BSDSESM1KU"
 author:
 - "Magnus Thor Lessing Rolin <thmr@itu.dk>"
 - "Mathias Bindslev Hansen <bimh@itu.dk>"
@@ -9,6 +9,7 @@ author:
 - "Rasmus Mygind Poulsen <rpou@itu.dk>"
 numbersections: true
 ---
+\newpage
 
 # Table of Contents
 
@@ -33,11 +34,13 @@ numbersections: true
    3.4 [DevOps](#devops)
 ---
 
-# System's Perspective -- 400 words
+\newpage
+
+# System's Perspective
 
 ## Design and Architecture
 
-**Module view of the Minitwit application**
+### Static view
 
 The application follows the onion architecture and is split into three layers.
 
@@ -47,11 +50,11 @@ The application follows the onion architecture and is split into three layers.
 
 ![Package Diagram](images/package-diagram.drawio.svg)
 
-### Static view
-
 ### Dynamic view
 
-To deploy the application navigate to this folder:
+### Infrastruture as Code
+
+The application infrastructure can be deployed via Terraform.
 ```bash
 # Folder
 /itu-minitwit/terraform
