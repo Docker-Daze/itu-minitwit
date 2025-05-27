@@ -75,12 +75,62 @@ cd repo-name
 ```
 
 ## Usage
-Instructions on how to run and use the project.
 
+Deploy the application
+
+To deploy the application navigate to this folder:
 ```bash
-# Example command to start the project
-<insert usage commands>
+# Folder
+/itu-minitwit/terraform
 ```
+When inside folder run:
+```bash
+# Command initializes terraform files
+terraform init
+```
+Initialises terraform files if they are not already initialzed
+Then run:
+```bash
+# Command show terraform changes
+terraform plan
+```
+This show what changes will be made when running terraform apply.
+finally run:
+```bash
+# Command apply terraform changes
+terraform apply
+# Confirm changes by saying yes
+yes
+```
+Wait for the application to deploy. When the application is deployed the website will be accessible on "http://164.90.240.84:5000/public".
+
+Other ports running in the background for monitoring and logging.
+- Promethous is on "164.90.240.84:9091"
+- Grafana is on "164.90.240.84:3000"
+- elasticsearch is on "164.90.240.84:9200"
+- kibana is on "164.90.240.84:5601"
+
+It requires a login to access both monitoring and logging.
+
+Run the application locally
+To run the application locally use this command:
+```bash
+# Command to run the project
+docker compose up --build
+```
+Inside the root folder itu-minitwit.
+
+When the minitwitimage service is built and all containers are created, then the application is up and running on "localhost:5114/". To access the application, navigate to "localhost:5114/" in your browser.
+
+You can use the applications features like having an account and post on the public timeline.
+
+The ports for monitoring and logging is also accessible locally.
+- Promethous is on "localhost:9091"
+- Grafana is on "localhost:3001"
+- elasticsearch is on "localhost:9200"
+- kibana is on "localhost:5601"
+
+Note that no data and dashboard Grafana are set up locally.
 
 ## Configuration
 Details about configuration files and environment variables.
