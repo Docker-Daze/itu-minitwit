@@ -2,25 +2,26 @@
 title: _minitwit_ Project Report
 subtitle: ITU DevOps 2025 Group `E`
 author:
-- "Magnus Thor Lessing Rolin <thmr@itu.dk>"
-- "Mathias Bindslev Hansen <bimh@itu.dk>"
-- "Nikolai Tilgreen Nielsen <nitn@itu.dk>"
-- "Rasmus Hassing Huge <rahu@itu.dk>"
-- "Rasmus Mygind Poulsen <rpou@itu.dk>"
+  - "Magnus Thor Lessing Rolin <thmr@itu.dk>"
+  - "Mathias Bindslev Hansen <bimh@itu.dk>"
+  - "Nikolai Tilgreen Nielsen <nitn@itu.dk>"
+  - "Rasmus Hassing Huge <rahu@itu.dk>"
+  - "Rasmus Mygind Poulsen <rpou@itu.dk>"
 numbersections: true
 ---
+
 \newpage
 
 # Table of Contents
 
 1. [System's Perspective](#systems-perspective)  
    1.1 [Design and Architecture](#design-and-architecture)  
-   1.2 [Dependencies](#dependencies)   
+   1.2 [Dependencies](#dependencies)  
    1.3 [Interactions of Subsystems](#interactions-of-subsystems)  
    1.4 [Current State of the System](#current-state-of-the-system)
 
 2. [Process' Perspective](#process-perspective)  
-   2.1 [Deployment and Release](#deployment-and-release)   
+   2.1 [Deployment and Release](#deployment-and-release)  
    2.2 [Monitoring](#monitoring-1)  
    2.3 [Logging of application](#logging-of-application)  
    2.4 [Security Assessment](#security-assessment)  
@@ -32,6 +33,7 @@ numbersections: true
    3.2 [Operation](#operation)  
    3.3 [Maintenance](#maintanence)  
    3.4 [DevOps](#devops)
+
 ---
 
 \newpage
@@ -44,23 +46,25 @@ numbersections: true
 
 The application follows the onion architecture and is split into three layers.
 
-* The **Domain Layer** contains the domain model.
-* The **Infrastructure Layer** contains the data manipulation and insertion logic.
-* The **Application Layer** contains the entrypoint of the applications and defines the endpoints of the API. This layer also contains the UI.
+- The **Domain Layer** contains the domain model.
+- The **Infrastructure Layer** contains the data manipulation and insertion logic.
+- The **Application Layer** contains the entrypoint of the applications and defines the endpoints of the API. This layer also contains the UI.
 
 ![Package Diagram](images/package-diagram.drawio.svg)
 
 The infrastructure is deployed to Digital Ocean.
-* The minitwit application is hosted on two droplets - a primary and secondary.
-* A nginx loadbalancer distributes load between the two minitwit servers.
-* The Database is hosted as a PostgreSQL Database Cluster.
-* Logging is hosted on its own seperate droplet.
+
+- The minitwit application is hosted on two droplets - a primary and secondary.
+- A nginx loadbalancer distributes load between the two minitwit servers.
+- The Database is hosted as a PostgreSQL Database Cluster.
+- Logging is hosted on its own seperate droplet.
 
 ![Deployment Diagram](images/DeploymentDiagram.png)
 
 ### Infrastruture as Code
+
 The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
-This includes modules for provisioning the application servers and logging stack. 
+This includes modules for provisioning the application servers and logging stack.
 
 ### Dynamic view
 
@@ -104,6 +108,7 @@ This includes modules for provisioning the application servers and logging stack
 ```
 
 ## Dependencies
+
 ```
 # Dependency List:
 1. Microsoft.EntityFrameworkCore.Design - Version: 9.0.1
@@ -140,21 +145,25 @@ This includes modules for provisioning the application servers and logging stack
 32. Dotnet_SDK - Version: 9.0.0
 33. org.Sonarcube - Version: 6.1.0
 ```
+
 #### Logging
+
 For logging, our application uses Serilog as the API to collect log data.
 This data is then transferred into the Elastic Stack,
 which consists of Logstash, Elasticsearch, and Kibana—all used to process, query, and display the logging data.
-This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana (a data visualization and exploration tool).
+his setup is hidden behind Nginx, which acts as a reverse proxy and serves both as a loadbalancer an authentication layer between the user and Kibana (a data visualization and exploration tool).
 
 For elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access logs.
 
 #### Monitoring
+
 For monitoring, our application uses Prometheus as a real-time metrics storage server.
 On top of this, we use Grafana as a data visualization tool to display and analyze these metrics.
 
 For Grafana "164.90.240.84:3000" you can use the given login to access the dashboard.
 
 #### Application
+
 We have built our application using the .NET software framework, following the onion architecture originally invented by Jeffrey Palermo.
 We use the ASP.NET Core Identity package as an authentication system, allowing us to create and delete users.
 Initially, we used SQLite as our DBMS but later switched to Prometheus.
@@ -163,10 +172,13 @@ For testing, we use NUnit as the primary testing framework, with Playwright laye
 To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
 As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
 SonarQube tracks security, reliability, maintainability, test coverage, and code duplications.
+And for the application we utilize Nginx as a reverse proxy between server. for handling and loadbalancing request to each of our application server for a more stable workload, faster responses and keep our application in a high availabilty state.
 
 ## Interactions of Subsystems
+
 User requests and simulator requests are handled differently in our application.
 The two main differences between simulator and user requests are as follows:
+
 1. For simulator calls, a status code of 200 is sent immediately after receiving a prompt.
 2. simulator prompts are also collected in batches to reduce the number of database calls.
 
@@ -175,17 +187,18 @@ Below, you will see a sequence diagram for an Unfollow requests, from both a use
 **Sequence Diagram for Simulator unfollow call**
 ![API Seq Diagram](images/UMLSEQApi.png)
 
-
 **Sequence Diagram for User unfollow call**
 ![User Seq Diagram](images/UMLSEQUser.png)
 
 ## Current State of the System
+
 The current state of our system is generally good. At all levels of the application, we are observing the results we expect and want.
 The biggest weakness in our application is the lack of testing, which is currently close to zero.
 Below is the result of a quality check run by our SonarQube workflow.
 
 ![Sonar Cube Quality assesment](images/SonarCubeResult.png)
-# Process' perspective  -- 1026 words
+
+# Process' perspective -- 1026 words
 
 ## Deployment and Release
 
@@ -212,6 +225,7 @@ The following workflows are implemented to ensure a robust CI/CD pipeline:
 Each workflow is defined in the `.github/workflows` directory and is triggered based on specific events such as pushes, pull requests, or scheduled intervals.
 
 ### Deployment Chain
+
 The deployment process follows a structured chain format to ensure reliability and minimize downtime. The steps are as follows:
 
 1. **Linting and Code Quality Checks**  
@@ -223,10 +237,12 @@ The deployment process follows a structured chain format to ensure reliability a
 3. **Deployment with Rolling Updates**  
    If the commit successfully passes all previous stages, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
 
+![Our CI/CD pipline after a commit to main branch](./images/CICDChain.png)
+
 This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
 
-
 ## Monitoring
+
 The application utilizes Prometheus and Grafana for monitoring. Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
 Then Grafana retrieves the data from /metrics, and uses this as its data source. The relevant information could however not be found in the default configs .
 In the `MetricsService.cs` file, there are custom metrics to our application, such as the "minitwit_follow_counter and "app_request_duration_seconds"
@@ -247,6 +263,7 @@ To see all the logs for e.g. timeouts, the searchbar is used. Here the user can 
 ## Security assessment
 
 The Application is made up of these assets:
+
 - Web application (Minitwit)
 - Monitoring (Prometheus + Grafana)
 - Logging (Logstash + Elasticsearch + Kibana)
@@ -255,27 +272,31 @@ The Application is made up of these assets:
 
 **Risk scenarios.**
 
-* R0: DDos attack kills the server.
+- R0: DDos attack kills the server.
 
 **General security:**
-* R1: Attacker uses exposed secrets to gain access to vulnerable data.
-* R2: Attacker gains access to our API, and injects huge amounts of data into our database, stressing the system.
-* R3: Attacker uses a known exploit in an outdated dependency, exploiting that vulnerability on our system.
-* R4: Attacker gets secrets from open endpoints.
+
+- R1: Attacker uses exposed secrets to gain access to vulnerable data.
+- R2: Attacker gains access to our API, and injects huge amounts of data into our database, stressing the system.
+- R3: Attacker uses a known exploit in an outdated dependency, exploiting that vulnerability on our system.
+- R4: Attacker gets secrets from open endpoints.
 
 **Web application threat sources:**
-* R5: Attacker performs SQL injection on our web application to download sensitive user data.
-* R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
-* R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s credentials cookies and session.
-* R8: Attacker can interrupt unencrypted HTTP request and modify requests.
+
+- R5: Attacker performs SQL injection on our web application to download sensitive user data.
+- R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
+- R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s credentials cookies and session.
+- R8: Attacker can interrupt unencrypted HTTP request and modify requests.
 
 **Infrastructure threat sources:**
-* R9: An attacker scans for open ports and discovers multiple exposed services on our server. The attacker can interact directly with these, which leads to data exposure and disruption of service.
-* R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
-* R11: An attacker SSH into our droplet and interacts with our running containers.
+
+- R9: An attacker scans for open ports and discovers multiple exposed services on our server. The attacker can interact directly with these, which leads to data exposure and disruption of service.
+- R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
+- R11: An attacker SSH into our droplet and interacts with our running containers.
 
 **Monitoring/logging threat sources:**
-* R12: Attacker accesses our unauthorized elasticsearch log’s and creates a backup of vulnerable data.
+
+- R12: Attacker accesses our unauthorized elasticsearch log’s and creates a backup of vulnerable data.
 
 ![Risk matrix](images/Risk_matrix.png)
 
@@ -287,13 +308,21 @@ A possible solution to DDos attacks is to close the server when a certain amount
 
 ## Strategy for scaling and upgrade
 
+Pay more money to digital ocean.
+
+- A complete description of stages and tools included in the CI/CD chains, including deployment and release of your systems.
+- How do you monitor your systems and what precisely do you monitor?
+- What do you log in your systems and how do you aggregate logs?
+- Brief results of the security assessment and brief description of how did you harden the security of your system based on the analysis.
+- Applied strategy for scaling and upgrades.
+
 ## The use of AI
 
 AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
-the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files. 
-This approach often speeded up development, as it often had great suggestions for common issues. 
-Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it. 
-In these cases, the TA's were useful. 
+the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files.
+This approach often speeded up development, as it often had great suggestions for common issues.
+Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
+In these cases, the TA's were useful.
 
 # Reflection Perspective -- 445 words
 
@@ -317,6 +346,7 @@ In the end it was decided that a status code 200 would be sent back immediately 
 and handled in the background, while the "user" would think everything went fine. The response time dropped to almost 0, and no requests from that point were lost.
 
 ## Maintenance
+
 At one point the Grafana and Prometheus data were gone. No one knew why it was gone, and it happened at a time, where everyone was working with something different.
 This made it difficult to trace why the error occured. Many hours were spent trying to find the issue, and it was finally discovered,
 that the snap version of Docker had been installed, over the official version. The snap version saved its volumes somewhere different,
@@ -326,5 +356,47 @@ After this issue was resolved, it was coincidentally discovered that the droplet
 It was therefore upgraded and disaster was avoided.
 
 ## DevOps
+
 There was an automatic linter and quality assessment tool, which together gave insights into, what needed to be changed.
 This removed unnecessary human intervention, that saved a lot of development time.
+
+title: _minitwit_ Project Report
+subtitle: ITU DevOps 2025 Group `E`
+author:
+
+- "Magnus Thor Lessing Rolin <thmr@itu.dk>"
+- "Mathias Bindslev Hansen <bimh@itu.dk>"
+- "Nikolai Tilgreen Nielsen <nitn@itu.dk>"
+- "Rasmus Hassing Huge <rahu@itu.dk>"
+- "Rasmus Mygind Poulsen <rpou@itu.dk>"
+  numbersections: true
+
+---
+
+\newpage
+
+# Table of Contents
+
+1. [System's Perspective](#systems-perspective)  
+   1.1 [Design and Architecture](#design-and-architecture)  
+   1.2 [Dependencies](#dependencies)  
+   1.3 [Interactions of Subsystems](#interactions-of-subsystems)  
+   1.4 [Current State of the System](#current-state-of-the-system)
+
+2. [Process' Perspective](#process-perspective)  
+   2.1 [Deployment and Release](#deployment-and-release)  
+   2.2 [Monitoring](#monitoring-1)  
+   2.3 [Logging of application](#logging-of-application)  
+   2.4 [Security Assessment](#security-assessment)  
+   2.5 [Strategy for Scaling and Upgrade](#strategy-for-scaling-and-upgrade)  
+   2.6 [The Use of AI](#the-use-of-ai)
+
+3. [Reflection Perspective](#reflection-perspective)  
+   3.1 [Evolution and Refactoring](#evolution-and-refactoring)  
+   3.2 [Operation](#operation)  
+   3.3 [Maintenance](#maintanence)  
+   3.4 [DevOps](#devops)
+
+---
+
+\newpage
