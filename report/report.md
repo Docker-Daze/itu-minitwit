@@ -219,6 +219,7 @@ The deployment process follows a structured chain format to ensure reliability a
 
 This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
 
+![Continous deployment workflow](images/continous-deployment.png)
 
 ## Monitoring
 The application utilizes Prometheus and Grafana for monitoring. Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
@@ -274,7 +275,7 @@ The Application is made up of these assets:
 **Risk matrix**
 ![Risk matrix](images/Risk_matrix.png)
 
-The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Some ports requires login to access and droplets are secured by digitaloceans standard security.
+The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Some ports requires login to access and droplets are secured by Digital Ocean standard security.
 
 The biggest invulnerability is no failsafe against spamming and overloading the application with requests.
 

@@ -128,16 +128,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Configure SSH to Secondary Server
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH2_KEY" > ~/.ssh/do_ssh_key2
-          chmod 600 ~/.ssh/do_ssh_key2
-        env:
-          SSH2_KEY: ${{ secrets.SSH2_KEY }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-
       - name: Deploy to Secondary Server
         # Configure the ~./bash_profile and deploy.sh file on the Vagrantfile
         run: |
