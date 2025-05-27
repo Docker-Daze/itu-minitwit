@@ -14,18 +14,13 @@ public class MessageBatchService : BackgroundService
 {
     private const int BatchSize = 10;
     private readonly Channel<string[]> _chan;
-    private readonly IDbContextFactory<MinitwitDbContext> _factory;
-    private readonly IUserRepository _userRepository;
-    private readonly IMessageRepository _messageRepository;
+    private readonly IServiceScopeFactory _scopeFactory;
 
     public MessageBatchService(
-        Channel<string[]> chan,
-        IDbContextFactory<MinitwitDbContext> factory, IUserRepository userRepository, IMessageRepository messageRepository)
+        Channel<string[]> chan, IServiceScopeFactory scopeFactory)
     {
         _chan = chan;
-        _factory = factory;
-        _userRepository = userRepository;
-        _messageRepository = messageRepository;
+        _scopeFactory = scopeFactory;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -39,7 +34,10 @@ public class MessageBatchService : BackgroundService
                 var att = await _chan.Reader.ReadAsync(stoppingToken);
                 try
                 {
-                    var msg = await ValidateMessage(att);
+                    using var itemScope = _scopeFactory.CreateScope();
+                    var userRepo = itemScope.ServiceProvider.GetRequiredService<IUserRepository>();
+                    var msgRepo  = itemScope.ServiceProvider.GetRequiredService<IMessageRepository>();
+                    var msg = await ValidateMessage(att, userRepo, msgRepo);
                     buffer.Add(msg);
                 }
                 catch (Exception e)
@@ -49,26 +47,27 @@ public class MessageBatchService : BackgroundService
                 }
             }
 
-            await using var ctx = _factory.CreateDbContext();
-
             // unify user instances
             var userMap = MakeUserDict(buffer);
-
+            using var scope = _scopeFactory.CreateScope();
+            var ctx = scope.ServiceProvider.GetRequiredService<MinitwitDbContext>();
+            
             foreach (var user in userMap.Values)
                 ctx.Entry(user).State = EntityState.Unchanged;
+            
             await ctx.Messages.AddRangeAsync(buffer, stoppingToken);
             await ctx.SaveChangesAsync(stoppingToken);
         }
     }
 
-    private async Task<Message> ValidateMessage(string[] att)
+    private async Task<Message> ValidateMessage(string[] att, IUserRepository userRepository, IMessageRepository messageRepository)
     {
-        var user = await _userRepository.GetUserFromUsername(att[0]);
+        var user = await userRepository.GetUserFromUsername(att[0]);
         if (user == null)
         {
             throw new Exception("User not found");
         }
-        return await _messageRepository.AddMessage(user, att[1], int.Parse(att[2]));
+        return await messageRepository.AddMessage(user, att[1], int.Parse(att[2]));
     }
 
     private Dictionary<string, User> MakeUserDict(List<Message> messages)
