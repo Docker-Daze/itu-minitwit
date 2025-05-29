@@ -376,10 +376,15 @@ This made it difficult to trace why the error occured. Many hours were spent try
 that the snap version of Docker had been installed, over the official version. The snap version saved its volumes somewhere different,
 which caused it to look in the wrong place, when looking for the previously saved volumes. The snap version was removed, and all the data was back.
 This resulted in an immediate backup of the volumes, so if the volumes were ever removed, the data would not be lost.
+
 After this issue was resolved, it was coincidentally discovered that the droplet only had 1 gb left of storage.
 It was therefore upgraded and disaster was avoided.
 
 ## DevOps
 
-The automatic linter and quality assessment tool gave insights into, what needed to be changed.
-This removed unnecessary human intervention, which saved a lot of development time.
+**What we did different compared to previous project**
+
+* **Automatic linter and quality assessment tool:** this improved overall quality of the codebase. 
+* **Automatic workflows for everything:** saved time by removing repeated manual actions through the UI.
+* **Docker:** made it easy to spin up containers for various purposes and ensure consistent environments across different operating systems.
+
