@@ -27,7 +27,7 @@ jobs:
       - name: Install Pandoc and LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex
+          sudo apt-get install -y pandoc texlive-xetex pandoc-crossref
 
       - name: Create build directory
         run: mkdir -p report/build
@@ -38,7 +38,7 @@ jobs:
       - name: Convert Markdown to PDF
         run: |
           cd report
-          pandoc report.md -o build/report.pdf --pdf-engine=xelatex --number-sections
+          pandoc report.md -o build/report.pdf --pdf-engine=xelatex --number-sections --filter pandoc-crossref
 
       - name: Commit report
         run: |

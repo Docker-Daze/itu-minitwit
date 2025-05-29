@@ -72,14 +72,14 @@ This includes modules for provisioning the application servers, load balancer an
 
 **Components**
 
-* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.  
+* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
 * **Batch Service:** Responsible for collecting and processing requests. This is a background service.
 * **ORM Layer:** Responsible for translating LINQ into SQL queries.
 * **Database:** Responsible for persisting data. This involves users, followers and messages.
 
 **Connectors**
 
-* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.   
+* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
 * **Channel:** This connector is an internal application connector that transfers requests.
 * **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
 * **TCP:** This connector handles SQL queries to the database.
