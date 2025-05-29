@@ -112,27 +112,26 @@ Here is a list of all dependencies.
 
 #### Logging
 
-For logging, our application uses Serilog to collect log data.
+For logging, the application uses Serilog to collect log data.
 This data is then transferred into the ELK Stack,
 which consists of Logstash, Elasticsearch, and Kibana — all used to process, query, and display the logging data.
 This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana.
 
-For elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access logs.
+For Elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access logs.
 
 #### Monitoring
 
-For monitoring, our application uses Prometheus as a real-time metrics storage server.
-On top of this, we use Grafana as a data visualization tool to display and analyze these metrics.
+For monitoring, the application uses Prometheus for collecting metrics.
+On top of this, Grafana is used for data visualization.
 
-For Grafana "164.90.240.84:3000" you can use the given login to access the dashboard.
+For Grafana "164.90.240.84:3000" you can use the teachers login to access the dashboard.
 
 #### Application
 
-We have built our application using the .NET software framework, following the onion architecture originally invented by Jeffrey Palermo.
-We use the ASP.NET Core Identity package as an authentication system, allowing us to create and delete users.
-Initially, we used SQLite as our DBMS but later switched to Prometheus.
-In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM).
-For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
+The application is built using .NET.
+It uses ASP.NET Core Identity for authentication, and EF Core as the Object-Relational Mapper.
+The initial database was based on SQLite, but later it was switched to PostgreSQL.
+For testing, NUnit is used as the primary testing framework, with Playwright layered on top for end-to-end testing.
 To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
 As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
 SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. As a further software quality measure, 
