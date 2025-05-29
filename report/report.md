@@ -287,7 +287,7 @@ To scale horizontally, we first need to [deploy](#deployment-and-release) a new 
 AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
 the AI were asked to see, if a fix existed. AI were also used for finding errors in e.g. docker files.
 This approach often speed up development, as it often had great suggestions for common issues.
-Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
+Sometimes it was also useless, as it had no good suggestions to some "unique" problems.
 In these cases, the TA's were useful.
 
 # Reflection Perspective
