@@ -44,7 +44,7 @@ numbersections: true
 
 ### Static view
 
-The application follows the Onion architecture and is split into three layers.
+The application follows the Onion Architecture and is split into three layers.
 
 - The **Domain Layer** contains the domain model.
 - The **Infrastructure Layer** contains the data manipulation and insertion logic.
@@ -55,7 +55,7 @@ The application follows the Onion architecture and is split into three layers.
 The infrastructure is deployed to Digital Ocean.
 
 - The minitwit application is hosted on two droplets - a primary and secondary.
-- A nginx loadbalancer distributes load between the two minitwit servers.
+- A Nginx load balancer distributes load between the two minitwit servers.
 - The Database is hosted as a PostgreSQL Database Cluster.
 - Logging is hosted on its own separate droplet.
 
@@ -75,14 +75,14 @@ This includes modules for provisioning the application servers, load balancer an
 * **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
 * **Batch Service:** Responsible for collecting and processing requests. This is a background service.
 * **ORM Layer:** Responsible for translating LINQ into SQL queries.
-* **Database:** Responsible for persisting data. This involves users, followers and messages.
+* **Database:** Responsible for storing data. This involves users, followers and messages.
 
 **Connectors**
 
 * **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
 * **Channel:** This connector is an internal application connector that transfers requests.
 * **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
-* **TCP:** This connector handles SQL queries to the database.
+* **TCP:** This connector transfers SQL queries to the database.
 
 ## Dependencies
 
@@ -127,12 +127,12 @@ Here is a list of all dependencies.
 
 **Logging**
 
-For logging, the application uses Serilog to collect log data.
-This data is then transferred into the ELK Stack,  which consists of Logstash, Elasticsearch, and Kibana. 
+For logging, the application uses Serilog to collect data.
+This data is then transferred into the ELK stack, which consists of Logstash, Elasticsearch, and Kibana. 
 Together they are used to process, query, and display the logging data.
 This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana.
 
-Elasticsearch is accessible at "209.38.112.21:8080". Use "admin" "admin" to login and access logs.
+Elasticsearch is accessible at `209.38.112.21:8080. Use "admin" "admin" to login and access logs.
 
 **Monitoring**
 
@@ -140,7 +140,7 @@ For monitoring, the application uses Prometheus for collecting metrics and Grafa
 Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
 Grafana retrieves the necessary data from /metrics.
 
-Grafana is accessible at "164.90.240.84:3000". You can use the teachers login to access the dashboard.
+Grafana is accessible at `164.90.240.84:3000`. The teachers login to access the dashboard.
 
 **Application**  
 
@@ -150,15 +150,19 @@ The application is built using .NET.
 * **Entity Framework Core** is used as the object relational mapper.
 * **Npgsql** is used to access the PostgreSQL database.
 * **NUnit** is used as the primary testing framework, with **Playwright** for end-to-end testing.
-* **SonarQube** is used to measure software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. 
-* **Hadolint** is used for docker linting and runs on pushes to the main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
+* **SonarQube** is used to assess software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplication. 
+* **Hadolint** is used for docker linting and runs on pushes to the main branch to ensure proper Dockerfile syntax.
 
-**Database**
+**Database**   
 The initial database was based on SQLite, but was later migrated to PostgreSQL. 
+
+**Containerization**   
+Docker is used to containerize the application and many of the services. 
 
 ## Interactions of Subsystems
 The diagrams in [@fig:UMLSEQUser] and [@fig:UMLSEQApi] shows how the application handles an unfollow request from both a regular user and the simulator.
-The key difference is when the 204 status code is sent, as well as the simulator using batch insertions.
+The key difference between the two interactions is how the response is returned. For a user a status code 200 is returned when the system is done processing the request.
+For the simulator a status code 204 is instantly returned upon receival of the request. The reason for this is elaborated in the reflection section.
 
 ![Sequence Diagram for User unfollow call](images/UMLSEQUser.png){#fig:UMLSEQUser}
 
@@ -167,11 +171,11 @@ The key difference is when the 204 status code is sent, as well as the simulator
 ## Current State of the System
 
 A quality assessment of the codebase from SonarQube is shown in [@fig:SonarCubeResult].
-The current state of the system is generally good. The system receives an A rating in security, reliability and maintainability.
-One flaw in the application is the lack of testing. The test coverage is only 2.5% and around 1.1k lines is missing coverage.
+The system receives an A rating in security, reliability and maintainability. This indicates that the current state of the system is overall acceptable.
+One flaw in the system is the lack of testing. The test coverage is only 2.5% and around 1.1k lines is missing coverage. Higher test coverage would make the system less error prone.
 
-Even though we have multiple minitwit servers, the application still has a single point of failure as there only is a single load balancer.
-To solve this we could add another load balancer to ensure higher availability.
+Even though the system has multiple minitwit servers, it still has a single point of failure as there only is a single load balancer.
+To solve this another load balancer could be added to ensure higher availability.
 
 ![Sonar Cube Quality assesment](images/SonarCubeResult.png){#fig:SonarCubeResult}
 
@@ -179,10 +183,10 @@ To solve this we could add another load balancer to ensure higher availability.
 
 ## Deployment and Release
 
-The following workflows are implemented to ensure a robust CI/CD pipeline:
+The following workflows are implemented in the CI/CD pipeline:
 
 1. **Build and Test Workflow**  
-   Automates the build process and runs all tests to ensure code quality.
+   Automates the build process and runs all tests.
 
 2. **Build Release Workflow**  
    Automatically creates a release when a new tag is pushed to the repository.
@@ -197,7 +201,7 @@ The following workflows are implemented to ensure a robust CI/CD pipeline:
    Automates weekly releases to ensure regular updates.
 
 6. **SonarQube Workflow**  
-   Performs static code analysis using SonarQube to identify potential bugs and vulnerabilities.
+   Performs static code analysis using SonarQube to assess the code quality.
 
 Each workflow is defined in the `.github/workflows` directory and is triggered based on specific events such as pushes, pull requests, or scheduled intervals.
 
@@ -222,6 +226,10 @@ The relevant information from the website were not present in the default Promet
 In the `MetricsService.cs` file, there are custom metrics to our application, such as the "minitwit_follow_counter and "app_request_duration_seconds"
 The follow counter is implemented in the program by adding to the counter, every time a follow request is made.
 The duration is measured by starting a timer when a request comes in, and stopping it when the request has been processed.
+
+![monitoring1.png](images/monitoring1.png){#fig:monitoring1}
+
+![monitoring2.png](images/monitoring2.png){#fig:monitoring2}
 
 ## Logging of application
 
