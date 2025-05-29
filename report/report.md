@@ -219,11 +219,11 @@ Each workflow is defined in the `.github/workflows` directory and is triggered b
 
 The deployment process follows a structured chain format to ensure reliability and minimize downtime. The steps are as follows:
 
-1. **Linting and Code Quality Checks**  
-   The code is first analyzed for adherence to linting and formatting standards. This ensures that the codebase remains clean and maintainable.
+1. **Testing**  
+   Once the linting checks pass, the commit undergoes testing to validate that all components work together as expected.
 
-2. **Integration Testing**  
-   Once the linting checks pass, the commit undergoes rigorous integration testing to validate that all components work together as expected.
+2. **Linting and Code Quality Checks**  
+   The code is first analyzed for adherence to linting and formatting standards. This ensures that the codebase remains clean and maintainable.
 
 3. **Deployment with Rolling Updates**  
    If the commit successfully passes all previous stages, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
