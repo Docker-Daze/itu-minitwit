@@ -145,6 +145,7 @@ Grafana is accessible at "164.90.240.84:3000". You can use the teachers login to
 #### Application
 
 The application is built using .NET.
+
 * **ASP.NET Core Identity** is used for authentication.
 * **Entity Framework Core** is used as the object relational mapper.
 * **Npgsql** is used to access the PostgreSQL database.
