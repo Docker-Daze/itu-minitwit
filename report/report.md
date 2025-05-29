@@ -261,7 +261,7 @@ They show the change in response time, when going from processing each request, 
 In the beginning, the logs contained all logs from the information level and up.
 This resulted in a flood of logs, and it was impossible to see anything relevant. It was then configured to only show warnings and above.
 Logging statements were added to the code, to log when problems occured.
-In the `ApiController.cs` there are custom creation of logs which are logged as warnings.
+In the `ApiController.cs` there are created custom logs.
 These logs include system failures such as unsuccessful message post and failure to follow a user.
 This data is sent from Serilog to Logstash. Another important metric is logging the request times.
 If a request takes longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that the team has struggled with.
