@@ -61,7 +61,7 @@ The infrastructure is deployed to Digital Ocean.
 
 ![Deployment Diagram](images/DeploymentDigram.png)
 
-### Infrastruture as Code
+### Infrastructure as Code
 
 The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
 This includes modules for provisioning the application servers, load balancer and logging stack.
@@ -72,14 +72,14 @@ This includes modules for provisioning the application servers, load balancer an
 
 **Components**
 
-* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.  
+* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
 * **Batch Service:** Responsible for collecting and processing requests. This is a background service.
 * **ORM Layer:** Responsible for translating LINQ into SQL queries.
 * **Database:** Responsible for persisting data. This involves users, followers and messages.
 
 **Connectors**
 
-* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.   
+* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
 * **Channel:** This connector is an internal application connector that transfers requests.
 * **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
 * **TCP:** This connector handles SQL queries to the database.
@@ -145,31 +145,37 @@ Grafana is accessible at "164.90.240.84:3000". You can use the teachers login to
 #### Application
 
 The application is built using .NET.
-It uses ASP.NET Core Identity for authentication, and EF Core as the Object-Relational Mapper.
-The initial database was based on SQLite, but later it was switched to PostgreSQL.
-For testing, NUnit is used as the primary testing framework, with Playwright layered on top for end-to-end testing.
-API calls from the simulator is handled via the ASP.NET Core MVC framework by creating an API controller that process HTTP requests.
-As a software quality measure, SonarQube is utilized by integrating their service via a GitHub workflow.
-SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. As a further software quality measure, 
-Hadolint runs on pushes to the main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
+
+* **ASP.NET Core Identity** is used for authentication.
+* **Entity Framework Core** is used as the object relational mapper.
+* **Npgsql** is used to access the PostgreSQL database.
+* **NUnit** is used as the primary testing framework, with **Playwright** for end-to-end testing.
+* **SonarQube** is used to measure software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. 
+* **Hadolint** is used for docker linting and runs on pushes to the main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
+
+#### Database
+The initial database was based on SQLite, but was later migrated to PostgreSQL. 
 
 ## Interactions of Subsystems
-Below you will see how the application handles an unfollow request from both a regular user and the simulator.
+The diagrams in [@fig:UMLSEQUser] and [@fig:UMLSEQApi] shows how the application handles an unfollow request from both a regular user and the simulator.
 The key difference is when the 204 status code is sent, as well as the simulator using batch insertions.
 
-![Sequence Diagram for Simulator unfollow call](images/UMLSEQApi.png)
+![Sequence Diagram for User unfollow call](images/UMLSEQUser.png){#fig:UMLSEQUser}
 
-![Sequence Diagram for User unfollow call](images/UMLSEQUser.png)
+![Sequence Diagram for Simulator unfollow call](images/UMLSEQApi.png){#fig:UMLSEQApi}
 
 ## Current State of the System
 
-The current state of the system is generally good. At all levels of the application, the results are as expected.
-The biggest weakness in the application is the lack of testing, which is currently close to zero.
-Below is the result of a quality check run by the SonarQube workflow.
+A quality assessment of the codebase from SonarQube is shown in [@fig:SonarCubeResult].
+The current state of the system is generally good. The system receives an A rating in security, reliability and maintainability.
+One flaw in the application is the lack of testing. The test coverage is only 2.5% and around 1.1k lines is missing coverage.
 
-![Sonar Cube Quality assesment](images/SonarCubeResult.png)
+Even though we have multiple minitwit servers, the application still has a single point of failure as there only is a single load balancer.
+To solve this we could add another load balancer to ensure higher availability.
 
-# Process' perspective -- 1026 words
+![Sonar Cube Quality assesment](images/SonarCubeResult.png){#fig:SonarCubeResult}
+
+# Process' perspective
 
 ## Deployment and Release
 
@@ -291,7 +297,7 @@ This approach often speeded up development, as it often had great suggestions fo
 Sometimes it was useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
 In these cases, the TA's were helpful.
 
-# Reflection Perspective -- 445 words
+# Reflection Perspective
 
 ## Evolution and Refactoring
 

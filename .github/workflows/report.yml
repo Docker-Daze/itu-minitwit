@@ -28,6 +28,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-xetex
+          
+          wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.15.0/pandoc-crossref-linux.tar.xz
+          tar -xf pandoc-crossref-linux.tar.xz
+          sudo mv pandoc-crossref /usr/local/bin/
 
       - name: Create build directory
         run: mkdir -p report/build
@@ -38,7 +42,7 @@ jobs:
       - name: Convert Markdown to PDF
         run: |
           cd report
-          pandoc report.md -o build/report.pdf --pdf-engine=xelatex --number-sections
+          pandoc report.md -o build/report.pdf --pdf-engine=xelatex --number-sections --filter pandoc-crossref
 
       - name: Commit report
         run: |
