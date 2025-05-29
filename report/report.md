@@ -171,9 +171,12 @@ In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relatio
 For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
 To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
 As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
-SonarQube tracks security, reliability, maintainability, test coverage, and code duplications.
+SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. As a further software quality measure, 
+we use Hadolint on pushes to our main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
 
 ## Interactions of Subsystems
+Below you will see how our application handles an unfollow request from both a regular user and the simulator.
+The key difference is when the 200 status code is sent, as well as the simulator using a batch loader.
 
 **Sequence Diagram for Simulator unfollow call**
 ![API Seq Diagram](images/UMLSEQApi.png)
