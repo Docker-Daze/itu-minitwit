@@ -61,7 +61,7 @@ The infrastructure is deployed to Digital Ocean.
 
 ![Deployment Diagram](images/DeploymentDiagram.png)
 
-### Infrastruture as Code
+### Infrastructure as Code
 
 The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
 This includes modules for provisioning the application servers, load balancer and logging stack.
@@ -145,23 +145,25 @@ Grafana is accessible at "164.90.240.84:3000". You can use the teachers login to
 #### Application
 
 The application is built using .NET.
-It uses ASP.NET Core Identity for authentication, and EF Core as the Object-Relational Mapper.
-The initial database was based on SQLite, but later it was switched to PostgreSQL.
-For testing, NUnit is used as the primary testing framework, with Playwright layered on top for end-to-end testing.
-API calls from the simulator is handled via the ASP.NET Core MVC framework by creating an API controller that process HTTP requests.
-As a software quality measure, SonarQube is utilized by integrating their service via a GitHub workflow.
-SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. As a further software quality measure, 
-Hadolint runs on pushes to the main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
+* **ASP.NET Core Identity** is used for authentication.
+* **Entity Framework Core** is used as the object relational mapper.
+* **Npgsql** is used to access the PostgreSQL database.
+* **NUnit** is used as the primary testing framework, with **Playwright** for end-to-end testing.
+* **SonarQube** is used to measure software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. 
+* **Hadolint** is used for docker linting and runs on pushes to the main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
+
+#### Database
+The initial database was based on SQLite, but was later migrated to PostgreSQL. 
 
 ## Interactions of Subsystems
-Below you will see how the application handles an unfollow request from both a regular user and the simulator.
+Figure [@fig:UMLSEQApi] and [@fig:UMLSEQUser] shows how the application handles an unfollow request from both a regular user and the simulator.
 The key difference is when the 204 status code is sent, as well as the simulator using batch insertions.
 
 **Sequence Diagram for Simulator unfollow call**
-![API Seq Diagram](images/UMLSEQApi.png)
+![API Seq Diagram](images/UMLSEQApi.png){#fig:UMLSEQApi}
 
 **Sequence Diagram for User unfollow call**
-![User Seq Diagram](images/UMLSEQUser.png)
+![User Seq Diagram](images/UMLSEQUser.png){#fig:UMLSEQUser}
 
 ## Current State of the System
 
