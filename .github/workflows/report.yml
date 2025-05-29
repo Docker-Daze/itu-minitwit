@@ -27,6 +27,9 @@ jobs:
 
       - name: Create build directory
         run: mkdir -p report/build
+        
+      - name: Install SVG conversion tool
+        run: sudo apt-get install -y librsvg2-bin
 
       - name: Convert Markdown to PDF
         run: |
