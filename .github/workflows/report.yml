@@ -6,11 +6,15 @@ on:
       - main
     paths:
       - 'report/report.md'
+      - 'report/images/*'
   pull_request:
     branches:
       - main
     paths:
       - 'report/report.md'
+      - 'report/images/*'
+  workflow_dispatch:
+    manual: true
 
 jobs:
   build:
@@ -24,13 +28,21 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-xetex
+          
+          wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.15.0/pandoc-crossref-linux.tar.xz
+          tar -xf pandoc-crossref-linux.tar.xz
+          sudo mv pandoc-crossref /usr/local/bin/
 
       - name: Create build directory
         run: mkdir -p report/build
+        
+      - name: Install SVG conversion tool
+        run: sudo apt-get install -y librsvg2-bin
 
       - name: Convert Markdown to PDF
         run: |
-          pandoc report/report.md -o report/build/report.pdf --pdf-engine=xelatex --number-sections
+          cd report
+          pandoc report.md -o build/report.pdf --pdf-engine=xelatex --number-sections --filter pandoc-crossref
 
       - name: Commit report
         run: |

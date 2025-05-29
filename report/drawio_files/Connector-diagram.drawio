@@ -1,0 +1,64 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram name="Page-1" id="9nOmvw3YlZMUt4aKm6qu">
+    <mxGraphModel dx="976" dy="660" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="270" width="280" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-2" value=":Minitwit application" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="33" y="270" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="YrXFWV5syRxRXXpQT1xc-3" target="YrXFWV5syRxRXXpQT1xc-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-25" value="HTTP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="YrXFWV5syRxRXXpQT1xc-23">
+          <mxGeometry x="-0.1111" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-3" value=":Simulator" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="315" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-13" value="Channel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="YrXFWV5syRxRXXpQT1xc-9" target="YrXFWV5syRxRXXpQT1xc-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-9" value=":ApiController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="330" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-10" value="source" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="348" y="353" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-11" value="dest" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="133" y="337" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="YrXFWV5syRxRXXpQT1xc-12" target="YrXFWV5syRxRXXpQT1xc-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-30" value="Npgsql" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="YrXFWV5syRxRXXpQT1xc-29">
+          <mxGeometry x="-0.4" y="2" relative="1" as="geometry">
+            <mxPoint x="6" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-12" value=":BatchService" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="460" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-14" value=":Database (PostgreSQL)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="414" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="YrXFWV5syRxRXXpQT1xc-20" target="YrXFWV5syRxRXXpQT1xc-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-28" value="TCP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="YrXFWV5syRxRXXpQT1xc-27">
+          <mxGeometry x="0.1731" y="4" relative="1" as="geometry">
+            <mxPoint x="-11" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YrXFWV5syRxRXXpQT1xc-20" value="ORM Layer (EF Core)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="460" width="90" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

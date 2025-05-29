@@ -44,7 +44,7 @@ numbersections: true
 
 ### Static view
 
-The application follows the onion architecture and is split into three layers.
+The application follows the Onion architecture and is split into three layers.
 
 - The **Domain Layer** contains the domain model.
 - The **Infrastructure Layer** contains the data manipulation and insertion logic.
@@ -57,57 +57,36 @@ The infrastructure is deployed to Digital Ocean.
 - The minitwit application is hosted on two droplets - a primary and secondary.
 - A nginx loadbalancer distributes load between the two minitwit servers.
 - The Database is hosted as a PostgreSQL Database Cluster.
-- Logging is hosted on its own seperate droplet.
+- Logging is hosted on its own separate droplet.
 
-![Deployment Diagram](images/DeploymentDiagram.png)
+![Deployment Diagram](images/DeploymentDigram.png)
 
-### Infrastruture as Code
+### Infrastructure as Code
 
 The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
-This includes modules for provisioning the application servers and logging stack.
+This includes modules for provisioning the application servers, load balancer and logging stack.
 
 ### Dynamic view
 
-```
-/itu-minitwit
-    ├── .github/
-    │   └── workflows                       # GitHub Action workflows
-    │       ├── build-and-test.yml          # Automated build and test
-    │       ├── build-release.yml           # Creates release on push with a tag
-    │       ├── continous-deployment.yml    # Deployment to dig
-    │       ├── lint-and-format-check.yml   # Automated linter and formatting checks
-    │       ├── scheduled-release.yml       # Automated weekly release
-    │       └── sonarcube.yml               # Automated Sonarcube checks
-    ├── logging/                            # Logging configuration files
-    │        ├── docker-compose.yml         # Starts ELK stack and nginx containers
-    │        └── nginx.conf                 # Reverse proxy with authentication
-    ├── logstash/                           # Logstash configuration
-    ├── remote_files/                       # Files used remotely on the minitwit server for deployment
-    ├── report/                             # Report files
-    ├── src/                                # Source code
-    │   ├── minitwit.core/                  # Domain Layer - Domain models
-    │   ├── minitwit.infrastructure/        # Infrastructure Layer - Data access
-    │   └── minitwit.web/                   # Presentation Layer - Web app & API entry point
-    │       └── Program.cs                  # Program entrypoint
-    ├── terraform/                          # Terraform configurations for provisioning
-    │   ├── files/                          # Files used by terraform
-    │   ├── modules/
-    │   │   ├── minitwit_logging/           # Terraform code for logging infrastucture
-    │   │   └── minitwit_server/            # Terraform code for minitwit infrastucture
-    │   ├── main.tf                         # Terraform module definitions
-    │   ├── terraform.tfvars                # Terraform variables
-    │   └── variables.tf                    # Terraform variables declarations
-    ├── tests/                              # Test cases
-    │   └── minitwit.tests/
-    │       ├── minitwit.tests.cs           # API tests
-    │       └── playwright.test.cs          # UI tests
-    │
-    ├── docker-compose.yml                  # For running the program locally
-    ├── Dockerfile                          # Application Dockerfile
-    └── itu-minitwit.sln                    # Project solution file
-```
+![C&C overview of the minitwit system](images/Connector-diagram.svg)
+
+**Components**
+
+* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
+* **Batch Service:** Responsible for collecting and processing requests. This is a background service.
+* **ORM Layer:** Responsible for translating LINQ into SQL queries.
+* **Database:** Responsible for persisting data. This involves users, followers and messages.
+
+**Connectors**
+
+* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
+* **Channel:** This connector is an internal application connector that transfers requests.
+* **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
+* **TCP:** This connector handles SQL queries to the database.
 
 ## Dependencies
+
+Here is a list of all dependencies.
 
 ```
 # Dependency List:
@@ -146,57 +125,64 @@ This includes modules for provisioning the application servers and logging stack
 33. org.Sonarcube - Version: 6.1.0
 ```
 
-#### Logging
+**Logging**
 
-For logging, our application uses Serilog as the API to collect log data.
-This data is then transferred into the Elastic Stack,
-which consists of Logstash, Elasticsearch, and Kibana—all used to process, query, and display the logging data.
-This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana (a data visualization and exploration tool).
+For logging, the application uses Serilog to collect log data.
+This data is then transferred into the ELK Stack,  which consists of Logstash, Elasticsearch, and Kibana. 
+Together they are used to process, query, and display the logging data.
+This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana.
 
-For elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access logs.
+Elasticsearch is accessible at "209.38.112.21:8080". Use "admin" "admin" to login and access logs.
 
-#### Monitoring
+**Monitoring**
 
-For monitoring, our application uses Prometheus as a real-time metrics storage server.
-On top of this, we use Grafana as a data visualization tool to display and analyze these metrics.
+For monitoring, the application uses Prometheus for collecting metrics and Grafana for data visualization.
+Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
+Grafana retrieves the necessary data from /metrics.
 
-For Grafana "164.90.240.84:3000" you can use the given login to access the dashboard.
+Grafana is accessible at "164.90.240.84:3000". You can use the teachers login to access the dashboard.
 
-#### Application
+**Application**  
 
-We have built our application using the .NET software framework, following the onion architecture originally invented by Jeffrey Palermo.
-We use the ASP.NET Core Identity package as an authentication system, allowing us to create and delete users.
-Initially, we used SQLite as our DBMS but later switched to Prometheus.
-In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM).
-For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
-To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
-As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
-SonarQube tracks security, reliability, maintainability, test coverage, and code duplications.
+The application is built using .NET.
+
+* **ASP.NET Core Identity** is used for authentication.
+* **Entity Framework Core** is used as the object relational mapper.
+* **Npgsql** is used to access the PostgreSQL database.
+* **NUnit** is used as the primary testing framework, with **Playwright** for end-to-end testing.
+* **SonarQube** is used to measure software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. 
+* **Hadolint** is used for docker linting and runs on pushes to the main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
+
+**Database**
+The initial database was based on SQLite, but was later migrated to PostgreSQL. 
 
 ## Interactions of Subsystems
+The diagrams in [@fig:UMLSEQUser] and [@fig:UMLSEQApi] shows how the application handles an unfollow request from both a regular user and the simulator.
+The key difference is when the 204 status code is sent, as well as the simulator using batch insertions.
 
-**Sequence Diagram for Simulator unfollow call**
-![API Seq Diagram](images/UMLSEQApi.png)
+![Sequence Diagram for User unfollow call](images/UMLSEQUser.png){#fig:UMLSEQUser}
 
-**Sequence Diagram for User unfollow call**
-![User Seq Diagram](images/UMLSEQUser.png)
+![Sequence Diagram for Simulator unfollow call](images/UMLSEQApi.png){#fig:UMLSEQApi}
 
 ## Current State of the System
 
-The current state of our system is generally good. At all levels of the application, we are observing the results we expect and want.
-The biggest weakness in our application is the lack of testing, which is currently close to zero.
-Below is the result of a quality check run by our SonarQube workflow.
+A quality assessment of the codebase from SonarQube is shown in [@fig:SonarCubeResult].
+The current state of the system is generally good. The system receives an A rating in security, reliability and maintainability.
+One flaw in the application is the lack of testing. The test coverage is only 2.5% and around 1.1k lines is missing coverage.
 
-![Sonar Cube Quality assesment](images/SonarCubeResult.png)
+Even though we have multiple minitwit servers, the application still has a single point of failure as there only is a single load balancer.
+To solve this we could add another load balancer to ensure higher availability.
 
-# Process' perspective -- 1026 words
+![Sonar Cube Quality assesment](images/SonarCubeResult.png){#fig:SonarCubeResult}
+
+# Process' perspective
 
 ## Deployment and Release
 
 The following workflows are implemented to ensure a robust CI/CD pipeline:
 
 1. **Build and Test Workflow**  
-   This workflow automates the build process and runs all unit and integration tests to ensure code quality.
+   Automates the build process and runs all tests to ensure code quality.
 
 2. **Build Release Workflow**  
    Automatically creates a release when a new tag is pushed to the repository.
@@ -208,7 +194,7 @@ The following workflows are implemented to ensure a robust CI/CD pipeline:
    Ensures that the code adheres to the project's linting and formatting standards.
 
 5. **Scheduled Release Workflow**  
-   Automates weekly releases to ensure regular updates and maintenance.
+   Automates weekly releases to ensure regular updates.
 
 6. **SonarQube Workflow**  
    Performs static code analysis using SonarQube to identify potential bugs and vulnerabilities.
@@ -232,22 +218,21 @@ This deployment strategy ensures high availability and minimizes the risk of ser
 
 ## Monitoring
 
-The application utilizes Prometheus and Grafana for monitoring. Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
-Then Grafana retrieves the data from /metrics, and uses this as its data source. The relevant information could however not be found in the default configs .
+The relevant information from the website were not present in the default Prometheus configs.
 In the `MetricsService.cs` file, there are custom metrics to our application, such as the "minitwit_follow_counter and "app_request_duration_seconds"
 The follow counter is implemented in the program by adding to the counter, every time a follow request is made.
 The duration is measured by starting a timer when a request comes in, and stopping it when the request has been processed.
 
 ## Logging of application
 
-The application uses the ELK logging stack. In the beginning, the logs contained information from the information level and up.
+In the beginning, the logs contained all logs from the information level and up.
 This resulted in a flood of logs, and it was impossible to see anything relevant. It was then configured to only show warnings and above.
-Here there were practically no logs. From here logging statements were added to the code, to log when problems occured.
+Here there were practically no logs. Logging statements were added to the code, to log when problems occured.
 In the `ApiController.cs` there are custom creation of logs which are logged as warnings.
 These logs include system failures such as unsuccessful message post and failure to follow a user.
-This data is sent through Serialog to Logstash. Another important metric is logging of request times.
-If a request took longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that has occured.
-To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input "@m: slow", to get them all.
+This data is sent through Serialog to Logstash. Another important metric is logging the request times.
+If a request took longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that the team has struggled with.
+To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input "@m: slow", to get all logs about low requests.
 
 ## Security assessment
 
@@ -266,81 +251,86 @@ The Application consists of the following assets:
 **General security:**
 
 - R1: Attacker uses exposed secrets to gain access to sensitive data.
-- R2: Attacker gains access to our API, and injects large amounts of data into our database, stressing the system.
+- R2: Attacker gains access to our API, and injects large amounts of data into the database, overloading the system.
 - R3: An attacker exploits a known vulnerability in an outdated dependency.
 - R4: Attacker extracts secrets from unprotected endpoints.
 
 **Web application threat sources:**
 
-- R5: Attacker performs SQL injection on our web application to download sensitive user data.
+- R5: Attacker performs SQL injection on the web application to download sensitive user data.
 - R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
 - R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
 - R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
 
 **Infrastructure threat sources:**
 
-- R9: An attacker scans for open ports and discovers multiple exposed services. this can lead to data exposure and disruption of service.
-- R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
-- R11: An attacker gains SSH access to our droplet and interacts with our running containers.
+- R9: An attacker scans for open ports and discovers multiple exposed services. This can lead to data exposure and disruption of service.
+- R10: An attacker gains SSH access to the droplet and interacts with the running containers.
 
 **Monitoring/logging threat sources:**
 
-- R12: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
+- R11: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
 
 ![Risk matrix](images/Risk_matrix.png)
 
-The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Monitoring and loggin requires login to access and droplets are secured by digitaloceans standard security.
+The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Access monitoring and loggin is resticted via login and droplets are protected using DigitalOcean’s default security.
 
-The biggest invulnerability is no failsafe against spamming and overloading the application with requests.
+The biggest vulnerability is the lack of protection against request spamming and application overloading.
 
-A possible solution to DDos attacks is to close the server when a certain amounts of request per minuted exceeds a high number. To secure against attacks on HTTP request is to use HTTPS. To secure open ports is adding authorization to all the ports.
+A possible solution to DDoS attacks is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services.
 
 ## Strategy for scaling and upgrade
 
-Our project is scalable. You can scale the system vertically by investing more in the hosting provider, or, in our case, we leverage the infrastructure we have built to scale horizontally.
+The project has been made scalable. It can be scaled vertically by investing more in the hosting provider, or scale horizontally by making more server-droplets.
 
-To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server. After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx. At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests. The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow. Once these steps are completed, the server will be fully integrated into the architecture of the application.
+To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server. 
+After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx. 
+At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests. 
+The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow. 
+Once these steps are completed, the server will be fully integrated into the architecture of the application.
 
 ## The use of AI
 
-AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
-the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files.
-This approach often speeded up development, as it often had great suggestions for common issues.
-Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
-In these cases, the TA's were useful.
+AI tools such as ChatGPT has been used to assist idea generation and our learning process. 
+We prioritized receiving help in the exercise sessions from TA's rather than using AI. However, in some cases
+when problems occured, and no one knew how to fix it, assistance from AI could be useful.
+This approach sometimes sped up development, as it had decent suggestions for common issues.
+Contrary, it was sometimes not useful as it did not know the unique circumstances of the problem or overcomplicated it.
 
-# Reflection Perspective -- 445 words
+# Reflection Perspective
 
 ## Evolution and Refactoring
 
 After implementing SonarQube quality assessment, a lot of code was refactored and renamed.
-Most of the codes issue was maintainability, where names did not align in different classes.
-This was quickly changed everywhere. Next issue was long functions, that did many different things.
-This was refactored out, so that one function has one job. This improved maintainability and readability of the code base.
+Most of the codes issues were maintainability, where names did not align in different classes.
+This was quickly changed everywhere. Next issue was long and complicated functions.
+Those functions were refactored, so that a function has one job. This improved maintainability and readability of the code base.
 
 ## Operation
 
-The biggest issue this project was the ReadTimeout issues. That meant some requests were lost, and caused problems.
-E.g. when a user tried to register, but failed. Then all following message- and follow requests failed.
-Many approaches to this was tried. First the Database calls were minimized. Sometimes the database would be called,
+The biggest issue in this project was the ReadTimeout issue. Some requests were lost, which caused problems.
+E.g. when a user tried to register, but failed, all their message- and follow requests failed.
+To fix this, the Database calls were minimized. Sometimes the database would be called,
 when not strictly necessary. This dropped response time by about 30%, but was not enough to actually remove the issue.
-Then the sql queries were combined, so only one to two trips were needed pr. request. Then a batch service was introduced,
+Then the SQL queries were combined, so only one or two trips were needed pr. request. Then a batch service was introduced,
 so requests would only be added to the database, when 10 requests were gathered. Both of these improvements significantly
 decreased response time, but on the 10th user, it would insert 10 requests at once, so that 10th users request would often get lost.
-In the end it was decided that a status code 200 would be sent back immediately after receiving a request. The request would be processed,
-and handled in the background, while the "user" would think everything went fine. The response time dropped to almost 0, and no requests from that point were lost.
+In the end it was decided that a status code 204 would be sent back immediately after receiving a request. The request would be processed,
+and handled in the background, while the "user" would think everything went fine. 
+The response time dropped to almost 0, and no requests from that point were lost.
 
 ## Maintenance
 
-At one point the Grafana and Prometheus data were gone. No one knew why it was gone, and it happened at a time, where everyone was working with something different.
+At one point the Grafana and Prometheus data were gone. 
+No one knew why it was gone, and it happened at a time, where everyone was working with something different.
 This made it difficult to trace why the error occured. Many hours were spent trying to find the issue, and it was finally discovered,
 that the snap version of Docker had been installed, over the official version. The snap version saved its volumes somewhere different,
-and caused it to look in the wrong place, when looking for the previous saved volumes. The snap version was removed, and all the data was back.
-This resulted in an immediate backup of the volumes, so if the volumes were ever removed, there still was a backup.
+which caused it to look in the wrong place, when looking for the previously saved volumes. The snap version was removed, and all the data was back.
+This resulted in an immediate backup of the volumes, so if the volumes were ever removed, the data would not be lost.
 After this issue was resolved, it was coincidentally discovered that the droplet only had 1 gb left of storage.
 It was therefore upgraded and disaster was avoided.
 
 ## DevOps
 
-There was an automatic linter and quality assessment tool, which together gave insights into, what needed to be changed.
-This removed unnecessary human intervention, that saved a lot of development time.
+The automatic linter and quality assessment tool gave insights into, what needed to be changed.
+This removed unnecessary human intervention, which saved a lot of development time.
