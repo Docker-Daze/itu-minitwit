@@ -225,8 +225,18 @@ This deployment strategy ensures high availability and minimizes the risk of ser
 
 ## Monitoring
 
-The relevant information from the website were not present in the default Prometheus configs.
-In the `MetricsService.cs` file, there are custom metrics to the application, such as the `minitwit_follow_counter` and `app_request_duration_seconds`
+There are two monitoring dashboard that monitors the following:
+1. **Request overview dashboard**
+   * Average requests per minute
+   * Average follow/unfollow requests per minute
+   * Average message requests per minute
+   * Average register requests per minute
+2. **Endpoint dashboard**
+   * Register endpoint response duration
+   * Follow/Unfollow endpoint response duration
+   * Message endpoint response duration
+
+In the `MetricsService.cs` file, there are custom metrics to the application, such as the `minitwit_follow_counter` and `app_request_duration_seconds`.
 The follow counter is implemented in the program by adding to the counter, every time a follow request is made.
 The duration is measured by starting a timer when a request comes in, and stopping it when the request has been processed.
 
