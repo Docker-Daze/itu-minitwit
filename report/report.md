@@ -269,56 +269,62 @@ The Application consists of the following assets:
 
 The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Access monitoring and loggin is resticted via login and droplets are protected using DigitalOcean’s default security.
 
-the biggest vulnerability is the lack of protection against request spamming and application overloading.
+The biggest vulnerability is the lack of protection against request spamming and application overloading.
 
 A possible solution to DDoS attacks is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services.
 
 ## Strategy for scaling and upgrade
 
-The project is scalable. You can scale the system vertically by investing more in the hosting provider, or, in our case, we leverage the infrastructure we have built to scale horizontally.
+The project has been made scalable. It can be scaled vertically by investing more in the hosting provider, or scale horizontally by making more server-droplets.
 
-To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server. After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx. At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests. The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow. Once these steps are completed, the server will be fully integrated into the architecture of the application.
+To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server. 
+After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx. 
+At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests. 
+The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow. 
+Once these steps are completed, the server will be fully integrated into the architecture of the application.
 
 ## The use of AI
 
 AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
-the AI were asked to see, if a fix existed. AI were also used for finding errors in e.g. docker files.
-This approach often speed up development, as it often had great suggestions for common issues.
-Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
-In these cases, the TA's were useful.
+the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files.
+This approach often speeded up development, as it often had great suggestions for common issues.
+Sometimes it was useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
+In these cases, the TA's were helpful.
 
 # Reflection Perspective -- 445 words
 
 ## Evolution and Refactoring
 
 After implementing SonarQube quality assessment, a lot of code was refactored and renamed.
-Most of the codes issue was maintainability, where names did not align in different classes.
-This was quickly changed everywhere. Next issue was long functions, that did many different things.
-This was refactored out, so that one function has one job. This improved maintainability and readability of the code base.
+Most of the codes issues were maintainability, where names did not align in different classes.
+This was quickly changed everywhere. Next issue was long and complicated functions.
+Those functions were refactored, so that one function has one job. This improved maintainability and readability of the code base.
 
 ## Operation
 
-The biggest issue this project was the ReadTimeout issues. That meant some requests were lost, and caused problems.
-E.g. when a user tried to register, but failed. Then all following message- and follow requests failed.
-Many approaches to this was tried. First the Database calls were minimized. Sometimes the database would be called,
+The biggest issue in this project was the ReadTimeout issue. Some requests were lost, which caused problems.
+E.g. when a user tried to register, but failed, all their message- and follow requests failed.
+To fix this, the Database calls were minimized. Sometimes the database would be called,
 when not strictly necessary. This dropped response time by about 30%, but was not enough to actually remove the issue.
-Then the sql queries were combined, so only one to two trips were needed pr. request. Then a batch service was introduced,
+Then the SQL queries were combined, so only one or two trips were needed pr. request. Then a batch service was introduced,
 so requests would only be added to the database, when 10 requests were gathered. Both of these improvements significantly
 decreased response time, but on the 10th user, it would insert 10 requests at once, so that 10th users request would often get lost.
 In the end it was decided that a status code 204 would be sent back immediately after receiving a request. The request would be processed,
-and handled in the background, while the "user" would think everything went fine. The response time dropped to almost 0, and no requests from that point were lost.
+and handled in the background, while the "user" would think everything went fine. 
+The response time dropped to almost 0, and no requests from that point were lost.
 
 ## Maintenance
 
-At one point the Grafana and Prometheus data were gone. No one knew why it was gone, and it happened at a time, where everyone was working with something different.
+At one point the Grafana and Prometheus data were gone. 
+No one knew why it was gone, and it happened at a time, where everyone was working with something different.
 This made it difficult to trace why the error occured. Many hours were spent trying to find the issue, and it was finally discovered,
 that the snap version of Docker had been installed, over the official version. The snap version saved its volumes somewhere different,
-and caused it to look in the wrong place, when looking for the previous saved volumes. The snap version was removed, and all the data was back.
-This resulted in an immediate backup of the volumes, so if the volumes were ever removed, there still was a backup.
+which caused it to look in the wrong place, when looking for the previously saved volumes. The snap version was removed, and all the data was back.
+This resulted in an immediate backup of the volumes, so if the volumes were ever removed, the data would not be lost.
 After this issue was resolved, it was coincidentally discovered that the droplet only had 1 gb left of storage.
 It was therefore upgraded and disaster was avoided.
 
 ## DevOps
 
-There was an automatic linter and quality assessment tool, which together gave insights into, what needed to be changed.
-This removed unnecessary human intervention, that saved a lot of development time.
+The automatic linter and quality assessment tool gave insights into, what needed to be changed.
+This removed unnecessary human intervention, which saved a lot of development time.
