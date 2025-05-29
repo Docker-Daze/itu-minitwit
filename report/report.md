@@ -349,7 +349,7 @@ Contrary, it was sometimes not useful as it did not know the unique circumstance
 
 **Migrating from SQLite to Postgres**
 
-To solve this challenge we bought a PostgreSQL database cluster on Digital Ocean, this was to make the process simpler.
+To solve this challenge we bought a PostgreSQL database cluster on Digital Ocean, to make the process simpler.
 For the migration a tool called pgloader was used. This allowed for minimal downtime.
 
 \href{https://github.com/orgs/Docker-Daze/projects/1/views/1?pane=issue&itemId=101959667&issue=Docker-Daze%7Citu-minitwit%7C18}{\underline{Link to issue}}
