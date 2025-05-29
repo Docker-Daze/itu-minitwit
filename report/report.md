@@ -76,7 +76,7 @@ This includes modules for provisioning the application servers, load balancer an
 - **Batch Service:** Responsible for collecting and processing requests. This is a background service.
 - **ORM Layer:** Responsible for translating LINQ into SQL queries.
 - **Database:** Responsible for storing data. This involves users, followers and messages.
-
+\newpage
 **Connectors**
 
 - **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
