@@ -226,6 +226,7 @@ This deployment strategy ensures high availability and minimizes the risk of ser
 ## Monitoring
 
 There are two monitoring dashboard that monitors the following:
+
 1. **Request overview dashboard**
    * Average requests per minute
    * Average follow/unfollow requests per minute
@@ -250,67 +251,76 @@ They show the change in response time, when going from processing each request, 
 
 In the beginning, the logs contained all logs from the information level and up.
 This resulted in a flood of logs, and it was impossible to see anything relevant. It was then configured to only show warnings and above.
-Here there were practically no logs. Logging statements were added to the code, to log when problems occured.
+Logging statements were added to the code, to log when problems occured.
 In the `ApiController.cs` there are custom creation of logs which are logged as warnings.
 These logs include system failures such as unsuccessful message post and failure to follow a user.
-This data is sent through Serialog to Logstash. Another important metric is logging the request times.
-If a request took longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that the team has struggled with.
-To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input "@m: slow", to get all logs about low requests.
+This data is sent from Serilog to Logstash. Another important metric is logging the request times.
+If a request takes longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that the team has struggled with.
+To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input "@m: slow", to get all logs about slow requests.
 
 ## Security assessment
 
 The Application consists of the following assets:
 
-- Web application (Minitwit)
+- Web application (minitwit)
 - Monitoring (Prometheus + Grafana)
 - Logging (Logstash + Elasticsearch + Kibana)
 - DigitalOcean droplets
 - DigitalOcean database cluster
 
-**Risk scenarios.**
+**Risk scenarios**
 
 - R0: DDoS attack overwhelms the server, making the application unavailable.
 
-**General security:**
+General security:
 
 - R1: Attacker uses exposed secrets to gain access to sensitive data.
 - R2: Attacker gains access to our API, and injects large amounts of data into the database, overloading the system.
 - R3: An attacker exploits a known vulnerability in an outdated dependency.
 - R4: Attacker extracts secrets from unprotected endpoints.
 
-**Web application threat sources:**
+Web application threat sources:
 
 - R5: Attacker performs SQL injection on the web application to download sensitive user data.
 - R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
 - R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
 - R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
 
-**Infrastructure threat sources:**
+Infrastructure threat sources:
 
-- R9: An attacker scans for open ports and discovers multiple exposed services. This can lead to data exposure and disruption of service.
+- R9: An attacker scans for open ports and discovers multiple exposed services.
 - R10: An attacker gains SSH access to the droplet and interacts with the running containers.
 
-**Monitoring/logging threat sources:**
+Monitoring/logging threat sources:
 
-- R11: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
+- R11: An attacker gains unauthorized access to Elasticsearch logs and stealing sensitive data.
 
-![Risk matrix](images/Risk_matrix.png)
+The above risk scenarios are plotted into the risk matrix shown in [@fig:Risk_matrix] below. 
 
-The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Access monitoring and loggin is resticted via login and droplets are protected using DigitalOcean’s default security.
+![Risk matrix](images/Risk_matrix.png){#fig:Risk_matrix}
+
+To harden security the application has been made secure against SQL injections.
+Secrets are stored privately and secure, and dependencies are up to date.
+Access to monitoring and logging is restricted via login and droplets are protected using DigitalOcean’s default security and recommendations for UFW.
 
 The biggest vulnerability is the lack of protection against request spamming and application overloading.
-
-A possible solution to DDoS attacks is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services.
+A possible solution to DDoS attacks could be to utilize Nginx on the load balancer. 
+Nginx has a "Limit_request_zone feature" which blocks an unusual amount of requests from clients, while still allowing regular users to send requests to the application.
+To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services.
 
 ## Strategy for scaling and upgrade
 
-The project has been made scalable. It can be scaled vertically by investing more in the hosting provider, or scale horizontally by making more server-droplets.
+The system can be scaled vertically by investing more in the hosting provider, or scaled horizontally by making more server-droplets.
 
-To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server.
-After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx.
-At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests.
-The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow.
-Once these steps are completed, the server will be fully integrated into the architecture of the application.
+To scale vertically:
+1. Upsize the droplets on Digital Ocean.
+
+To scale horizontally:
+1. Deploy new application server
+2. Add the IP address of the server to load balancer's upstream server list in the configuration file of Nginx.
+3. Add the server to the deployment workflow.
+4. Add the required secrets to GitHub.
+5. Now the new server should be fully integrated into the architecture of the application.
 
 ## The use of AI
 
@@ -324,10 +334,19 @@ Contrary, it was sometimes not useful as it did not know the unique circumstance
 
 ## Evolution and Refactoring
 
-After implementing SonarQube quality assessment, a lot of code was refactored and renamed.
-Most of the codes issues were maintainability, where names did not align in different classes.
-This was quickly changed everywhere. Next issue was long and complicated functions.
-Those functions were refactored, so that a function has one job. This improved maintainability and readability of the code base.
+**Migrating from SQLite to Postgres**
+To solve this challenge we bought a PostgreSQL database cluster on Digital Ocean, this was to make the process simpler.
+For the migration a tool called pgloader was used. This allowed for minimal downtime.
+
+**Improving code quality**
+After implementing SonarQube quality assessment, a lot of code was refactored and renamed to meet their assessment criteria.
+Most of the issues were maintainability, where names did not align in different classes. The next issue was long and complicated functions.
+Those functions were refactored, so that a function has one job. This improved maintainability and readability of the codebase.
+
+**Securing Elasticsearch**
+We received a security notice from DigitalOcean regarding a publicly exposed port on our Elasticsearch instance.
+It was a challenge to enable the built-in security features of Elasticsearch, so Nginx was used to secure the port instead.
+In the future we should be more aware of which ports are publicly exposed.
 
 ## Operation
 
