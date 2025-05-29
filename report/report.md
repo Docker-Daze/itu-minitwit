@@ -356,7 +356,7 @@ For the migration a tool called pgloader was used. This allowed for minimal down
 
 **Improving code quality**
 
-After implementing SonarQube quality assessment, a lot of code was refactored and renamed to meet their assessment criteria.
+After implementing SonarQube quality assessment, a lot of code was refactored and variables renamed to meet their assessment criteria.
 Most of the issues were maintainability, where names did not align in different classes. Another issue was long and complicated functions.
 Those functions were refactored, so that a function has one job. The graph in [@fig:sonarqubegraph] show the quality assessment going from 839 to 66 issues after this refactoring.
 This improved maintainability and readability of the codebase.
@@ -396,7 +396,7 @@ It was therefore upgraded and disaster was avoided.
 
 **What we did different compared to previous project**
 
-* **Automatic linter and quality assessment tool:** this improved overall quality of the codebase. 
-* **Automatic workflows for everything:** saved time by removing repeated manual actions through the UI.
-* **Docker:** made it easy to spin up containers for various purposes and ensure consistent environments across different operating systems.
+* **Automatic linter and quality assessment tool:** This improved overall quality of the codebase. 
+* **Automatic workflows for everything:** This saved time by removing repeated manual actions through the UI.
+* **Docker:** This made it easy to spin up containers for various purposes and ensure consistent environments across different operating systems.
 
