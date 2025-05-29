@@ -64,10 +64,23 @@ The infrastructure is deployed to Digital Ocean.
 ### Infrastruture as Code
 
 The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
-This includes modules for provisioning the application servers and logging stack.
+This includes modules for provisioning the application servers, load balancer and logging stack.
 
 ### Dynamic view
 
+![C&C overview of the minitwit system](images/Connector-diagram.svg)
+
+**Components**
+* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
+* **Batch Service:** Responsible for collecting and processing requests. This is a background service.
+* **ORM Layer:** Responsible for translating LINQ into SQL queries.
+* **Database:** Responsible for persisting data. This involves users, followers and messages.
+
+**Connectors**
+* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
+* **Channel:** This connector is an internal application connector that transfers requests.
+* **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
+* **TCP:** This connector handles SQL queries to the database.
 
 ## Dependencies
 
