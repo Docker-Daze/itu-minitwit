@@ -128,11 +128,10 @@ For Grafana "164.90.240.84:3000" you can use the teachers login to access the da
 
 #### Application
 
-The application is built using the .NET software framework.
-The ASP.NET Core Identity package is used as the authentication system, to create and delete users, and secure password hashing.
-Initially, we used SQLite as our DBMS but later switched to Prometheus.
-In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM).
-For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
+The application is built using .NET.
+It uses ASP.NET Core Identity for authentication, and EF Core as the Object-Relational Mapper.
+The initial database was based on SQLite, but later it was switched to PostgreSQL.
+For testing, NUnit is used as the primary testing framework, with Playwright layered on top for end-to-end testing.
 To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
 As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
 SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. As a further software quality measure, 
