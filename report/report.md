@@ -64,10 +64,23 @@ The infrastructure is deployed to Digital Ocean.
 ### Infrastruture as Code
 
 The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
-This includes modules for provisioning the application servers and logging stack.
+This includes modules for provisioning the application servers, load balancer and logging stack.
 
 ### Dynamic view
 
+![C&C overview of the minitwit system](images/Connector-diagram.svg)
+
+**Components**
+* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
+* **Batch Service:** Responsible for collecting and processing requests. This is a background service.
+* **ORM Layer:** Responsible for translating LINQ into SQL queries.
+* **Database:** Responsible for persisting data. This involves users, followers and messages.
+
+**Connectors**
+* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
+* **Channel:** This connector is an internal application connector that transfers requests.
+* **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
+* **TCP:** This connector handles SQL queries to the database.
 
 ## Dependencies
 
@@ -238,7 +251,7 @@ The Application consists of the following assets:
 
 **Web application threat sources:**
 
-- R5: Attacker performs SQL injection on our web application to download sensitive user data.
+- R5: Attacker performs SQL injection on the web application to download sensitive user data.
 - R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
 - R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
 - R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
@@ -259,19 +272,19 @@ The application is secure against SQL injections. There is no public secrets and
 
 the biggest vulnerability is the lack of protection against request spamming and application overloading.
 
-To mitigate DDoS attacks a possible solution is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services
+A possible solution to DDoS attacks is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services.
 
 ## Strategy for scaling and upgrade
 
-Our project is scalable. You can scale the system vertically by investing more in the hosting provider, or, in our case, we leverage the infrastructure we have built to scale horizontally.
+The project is scalable. You can scale the system vertically by investing more in the hosting provider, or, in our case, we leverage the infrastructure we have built to scale horizontally.
 
 To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server. After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx. At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests. The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow. Once these steps are completed, the server will be fully integrated into the architecture of the application.
 
 ## The use of AI
 
 AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
-the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files.
-This approach often speeded up development, as it often had great suggestions for common issues.
+the AI were asked to see, if a fix existed. AI were also used for finding errors in e.g. docker files.
+This approach often speed up development, as it often had great suggestions for common issues.
 Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
 In these cases, the TA's were useful.
 
