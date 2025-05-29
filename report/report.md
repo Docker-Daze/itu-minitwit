@@ -359,7 +359,6 @@ For the migration a tool called pgloader was used. This allowed for minimal down
 After implementing SonarQube quality assessment, a lot of code was refactored and variables renamed to meet their assessment criteria.
 Most of the issues were maintainability, where names did not align in different classes. Another issue was long and complicated functions.
 Those functions were refactored, so that a function has one job. The graph in [@fig:sonarqubegraph] show the quality assessment going from 839 to 66 issues after this refactoring.
-This improved maintainability and readability of the codebase.
 
 ![SonarQube issues over time](images/sonarqubegraph.png){#fig:sonarqubegraph}
 
