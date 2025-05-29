@@ -260,7 +260,7 @@ The application is secure against SQL injections. There is no public secrets and
 
 the biggest vulnerability is the lack of protection against request spamming and application overloading.
 
-To mitigate DDoS attacks a possible solution is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services
+A possible solution to DDoS attacks is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services.
 
 ## Strategy for scaling and upgrade
 
