@@ -121,8 +121,9 @@ For Elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access l
 
 #### Monitoring
 
-For monitoring, the application uses Prometheus for collecting metrics.
-On top of this, Grafana is used for data visualization.
+For monitoring, the application uses Prometheus for collecting metrics. 
+Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
+On top of this, Grafana is used for data visualization. Grafana retrieves the necessary data from /metrics.
 
 For Grafana "164.90.240.84:3000" you can use the teachers login to access the dashboard.
 
@@ -132,14 +133,14 @@ The application is built using .NET.
 It uses ASP.NET Core Identity for authentication, and EF Core as the Object-Relational Mapper.
 The initial database was based on SQLite, but later it was switched to PostgreSQL.
 For testing, NUnit is used as the primary testing framework, with Playwright layered on top for end-to-end testing.
-To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
-As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
+API calls from the simulator is handled via the ASP.NET Core MVC framework by creating an API controller that process HTTP requests.
+As a software quality measure, SonarQube is utilized by integrating their service via a GitHub workflow.
 SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. As a further software quality measure, 
-we use Hadolint on pushes to our main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
+Hadolint runs on pushes to the main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
 
 ## Interactions of Subsystems
-Below you will see how our application handles an unfollow request from both a regular user and the simulator.
-The key difference is when the 204 status code is sent, as well as the simulator using a batch loader.
+Below you will see how the application handles an unfollow request from both a regular user and the simulator.
+The key difference is when the 204 status code is sent, as well as the simulator using batch insertions.
 
 **Sequence Diagram for Simulator unfollow call**
 ![API Seq Diagram](images/UMLSEQApi.png)
@@ -149,9 +150,9 @@ The key difference is when the 204 status code is sent, as well as the simulator
 
 ## Current State of the System
 
-The current state of our system is generally good. At all levels of the application, we are observing the results we expect and want.
-The biggest weakness in our application is the lack of testing, which is currently close to zero.
-Below is the result of a quality check run by our SonarQube workflow.
+The current state of the system is generally good. At all levels of the application, the results are as expected.
+The biggest weakness in the application is the lack of testing, which is currently close to zero.
+Below is the result of a quality check run by the SonarQube workflow.
 
 ![Sonar Cube Quality assesment](images/SonarCubeResult.png)
 
@@ -162,7 +163,7 @@ Below is the result of a quality check run by our SonarQube workflow.
 The following workflows are implemented to ensure a robust CI/CD pipeline:
 
 1. **Build and Test Workflow**  
-   This workflow automates the build process and runs all unit and integration tests to ensure code quality.
+   Automates the build process and runs all tests to ensure code quality.
 
 2. **Build Release Workflow**  
    Automatically creates a release when a new tag is pushed to the repository.
@@ -174,7 +175,7 @@ The following workflows are implemented to ensure a robust CI/CD pipeline:
    Ensures that the code adheres to the project's linting and formatting standards.
 
 5. **Scheduled Release Workflow**  
-   Automates weekly releases to ensure regular updates and maintenance.
+   Automates weekly releases to ensure regular updates.
 
 6. **SonarQube Workflow**  
    Performs static code analysis using SonarQube to identify potential bugs and vulnerabilities.
@@ -198,22 +199,21 @@ This deployment strategy ensures high availability and minimizes the risk of ser
 
 ## Monitoring
 
-The application utilizes Prometheus and Grafana for monitoring. Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
-Then Grafana retrieves the data from /metrics, and uses this as its data source. The relevant information could however not be found in the default configs .
+The relevant information from the website were not present in the default Prometheus configs.
 In the `MetricsService.cs` file, there are custom metrics to our application, such as the "minitwit_follow_counter and "app_request_duration_seconds"
 The follow counter is implemented in the program by adding to the counter, every time a follow request is made.
 The duration is measured by starting a timer when a request comes in, and stopping it when the request has been processed.
 
 ## Logging of application
 
-The application uses the ELK logging stack. In the beginning, the logs contained information from the information level and up.
+In the beginning, the logs contained all logs from the information level and up.
 This resulted in a flood of logs, and it was impossible to see anything relevant. It was then configured to only show warnings and above.
-Here there were practically no logs. From here logging statements were added to the code, to log when problems occured.
+Here there were practically no logs. Logging statements were added to the code, to log when problems occured.
 In the `ApiController.cs` there are custom creation of logs which are logged as warnings.
 These logs include system failures such as unsuccessful message post and failure to follow a user.
-This data is sent through Serialog to Logstash. Another important metric is logging of request times.
-If a request took longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that has occured.
-To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input "@m: slow", to get them all.
+This data is sent through Serialog to Logstash. Another important metric is logging the request times.
+If a request took longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that the team has struggled with.
+To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input "@m: slow", to get all logs about low requests.
 
 ## Security assessment
 
