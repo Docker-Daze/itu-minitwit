@@ -44,7 +44,7 @@ numbersections: true
 
 ### Static view
 
-The application follows the onion architecture and is split into three layers.
+The application follows the Onion architecture and is split into three layers.
 
 - The **Domain Layer** contains the domain model.
 - The **Infrastructure Layer** contains the data manipulation and insertion logic.
@@ -68,46 +68,10 @@ This includes modules for provisioning the application servers and logging stack
 
 ### Dynamic view
 
-```
-/itu-minitwit
-    ├── .github/
-    │   └── workflows                       # GitHub Action workflows
-    │       ├── build-and-test.yml          # Automated build and test
-    │       ├── build-release.yml           # Creates release on push with a tag
-    │       ├── continous-deployment.yml    # Deployment to dig
-    │       ├── lint-and-format-check.yml   # Automated linter and formatting checks
-    │       ├── scheduled-release.yml       # Automated weekly release
-    │       └── sonarcube.yml               # Automated Sonarcube checks
-    ├── logging/                            # Logging configuration files
-    │        ├── docker-compose.yml         # Starts ELK stack and nginx containers
-    │        └── nginx.conf                 # Reverse proxy with authentication
-    ├── logstash/                           # Logstash configuration
-    ├── remote_files/                       # Files used remotely on the minitwit server for deployment
-    ├── report/                             # Report files
-    ├── src/                                # Source code
-    │   ├── minitwit.core/                  # Domain Layer - Domain models
-    │   ├── minitwit.infrastructure/        # Infrastructure Layer - Data access
-    │   └── minitwit.web/                   # Presentation Layer - Web app & API entry point
-    │       └── Program.cs                  # Program entrypoint
-    ├── terraform/                          # Terraform configurations for provisioning
-    │   ├── files/                          # Files used by terraform
-    │   ├── modules/
-    │   │   ├── minitwit_logging/           # Terraform code for logging infrastucture
-    │   │   └── minitwit_server/            # Terraform code for minitwit infrastucture
-    │   ├── main.tf                         # Terraform module definitions
-    │   ├── terraform.tfvars                # Terraform variables
-    │   └── variables.tf                    # Terraform variables declarations
-    ├── tests/                              # Test cases
-    │   └── minitwit.tests/
-    │       ├── minitwit.tests.cs           # API tests
-    │       └── playwright.test.cs          # UI tests
-    │
-    ├── docker-compose.yml                  # For running the program locally
-    ├── Dockerfile                          # Application Dockerfile
-    └── itu-minitwit.sln                    # Project solution file
-```
 
 ## Dependencies
+
+Here is a list of all dependencies.
 
 ```
 # Dependency List:
@@ -148,10 +112,10 @@ This includes modules for provisioning the application servers and logging stack
 
 #### Logging
 
-For logging, our application uses Serilog as the API to collect log data.
-This data is then transferred into the Elastic Stack,
-which consists of Logstash, Elasticsearch, and Kibana—all used to process, query, and display the logging data.
-This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana (a data visualization and exploration tool).
+For logging, our application uses Serilog to collect log data.
+This data is then transferred into the ELK Stack,
+which consists of Logstash, Elasticsearch, and Kibana — all used to process, query, and display the logging data.
+This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana.
 
 For elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access logs.
 
