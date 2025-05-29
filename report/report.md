@@ -169,7 +169,7 @@ Below is the result of a quality check run by the SonarQube workflow.
 
 ![Sonar Cube Quality assesment](images/SonarCubeResult.png)
 
-# Process' perspective -- 1026 words
+# Process' perspective
 
 ## Deployment and Release
 
@@ -287,7 +287,7 @@ This approach often speed up development, as it often had great suggestions for 
 Sometimes it was also useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
 In these cases, the TA's were useful.
 
-# Reflection Perspective -- 445 words
+# Reflection Perspective
 
 ## Evolution and Refactoring
 
