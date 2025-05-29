@@ -138,7 +138,7 @@ This data is then transferred into the ELK stack, which consists of Logstash, El
 Together they are used to process, query, and display the logging data.
 This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana.
 
-Elasticsearch is accessible at `209.38.112.21:8080. Use "admin" "admin" to login and access logs.
+Elasticsearch is accessible at `209.38.112.21:8080`. Use "admin" "admin" to login and access logs.
 
 **Monitoring**
 
