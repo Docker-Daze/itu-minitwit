@@ -361,15 +361,12 @@ In the future we should be more aware of which ports are publicly available.
 
 ## Operation
 
-The biggest issue in this project was the ReadTimeout issue.
-E.g. when a user tried to register, but failed, all their message- and follow requests failed.
-To fix this, the Database calls were minimized. This dropped response time by about 30%, but was not enough to actually remove the issue.
-Then the SQL queries were combined, so only one or two trips were needed pr. request. Then a batch service was introduced,
-so requests would only be added to the database, when 10 requests were gathered. Both of these improvements significantly
-decreased response time, but on the 10th user, it would insert 10 requests at once, so that 10th users request would often get lost.
-In the end it was decided that a status code 204 would be sent back immediately after receiving a request. The request would be processed,
-and handled in the background, while the "user" would think everything went fine.
-The response time dropped to almost 0, and no requests from that point were lost.
+A big issue in the project was getting ReadTimeout from the simulator due to slow processing of requests.
+E.g. when a register request failed, all subsequent requests would also fail.
+To fix this, the database calls were minimized, SQL queries were combined and a batch service was introduced.
+This resulted in fewer requests to the database. However, due to how the batch service was implemented,
+the final request in a batch would still receive a ReadTimeout, as it had to wait for all requests in the batch to be processed.
+The solution to this was immediately returning a status code 204 while processing the request in the background.
 
 ## Maintenance
 
