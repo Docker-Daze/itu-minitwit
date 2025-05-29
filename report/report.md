@@ -223,13 +223,15 @@ This deployment strategy ensures high availability and minimizes the risk of ser
 ## Monitoring
 
 The relevant information from the website were not present in the default Prometheus configs.
-In the `MetricsService.cs` file, there are custom metrics to our application, such as the "minitwit_follow_counter and "app_request_duration_seconds"
+In the `MetricsService.cs` file, there are custom metrics to the application, such as the `minitwit_follow_counter` and `app_request_duration_seconds`
 The follow counter is implemented in the program by adding to the counter, every time a follow request is made.
 The duration is measured by starting a timer when a request comes in, and stopping it when the request has been processed.
 
-![monitoring1.png](images/monitoring1.png){#fig:monitoring1}
+The graphs in [@fig:monitoring1] and [@fig:monitoring2] shows the two Grafana dashboards populated with data.
+They show the change in response time, when going from processing each request, to instantly returning 204.
+![Grafana requests overview](images/monitoring1.png){#fig:monitoring1}
 
-![monitoring2.png](images/monitoring2.png){#fig:monitoring2}
+![Grafana request response duration](images/monitoring2.png){#fig:monitoring2}
 
 ## Logging of application
 
