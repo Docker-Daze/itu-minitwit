@@ -1,0 +1,73 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram name="Page-1" id="HrrIlGDa5ejyJMvoJAd3">
+    <mxGraphModel dx="976" dy="660" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-1" target="doD6-KE-KtEN-3MN5Io9-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-1" value="Checkout code" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-2" target="doD6-KE-KtEN-3MN5Io9-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-2" value="Login to Docker Hub" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-5" target="doD6-KE-KtEN-3MN5Io9-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-5" value="Set up Docker Build" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-7" target="doD6-KE-KtEN-3MN5Io9-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-7" value="Build and push minitwitimage" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-9" target="doD6-KE-KtEN-3MN5Io9-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-9" value="Configure SSH to Primary Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-11" target="doD6-KE-KtEN-3MN5Io9-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-11" value="Create Environment File" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-16" target="doD6-KE-KtEN-3MN5Io9-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-16" value="Deploy to primary" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-18" target="doD6-KE-KtEN-3MN5Io9-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-18" value="Health Check Primary Server Post-deployment" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-20" target="doD6-KE-KtEN-3MN5Io9-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-20" value="Configure SSH to Secondary Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="doD6-KE-KtEN-3MN5Io9-22" target="doD6-KE-KtEN-3MN5Io9-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-22" value="Deploy to Secondary Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="doD6-KE-KtEN-3MN5Io9-24" value="Health Check Secondary Server Post-deployment" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
