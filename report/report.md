@@ -12,7 +12,7 @@ numbersections: true
 
 \newpage
 
-# Table of Contents
+**Table of Contents**
 
 1. [System's Perspective](#systems-perspective)  
    1.1 [Design and Architecture](#design-and-architecture)  
@@ -66,6 +66,8 @@ The infrastructure is deployed to Digital Ocean.
 The infrastructure above can be deployed with Terraform. The infrastructure as code is documented in the `/terraform` directory.
 This includes modules for provisioning the application servers, load balancer and logging stack.
 
+\newpage
+
 ### Dynamic view
 
 ![C&C overview of the minitwit system](images/Connector-diagram.svg)
@@ -76,13 +78,15 @@ This includes modules for provisioning the application servers, load balancer an
 - **Batch Service:** Responsible for collecting and processing requests. This is a background service.
 - **ORM Layer:** Responsible for translating LINQ into SQL queries.
 - **Database:** Responsible for storing data. This involves users, followers and messages.
-\newpage
+
 **Connectors**
 
 - **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
 - **Channel:** This connector is an internal application connector that transfers requests.
 - **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
 - **TCP:** This connector transfers SQL queries to the database.
+
+\newpage
 
 ## Dependencies
 
@@ -125,6 +129,8 @@ Here is a list of all dependencies.
 33. org.Sonarcube - Version: 6.1.0
 ```
 
+\newpage
+
 **Logging**
 
 For logging, the application uses Serilog to collect data.
@@ -165,9 +171,9 @@ The diagrams in [@fig:UMLSEQUser] and [@fig:UMLSEQApi] shows how the application
 The key difference between the two interactions is how the response is returned. For a user a status code 200 is returned when the system is done processing the request.
 For the simulator a status code 204 is instantly returned upon receival of the request. The reason for this is elaborated in the reflection section.
 
-![Sequence Diagram for User unfollow call](images/UMLSEQUser.png){#fig:UMLSEQUser}
+![Sequence Diagram for User unfollow call](images/UMLSEQUser.png){#fig:UMLSEQUser  width=80%}
 
-![Sequence Diagram for Simulator unfollow call](images/UMLSEQApi.png){#fig:UMLSEQApi}
+![Sequence Diagram for Simulator unfollow call](images/UMLSEQApi.png){#fig:UMLSEQApi  width=80%}
 
 ## Current State of the System
 
@@ -179,6 +185,8 @@ Even though the system has multiple minitwit servers, it still has a single poin
 To solve this another load balancer could be added to ensure higher availability.
 
 ![Sonar Cube Quality assesment](images/SonarCubeResult.png){#fig:SonarCubeResult}
+
+\newpage
 
 # Process' perspective
 
@@ -331,6 +339,8 @@ when problems occured, and no one knew how to fix it, assistance from AI could b
 This approach sometimes sped up development, as it had decent suggestions for common issues.
 Contrary, it was sometimes not useful as it did not know the unique circumstances of the problem or overcomplicated it.
 
+\newpage
+
 # Reflection Perspective
 
 ## Evolution and Refactoring
@@ -340,7 +350,7 @@ Contrary, it was sometimes not useful as it did not know the unique circumstance
 To solve this challenge we bought a PostgreSQL database cluster on Digital Ocean, this was to make the process simpler.
 For the migration a tool called pgloader was used. This allowed for minimal downtime.
 
-[Link to issue](https://github.com/orgs/Docker-Daze/projects/1/views/1?pane=issue&itemId=101959667&issue=Docker-Daze%7Citu-minitwit%7C18)
+\href{https://github.com/orgs/Docker-Daze/projects/1/views/1?pane=issue&itemId=101959667&issue=Docker-Daze%7Citu-minitwit%7C18}{\underline{Link to issue}}
 
 **Improving code quality**
 
@@ -357,7 +367,7 @@ We received a security notice from DigitalOcean regarding a publicly exposed por
 It was a challenge to enable the built-in security features of Elasticsearch, so Nginx was used to secure the port instead.
 In the future we should be more aware of which ports are publicly available.
 
-[Link to issue](https://github.com/orgs/Docker-Daze/projects/1?pane=issue&itemId=106037166&issue=Docker-Daze%7Citu-minitwit%7C42)
+\href{https://github.com/orgs/Docker-Daze/projects/1?pane=issue&itemId=106037166&issue=Docker-Daze%7Citu-minitwit%7C42}{\underline{Link to issue}}
 
 ## Operation
 
