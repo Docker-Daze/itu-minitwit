@@ -157,7 +157,7 @@ The application is built using .NET.
 The initial database was based on SQLite, but was later migrated to PostgreSQL. 
 
 ## Interactions of Subsystems
-Figure [@fig:UMLSEQApi] and [@fig:UMLSEQUser] shows how the application handles an unfollow request from both a regular user and the simulator.
+The diagrams in [@fig:UMLSEQUser] and [@fig:UMLSEQApi] shows how the application handles an unfollow request from both a regular user and the simulator.
 The key difference is when the 204 status code is sent, as well as the simulator using batch insertions.
 
 ![Sequence Diagram for User unfollow call](images/UMLSEQUser.png){#fig:UMLSEQUser}
@@ -166,11 +166,14 @@ The key difference is when the 204 status code is sent, as well as the simulator
 
 ## Current State of the System
 
-The current state of the system is generally good. At all levels of the application, the results are as expected.
-The biggest weakness in the application is the lack of testing, which is currently close to zero.
-Below is the result of a quality check run by the SonarQube workflow.
+A quality assessment of the codebase from SonarQube is shown in [@fig:SonarCubeResult].
+The current state of the system is generally good. The system receives an A rating in security, reliability and maintainability.
+One flaw in the application is the lack of testing. The test coverage is only 2.5% and around 1.1k lines is missing coverage.
 
-![Sonar Cube Quality assesment](images/SonarCubeResult.png)
+Even though we have multiple minitwit servers, the application still has a single point of failure as there only is a single load balancer.
+To solve this we could add another load balancer to ensure higher availability.
+
+![Sonar Cube Quality assesment](images/SonarCubeResult.png){#fig:SonarCubeResult}
 
 # Process' perspective
 
