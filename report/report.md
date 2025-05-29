@@ -238,7 +238,7 @@ The Application consists of the following assets:
 
 **Web application threat sources:**
 
-- R5: Attacker performs SQL injection on our web application to download sensitive user data.
+- R5: Attacker performs SQL injection on the web application to download sensitive user data.
 - R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
 - R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
 - R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
