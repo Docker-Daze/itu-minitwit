@@ -336,25 +336,34 @@ Contrary, it was sometimes not useful as it did not know the unique circumstance
 ## Evolution and Refactoring
 
 **Migrating from SQLite to Postgres**
+
 To solve this challenge we bought a PostgreSQL database cluster on Digital Ocean, this was to make the process simpler.
 For the migration a tool called pgloader was used. This allowed for minimal downtime.
 
+[Link to issue](https://github.com/orgs/Docker-Daze/projects/1/views/1?pane=issue&itemId=101959667&issue=Docker-Daze%7Citu-minitwit%7C18)
+
 **Improving code quality**
+
 After implementing SonarQube quality assessment, a lot of code was refactored and renamed to meet their assessment criteria.
-Most of the issues were maintainability, where names did not align in different classes. The next issue was long and complicated functions.
-Those functions were refactored, so that a function has one job. This improved maintainability and readability of the codebase.
+Most of the issues were maintainability, where names did not align in different classes. Another issue was long and complicated functions.
+Those functions were refactored, so that a function has one job. The graph in [@fig:sonarqubegraph] show the quality assessment going from 839 to 66 issues after this refactoring.
+This improved maintainability and readability of the codebase.
+
+![SonarQube issues over time](images/sonarqubegraph.png){#fig:sonarqubegraph}
 
 **Securing Elasticsearch**
+
 We received a security notice from DigitalOcean regarding a publicly exposed port on our Elasticsearch instance.
 It was a challenge to enable the built-in security features of Elasticsearch, so Nginx was used to secure the port instead.
-In the future we should be more aware of which ports are publicly exposed.
+In the future we should be more aware of which ports are publicly available.
+
+[Link to issue](https://github.com/orgs/Docker-Daze/projects/1?pane=issue&itemId=106037166&issue=Docker-Daze%7Citu-minitwit%7C42)
 
 ## Operation
 
-The biggest issue in this project was the ReadTimeout issue. Some requests were lost, which caused problems.
+The biggest issue in this project was the ReadTimeout issue.
 E.g. when a user tried to register, but failed, all their message- and follow requests failed.
-To fix this, the Database calls were minimized. Sometimes the database would be called,
-when not strictly necessary. This dropped response time by about 30%, but was not enough to actually remove the issue.
+To fix this, the Database calls were minimized. This dropped response time by about 30%, but was not enough to actually remove the issue.
 Then the SQL queries were combined, so only one or two trips were needed pr. request. Then a batch service was introduced,
 so requests would only be added to the database, when 10 requests were gathered. Both of these improvements significantly
 decreased response time, but on the 10th user, it would insert 10 requests at once, so that 10th users request would often get lost.
