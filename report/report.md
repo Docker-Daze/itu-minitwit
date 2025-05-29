@@ -156,7 +156,7 @@ The application is built using .NET.
 - **Entity Framework Core** is used as the object relational mapper.
 - **Npgsql** is used to access the PostgreSQL database.
 - **NUnit** is used as the primary testing framework, with **Playwright** for end-to-end testing.
-- **SonarQube** is used to assess software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplication.
+- **SonarQube** is used to assess software quality via a GitHub workflow.
 - **Hadolint** is used for docker linting and runs on pushes to the main branch to ensure proper Dockerfile syntax.
 
 **Database**  
