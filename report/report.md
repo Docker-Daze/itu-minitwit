@@ -182,7 +182,7 @@ The system receives an A rating in security, reliability and maintainability. Th
 One flaw in the system is the lack of testing. The test coverage is only 2.5% and around 1.1k lines is missing coverage. Higher test coverage would make the system less error prone.
 
 Even though the system has multiple minitwit servers, it still has a single point of failure as there only is a single load balancer.
-To solve this another load balancer could be added to ensure higher availability.
+To solve this, another load balancer could be added to ensure higher availability.
 
 ![Sonar Cube Quality assesment](images/SonarCubeResult.png){#fig:SonarCubeResult}
 
@@ -247,7 +247,7 @@ There are two monitoring dashboard that monitors the following:
 
 In the `MetricsService.cs` file, there are custom metrics to the application, such as the `minitwit_follow_counter` and `app_request_duration_seconds`.
 The follow counter is implemented in the program by adding to the counter, every time a follow request is made.
-The duration is measured by starting a timer when a request comes in, and stopping it when the request has been processed.
+The duration is measured by starting a timer when a request comes in, and stopping it when a response is returned.
 
 The graphs in [@fig:monitoring1] and [@fig:monitoring2] shows the two Grafana dashboards populated with data.
 They show the change in response time, when going from processing each request, to instantly returning 204.
