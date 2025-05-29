@@ -125,7 +125,7 @@ Here is a list of all dependencies.
 33. org.Sonarcube - Version: 6.1.0
 ```
 
-#### Logging
+**Logging**
 
 For logging, the application uses Serilog to collect log data.
 This data is then transferred into the ELK Stack,  which consists of Logstash, Elasticsearch, and Kibana. 
@@ -134,7 +134,7 @@ This setup is hidden behind Nginx, which acts as a reverse proxy and serves as a
 
 Elasticsearch is accessible at "209.38.112.21:8080". Use "admin" "admin" to login and access logs.
 
-#### Monitoring
+**Monitoring**
 
 For monitoring, the application uses Prometheus for collecting metrics and Grafana for data visualization.
 Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
@@ -142,7 +142,7 @@ Grafana retrieves the necessary data from /metrics.
 
 Grafana is accessible at "164.90.240.84:3000". You can use the teachers login to access the dashboard.
 
-#### Application
+**Application**  
 
 The application is built using .NET.
 
@@ -153,7 +153,7 @@ The application is built using .NET.
 * **SonarQube** is used to measure software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. 
 * **Hadolint** is used for docker linting and runs on pushes to the main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
 
-#### Database
+**Database**
 The initial database was based on SQLite, but was later migrated to PostgreSQL. 
 
 ## Interactions of Subsystems
