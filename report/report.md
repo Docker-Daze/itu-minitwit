@@ -141,11 +141,10 @@ For Grafana "164.90.240.84:3000" you can use the teachers login to access the da
 
 #### Application
 
-The application is built using the .NET software framework.
-The ASP.NET Core Identity package is used as the authentication system, to create and delete users, and secure password hashing.
-Initially, we used SQLite as our DBMS but later switched to Prometheus.
-In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM).
-For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
+The application is built using .NET.
+It uses ASP.NET Core Identity for authentication, and EF Core as the Object-Relational Mapper.
+The initial database was based on SQLite, but later it was switched to PostgreSQL.
+For testing, NUnit is used as the primary testing framework, with Playwright layered on top for end-to-end testing.
 To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
 As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
 SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. As a further software quality measure, 
@@ -252,7 +251,7 @@ The Application consists of the following assets:
 
 **Web application threat sources:**
 
-- R5: Attacker performs SQL injection on our web application to download sensitive user data.
+- R5: Attacker performs SQL injection on the web application to download sensitive user data.
 - R6: Attacker exploits a cross-site scripting vulnerability to hijack a user sessions.
 - R7: Attacker forces or tricks an authenticated user to do unwanted request to the web application. A malicious site sends a request to the trusted website using the user’s cookies and session.
 - R8: Attacker can interrupt unencrypted HTTP request and modifies requests.
@@ -273,11 +272,11 @@ The application is secure against SQL injections. There is no public secrets and
 
 the biggest vulnerability is the lack of protection against request spamming and application overloading.
 
-To mitigate DDoS attacks a possible solution is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services
+A possible solution to DDoS attacks is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services.
 
 ## Strategy for scaling and upgrade
 
-Our project is scalable. You can scale the system vertically by investing more in the hosting provider, or, in our case, we leverage the infrastructure we have built to scale horizontally.
+The project is scalable. You can scale the system vertically by investing more in the hosting provider, or, in our case, we leverage the infrastructure we have built to scale horizontally.
 
 To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server. After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx. At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests. The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow. Once these steps are completed, the server will be fully integrated into the architecture of the application.
 
