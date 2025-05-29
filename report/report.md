@@ -57,7 +57,7 @@ The infrastructure is deployed to Digital Ocean.
 - The minitwit application is hosted on two droplets - a primary and secondary.
 - A nginx loadbalancer distributes load between the two minitwit servers.
 - The Database is hosted as a PostgreSQL Database Cluster.
-- Logging is hosted on its own seperate droplet.
+- Logging is hosted on its own separate droplet.
 
 ![Deployment Diagram](images/DeploymentDigram.png)
 
