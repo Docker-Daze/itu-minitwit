@@ -146,7 +146,7 @@ For monitoring, the application uses Prometheus for collecting metrics and Grafa
 Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
 Grafana retrieves the necessary data from /metrics.
 
-Grafana is accessible at `164.90.240.84:3000`. The teachers login to access the dashboard.
+Grafana is accessible at `164.90.240.84:3000`. Use the teachers login to access the dashboard.
 
 **Application**
 
