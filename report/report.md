@@ -304,7 +304,7 @@ Contrary, it was sometimes not useful as it did not know the unique circumstance
 After implementing SonarQube quality assessment, a lot of code was refactored and renamed.
 Most of the codes issues were maintainability, where names did not align in different classes.
 This was quickly changed everywhere. Next issue was long and complicated functions.
-Those functions were refactored, so that one function has one job. This improved maintainability and readability of the code base.
+Those functions were refactored, so that a function has one job. This improved maintainability and readability of the code base.
 
 ## Operation
 
