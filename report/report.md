@@ -289,11 +289,11 @@ The Application consists of the following assets:
 
 ![Risk matrix](images/Risk_matrix.png)
 
-The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Monitoring and loggin requires login to access and droplets are secured by digitaloceans standard security.
+The application is secure against SQL injections. There is no public secrets and dependencies are up to date. Access monitoring and loggin is resticted via login and droplets are protected using DigitalOcean’s default security.
 
-The biggest invulnerability is no failsafe against spamming and overloading the application with requests.
+the biggest vulnerability is the lack of protection against request spamming and application overloading.
 
-A possible solution to DDos attacks is to close the server when a certain amounts of request per minuted exceeds a high number. To secure against attacks on HTTP request is to use HTTPS. To secure open ports is adding authorization to all the ports.
+To mitigate DDoS attacks a possible solution is to temporarily shut down the server when the number of requests per minute exceeds a defined threshold. To secure HTTP traffic, HTTPS could be added. To protect open ports, authentication should be required for all exposed services
 
 ## Strategy for scaling and upgrade
 
