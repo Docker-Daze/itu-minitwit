@@ -6,11 +6,15 @@ on:
       - main
     paths:
       - 'report/report.md'
+      - 'report/images/*'
   pull_request:
     branches:
       - main
     paths:
       - 'report/report.md'
+      - 'report/images/*'
+  workflow_dispatch:
+    manual: true
 
 jobs:
   build:
