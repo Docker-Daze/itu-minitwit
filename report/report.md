@@ -59,7 +59,7 @@ The infrastructure is deployed to Digital Ocean.
 - The Database is hosted as a PostgreSQL Database Cluster.
 - Logging is hosted on its own seperate droplet.
 
-![Deployment Diagram](images/DeploymentDiagram.png)
+![Deployment Diagram](images/DeploymentDigram.png)
 
 ### Infrastructure as Code
 
@@ -159,11 +159,9 @@ The initial database was based on SQLite, but was later migrated to PostgreSQL.
 Figure [@fig:UMLSEQApi] and [@fig:UMLSEQUser] shows how the application handles an unfollow request from both a regular user and the simulator.
 The key difference is when the 204 status code is sent, as well as the simulator using batch insertions.
 
-**Sequence Diagram for Simulator unfollow call**
-![API Seq Diagram](images/UMLSEQApi.png){#fig:UMLSEQApi}
+![Sequence Diagram for User unfollow call](images/UMLSEQUser.png){#fig:UMLSEQUser}
 
-**Sequence Diagram for User unfollow call**
-![User Seq Diagram](images/UMLSEQUser.png){#fig:UMLSEQUser}
+![Sequence Diagram for Simulator unfollow call](images/UMLSEQApi.png){#fig:UMLSEQApi}
 
 ## Current State of the System
 
@@ -249,7 +247,7 @@ The Application consists of the following assets:
 **General security:**
 
 - R1: Attacker uses exposed secrets to gain access to sensitive data.
-- R2: Attacker gains access to our API, and injects large amounts of data into our database, stressing the system.
+- R2: Attacker gains access to our API, and injects large amounts of data into the database, overloading the system.
 - R3: An attacker exploits a known vulnerability in an outdated dependency.
 - R4: Attacker extracts secrets from unprotected endpoints.
 
@@ -262,13 +260,12 @@ The Application consists of the following assets:
 
 **Infrastructure threat sources:**
 
-- R9: An attacker scans for open ports and discovers multiple exposed services. this can lead to data exposure and disruption of service.
-- R10: An attacker scans for open ports and identifies an exposed Elasticsearch instance listening on port 9200. Since the service lacks authentication, the attacker is able to gain access to vulnerable data.
-- R11: An attacker gains SSH access to our droplet and interacts with our running containers.
+- R9: An attacker scans for open ports and discovers multiple exposed services. This can lead to data exposure and disruption of service.
+- R10: An attacker gains SSH access to the droplet and interacts with the running containers.
 
 **Monitoring/logging threat sources:**
 
-- R12: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
+- R11: An attacker gains unauthorized access to Elasticsearch logs and backs up sensitive data.
 
 ![Risk matrix](images/Risk_matrix.png)
 
