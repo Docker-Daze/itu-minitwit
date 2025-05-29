@@ -157,11 +157,9 @@ Hadolint runs on pushes to the main branch, enforcing warnings as errors to ensu
 Below you will see how the application handles an unfollow request from both a regular user and the simulator.
 The key difference is when the 204 status code is sent, as well as the simulator using batch insertions.
 
-**Sequence Diagram for Simulator unfollow call**
-![API Seq Diagram](images/UMLSEQApi.png)
+![Sequence Diagram for Simulator unfollow call](images/UMLSEQApi.png)
 
-**Sequence Diagram for User unfollow call**
-![User Seq Diagram](images/UMLSEQUser.png)
+![Sequence Diagram for User unfollow call](images/UMLSEQUser.png)
 
 ## Current State of the System
 
