@@ -398,4 +398,4 @@ It was therefore upgraded and disaster was avoided.
 * **Automatic linter and quality assessment tool:** This improved overall quality of the codebase. 
 * **Automatic workflows for everything:** This saved time by removing repeated manual actions through the UI.
 * **Docker:** This made it easy to spin up containers for various purposes and ensure consistent environments across different operating systems.
-
+* **Logging and monitoring:** We were able to improve the system based on data from logging and monitoring. 
