@@ -243,6 +243,7 @@ The duration is measured by starting a timer when a request comes in, and stoppi
 
 The graphs in [@fig:monitoring1] and [@fig:monitoring2] shows the two Grafana dashboards populated with data.
 They show the change in response time, when going from processing each request, to instantly returning 204.
+
 ![Grafana requests overview](images/monitoring1.png){#fig:monitoring1}
 
 ![Grafana request response duration](images/monitoring2.png){#fig:monitoring2}
