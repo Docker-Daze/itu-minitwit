@@ -225,7 +225,7 @@ The deployment process follows a structured chain format to ensure reliability a
    The code is first analyzed for adherence to linting and formatting standards. This ensures that the codebase remains clean and maintainable.
 
 3. **Deployment with Rolling Updates**  
-   If the commit successfully passes all previous stages, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
+   If the commit successfully the build and test stage, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
 
 ![CICD](./images/CICDChain.png)
 
@@ -265,7 +265,7 @@ In the `ApiController.cs` there are created custom logs.
 These logs include system failures such as unsuccessful message post and failure to follow a user.
 This data is sent from Serilog to Logstash. Another important metric is logging the request times.
 If a request takes longer than 300 ms to process, it will log it. This has been central in discovering the ReadTimeout issue, that the team has struggled with.
-To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input "@m: slow", to get all logs about slow requests.
+To see all the logs for e.g. timeouts, the searchbar is used. Here the user can input `@m: slow`, to get all logs about slow requests.
 
 ## Security assessment
 
