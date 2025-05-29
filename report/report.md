@@ -71,13 +71,15 @@ This includes modules for provisioning the application servers, load balancer an
 ![C&C overview of the minitwit system](images/Connector-diagram.svg)
 
 **Components**
-* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
+
+* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.  
 * **Batch Service:** Responsible for collecting and processing requests. This is a background service.
 * **ORM Layer:** Responsible for translating LINQ into SQL queries.
 * **Database:** Responsible for persisting data. This involves users, followers and messages.
 
 **Connectors**
-* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
+
+* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.   
 * **Channel:** This connector is an internal application connector that transfers requests.
 * **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
 * **TCP:** This connector handles SQL queries to the database.
@@ -126,19 +128,19 @@ Here is a list of all dependencies.
 #### Logging
 
 For logging, the application uses Serilog to collect log data.
-This data is then transferred into the ELK Stack,
-which consists of Logstash, Elasticsearch, and Kibana — all used to process, query, and display the logging data.
+This data is then transferred into the ELK Stack,  which consists of Logstash, Elasticsearch, and Kibana. 
+Together they are used to process, query, and display the logging data.
 This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana.
 
-For Elasticsearch "209.38.112.21:8080" use "admin" "admin" to login and access logs.
+Elasticsearch is accessible at "209.38.112.21:8080". Use "admin" "admin" to login and access logs.
 
 #### Monitoring
 
-For monitoring, the application uses Prometheus for collecting metrics. 
+For monitoring, the application uses Prometheus for collecting metrics and Grafana for data visualization.
 Prometheus scrapes port 5000, the minitwit application, and sends the data to the /metrics endpoint.
-On top of this, Grafana is used for data visualization. Grafana retrieves the necessary data from /metrics.
+Grafana retrieves the necessary data from /metrics.
 
-For Grafana "164.90.240.84:3000" you can use the teachers login to access the dashboard.
+Grafana is accessible at "164.90.240.84:3000". You can use the teachers login to access the dashboard.
 
 #### Application
 
