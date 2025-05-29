@@ -322,9 +322,11 @@ To secure HTTP traffic, HTTPS could be added. To protect open ports, authenticat
 The system can be scaled vertically by investing more in the hosting provider, or scaled horizontally by making more server-droplets.
 
 To scale vertically:
+
 1. Upsize the droplets on Digital Ocean.
 
 To scale horizontally:
+
 1. Deploy new application server
 2. Add the IP address of the server to load balancer's upstream server list in the configuration file of Nginx.
 3. Add the server to the deployment workflow.
