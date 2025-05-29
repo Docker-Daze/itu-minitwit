@@ -72,17 +72,17 @@ This includes modules for provisioning the application servers, load balancer an
 
 **Components**
 
-* **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
-* **Batch Service:** Responsible for collecting and processing requests. This is a background service.
-* **ORM Layer:** Responsible for translating LINQ into SQL queries.
-* **Database:** Responsible for storing data. This involves users, followers and messages.
+- **API Controller:** Responsible for receiving incoming requests to the API endpoints and send them to the correct batch service.
+- **Batch Service:** Responsible for collecting and processing requests. This is a background service.
+- **ORM Layer:** Responsible for translating LINQ into SQL queries.
+- **Database:** Responsible for storing data. This involves users, followers and messages.
 
 **Connectors**
 
-* **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
-* **Channel:** This connector is an internal application connector that transfers requests.
-* **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
-* **TCP:** This connector transfers SQL queries to the database.
+- **HTTP:** This connector is the protocol to communicate between the simulator/browser and server.
+- **Channel:** This connector is an internal application connector that transfers requests.
+- **Npgsql:** The connector is a .NET package that acts as the ORM for PostgreSQL.
+- **TCP:** This connector transfers SQL queries to the database.
 
 ## Dependencies
 
@@ -128,7 +128,7 @@ Here is a list of all dependencies.
 **Logging**
 
 For logging, the application uses Serilog to collect data.
-This data is then transferred into the ELK stack, which consists of Logstash, Elasticsearch, and Kibana. 
+This data is then transferred into the ELK stack, which consists of Logstash, Elasticsearch, and Kibana.
 Together they are used to process, query, and display the logging data.
 This setup is hidden behind Nginx, which acts as a reverse proxy and serves as an authentication layer between the user and Kibana.
 
@@ -142,24 +142,25 @@ Grafana retrieves the necessary data from /metrics.
 
 Grafana is accessible at `164.90.240.84:3000`. The teachers login to access the dashboard.
 
-**Application**  
+**Application**
 
 The application is built using .NET.
 
-* **ASP.NET Core Identity** is used for authentication.
-* **Entity Framework Core** is used as the object relational mapper.
-* **Npgsql** is used to access the PostgreSQL database.
-* **NUnit** is used as the primary testing framework, with **Playwright** for end-to-end testing.
-* **SonarQube** is used to assess software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplication. 
-* **Hadolint** is used for docker linting and runs on pushes to the main branch to ensure proper Dockerfile syntax.
+- **ASP.NET Core Identity** is used for authentication.
+- **Entity Framework Core** is used as the object relational mapper.
+- **Npgsql** is used to access the PostgreSQL database.
+- **NUnit** is used as the primary testing framework, with **Playwright** for end-to-end testing.
+- **SonarQube** is used to assess software quality via a GitHub workflow. SonarQube tracks security, reliability, maintainability, test coverage, and code duplication.
+- **Hadolint** is used for docker linting and runs on pushes to the main branch to ensure proper Dockerfile syntax.
 
-**Database**   
-The initial database was based on SQLite, but was later migrated to PostgreSQL. 
+**Database**  
+The initial database was based on SQLite, but was later migrated to PostgreSQL.
 
-**Containerization**   
-Docker is used to containerize the application and many of the services. 
+**Containerization**  
+Docker is used to containerize the application and many of the services.
 
 ## Interactions of Subsystems
+
 The diagrams in [@fig:UMLSEQUser] and [@fig:UMLSEQApi] shows how the application handles an unfollow request from both a regular user and the simulator.
 The key difference between the two interactions is how the response is returned. For a user a status code 200 is returned when the system is done processing the request.
 For the simulator a status code 204 is instantly returned upon receival of the request. The reason for this is elaborated in the reflection section.
@@ -205,7 +206,7 @@ The following workflows are implemented in the CI/CD pipeline:
 
 Each workflow is defined in the `.github/workflows` directory and is triggered based on specific events such as pushes, pull requests, or scheduled intervals.
 
-### Deployment Chain
+## Deployment Chain
 
 The deployment process follows a structured chain format to ensure reliability and minimize downtime. The steps are as follows:
 
@@ -217,6 +218,8 @@ The deployment process follows a structured chain format to ensure reliability a
 
 3. **Deployment with Rolling Updates**  
    If the commit successfully passes all previous stages, the deployment process begins. Rolling updates are utilized to ensure a seamless transition. This approach guarantees that if the deployment encounters any issues, an unaffected backup server remains operational to handle the workload while the problem is resolved.
+
+![CICD](./images/CICDChain.png)
 
 This deployment strategy ensures high availability and minimizes the risk of service disruption during updates.
 
@@ -291,15 +294,15 @@ A possible solution to DDoS attacks is to temporarily shut down the server when 
 
 The project has been made scalable. It can be scaled vertically by investing more in the hosting provider, or scale horizontally by making more server-droplets.
 
-To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server. 
-After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx. 
-At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests. 
-The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow. 
+To scale horizontally, we first need to [deploy](#deployment-and-release) a new application server.
+After that, we add the IP address of the server to our ["load balancer's"](#design-and-architecture) upstream server list in the configuration file of Nginx.
+At this point, the server should be up and running, with the load balancer utilizing the new server to distribute incoming requests.
+The only remaining steps are to add the new server to the ["rolling update"](#deployment-chain) workflow in ".github/workflows/continuous-deployment.yml," which involves adding new secrets to the project's GitHub secrets and implementing a safety check in the workflow.
 Once these steps are completed, the server will be fully integrated into the architecture of the application.
 
 ## The use of AI
 
-AI tools such as ChatGPT has been used to assist idea generation and our learning process. 
+AI tools such as ChatGPT has been used to assist idea generation and our learning process.
 We prioritized receiving help in the exercise sessions from TA's rather than using AI. However, in some cases
 when problems occured, and no one knew how to fix it, assistance from AI could be useful.
 This approach sometimes sped up development, as it had decent suggestions for common issues.
@@ -324,12 +327,12 @@ Then the SQL queries were combined, so only one or two trips were needed pr. req
 so requests would only be added to the database, when 10 requests were gathered. Both of these improvements significantly
 decreased response time, but on the 10th user, it would insert 10 requests at once, so that 10th users request would often get lost.
 In the end it was decided that a status code 204 would be sent back immediately after receiving a request. The request would be processed,
-and handled in the background, while the "user" would think everything went fine. 
+and handled in the background, while the "user" would think everything went fine.
 The response time dropped to almost 0, and no requests from that point were lost.
 
 ## Maintenance
 
-At one point the Grafana and Prometheus data were gone. 
+At one point the Grafana and Prometheus data were gone.
 No one knew why it was gone, and it happened at a time, where everyone was working with something different.
 This made it difficult to trace why the error occured. Many hours were spent trying to find the issue, and it was finally discovered,
 that the snap version of Docker had been installed, over the official version. The snap version saved its volumes somewhere different,
