@@ -291,11 +291,11 @@ Once these steps are completed, the server will be fully integrated into the arc
 
 ## The use of AI
 
-AI tools such as Chat GPT was used for idea generation. When problems occured, and no one knew how to fix it,
-the AI were asked to see, if an easy fix existed. AI were also used for finding errors in e.g. docker files.
-This approach often speeded up development, as it often had great suggestions for common issues.
-Sometimes it was useless, as it was a somewhat "unique" problem, and it did not know how to fix it.
-In these cases, the TA's were helpful.
+AI tools such as ChatGPT has been used to assist idea generation and our learning process. 
+We prioritized receiving help in the exercise sessions from TA's rather than using AI. However, in some cases
+when problems occured, and no one knew how to fix it, assistance from AI could be useful.
+This approach sometimes sped up development, as it had decent suggestions for common issues.
+Contrary, it was sometimes not useful as it did not know the unique circumstances of the problem or overcomplicated it.
 
 # Reflection Perspective
 
