@@ -171,9 +171,12 @@ In both cases, we utilized Entity Framework Core (EF Core) as our Object-Relatio
 For testing, we use NUnit as the primary testing framework, with Playwright layered on top for end-to-end testing.
 To handle API calls from the simulator, we use the ASP.NET Core MVC framework to create API controllers that process HTTP requests.
 As a software quality measure, we use SonarQube, specifically integrating their service via a GitHub workflow.
-SonarQube tracks security, reliability, maintainability, test coverage, and code duplications.
+SonarQube tracks security, reliability, maintainability, test coverage, and code duplications. As a further software quality measure, 
+we use Hadolint on pushes to our main branch, enforcing warnings as errors to ensure proper Dockerfile syntax.
 
 ## Interactions of Subsystems
+Below you will see how our application handles an unfollow request from both a regular user and the simulator.
+The key difference is when the 204 status code is sent, as well as the simulator using a batch loader.
 
 **Sequence Diagram for Simulator unfollow call**
 ![API Seq Diagram](images/UMLSEQApi.png)
@@ -327,7 +330,7 @@ when not strictly necessary. This dropped response time by about 30%, but was no
 Then the sql queries were combined, so only one to two trips were needed pr. request. Then a batch service was introduced,
 so requests would only be added to the database, when 10 requests were gathered. Both of these improvements significantly
 decreased response time, but on the 10th user, it would insert 10 requests at once, so that 10th users request would often get lost.
-In the end it was decided that a status code 200 would be sent back immediately after receiving a request. The request would be processed,
+In the end it was decided that a status code 204 would be sent back immediately after receiving a request. The request would be processed,
 and handled in the background, while the "user" would think everything went fine. The response time dropped to almost 0, and no requests from that point were lost.
 
 ## Maintenance
