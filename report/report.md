@@ -59,7 +59,7 @@ The infrastructure is deployed to Digital Ocean.
 - The Database is hosted as a PostgreSQL Database Cluster.
 - Logging is hosted on its own separate droplet.
 
-![Deployment Diagram](images/DeploymentDigram.png)
+![Deployment Diagram](images/DeploymentDiagram.png)
 
 ### Infrastructure as Code
 

@@ -2,16 +2,23 @@
 name: Continuous Deployment
 
 on:
-  push:
-    # Run workflow every time something is pushed to the main branch
+  workflow_run:
+    workflows:
+      - "Build and Test"
+      - "SonarCube Analysis"
+    types:
+      - completed
     branches:
       - main
-  # allow manual triggers for now too
   workflow_dispatch:
-    manual: true
+    inputs:
+      force_deploy:
+        description: "Force deployment (skip CI check)"
+        required: false
+        default: false
+        type: boolean
 
-# Remember to set the following secrets in your repository's settings:
-# https://github.com/your_username/itu-minitwit-ci/settings/secrets/actions
+# Remember to set the following secrets in repository settings:
 # DOCKER_USERNAME
 # DOCKER_PASSWORD
 # SSH_USER
@@ -21,8 +28,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: >
+      ${{ 
+        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+        (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') ||
+        (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy != 'true')
+      }}
 
     steps:
+      - name: Verify CI Status
+        if: github.event_name == 'workflow_run'
+        run: |
+          echo "🔍 Deployment triggered by: ${{ github.event.workflow_run.name }}"
+          echo "✅ CI Status: ${{ github.event.workflow_run.conclusion }}"
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -45,7 +64,7 @@ jobs:
           cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/minitwitimage:webbuildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/minitwitimage:webbuildcache,mode=max
 
-      - name: Create Environment File 
+      - name: Create Environment File
         run: |
           echo "DB_CONNECTION_STRING='$DB_CONNECTION_STRING'" > .env
           echo "DOCKER_USERNAME='$DOCKER_USERNAME'" >> .env
@@ -88,12 +107,12 @@ jobs:
         run: |
           echo "Waiting for application to start..."
           sleep 10
-          
+
           # Health check - try up to 10 times with 10 second intervals
           MAX_RETRIES=10
           RETRY_INTERVAL=5
           HEALTH_CHECK_URL="http://${{ secrets.SSH_HOST }}:5000/api/health"
-          
+
           for i in $(seq 1 $MAX_RETRIES); do
             echo "Health check attempt $i of $MAX_RETRIES"
             
@@ -151,12 +170,12 @@ jobs:
         run: |
           echo "Waiting for application to start..."
           sleep 10
-          
+
           # Health check - try up to 10 times with 10 second intervals
           MAX_RETRIES=10
           RETRY_INTERVAL=5
           HEALTH_CHECK_URL="http://${{ secrets.SSH2_HOST }}:5000/api/health"
-          
+
           for i in $(seq 1 $MAX_RETRIES); do
             echo "Health check attempt $i of $MAX_RETRIES"
             
