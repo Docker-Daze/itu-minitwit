@@ -1,4 +1,3 @@
-variable "do_token" {}
 variable "vpc_uuid" {}
 variable "db_connection_string" {}
 variable "docker_username" {}

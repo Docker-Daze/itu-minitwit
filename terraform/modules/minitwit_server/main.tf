@@ -20,7 +20,7 @@ resource "digitalocean_droplet" "server" {
     user        = "root"
     host        = digitalocean_droplet.server.ipv4_address
     type        = "ssh"
-    private_key = file("~/.ssh/id_ed25519")
+    private_key = file("~/.ssh/tf_do_ssh_key")
     timeout     = "2m"
   }
 
@@ -55,7 +55,7 @@ resource "null_resource" "db_firewall_setup" {
     user        = "root"
     host        = digitalocean_droplet.server.ipv4_address
     type        = "ssh"
-    private_key = file("~/.ssh/id_ed25519")
+    private_key = file("~/.ssh/tf_do_ssh_key")
     timeout     = "2m"
   }
 

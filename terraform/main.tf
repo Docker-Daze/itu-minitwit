@@ -9,12 +9,11 @@ terraform {
 
 # Configure the DigitalOcean Provider
 provider "digitalocean" {
-  token = var.do_token
 }
 
 resource "digitalocean_ssh_key" "main" {
   name       = "minitwit-server-tf-ssh-key"
-  public_key = file("~/.ssh/id_ed25519.pub")
+  public_key = file("~/.ssh/tf_do_ssh_key.pub")
 }
 
 

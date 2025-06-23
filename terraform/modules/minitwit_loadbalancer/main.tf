@@ -20,7 +20,7 @@ resource "digitalocean_droplet" "loadbalancer" {
     user    = "root"
     host    = digitalocean_droplet.loadbalancer.ipv4_address
     type    = "ssh"
-    private_key = file("~/.ssh/id_ed25519")
+    private_key = file("~/.ssh/tf_do_ssh_key")
     timeout = "2m"
   }
 
